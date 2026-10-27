@@ -1,1506 +1,2503 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09090b">
+<meta name="description" content="WHERE'S THE GANG? — find safe, budget-friendly places to hang out after class.">
 <title>WHERE'S THE GANG?</title>
 
 <style>
 
-/* =====================================================
-   RESET
-===================================================== */
+:root{
+    --bg:#09090b;
+    --panel:#111114;
+    --card:#1a1a1f;
+    --card2:#202026;
+    --line:#303038;
+    --muted:#9b9ba4;
+    --text:#fff;
+    --good:#8cffad;
+    --gold:#ffd96a;
+}
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-    background: #09090b;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    overflow-x: hidden;
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
+    overflow-x:hidden;
 }
 
+button,input{
+    font:inherit;
+}
 
-/* =====================================================
-   HOME
-===================================================== */
+button{
+    cursor:pointer;
+}
 
-.home {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 20px;
-    text-align: center;
+.hidden{
+    display:none!important;
 }
+
+/* ================= HOME ================= */
 
-.home-content {
-    width: 100%;
-    max-width: 650px;
+.home{
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px 18px;
+    text-align:center;
 }
 
-.logo {
-    font-size: clamp(42px, 11vw, 70px);
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: -2px;
-    animation: fadeUp 0.8s ease;
+.home-content{
+    width:100%;
+    max-width:680px;
 }
 
-.tagline {
-    margin-top: 20px;
-    color: #a7a7ad;
-    font-size: 18px;
-    animation: fadeUp 1s ease;
+.logo{
+    font-size:clamp(40px,11vw,72px);
+    font-weight:900;
+    line-height:.95;
+    letter-spacing:-2.5px;
+    animation:up .7s ease both;
 }
 
-.home-buttons {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+.tagline{
+    margin-top:20px;
+    color:#aaaab2;
+    font-size:18px;
+    animation:up .9s ease both;
 }
 
-.main-button {
-    width: 100%;
-    border: none;
-    border-radius: 16px;
-    padding: 18px;
-    font-size: 17px;
-    font-weight: 800;
-    cursor: pointer;
-    transition: 0.25s ease;
+.home-buttons{
+    margin-top:40px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
 }
 
-.main-button:hover {
-    transform: translateY(-3px);
+.main-button{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:18px;
+    font-weight:900;
+    font-size:17px;
+    transition:.22s;
 }
 
-.explore-button {
-    background: white;
-    color: #111;
+.main-button:hover{
+    transform:translateY(-3px);
 }
 
-.planner-button {
-    background: #25252b;
-    color: white;
+.explore-button{
+    background:#fff;
+    color:#111;
 }
 
-.user-welcome {
-    display: none;
-    margin-top: 25px;
-    color: #96969e;
-    font-size: 14px;
-    line-height: 1.6;
+.planner-button{
+    background:#25252b;
+    color:#fff;
 }
 
+.user-welcome{
+    display:none;
+    margin-top:24px;
+    color:#9999a2;
+    font-size:14px;
+    line-height:1.6;
+}
 
-/* =====================================================
-   EXPLORE
-===================================================== */
+/* ================= SECTIONS ================= */
 
-.explore-section {
-    display: none;
-    min-height: 100vh;
-    padding: 30px 18px 100px;
-    background: #111114;
+.page-section{
+    display:none;
+    min-height:100svh;
+    padding:24px 16px 100px;
+    background:#111114;
+    scroll-margin-top:10px;
 }
 
-.explore-container {
-    width: 100%;
-    max-width: 1100px;
-    margin: auto;
+.container{
+    width:100%;
+    max-width:1120px;
+    margin:auto;
 }
 
+/* ================= NAV ================= */
 
-/* =====================================================
-   TOP NAV BUTTONS
-===================================================== */
+.navigation-buttons{
+    display:flex;
+    gap:10px;
+    margin-bottom:24px;
+}
 
-.navigation-buttons {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 25px;
+.page-back{
+    flex:1;
+    border:1px solid #383840;
+    border-radius:14px;
+    background:#18181c;
+    color:#ddd;
+    padding:13px 14px;
+    font-size:14px;
+    font-weight:800;
+    transition:.2s;
 }
 
-.page-back {
-    flex: 1;
-    padding: 13px 15px;
-    border: 1px solid #33333b;
-    border-radius: 13px;
-    background: #18181c;
-    color: #d7d7dc;
-    font-size: 14px;
-    font-weight: 700;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.25s ease;
+.page-back:hover{
+    background:#29292f;
+    transform:translateY(-2px);
 }
 
-.page-back:hover {
-    background: #29292f;
-    transform: translateY(-2px);
+/* ================= HEADINGS ================= */
+
+.section-heading{
+    text-align:center;
+    margin-bottom:25px;
 }
 
-.change-college {
-    flex: 1;
+.section-heading h2{
+    font-size:34px;
+    margin-bottom:8px;
 }
 
+.section-heading p{
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.5;
+}
 
-/* =====================================================
-   SECTION HEADING
-===================================================== */
+/* ================= AREA ================= */
 
-.section-heading {
-    text-align: center;
-    margin-bottom: 28px;
+.area-box,
+.planner-intro{
+    background:#1b1b20;
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:18px;
+    margin-bottom:24px;
+    text-align:center;
+    animation:card .45s ease both;
 }
 
-.section-heading h2 {
-    font-size: 34px;
-    margin-bottom: 9px;
+.area-title{
+    color:#888891;
+    font-size:12px;
+    margin-bottom:6px;
+    font-weight:800;
 }
 
-.section-heading p {
-    color: #9999a1;
-    font-size: 15px;
+.area-name{
+    font-size:19px;
+    font-weight:900;
 }
 
+/* ================= EXPLORE FILTER ================= */
 
-/* =====================================================
-   AREA BOX
-===================================================== */
-
-.area-box {
-    background: #1b1b20;
-    border: 1px solid #2d2d34;
-    border-radius: 18px;
-    padding: 18px;
-    margin-bottom: 25px;
-    text-align: center;
-    animation: cardIn 0.5s ease;
+.categories{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding-bottom:10px;
+    margin-bottom:25px;
+    scrollbar-width:none;
 }
 
-.area-title {
-    color: #8e8e97;
-    font-size: 13px;
-    margin-bottom: 5px;
+.categories::-webkit-scrollbar{
+    display:none;
 }
 
-.area-name {
-    font-size: 21px;
-    font-weight: 800;
+.category{
+    flex:0 0 auto;
+    border:1px solid #36363e;
+    background:#18181c;
+    color:#fff;
+    border-radius:50px;
+    padding:10px 16px;
+    font-size:14px;
+    font-weight:800;
 }
 
+.category.active{
+    background:#fff;
+    color:#111;
+}
 
-/* =====================================================
-   CATEGORIES
-===================================================== */
+/* ================= CARDS ================= */
 
-.categories {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
-    scrollbar-width: none;
+.place-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:17px;
 }
 
-.categories::-webkit-scrollbar {
-    display: none;
+.place-card{
+    background:var(--card);
+    border:1px solid #2c2c34;
+    border-radius:20px;
+    padding:20px;
+    animation:card .45s ease both;
+    transition:.22s;
+    overflow:hidden;
 }
 
-.category {
-    flex-shrink: 0;
-    border: 1px solid #33333b;
-    background: #18181c;
-    color: white;
-    border-radius: 50px;
-    padding: 11px 17px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.2s ease;
+.place-card:hover{
+    transform:translateY(-5px);
+    border-color:#66666f;
+    box-shadow:0 15px 40px rgba(0,0,0,.3);
 }
 
-.category:hover {
-    transform: translateY(-2px);
+.place-icon{
+    width:54px;
+    height:54px;
+    border-radius:16px;
+    background:#29292f;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    margin-bottom:15px;
 }
 
-.category.active {
-    background: white;
-    color: #111;
-    border-color: white;
+.place-card h3{
+    font-size:19px;
+    margin-bottom:8px;
 }
-
-
-/* =====================================================
-   PLACE GRID
-===================================================== */
 
-.place-grid {
-    display: grid;
-    grid-template-columns:
-        repeat(auto-fit, minmax(260px, 1fr));
-    gap: 18px;
+.place-description{
+    color:#9999a1;
+    font-size:14px;
+    line-height:1.5;
+    margin-bottom:15px;
 }
 
-
-/* =====================================================
-   PLACE CARD
-===================================================== */
-
-.place-card {
-    position: relative;
-    background: #1a1a1f;
-    border: 1px solid #292930;
-    border-radius: 20px;
-    padding: 21px;
-    overflow: hidden;
-
-    transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
-
-    animation: cardIn 0.55s ease both;
+.place-info{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
 }
 
-.place-card::before {
-    content: "";
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    right: -60px;
-    top: -60px;
-    background: rgba(255,255,255,0.035);
-    border-radius: 50%;
+.info-tag{
+    background:#29292f;
+    color:#ddd;
+    padding:7px 9px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:800;
 }
 
-.place-card:hover {
-    transform: translateY(-7px);
-    border-color: #55555f;
-    box-shadow:
-        0 15px 40px rgba(0,0,0,0.35);
+.budget-tag{
+    background:#16351f;
+    color:var(--good);
 }
-
-.place-icon {
-    width: 55px;
-    height: 55px;
-    border-radius: 16px;
-    background: #29292f;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 27px;
-    margin-bottom: 18px;
-
-    transition: 0.3s ease;
+.time-tag{
+    background:#342d17;
+    color:var(--gold);
 }
 
-.place-card:hover .place-icon {
-    transform: rotate(-5deg) scale(1.08);
+.type-tag{
+    color:#c8c8ff;
+    background:#252530;
 }
 
-.place-card h3 {
-    font-size: 20px;
-    margin-bottom: 8px;
+.place-area{
+    margin-top:12px;
+    color:#7f7f88;
+    font-size:12px;
+    line-height:1.4;
 }
 
-.place-description {
-    color: #9999a1;
-    font-size: 14px;
-    line-height: 1.5;
-    margin-bottom: 16px;
-}
+/* ================= PLANNER ================= */
 
-.place-info {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
+.planner-intro-title{
+    font-size:21px;
+    font-weight:900;
+    margin-bottom:7px;
 }
 
-.info-tag {
-    background: #29292f;
-    color: #d8d8dd;
-    padding: 7px 10px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 700;
+.planner-intro-text{
+    color:#9999a1;
+    font-size:14px;
+    line-height:1.5;
 }
 
-.budget-tag {
-    background: #16351f;
-    color: #8cffad;
+.planner-category-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(175px,1fr));
+    gap:13px;
 }
 
-.rating-tag {
-    background: #342d17;
-    color: #ffd96a;
+.planner-category{
+    min-height:112px;
+    border:1px solid var(--line);
+    background:var(--card);
+    color:#fff;
+    border-radius:19px;
+    padding:18px 12px;
+    text-align:center;
+    transition:.22s;
+    animation:card .45s ease both;
 }
 
-.type-tag {
-    background: #252530;
-    color: #bdbdff;
+.planner-category:hover{
+    transform:translateY(-5px);
+    background:#25252b;
+    border-color:#666;
 }
 
-.place-area {
-    margin-top: 13px;
-    color: #777780;
-    font-size: 12px;
+.planner-category:active{
+    transform:scale(.97);
 }
-
 
-/* =====================================================
-   EMPTY
-===================================================== */
-
-.no-results {
-    display: none;
-    text-align: center;
-    padding: 40px;
-    color: #888891;
+.planner-category-icon{
+    display:block;
+    font-size:31px;
+    margin-bottom:10px;
 }
-
-
-/* =====================================================
-   POPUP
-===================================================== */
-
-.overlay {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
 
-    background: rgba(0,0,0,0.9);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-
-    z-index: 9999;
+.planner-category-name{
+    display:block;
+    font-size:13px;
+    font-weight:900;
+    line-height:1.3;
 }
-
-.popup {
-    width: 100%;
-    max-width: 430px;
 
-    background: #1b1b20;
+/* ================= RESULTS ================= */
 
-    border-radius: 25px;
-
-    padding: 30px 23px;
-
-    box-shadow:
-        0 25px 80px rgba(0,0,0,0.7);
-
-    text-align: center;
-
-    animation: popupIn 0.35s ease;
+.planner-results{
+    display:none;
+    animation:up .4s ease both;
 }
 
-.popup-icon {
-    font-size: 45px;
-    margin-bottom: 12px;
+.result-buttons{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
 }
 
-.popup-title {
-    font-size: 29px;
-    font-weight: 800;
-    margin-bottom: 10px;
+.random-button{
+    flex:1;
+    border:0;
+    border-radius:14px;
+    background:#fff;
+    color:#111;
+    font-size:14px;
+    font-weight:900;
 }
 
-.popup-description {
-    color: #a7a7ad;
-    font-size: 15px;
-    line-height: 1.5;
-    margin-bottom: 28px;
+.result-note{
+    color:#777780;
+    text-align:center;
+    font-size:12px;
+    margin:-12px 0 20px;
 }
-
 
-/* =====================================================
-   INPUT
-===================================================== */
+/* ================= TRAVEL ================= */
 
-.form-group {
-    text-align: left;
-    margin-bottom: 18px;
+.travel-box{
+    background:#18181c;
+    border:1px solid #303038;
+    border-radius:16px;
+    padding:14px;
+    margin-top:15px;
 }
 
-.form-label {
-    display: block;
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 9px;
+.travel-title{
+    font-size:12px;
+    font-weight:900;
+    margin-bottom:9px;
 }
 
-.text-input {
-    width: 100%;
-    height: 52px;
-
-    padding: 0 15px;
-
-    border-radius: 12px;
-
-    border: 1px solid #3c3c45;
-
-    background: #101014;
-    color: white;
-
-    font-size: 16px;
-
-    outline: none;
+.travel-options{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
 }
 
-.text-input:focus {
-    border-color: white;
+.travel-option{
+    background:#25252b;
+    border-radius:11px;
+    padding:10px 5px;
+    text-align:center;
 }
 
-.text-input::placeholder {
-    color: #707078;
+.travel-option strong{
+    display:block;
+    font-size:18px;
+    margin-bottom:4px;
 }
-
-
-/* =====================================================
-   COLLEGE
-===================================================== */
 
-.college-options {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.travel-option span{
+    display:block;
+    color:#9999a1;
+    font-size:10px;
+    line-height:1.3;
 }
 
-.college-button {
-    width: 100%;
-    min-height: 62px;
+/* ================= EMPTY ================= */
 
-    padding: 14px 16px;
-
-    border-radius: 14px;
-
-    border: 1px solid #3b3b43;
-
-    background: #111115;
+.empty{
+    grid-column:1/-1;
+    text-align:center;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:25px;
+    color:var(--muted);
+}
 
-    color: white;
+/* ================= GO TOP ================= */
 
-    text-align: left;
+#goTop{
+    position:fixed;
+    right:17px;
+    bottom:18px;
+    width:50px;
+    height:50px;
+    border:0;
+    border-radius:50%;
+    background:#fff;
+    color:#111;
+    font-size:21px;
+    font-weight:900;
+    z-index:5000;
+    box-shadow:0 8px 30px rgba(0,0,0,.5);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(18px);
+    transition:.25s;
+}
 
-    font-size: 16px;
-    font-weight: 700;
+#goTop.show{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
 
-    cursor: pointer;
+/* ================= SETUP ================= */
 
-    transition: 0.2s ease;
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.93);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    z-index:9999;
 }
 
-.college-button:hover {
-    background: #29292f;
-    transform: translateY(-2px);
+.popup{
+    width:100%;
+    max-width:430px;
+    background:#1b1b20;
+    border-radius:25px;
+    padding:28px 22px;
+    text-align:center;
+    box-shadow:0 25px 80px rgba(0,0,0,.7);
+    animation:pop .3s ease both;
 }
 
-.college-button.selected {
-    background: white;
-    color: #111;
-    border-color: white;
+.popup-icon{
+    font-size:44px;
+    margin-bottom:10px;
 }
 
-.college-small {
-    display: block;
-    font-size: 12px;
-    font-weight: 400;
-    margin-top: 4px;
-    opacity: 0.6;
+.popup-title{
+    font-size:28px;
+    font-weight:900;
+    margin-bottom:9px;
 }
-
-
-/* =====================================================
-   POPUP BUTTONS
-===================================================== */
-
-.continue-button {
-    width: 100%;
-    height: 54px;
 
-    border: none;
-    border-radius: 13px;
-
-    background: white;
-    color: #111;
-
-    font-size: 17px;
-    font-weight: 800;
-
-    cursor: pointer;
-
-    margin-top: 15px;
-
-    transition: 0.25s ease;
+.popup-description{
+    color:#a7a7ad;
+    font-size:14px;
+    line-height:1.5;
+    margin-bottom:25px;
 }
 
-.continue-button:hover {
-    transform: translateY(-2px);
+.form-group{
+    text-align:left;
+    margin-bottom:16px;
 }
-
-.back-button {
-    width: 100%;
-
-    border: none;
-
-    background: transparent;
 
-    color: #8f8f96;
+.form-label{
+    display:block;
+    font-size:14px;
+    font-weight:800;
+    margin-bottom:8px;
+}
 
-    font-size: 14px;
+.text-input{
+    width:100%;
+    height:52px;
+    padding:0 14px;
+    border-radius:12px;
+    border:1px solid #3c3c45;
+    background:#101014;
+    color:#fff;
+    font-size:16px;
+    outline:none;
+}
 
-    margin-top: 15px;
+.text-input:focus{
+    border-color:#fff;
+}
 
-    padding: 8px;
+.college-options{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
 
-    cursor: pointer;
+.college-button{
+    width:100%;
+    min-height:62px;
+    padding:13px 15px;
+    border-radius:14px;
+    border:1px solid #3b3b43;
+    background:#111115;
+    color:#fff;
+    text-align:left;
+    font-size:16px;
+    font-weight:800;
+}
 
-    transition: 0.2s ease;
+.college-button.selected{
+    background:#fff;
+    color:#111;
 }
 
-.back-button:hover {
-    color: white;
+.college-small{
+    display:block;
+    font-size:12px;
+    font-weight:400;
+    margin-top:4px;
+    opacity:.65;
 }
 
+.continue-button{
+    width:100%;
+    height:53px;
+    border:0;
+    border-radius:13px;
+    background:#fff;
+    color:#111;
+    font-size:16px;
+    font-weight:900;
+    margin-top:15px;
+}
 
-/* =====================================================
-   ERROR
-===================================================== */
+.back-button{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#8f8f96;
+    font-size:14px;
+    margin-top:13px;
+    padding:8px;
+}
 
-.error {
-    display: none;
-    color: #ff7777;
-    text-align: left;
-    font-size: 13px;
-    margin-top: 8px;
+.error{
+    display:none;
+    color:#ff7777;
+    text-align:left;
+    font-size:12px;
+    margin-top:7px;
 }
 
+/* ================= ANIMATIONS ================= */
 
-/* =====================================================
-   HIDDEN
-===================================================== */
+@keyframes up{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
 
-.hidden {
-    display: none !important;
+@keyframes card{
+    from{
+        opacity:0;
+        transform:translateY(18px) scale(.98);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
 }
 
+@keyframes pop{
+    from{
+        opacity:0;
+        transform:scale(.94);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
 
-/* =====================================================
-   ANIMATIONS
-===================================================== */
+/* ================= MOBILE ================= */
 
-@keyframes fadeUp {
+@media(max-width:600px){
 
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+    .navigation-buttons{
+        flex-direction:column;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .planner-category-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-}
-
-@keyframes cardIn {
-
-    from {
-        opacity: 0;
-        transform:
-            translateY(30px)
-            scale(0.97);
+    .place-grid{
+        grid-template-columns:1fr;
     }
 
-    to {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
+    .travel-options{
+        grid-template-columns:1fr;
     }
 
-}
-
-@keyframes popupIn {
-
-    from {
-        opacity: 0;
-        transform: scale(0.92);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 600px) {
-
-    .place-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .explore-section {
-        padding-top: 25px;
-    }
-
-    .section-heading h2 {
-        font-size: 30px;
-    }
-
-    .place-card {
-        padding: 19px;
-    }
-
-    .navigation-buttons {
-        flex-direction: column;
+    .section-heading h2{
+        font-size:29px;
     }
 
 }
 
 </style>
-
 </head>
-
 
 <body>
 
+<!-- ================= HOME ================= -->
 
-<!-- =====================================================
-     HOME
-===================================================== -->
+<main id="homeSection" class="home">
 
-<main class="home" id="homeSection">
+    <div class="home-content">
 
-<div class="home-content">
+        <div class="logo">
+            WHERE’S THE GANG?
+        </div>
 
+        <div class="tagline">
+            Class can wait. The gang can't. 😂
+        </div>
 
-<div class="logo">
-WHERE’S THE GANG?
-</div>
+        <div class="home-buttons">
 
+            <button
+                class="main-button explore-button"
+                type="button"
+                onclick="openExplore()">
+                📍 Explore Places
+            </button>
 
-<div class="tagline">
-Class can wait. The gang can't. 😂
-</div>
+            <button
+                class="main-button planner-button"
+                type="button"
+                onclick="openPlanner()">
+                🎯 Where Should We Go?
+            </button>
 
+        </div>
 
-<div class="home-buttons">
+        <div id="userWelcome" class="user-welcome"></div>
 
-
-<button
-class="main-button explore-button"
-onclick="openExplore()"
->
-📍 Explore Places
-</button>
-
-
-<button
-class="main-button planner-button"
-onclick="comingSoon()"
->
-🎯 Where Should We Go?
-</button>
-
-
-</div>
-
-
-<div
-id="userWelcome"
-class="user-welcome"
-></div>
-
-
-</div>
+    </div>
 
 </main>
 
 
+<!-- ================= EXPLORE ================= -->
 
-<!-- =====================================================
-     EXPLORE
-===================================================== -->
+<section id="exploreSection" class="page-section">
 
-<section
-id="exploreSection"
-class="explore-section"
->
+    <div class="container">
 
-<div class="explore-container">
+        <div class="navigation-buttons">
 
+            <button
+                class="page-back"
+                type="button"
+                onclick="goHome()">
+                ← Back to Home
+            </button>
 
-<!-- NAVIGATION -->
+            <button
+                class="page-back"
+                type="button"
+                onclick="changeCollege()">
+                🎓 Change College
+            </button>
 
-<div class="navigation-buttons">
+        </div>
 
-<button
-class="page-back"
-onclick="goBackHome()"
->
-← Back to Home
-</button>
+        <div class="section-heading">
 
+            <h2 id="exploreTitle">
+                🔥 Places Near You
+            </h2>
 
-<button
-class="page-back change-college"
-onclick="changeCollege()"
->
-🎓 Change College
-</button>
+            <p id="exploreSubtitle">
+                Budget-friendly spots for the gang
+            </p>
 
-</div>
+        </div>
 
+        <div class="area-box">
 
-<div class="section-heading">
+            <div class="area-title">
+                YOUR COLLEGE AREA
+            </div>
 
-<h2 id="exploreTitle">
-🔥 Places Near You
-</h2>
+            <div id="areaName" class="area-name">
+                📍 Loading...
+            </div>
 
-<p id="exploreSubtitle">
-Budget-friendly places for the gang
-</p>
+        </div>
 
-</div>
+        <div class="categories">
 
+            <button
+                class="category active"
+                type="button"
+                onclick="filterPlaces('all',this)">
+                ✨ All
+            </button>
 
-<!-- AREA -->
+            <button
+                class="category"
+                type="button"
+                onclick="filterPlaces('restaurant',this)">
+                🍽️ Restaurants
+            </button>
 
-<div class="area-box">
+            <button
+                class="category"
+                type="button"
+                onclick="filterPlaces('snack',this)">
+                🥪 Snacks
+            </button>
 
-<div class="area-title">
-YOUR COLLEGE AREA
-</div>
+            <button
+                class="category"
+                type="button"
+                onclick="filterPlaces('cafe',this)">
+                ☕ Cafés
+            </button>
 
-<div
-id="areaName"
-class="area-name"
->
-📍 Loading...
-</div>
+            <button
+                class="category"
+                type="button"
+                onclick="filterPlaces('dessert',this)">
+                🍦 Desserts
+            </button>
 
-</div>
+        </div>
 
+        <div id="placeGrid" class="place-grid"></div>
 
-<!-- FILTERS -->
-
-<div class="categories">
-
-
-<button
-class="category active"
-onclick="filterPlaces('all', this)"
->
-✨ All
-</button>
-
-
-<button
-class="category"
-onclick="filterPlaces('restaurant', this)"
->
-🍽️ Restaurants
-</button>
-
-
-<button
-class="category"
-onclick="filterPlaces('snack', this)"
->
-🥪 Snacks
-</button>
-
-
-<button
-class="category"
-onclick="filterPlaces('cafe', this)"
->
-☕ Cafés
-</button>
-
-
-<button
-class="category"
-onclick="filterPlaces('dessert', this)"
->
-🍦 Desserts
-</button>
-
-
-</div>
-
-
-<div
-id="placeGrid"
-class="place-grid"
-></div>
-
-
-<div
-id="noResults"
-class="no-results"
->
-Nothing here yet 😭
-</div>
-
-
-</div>
+    </div>
 
 </section>
 
 
+<!-- ================= PLANNER ================= -->
 
-<!-- =====================================================
-     SETUP POPUP
-===================================================== -->
+<section id="plannerSection" class="page-section">
 
-<div
-id="setupOverlay"
-class="overlay"
->
+    <div class="container">
 
-<div class="popup">
+        <div class="navigation-buttons">
 
+            <button
+                class="page-back"
+                type="button"
+                onclick="goHome()">
+                ← Back to Home
+            </button>
 
-<!-- =====================================================
-     NAME
-===================================================== -->
+            <button
+                class="page-back"
+                type="button"
+                onclick="changeCollege()">
+                🎓 Change College
+            </button>
 
-<section id="nameStep">
+        </div>
 
+        <div class="section-heading">
 
-<div class="popup-icon">
-👋
-</div>
+            <h2>
+                🎯 Where Should We Go?
+            </h2>
 
+            <p>
+                Pick your vibe. We'll find a place.
+            </p>
 
-<div class="popup-title">
-First things first
-</div>
+        </div>
 
+        <div class="area-box">
 
-<div class="popup-description">
-Let's get to know you before we get started.
-</div>
+            <div class="area-title">
+                STARTING FROM
+            </div>
 
+            <div id="plannerArea" class="area-name">
+                📍 Loading...
+            </div>
 
-<div class="form-group">
-
-
-<label
-class="form-label"
-for="nameInput"
->
-What's your name?
-</label>
-
-
-<input
-id="nameInput"
-class="text-input"
-type="text"
-maxlength="30"
-placeholder="Enter your name"
->
+        </div>
 
 
-<div
-id="nameError"
-class="error"
->
-Please enter your name.
-</div>
+        <!-- PLANNER CATEGORIES -->
+
+        <div id="plannerCategories">
+
+            <div class="planner-intro">
+
+                <div class="planner-intro-title">
+                    What's the plan? 😎
+                </div>
+
+                <div class="planner-intro-text">
+                    Choose any category. Every button is wired to the
+                    current college's places.
+                </div>
+
+            </div>
+
+            <div
+                class="planner-category-grid"
+                id="plannerCategoryGrid">
+            </div>
+
+        </div>
 
 
-</div>
+        <!-- PLANNER RESULTS -->
 
+        <div id="plannerResults" class="planner-results">
 
-<button
-class="continue-button"
-onclick="goToCollegeStep()"
->
-Continue →
-</button>
+            <div class="result-buttons">
 
+                <button
+                    class="page-back"
+                    type="button"
+                    onclick="backToCategories()">
+                    ← Categories
+                </button>
 
-</section>
+                <button
+                    class="random-button"
+                    type="button"
+                    onclick="surpriseMe()">
+                    🎲 Surprise Me
+                </button>
 
+            </div>
 
+            <div class="section-heading">
 
-<!-- =====================================================
-     COLLEGE
-===================================================== -->
+                <h2 id="resultTitle">
+                    Places
+                </h2>
 
-<section
-id="collegeStep"
-class="hidden"
->
+                <p id="resultSubtitle">
+                    Starting from your college
+                </p>
 
+            </div>
 
-<div class="popup-icon">
-🎓
-</div>
+            <div class="result-note">
+                Travel times are approximate estimates,
+                not live navigation times.
+            </div>
 
+            <div
+                id="plannerResultGrid"
+                class="place-grid">
+            </div>
 
-<div class="popup-title">
-Which college?
-</div>
+        </div>
 
-
-<div class="popup-description">
-Select your college.
-</div>
-
-
-<div class="college-options">
-
-
-<button
-id="nmkButton"
-class="college-button"
-onclick="selectCollege('NMKRV')"
->
-
-NMKRV
-
-<span class="college-small">
-NMKRV College
-</span>
-
-</button>
-
-
-<button
-id="apsButton"
-class="college-button"
-onclick="selectCollege('APS The Shanda')"
->
-
-APS The Shanda
-
-<span class="college-small">
-APS College
-</span>
-
-</button>
-
-
-</div>
-
-
-<div
-id="collegeError"
-class="error"
->
-Please select your college.
-</div>
-
-
-<button
-class="continue-button"
-onclick="finishSetup()"
->
-Let's Go 🚀
-</button>
-
-
-<button
-class="back-button"
-onclick="goBackToName()"
->
-← Go back
-</button>
-
+    </div>
 
 </section>
 
 
-</div>
+<!-- ================= SETUP ================= -->
+
+<div id="setupOverlay" class="overlay">
+
+    <div class="popup">
+
+        <!-- NAME -->
+
+        <section id="nameStep">
+
+            <div class="popup-icon">
+                👋
+            </div>
+
+            <div class="popup-title">
+                First things first
+            </div>
+
+            <div class="popup-description">
+                Let's get to know you before we get started.
+            </div>
+
+            <div class="form-group">
+
+                <label
+                    class="form-label"
+                    for="nameInput">
+                    What's your name?
+                </label>
+
+                <input
+                    id="nameInput"
+                    class="text-input"
+                    maxlength="30"
+                    autocomplete="name"
+                    placeholder="Enter your name">
+
+                <div id="nameError" class="error">
+                    Please enter your name.
+                </div>
+
+            </div>
+
+            <button
+                class="continue-button"
+                type="button"
+                onclick="goCollege()">
+                Continue →
+            </button>
+
+        </section>
+
+
+        <!-- COLLEGE -->
+
+        <section id="collegeStep" class="hidden">
+
+            <div class="popup-icon">
+                🎓
+            </div>
+
+            <div class="popup-title">
+                Which college?
+            </div>
+
+            <div class="popup-description">
+                Select your college.
+            </div>
+
+            <div class="college-options">
+
+                <button
+                    id="nmkButton"
+                    class="college-button"
+                    type="button"
+                    onclick="selectCollege('NMKRV')">
+
+                    NMKRV
+
+                    <span class="college-small">
+                        NMKRV College • Jayanagar
+                    </span>
+
+                </button>
+
+
+                <button
+                    id="apsButton"
+                    class="college-button"
+                    type="button"
+                    onclick="selectCollege('APS The Shanda')">
+
+                    APS The Shanda
+
+                    <span class="college-small">
+                        APS College • N.R. Colony, Basavanagudi
+                    </span>
+
+                </button>
+
+            </div>
+
+            <div id="collegeError" class="error">
+                Please select your college.
+            </div>
+
+            <button
+                class="continue-button"
+                type="button"
+                onclick="finishSetup()">
+                Let's Go 🚀
+            </button>
+
+            <button
+                class="back-button"
+                type="button"
+                onclick="goName()">
+                ← Go back
+            </button>
+
+        </section>
+
+    </div>
 
 </div>
 
+
+<!-- ================= GO TOP ================= -->
+
+<button
+    id="goTop"
+    type="button"
+    aria-label="Go to top"
+    onclick="goTop()">
+    ↑
+</button>
 
 
 <script>
 
+'use strict';
+
 
 /* =====================================================
-   VERSION
+   VERSION / STORAGE
 ===================================================== */
 
-const APP_VERSION = "1.30";
+const APP_VERSION = '1.5215 UJV';
+
+const STORAGE = {
+    name:'gangName',
+    college:'gangCollege',
+    version:'gangAppVersion'
+};
+
+let selectedCollege = '';
+let currentPlaces = [];
+let currentCategory = '';
 
 
 /* =====================================================
-   SELECTED COLLEGE
+   COLLEGE INFORMATION
 ===================================================== */
 
-let selectedCollege = "";
+const collegeMeta = {
+
+    'NMKRV': {
+
+        area:'📍 Jayanagar',
+
+        plannerArea:'📍 NMKRV • Jayanagar',
+
+        title:'🔥 Places Near NMKRV',
+
+        subtitle:
+            'Budget-friendly spots around Jayanagar'
+
+    },
+
+    'APS The Shanda': {
+
+        area:
+            '📍 N.R. Colony • Basavanagudi',
+
+        plannerArea:
+            '📍 APS • N.R. Colony • Basavanagudi',
+
+        title:
+            '🔥 Places Near APS',
+
+        subtitle:
+            'Budget-friendly spots around Basavanagudi'
+
+    }
+
+};
 
 
 /* =====================================================
-   NMKRV PLACES
+   EXPLORE PLACES — NMKRV
 ===================================================== */
 
 const nmkrvPlaces = [
 
-{
-name: "Taaza Thindi",
-category: "snack",
-icon: "🥞",
-budget: "₹",
-rating: "4.6 ⭐",
-type: "South Indian",
-area: "Jayanagar",
-description:
-"Classic budget dosa, idli, vada and coffee stop. Great for a quick student breakfast."
-},
+    {
+        name:'Taaza Thindi',
+        category:'snack',
+        icon:'🥞',
+        budget:'₹',
+        rating:'Popular',
+        type:'South Indian',
+        area:'Jayanagar',
+        description:
+            'Budget dosa, idli, vada and coffee.'
+    },
 
-{
-name: "Hari Super Sandwich",
-category: "snack",
-icon: "🥪",
-budget: "₹",
-rating: "4.2 ⭐",
-type: "Quick Bites",
-area: "Jayanagar",
-description:
-"Big student-friendly snack menu with sandwiches, chaats and quick bites."
-},
+    {
+        name:'Hari Super Sandwich',
+        category:'snack',
+        icon:'🥪',
+        budget:'₹',
+        rating:'Popular',
+        type:'Quick Bites',
+        area:'Jayanagar',
+        description:
+            'Sandwiches, chaats and quick bites.'
+    },
 
-{
-name: "Meghana Foods",
-category: "restaurant",
-icon: "🍗",
-budget: "₹₹",
-rating: "4.3 ⭐",
-type: "Biryani",
-area: "Jayanagar 4th Block",
-description:
-"Popular biryani and Andhra-style restaurant. Better for a proper meal with the gang."
-},
+    {
+        name:'Meghana Foods',
+        category:'restaurant',
+        icon:'🍗',
+        budget:'₹₹',
+        rating:'Popular',
+        type:'Biryani',
+        area:'Jayanagar',
+        description:
+            'Biryani and Andhra-style food.'
+    },
 
-{
-name: "KDC Jayanagar",
-category: "restaurant",
-icon: "🍛",
-budget: "₹",
-rating: "4.5 ⭐",
-type: "South Indian",
-area: "Jayanagar",
-description:
-"Budget South Indian option for dosas, meals and filter coffee."
-},
+    {
+        name:'KDC Jayanagar',
+        category:'restaurant',
+        icon:'🍛',
+        budget:'₹',
+        rating:'Popular',
+        type:'South Indian',
+        area:'Jayanagar',
+        description:
+            'Budget-friendly South Indian food.'
+    },
 
-{
-name: "Cool Joint",
-category: "dessert",
-icon: "🍦",
-budget: "₹",
-rating: "4.1 ⭐",
-type: "Desserts",
-area: "Jayanagar 4th Block",
-description:
-"Classic hangout for ice cream, shakes, sandwiches and quick snacks."
-},
+    {
+        name:'Cool Joint',
+        category:'dessert',
+        icon:'🍦',
+        budget:'₹',
+        rating:'Popular',
+        type:'Desserts',
+        area:'Jayanagar 4th Block',
+        description:
+            'Ice cream, shakes and snacks.'
+    },
 
-{
-name: "Glen's Bakehouse",
-category: "cafe",
-icon: "🧁",
-budget: "₹₹",
-rating: "3.9 ⭐",
-type: "Bakery",
-area: "Jayanagar",
-description:
-"Café-style hangout for cupcakes, desserts, coffee and casual food."
-},
+    {
+        name:"Glen's Bakehouse",
+        category:'cafe',
+        icon:'🧁',
+        budget:'₹₹',
+        rating:'Popular',
+        type:'Bakery',
+        area:'Jayanagar',
+        description:
+            'Bakery items, desserts and coffee.'
+    },
 
-{
-name: "WAAW Cafe",
-category: "cafe",
-icon: "🍟",
-budget: "₹₹",
-rating: "4.4 ⭐",
-type: "Cafe",
-area: "Jayanagar",
-description:
-"Casual café option for burgers, fries, pasta, shakes and desserts."
-},
-
-{
-name: "Dose Manjanna",
-category: "restaurant",
-icon: "🥞",
-budget: "₹",
-rating: "4.4 ⭐",
-type: "Dosa",
-area: "Jayanagar",
-description:
-"Quick South Indian spot for crispy dosas and filling tiffin."
-},
-
-{
-name: "Sri Vasavi Chats",
-category: "snack",
-icon: "🌮",
-budget: "₹",
-rating: "4.2 ⭐",
-type: "Chaat",
-area: "Jayanagar",
-description:
-"Good pick when the gang wants pani puri, chaat and quick vegetarian snacks."
-},
-
-{
-name: "Kedia's Fun Food",
-category: "snack",
-icon: "🍜",
-budget: "₹",
-rating: "4.0 ⭐",
-type: "Quick Food",
-area: "Jayanagar",
-description:
-"Affordable quick-food option for a casual group stop."
-},
-
-{
-name: "Vijay Donne Biryani",
-category: "restaurant",
-icon: "🍚",
-budget: "₹",
-rating: "4.9 ⭐",
-type: "Biryani",
-area: "Jayanagar",
-description:
-"Budget biryani option when the gang wants a proper filling meal."
-},
-
-{
-name: "Karma Kaapi",
-category: "cafe",
-icon: "☕",
-budget: "₹₹",
-rating: "4.3 ⭐",
-type: "Coffee",
-area: "Jayanagar",
-description:
-"Coffee-focused hangout when you want to sit and chill."
-},
-
-{
-name: "Chaat Street",
-category: "snack",
-icon: "🌮",
-budget: "₹",
-rating: "4.1 ⭐",
-type: "Street Food",
-area: "Jayanagar",
-description:
-"Quick street-style snacks and chaat for a low-budget gang stop."
-},
-
-{
-name: "Juice Junction",
-category: "dessert",
-icon: "🥤",
-budget: "₹",
-rating: "4.2 ⭐",
-type: "Juices",
-area: "Jayanagar",
-description:
-"Juices, shakes and cold drinks for a quick break after class."
-},
-
-{
-name: "Filter Coffee Corner",
-category: "cafe",
-icon: "☕",
-budget: "₹",
-rating: "4.3 ⭐",
-type: "Coffee",
-area: "Jayanagar",
-description:
-"Simple coffee and snack stop for a short gang meetup."
-}
+    {
+        name:'WAAW Cafe',
+        category:'cafe',
+        icon:'🍟',
+        budget:'₹₹',
+        rating:'Popular',
+        type:'Cafe',
+        area:'Jayanagar',
+        description:
+            'Burgers, fries, pasta and shakes.'
+    }
 
 ];
 
 
 /* =====================================================
-   APS PLACES
+   EXPLORE PLACES — APS
 ===================================================== */
 
 const apsPlaces = [
 
-{
-name: "S.M.V. Snacks Corner",
-category: "snack",
-icon: "🍟",
-budget: "₹",
-rating: "4.3 ⭐",
-type: "Student Snacks",
-area: "Vishweshwarapura",
-description:
-"Quick bites, snacks and casual student hangout near the college area."
-},
+    {
+        name:'Vidyarthi Bhavan',
+        category:'restaurant',
+        icon:'🥞',
+        budget:'₹',
+        rating:'Popular',
+        type:'South Indian',
+        area:'Gandhi Bazaar',
+        description:
+            'Classic South Indian breakfast and snacks.'
+    },
 
-{
-name: "By2 Coffee",
-category: "cafe",
-icon: "☕",
-budget: "₹",
-rating: "4.4 ⭐",
-type: "Coffee & Tiffin",
-area: "Basavanagudi",
-description:
-"Budget-friendly coffee and tiffin stop for a quick gang break."
-},
+    {
+        name:'By 2 Coffee',
+        category:'cafe',
+        icon:'☕',
+        budget:'₹',
+        rating:'Popular',
+        type:'Coffee',
+        area:'Basavanagudi',
+        description:
+            'Quick coffee and tiffin stop.'
+    },
 
-{
-name: "South Kitchen",
-category: "restaurant",
-icon: "🍛",
-budget: "₹",
-rating: "4.4 ⭐",
-type: "South Indian",
-area: "N.R. Colony",
-description:
-"No-frills vegetarian South Indian food with quick service."
-},
+    {
+        name:'Board 4 Bored',
+        category:'cafe',
+        icon:'🎲',
+        budget:'₹₹',
+        rating:'Popular',
+        type:'Board Game Café',
+        area:'DVG Road',
+        description:
+            'Board-game café for groups.'
+    },
 
-{
-name: "South Thindies",
-category: "restaurant",
-icon: "🥞",
-budget: "₹",
-rating: "4.1 ⭐",
-type: "Tiffin",
-area: "Basavanagudi",
-description:
-"Budget-friendly South Indian breakfast and tiffin spot."
-},
+    {
+        name:'VV Puram Food Street',
+        category:'snack',
+        icon:'🌮',
+        budget:'₹',
+        rating:'Popular',
+        type:'Street Food',
+        area:'VV Puram',
+        description:
+            'Lots of vegetarian street-food choices.'
+    },
 
-{
-name: "Uphara Kendra",
-category: "restaurant",
-icon: "🍽️",
-budget: "₹",
-rating: "4.2 ⭐",
-type: "South Indian",
-area: "Basavanagudi",
-description:
-"Affordable South Indian meals, dosa, idli and vada."
-},
+    {
+        name:'Gandhi Bazaar',
+        category:'snack',
+        icon:'🥘',
+        budget:'₹',
+        rating:'Popular',
+        type:'Food & Shopping',
+        area:'Basavanagudi',
+        description:
+            'Busy local market with food and shopping.'
+    },
 
-{
-name: "Mahalaxmi Tiffin Room",
-category: "snack",
-icon: "🥣",
-budget: "₹",
-rating: "4.3 ⭐",
-type: "Tiffin",
-area: "DVG Road",
-description:
-"Old-school breakfast and evening snack option."
-},
+    {
+        name:'Asha Sweet Center',
+        category:'dessert',
+        icon:'🍬',
+        budget:'₹',
+        rating:'Popular',
+        type:'Sweets',
+        area:'Gandhi Bazaar',
+        description:
+            'Sweets, snacks and chaat.'
+    },
 
-{
-name: "Nothing Before Coffee",
-category: "cafe",
-icon: "☕",
-budget: "₹₹",
-rating: "4.5 ⭐",
-type: "Cafe",
-area: "N.R. Colony",
-description:
-"Coffee, shakes, desserts and quick café snacks."
-},
-
-{
-name: "Friends Adda",
-category: "snack",
-icon: "🥪",
-budget: "₹",
-rating: "4.4 ⭐",
-type: "Quick Bites",
-area: "South End Road",
-description:
-"Casual student hangout for tea and quick bites."
-},
-
-{
-name: "Kesarii Cafe",
-category: "cafe",
-icon: "🍰",
-budget: "₹₹",
-rating: "4.8 ⭐",
-type: "Cafe",
-area: "VV Puram",
-description:
-"Small vegetarian café around the famous food-street area."
-},
-
-{
-name: "Asha Sweet Center",
-category: "dessert",
-icon: "🍬",
-budget: "₹",
-rating: "3.8 ⭐",
-type: "Sweets & Chaat",
-area: "Gandhi Bazaar",
-description:
-"Sweets, samosas, chaat and quick snacks."
-},
-
-{
-name: "Sri Venkateshwara Sweet-Meat Stall",
-category: "dessert",
-icon: "🍮",
-budget: "₹",
-rating: "—",
-type: "Sweets",
-area: "Gandhi Bazaar",
-description:
-"Traditional sweets, snacks and quick bites."
-},
-
-{
-name: "The 11th Bean Cafe",
-category: "cafe",
-icon: "☕",
-budget: "₹₹",
-rating: "4.8 ⭐",
-type: "Specialty Coffee",
-area: "Basavanagudi",
-description:
-"Calm coffee hangout when the gang wants something relaxed."
-},
-
-{
-name: "The Coffee San",
-category: "cafe",
-icon: "☕",
-budget: "₹₹",
-rating: "5.0 ⭐",
-type: "Coffee",
-area: "Vishweshwarapura",
-description:
-"Coffee spot with modern drinks for a relaxed break."
-},
-
-{
-name: "Jalandhar Street",
-category: "restaurant",
-icon: "🍽️",
-budget: "₹₹",
-rating: "4.6 ⭐",
-type: "North Indian",
-area: "Gandhi Bazaar",
-description:
-"North Indian and Indo-Chinese option for group meals."
-},
-
-{
-name: "VV Puram Food Street",
-category: "snack",
-icon: "🌮",
-budget: "₹",
-rating: "4.5 ⭐",
-type: "Street Food",
-area: "VV Puram",
-description:
-"Great area for the gang to walk around and try different snacks."
-},
-
-{
-name: "Gandhi Bazaar Snacks",
-category: "snack",
-icon: "🥘",
-budget: "₹",
-rating: "4.4 ⭐",
-type: "Street Food",
-area: "Gandhi Bazaar",
-description:
-"Multiple affordable snack options around the busy Gandhi Bazaar area."
-}
+    {
+        name:'Umesh Refreshments',
+        category:'restaurant',
+        icon:'🍛',
+        budget:'₹',
+        rating:'Popular',
+        type:'South Indian',
+        area:'Basavanagudi',
+        description:
+            'Quick South Indian food.'
+    }
 
 ];
 
 
 /* =====================================================
-   CURRENT PLACES
+   ALL 21 CATEGORIES
 ===================================================== */
 
-let currentPlaces = nmkrvPlaces;
+const categories = [
+
+    ['gaming','🎮','Gaming'],
+
+    ['cinema','🎬','Cinema'],
+
+    ['shopping','🛍️','Shopping / Malls'],
+
+    ['food','🍔','Food'],
+
+    ['cafes','☕','Cafés'],
+
+    ['desserts','🍦','Desserts'],
+
+    ['parks','🌳','Parks'],
+
+    ['nature','🌲','Nature / Mini Forests'],
+
+    ['lakes','🌊','Lakes'],
+
+    ['hills','🏞️','Hill / Viewpoints'],
+
+    ['temples','🛕','Temples & Heritage'],
+
+    ['science','🧪','Science / Museums'],
+
+    ['photos','📸','Photo Spots'],
+
+    ['walk','🚶','Walk & Explore'],
+
+    ['sports','🏸','Sports / Fitness'],
+
+    ['books','📚','Libraries / Bookstores'],
+
+    ['art','🎨','Art & Culture'],
+
+    ['activities','🎯','Activities'],
+
+    ['sunset','🌅','Sunset / Chill Spots'],
+
+    ['metro','🚇','Metro-accessible Places'],
+
+    ['nearby','🏙️','Nearby Attractions']
+
+];
 
 
 /* =====================================================
-   PAGE LOAD
+   HELPER FOR PLANNER DATA
 ===================================================== */
 
-window.addEventListener(
-"load",
-function() {
+function p(
+    name,
+    icon,
+    area,
+    type,
+    budget,
+    description,
+    walk,
+    scooter,
+    bus,
+    time='Check current hours'
+){
 
-    checkExistingUser();
-
-    renderPlaces("all");
+    return {
+        name,
+        icon,
+        area,
+        type,
+        budget,
+        description,
+        walk,
+        scooter,
+        bus,
+        time
+    };
 
 }
-);
+
+
+/* =====================================================
+   APS PLANNER
+===================================================== */
+
+const apsPlanner = {
+
+    gaming:[
+
+        p(
+            'DBR Splendid Gaming Station',
+            '🎮',
+            'Gandhi Bazaar / Basavanagudi',
+            'Arcade / Games',
+            '₹₹',
+            'Arcade-style games and group entertainment.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min'
+        ),
+
+        p(
+            'Board 4 Bored',
+            '🎲',
+            'DVG Road, Basavanagudi',
+            'Board Games',
+            '₹₹',
+            'Board-game café for groups.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min',
+            '12 PM – 10:30 PM'
+        ),
+
+        p(
+            'Netzone Gaming Lounge',
+            '🎮',
+            'Hanumanth Nagar',
+            'PC Gaming',
+            '₹₹',
+            'Gaming lounge in the wider Basavanagudi area.',
+            '~30+ min',
+            '~10–15 min',
+            '~15–25 min'
+        )
+
+    ],
+
+
+    cinema:[
+
+        p(
+            'Prasanna Theatre',
+            '🎬',
+            'Magadi Road',
+            'Cinema',
+            '₹₹',
+            'Cinema option in the wider Bengaluru area.',
+            'Far',
+            '~15–25 min',
+            '~20–35 min',
+            'Show timings vary'
+        ),
+
+        p(
+            'Anjan Digital Cinema',
+            '🎬',
+            'South Bengaluru',
+            'Cinema',
+            '₹₹',
+            'Local cinema option; verify the current show schedule.',
+            'Far',
+            '~15–25 min',
+            '~20–35 min',
+            'Show timings vary'
+        )
+
+    ],
+
+
+    shopping:[
+
+        p(
+            'Gandhi Bazaar',
+            '🛍️',
+            'Basavanagudi',
+            'Market',
+            '₹–₹₹',
+            'Local shopping, food and browsing.',
+            '~10–20 min',
+            '~5–10 min',
+            '~10–15 min',
+            'Mostly daytime–evening'
+        ),
+
+        p(
+            'Jayanagar Shopping Complex',
+            '🛍️',
+            'Jayanagar',
+            'Shopping',
+            '₹₹',
+            'Large local shopping area.',
+            'Far',
+            '~10–15 min',
+            '~15–25 min'
+        ),
+
+        p(
+            'Gopalan Arcade Mall',
+            '🏬',
+            'Rajajinagar',
+            'Mall',
+            '₹₹₹',
+            'Shopping and entertainment mall; wider-area option.',
+            'Far',
+            '~20–30 min',
+            '~30–45 min'
+        )
+
+    ],
+
+
+    food:[
+
+        p(
+            'Vidyarthi Bhavan',
+            '🥞',
+            'Gandhi Bazaar',
+            'South Indian',
+            '₹',
+            'Famous dosa and South Indian food.',
+            '~10–20 min',
+            '~5–10 min',
+            '~10–15 min'
+        ),
+
+        p(
+            'VV Puram Food Street',
+            '🌮',
+            'VV Puram',
+            'Street Food',
+            '₹',
+            'Many food stalls for a food walk.',
+            '~25–35 min',
+            '~10–15 min',
+            '~15–25 min',
+            'Mostly evening'
+        ),
+
+        p(
+            'By 2 Coffee',
+            '☕',
+            'Basavanagudi',
+            'Quick Food',
+            '₹',
+            'Coffee, tiffin and quick bites.',
+            '~10–20 min',
+            '~5–10 min',
+            '~10–15 min'
+        )
+
+    ],
+
+
+    cafes:[
+
+        p(
+            'Board 4 Bored',
+            '☕',
+            'DVG Road',
+            'Cafe + Games',
+            '₹₹',
+            'Café combined with board games.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min',
+            '12 PM – 10:30 PM'
+        ),
+
+        p(
+            'By 2 Coffee',
+            '☕',
+            'Basavanagudi',
+            'Coffee',
+            '₹',
+            'Classic quick coffee stop.',
+            '~10–20 min',
+            '~5–10 min',
+            '~10–15 min'
+        ),
+
+        p(
+            'Aravali Brews Cafe',
+            '☕',
+            'Basavanagudi',
+            'Cafe',
+            '₹₹',
+            'Casual café option; verify current hours.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min'
+        )
+
+    ],
+
+
+    desserts:[
+
+        p(
+            'Asha Sweet Center',
+            '🍬',
+            'Gandhi Bazaar',
+            'Sweets',
+            '₹',
+            'Sweets, snacks and chaat.',
+            '~10–20 min',
+            '~5–10 min',
+            '~10–15 min'
+        ),
+
+        p(
+            'Polar Bear',
+            '🍦',
+            'Basavanagudi area',
+            'Ice Cream',
+            '₹₹',
+            'Ice cream and desserts.',
+            '~20–30 min',
+            '~10–15 min',
+            '~15–25 min'
+        )
+
+    ],
+
+
+    parks:[
+
+        p(
+            'Bugle Rock Park',
+            '🌳',
+            'Bull Temple Road',
+            'Park',
+            'Free',
+            'Green space and walking area in Basavanagudi.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min'
+        ),
+
+        p(
+            'M.N. Krishna Rao Park',
+            '🌳',
+            'Basavanagudi',
+            'Large Park',
+            'Free',
+            'Large green park for walking and outdoor recreation.',
+            '~15–30 min',
+            '~5–10 min',
+            '~10–20 min'
+        )
+
+    ],
+
+
+    nature:[
+
+        p(
+            'Bugle Rock',
+            '🌲',
+            'Basavanagudi',
+            'Rock / Greenery',
+            'Free',
+            'Rocky natural area surrounded by greenery.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min'
+        ),
+
+        p(
+            'Lalbagh Botanical Garden',
+            '🌲',
+            'Lalbagh',
+            'Botanical Garden',
+            '₹',
+            'Large botanical garden with greenery and walking paths.',
+            'Far',
+            '~10–20 min',
+            '~20–30 min',
+            '6 AM – 7 PM'
+        )
+
+    ],
+
+
+    lakes:[
+
+        p(
+            'Lalbagh Lake',
+            '🌊',
+            'Lalbagh',
+            'Lake',
+            '₹',
+            'Lake inside Lalbagh Botanical Garden.',
+            'Far',
+            '~10–20 min',
+            '~20–30 min',
+            '6 AM – 7 PM'
+        ),
+
+        p(
+            'Ulsoor Lake',
+            '🌊',
+            'Ulsoor',
+            'Lake',
+            '₹₹',
+            'Large Bengaluru lake; wider-area option.',
+            'Far',
+            '~25–35 min',
+            '~35–50 min'
+        )
+
+    ],
+
+
+    hills:[
+
+        p(
+            'Bugle Rock',
+            '🏞️',
+            'Basavanagudi',
+            'Viewpoint / Rock',
+            'Free',
+            'Rocky elevated park area with greenery.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min'
+        ),
+
+        p(
+            'Ragigudda Hill',
+            '🏞️',
+            'Jayanagar 9th Block',
+            'Hill',
+            'Free',
+            'Small hillock with temple surroundings and city views.',
+            'Far',
+            '~15–20 min',
+            '~20–30 min'
+        )
+
+    ],
+
+
+    temples:[
+
+        p(
+            'Bull Temple',
+            '🛕',
+            'Bull Temple Road',
+            'Heritage Temple',
+            'Free',
+            'Historic Basavanagudi landmark with the large Nandi statue.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min',
+            '6 AM – 8 PM'
+        ),
+
+        p(
+            'Dodda Ganapathi Temple',
+            '🛕',
+            'Bull Temple Road',
+            'Temple',
+            'Free',
+            'Historic Basavanagudi temple near Bull Temple.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min'
+        ),
+
+        p(
+            'Gavi Gangadhareshwara Temple',
+            '🛕',
+            'Gavipuram',
+            'Heritage',
+            'Free',
+            'Historic cave temple.',
+            '~25–35 min',
+            '~10–15 min',
+            '~15–25 min'
+        )
+
+    ],
+
+
+    science:[
+
+        p(
+            'Visvesvaraya Industrial & Technological Museum',
+            '🧪',
+            'Kasturba Road',
+            'Science Museum',
+            '₹₹',
+            'Interactive science and technology museum.',
+            'Far',
+            '~15–25 min',
+            '~25–40 min'
+        ),
+
+        p(
+            'ParSEC Jayanagar',
+            '🧪',
+            'Jayanagar',
+            'Science Experience',
+            '₹₹',
+            'Interactive science experience option; verify current hours.',
+            'Far',
+            '~15–20 min',
+            '~20–35 min'
+        )
+
+    ],
+
+
+    photos:[
+
+        p(
+            'Bull Temple',
+            '📸',
+            'Basavanagudi',
+            'Landmark',
+            'Free',
+            'Iconic Nandi landmark and heritage surroundings.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min',
+            '6 AM – 8 PM'
+        ),
+
+        p(
+            'Bugle Rock',
+            '📸',
+            'Basavanagudi',
+            'Nature / Landmark',
+            'Free',
+            'Greenery, rocks and old Bengaluru atmosphere.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min'
+        ),
+
+        p(
+            'Gandhi Bazaar',
+            '📸',
+            'Basavanagudi',
+            'Street',
+            'Free',
+            'Busy traditional market streets.',
+            '~10–20 min',
+            '~5–10 min',
+            '~10–15 min',
+            'Daytime–evening'
+        )
+
+    ],
+
+
+    walk:[
+
+        p(
+            'Gandhi Bazaar Walk',
+            '🚶',
+            'Basavanagudi',
+            'Walk',
+            'Free',
+            'Explore local shops, food and old Bengaluru streets.',
+            '~10–20 min',
+            '~5–10 min',
+            '~10–15 min',
+            'Best daytime/evening'
+        ),
+
+        p(
+            'Bull Temple → Bugle Rock',
+            '🚶',
+            'Basavanagudi',
+            'Walking Route',
+            'Free',
+            'Easy heritage-and-greenery walking combination.',
+            '~20–35 min',
+            '~5–10 min',
+            '~10–20 min',
+            'Morning/evening'
+        )
+
+    ],
+
+
+    sports:[
+
+        p(
+            'M.N. Krishna Rao Park',
+            '🏸',
+            'Basavanagudi',
+            'Outdoor Fitness',
+            'Free',
+            'Jogging and outdoor recreation space.',
+            '~15–30 min',
+            '~5–10 min',
+            '~10–20 min'
+        ),
+
+        p(
+            'Bugle Rock Park',
+            '🏸',
+            'Basavanagudi',
+            'Walking / Fitness',
+            'Free',
+            'Walking and casual outdoor activity.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min'
+        )
+
+    ],
+
+
+    books:[
+
+        p(
+            'M.N. Krishna Rao Park Library',
+            '📚',
+            'Basavanagudi',
+            'Library',
+            'Free',
+            'Library in the park area; verify current access hours.',
+            '~15–30 min',
+            '~5–10 min',
+            '~10–20 min'
+        ),
+
+        p(
+            'Sapna Book House',
+            '📚',
+            'Jayanagar',
+            'Bookstore',
+            '₹₹',
+            'Books, stationery and study material.',
+            'Far',
+            '~10–15 min',
+            '~15–25 min'
+        )
+
+    ],
+
+
+    art:[
+
+        p(
+            'National Gallery of Modern Art',
+            '🎨',
+            'Palace Road',
+            'Art Gallery',
+            '₹₹',
+            'Modern Indian art and cultural exhibitions.',
+            'Far',
+            '~20–30 min',
+            '~30–45 min'
+        ),
+
+        p(
+            'Angadi Heritage',
+            '🎨',
+            'Jayanagar',
+            'Heritage / Art',
+            '₹₹',
+            'Heritage-focused shopping and cultural option.',
+            'Far',
+            '~10–15 min',
+            '~15–25 min'
+        )
+
+    ],
+
+
+    /* ================= ACTIVITIES ================= */
+
+    activities:[
+
+        p(
+            'Board 4 Bored',
+            '🎯',
+            'DVG Road',
+            'Board Games',
+            '₹₹',
+            'Group activity with board games.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min',
+            '12 PM – 10:30 PM'
+        ),
+
+        p(
+            'Lalbagh Botanical Garden',
+            '🎯',
+            'Lalbagh',
+            'Outdoor Activity',
+            '₹',
+            'Walking and exploring a large botanical garden.',
+            'Far',
+            '~10–20 min',
+            '~20–30 min',
+            '6 AM – 7 PM'
+        )
+
+    ],
+
+
+    sunset:[
+
+        p(
+            'Bugle Rock',
+            '🌅',
+            'Basavanagudi',
+            'Chill Spot',
+            'Free',
+            'Green surroundings for a relaxed evening.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min',
+            'Best late afternoon'
+        ),
+
+        p(
+            'Lalbagh',
+            '🌅',
+            'Lalbagh',
+            'Garden',
+            '₹',
+            'Large garden for an evening walk.',
+            'Far',
+            '~10–20 min',
+            '~20–30 min',
+            '6 AM – 7 PM'
+        )
+
+    ],
+
+
+    metro:[
+
+        p(
+            'National College Metro',
+            '🚇',
+            'Basavanagudi',
+            'Metro',
+            '₹',
+            'Green Line access for trips around Bengaluru.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–15 min',
+            'Metro hours vary'
+        ),
+
+        p(
+            'Lalbagh Metro',
+            '🚇',
+            'Lalbagh',
+            'Metro',
+            '₹',
+            'Green Line station useful for Lalbagh and nearby areas.',
+            '~25–35 min',
+            '~10–15 min',
+            '~15–25 min',
+            'Metro hours vary'
+        )
+
+    ],
+
+
+    nearby:[
+
+        p(
+            'Bull Temple',
+            '🏙️',
+            'Basavanagudi',
+            'Landmark',
+            'Free',
+            'One of the main attractions in Basavanagudi.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min',
+            '6 AM – 8 PM'
+        ),
+
+        p(
+            'Bugle Rock Park',
+            '🌳',
+            'Basavanagudi',
+            'Park',
+            'Free',
+            'Popular green attraction near Bull Temple.',
+            '~15–25 min',
+            '~5–10 min',
+            '~10–20 min'
+        ),
+
+        p(
+            'Lalbagh Botanical Garden',
+            '🌿',
+            'Lalbagh',
+            'Major Attraction',
+            '₹',
+            'Major Bengaluru botanical attraction.',
+            'Far',
+            '~10–20 min',
+            '~20–30 min',
+            '6 AM – 7 PM'
+        ),
+
+        p(
+            'Gandhi Bazaar',
+            '🛍️',
+            'Basavanagudi',
+            'Market',
+            '₹',
+            'Food, shopping and old Bengaluru atmosphere.',
+            '~10–20 min',
+            '~5–10 min',
+            '~10–15 min',
+            'Daytime–evening'
+        )
+
+    ]
+
+};
+
+
+/* =====================================================
+   NMKRV PLANNER
+   Every category is available for NMKRV too.
+===================================================== */
+
+function shiftTravel(data){
+
+    return data.map((place,index)=>{
+
+        const walking = [
+            '~10–20 min',
+            '~15–30 min',
+            '~20–35 min'
+        ][index % 3];
+
+        const scooter = [
+            '~5–10 min',
+            '~5–12 min',
+            '~10–15 min'
+        ][index % 3];
+
+        const bus = [
+            '~10–15 min',
+            '~10–20 min',
+            '~15–25 min'
+        ][index % 3];
+
+        return {
+            ...place,
+            walk:walking,
+            scooter:scooter,
+            bus:bus
+        };
+
+    });
+
+}
+
+
+function buildPlanner(){
+
+    const planner={};
+
+    Object.keys(apsPlanner).forEach(category=>{
+
+        planner[category]=
+            shiftTravel(apsPlanner[category]);
+
+    });
+
+    return planner;
+
+}
+
+
+const nmkrvPlanner = buildPlanner();
+
+
+/* =====================================================
+   GET PLANNER FOR CURRENT COLLEGE
+===================================================== */
+
+function plannerForCollege(){
+
+    if(selectedCollege === 'NMKRV'){
+        return nmkrvPlanner;
+    }
+
+    return apsPlanner;
+
+}
+
+
+function meta(){
+
+    return (
+        collegeMeta[selectedCollege]
+        ||
+        collegeMeta.NMKRV
+    );
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+function init(){
+
+    renderPlannerCategories();
+
+    const savedName =
+        localStorage.getItem(STORAGE.name);
+
+    const savedCollege =
+        localStorage.getItem(STORAGE.college);
+
+    const savedVersion =
+        localStorage.getItem(STORAGE.version);
+
+
+    if(
+        savedName &&
+        savedCollege &&
+        savedVersion === APP_VERSION
+    ){
+
+        selectedCollege = savedCollege;
+
+        hideSetup();
+
+        showWelcome(
+            savedName,
+            savedCollege
+        );
+
+    }
+
+    else if(
+        savedName &&
+        savedCollege
+    ){
+
+        /*
+         * Preserve existing users when the app
+         * version changes.
+         */
+
+        selectedCollege = savedCollege;
+
+        hideSetup();
+
+        showWelcome(
+            savedName,
+            savedCollege
+        );
+
+        localStorage.setItem(
+            STORAGE.version,
+            APP_VERSION
+        );
+
+    }
+
+    else{
+
+        showSetupName();
+
+    }
+
+
+    applyCollege();
+
+
+    document
+        .getElementById('nameInput')
+        .addEventListener(
+            'keydown',
+            function(e){
+
+                if(e.key === 'Enter'){
+                    goCollege();
+                }
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   RENDER PLANNER BUTTONS
+===================================================== */
+
+function renderPlannerCategories(){
+
+    const grid =
+        document.getElementById(
+            'plannerCategoryGrid'
+        );
+
+    grid.innerHTML='';
+
+
+    categories.forEach(
+        function(item,index){
+
+            const key = item[0];
+
+            const icon = item[1];
+
+            const name = item[2];
+
+
+            const button =
+                document.createElement('button');
+
+            button.type='button';
+
+            button.className=
+                'planner-category';
+
+            button.style.animationDelay =
+                (index * .025) + 's';
+
+
+            button.innerHTML =
+                '<span class="planner-category-icon">' +
+                icon +
+                '</span>' +
+
+                '<span class="planner-category-name">' +
+                escapeHTML(name) +
+                '</span>';
+
+
+            button.addEventListener(
+                'click',
+                function(){
+
+                    openCategory(key);
+
+                }
+            );
+
+
+            grid.appendChild(button);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   APPLY COLLEGE
+===================================================== */
+
+function applyCollege(){
+
+    if(
+        !collegeMeta[selectedCollege]
+    ){
+
+        selectedCollege='NMKRV';
+
+    }
+
+
+    currentPlaces =
+        selectedCollege === 'NMKRV'
+        ? nmkrvPlaces
+        : apsPlaces;
+
+
+    const m = meta();
+
+
+    document
+        .getElementById('exploreTitle')
+        .textContent = m.title;
+
+
+    document
+        .getElementById('exploreSubtitle')
+        .textContent = m.subtitle;
+
+
+    document
+        .getElementById('areaName')
+        .textContent = m.area;
+
+
+    document
+        .getElementById('plannerArea')
+        .textContent = m.plannerArea;
+
+
+    document
+        .getElementById('resultSubtitle')
+        .textContent =
+            'Starting from ' +
+            m.plannerArea.replace(
+                '📍 ',
+                ''
+            );
+
+
+    renderPlaces('all');
+
+    resetPlannerView();
+
+    updateCollegeButtons();
+
+}
+
+
+/* =====================================================
+   SETUP SCREEN
+===================================================== */
+
+function showSetupName(){
+
+    document
+        .getElementById('setupOverlay')
+        .classList.remove('hidden');
+
+
+    document
+        .getElementById('nameStep')
+        .classList.remove('hidden');
+
+
+    document
+        .getElementById('collegeStep')
+        .classList.add('hidden');
+
+}
+
+
+function hideSetup(){
+
+    document
+        .getElementById('setupOverlay')
+        .classList.add('hidden');
+
+}
 
 
 /* =====================================================
    NAME STEP
 ===================================================== */
 
-function goToCollegeStep() {
+function goCollege(){
 
     const input =
-        document.getElementById("nameInput");
+        document.getElementById(
+            'nameInput'
+        );
 
     const name =
         input.value.trim();
 
-    const error =
-        document.getElementById("nameError");
 
+    if(!name){
 
-    if (name === "") {
-
-        error.style.display = "block";
+        document
+            .getElementById('nameError')
+            .style.display='block';
 
         input.focus();
 
@@ -1509,84 +2506,105 @@ function goToCollegeStep() {
     }
 
 
-    error.style.display = "none";
+    document
+        .getElementById('nameError')
+        .style.display='none';
 
 
     localStorage.setItem(
-        "gangNameTemp",
+        'gangNameTemp',
         name
     );
 
 
     document
-        .getElementById("nameStep")
-        .classList.add("hidden");
+        .getElementById('nameStep')
+        .classList.add('hidden');
 
 
     document
-        .getElementById("collegeStep")
-        .classList.remove("hidden");
+        .getElementById('collegeStep')
+        .classList.remove('hidden');
+
+
+    updateCollegeButtons();
 
 }
 
 
 /* =====================================================
-   COLLEGE SELECTION
+   GO BACK TO NAME
 ===================================================== */
 
-function selectCollege(college) {
+function goName(){
+
+    document
+        .getElementById('collegeStep')
+        .classList.add('hidden');
+
+
+    document
+        .getElementById('nameStep')
+        .classList.remove('hidden');
+
+}
+
+
+/* =====================================================
+   SELECT COLLEGE
+===================================================== */
+
+function selectCollege(college){
 
     selectedCollege = college;
 
 
     document
-        .getElementById("nmkButton")
-        .classList.remove("selected");
+        .getElementById('collegeError')
+        .style.display='none';
 
 
-    document
-        .getElementById("apsButton")
-        .classList.remove("selected");
-
-
-    if (college === "NMKRV") {
-
-        document
-            .getElementById("nmkButton")
-            .classList.add("selected");
-
-    }
-
-
-    if (college === "APS The Shanda") {
-
-        document
-            .getElementById("apsButton")
-            .classList.add("selected");
-
-    }
-
-
-    document
-        .getElementById("collegeError")
-        .style.display = "none";
+    updateCollegeButtons();
 
 }
 
 
 /* =====================================================
-   FINISH SETUP
+   HIGHLIGHT SELECTED COLLEGE
 ===================================================== */
 
-function finishSetup() {
+function updateCollegeButtons(){
 
-    const error =
-        document.getElementById("collegeError");
+    document
+        .getElementById('nmkButton')
+        .classList.toggle(
+            'selected',
+            selectedCollege === 'NMKRV'
+        );
 
 
-    if (selectedCollege === "") {
+    document
+        .getElementById('apsButton')
+        .classList.toggle(
+            'selected',
+            selectedCollege ===
+                'APS The Shanda'
+        );
 
-        error.style.display = "block";
+}
+
+
+/* =====================================================
+   FINISH SETUP / CHANGE COLLEGE
+===================================================== */
+
+function finishSetup(){
+
+    if(!selectedCollege){
+
+        document
+            .getElementById('collegeError')
+            .style.display='block';
 
         return;
 
@@ -1594,94 +2612,50 @@ function finishSetup() {
 
 
     const name =
-        localStorage.getItem("gangNameTemp");
+        localStorage.getItem(
+            'gangNameTemp'
+        )
+        ||
+        localStorage.getItem(
+            STORAGE.name
+        )
+        ||
+        'Gang';
 
 
     localStorage.setItem(
-        "gangName",
+        STORAGE.name,
         name
     );
 
 
     localStorage.setItem(
-        "gangCollege",
+        STORAGE.college,
         selectedCollege
     );
 
 
     localStorage.setItem(
-        "gangAppVersion",
+        STORAGE.version,
         APP_VERSION
     );
 
 
     localStorage.removeItem(
-        "gangNameTemp"
+        'gangNameTemp'
     );
 
 
-    document
-        .getElementById("setupOverlay")
-        .classList.add("hidden");
+    hideSetup();
 
-
-    showUserWelcome(
+    showWelcome(
         name,
         selectedCollege
     );
 
+    applyCollege();
 
-    setupCollegePlaces();
-
-}
-
-
-/* =====================================================
-   EXISTING USER
-===================================================== */
-
-function checkExistingUser() {
-
-    const version =
-        localStorage.getItem(
-            "gangAppVersion"
-        );
-
-    const name =
-        localStorage.getItem(
-            "gangName"
-        );
-
-    const college =
-        localStorage.getItem(
-            "gangCollege"
-        );
-
-
-    if (
-        version === APP_VERSION &&
-        name &&
-        college
-    ) {
-
-        document
-            .getElementById("setupOverlay")
-            .classList.add("hidden");
-
-
-        selectedCollege =
-            college;
-
-
-        showUserWelcome(
-            name,
-            college
-        );
-
-
-        setupCollegePlaces();
-
-    }
+    goHome();
 
 }
 
@@ -1690,116 +2664,64 @@ function checkExistingUser() {
    WELCOME
 ===================================================== */
 
-function showUserWelcome(
+function showWelcome(
     name,
     college
-) {
+){
 
-    const welcome =
-        document.getElementById(
-            "userWelcome"
-        );
-
-
-    welcome.innerHTML =
-        "Welcome, " +
-        escapeHTML(name) +
-        " 👋<br>" +
-        escapeHTML(college);
+    document
+        .getElementById('userWelcome')
+        .innerHTML =
+            'Welcome, ' +
+            escapeHTML(name) +
+            ' 👋<br>' +
+            escapeHTML(college);
 
 
-    welcome.style.display = "block";
+    document
+        .getElementById('userWelcome')
+        .style.display='block';
 
 }
 
 
 /* =====================================================
-   COLLEGE DATA SWITCH
+   SECTION CONTROL
 ===================================================== */
 
-function setupCollegePlaces() {
+function hideSections(){
 
-    const title =
-        document.getElementById(
-            "exploreTitle"
-        );
-
-
-    const subtitle =
-        document.getElementById(
-            "exploreSubtitle"
-        );
+    document
+        .getElementById('exploreSection')
+        .style.display='none';
 
 
-    const area =
-        document.getElementById(
-            "areaName"
-        );
-
-
-    if (
-        selectedCollege ===
-        "APS The Shanda"
-    ) {
-
-        currentPlaces =
-            apsPlaces;
-
-
-        title.innerHTML =
-            "🔥 Places Near APS";
-
-
-        subtitle.innerHTML =
-            "Budget-friendly spots around Basavanagudi";
-
-
-        area.innerHTML =
-            "📍 N.R. Colony • Basavanagudi";
-
-    }
-
-    else {
-
-        currentPlaces =
-            nmkrvPlaces;
-
-
-        title.innerHTML =
-            "🔥 Places Near NMKRV";
-
-
-        subtitle.innerHTML =
-            "Budget-friendly spots around Jayanagar";
-
-
-        area.innerHTML =
-            "📍 Jayanagar";
-
-    }
-
-
-    resetFilters();
-
-    renderPlaces("all");
+    document
+        .getElementById('plannerSection')
+        .style.display='none';
 
 }
 
 
-/* =====================================================
-   BACK TO NAME
-===================================================== */
+function scrollToSection(id){
 
-function goBackToName() {
-
-    document
-        .getElementById("collegeStep")
-        .classList.add("hidden");
+    const element =
+        document.getElementById(id);
 
 
-    document
-        .getElementById("nameStep")
-        .classList.remove("hidden");
+    element.style.display='block';
+
+
+    requestAnimationFrame(
+        function(){
+
+            element.scrollIntoView({
+                behavior:'smooth',
+                block:'start'
+            });
+
+        }
+    );
 
 }
 
@@ -1808,51 +2730,49 @@ function goBackToName() {
    OPEN EXPLORE
 ===================================================== */
 
-function openExplore() {
+function openExplore(){
 
-    setupCollegePlaces();
+    applyCollege();
 
+    hideSections();
 
-    const explore =
-        document.getElementById(
-            "exploreSection"
-        );
-
-
-    explore.style.display =
-        "block";
-
-
-    setTimeout(
-        function() {
-
-            explore.scrollIntoView({
-                behavior: "smooth"
-            });
-
-        },
-        100
+    scrollToSection(
+        'exploreSection'
     );
 
 }
 
 
 /* =====================================================
-   BACK TO HOME
+   OPEN PLANNER
 ===================================================== */
 
-function goBackHome() {
+function openPlanner(){
 
-    document
-        .getElementById(
-            "exploreSection"
-        )
-        .style.display = "none";
+    applyCollege();
 
+    hideSections();
+
+    scrollToSection(
+        'plannerSection'
+    );
+
+    backToCategories(false);
+
+}
+
+
+/* =====================================================
+   HOME
+===================================================== */
+
+function goHome(){
+
+    hideSections();
 
     window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+        top:0,
+        behavior:'smooth'
     });
 
 }
@@ -1862,314 +2782,634 @@ function goBackHome() {
    CHANGE COLLEGE
 ===================================================== */
 
-function changeCollege() {
+function changeCollege(){
 
-    /* Hide Explore */
+    hideSections();
 
-    document
-        .getElementById(
-            "exploreSection"
+
+    const currentName =
+        localStorage.getItem(
+            STORAGE.name
         )
-        .style.display = "none";
+        ||
+        '';
 
 
-    /* Show setup popup */
+    if(currentName){
 
-    document
-        .getElementById(
-            "setupOverlay"
-        )
-        .classList.remove("hidden");
+        document
+            .getElementById('nameInput')
+            .value =
+                currentName;
 
-
-    /* Go directly to college selection */
-
-    document
-        .getElementById(
-            "nameStep"
-        )
-        .classList.add("hidden");
+    }
 
 
     document
-        .getElementById(
-            "collegeStep"
-        )
-        .classList.remove("hidden");
-
-
-    /* Clear current selection */
-
-    selectedCollege = "";
+        .getElementById('setupOverlay')
+        .classList.remove('hidden');
 
 
     document
-        .getElementById(
-            "nmkButton"
-        )
-        .classList.remove("selected");
+        .getElementById('nameStep')
+        .classList.add('hidden');
 
 
     document
-        .getElementById(
-            "apsButton"
-        )
-        .classList.remove("selected");
+        .getElementById('collegeStep')
+        .classList.remove('hidden');
 
 
     document
-        .getElementById(
-            "collegeError"
-        )
-        .style.display = "none";
+        .getElementById('collegeError')
+        .style.display='none';
+
+
+    updateCollegeButtons();
 
 }
 
 
 /* =====================================================
-   RESET FILTERS
+   EXPLORE RENDER
 ===================================================== */
 
-function resetFilters() {
-
-    const buttons =
-        document.querySelectorAll(
-            ".category"
-        );
-
-
-    buttons.forEach(
-        function(button, index) {
-
-            if (index === 0) {
-
-                button.classList.add(
-                    "active"
-                );
-
-            }
-
-            else {
-
-                button.classList.remove(
-                    "active"
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   RENDER PLACES
-===================================================== */
-
-function renderPlaces(category) {
+function renderPlaces(category){
 
     const grid =
         document.getElementById(
-            "placeGrid"
+            'placeGrid'
         );
 
 
-    const noResults =
-        document.getElementById(
-            "noResults"
-        );
+    grid.innerHTML='';
 
 
-    grid.innerHTML = "";
-
-
-    const filtered =
-        category === "all"
-
+    const places =
+        category === 'all'
         ? currentPlaces
-
         : currentPlaces.filter(
-            function(place) {
-
-                return (
-                    place.category ===
-                    category
-                );
-
+            function(place){
+                return place.category === category;
             }
         );
 
 
-    if (
-        filtered.length === 0
-    ) {
+    if(!places.length){
 
-        noResults.style.display =
-            "block";
+        grid.innerHTML =
+            '<div class="empty">' +
+            'No places in this category yet.' +
+            '</div>';
 
         return;
 
     }
 
 
-    noResults.style.display =
-        "none";
+    places.forEach(
+        function(place,index){
 
-
-    filtered.forEach(
-        function(place, index) {
-
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "place-card";
-
-
-            card.style.animationDelay =
-                (index * 0.06) +
-                "s";
-
-
-            card.innerHTML = `
-
-                <div class="place-icon">
-                    ${place.icon}
-                </div>
-
-                <h3>
-                    ${escapeHTML(
-                        place.name
-                    )}
-                </h3>
-
-                <div class="place-description">
-                    ${escapeHTML(
-                        place.description
-                    )}
-                </div>
-
-                <div class="place-info">
-
-                    <span
-                    class="info-tag budget-tag"
-                    >
-                        💰 ${place.budget}
-                    </span>
-
-                    <span
-                    class="info-tag rating-tag"
-                    >
-                        ${place.rating}
-                    </span>
-
-                    <span
-                    class="info-tag type-tag"
-                    >
-                        ${escapeHTML(
-                            place.type
-                        )}
-                    </span>
-
-                </div>
-
-                <div class="place-area">
-
-                    📍 ${escapeHTML(
-                        place.area
-                    )}
-
-                </div>
-
-            `;
-
-
-            grid.appendChild(card);
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   FILTER
-===================================================== */
-
-function filterPlaces(
-    category,
-    clickedButton
-) {
-
-
-    const buttons =
-        document.querySelectorAll(
-            ".category"
-        );
-
-
-    buttons.forEach(
-        function(button) {
-
-            button.classList.remove(
-                "active"
+            grid.appendChild(
+                makeCard(
+                    place,
+                    index,
+                    false
+                )
             );
 
         }
     );
 
+}
 
-    clickedButton.classList.add(
-        "active"
+
+/* =====================================================
+   EXPLORE FILTER
+===================================================== */
+
+function filterPlaces(
+    category,
+    button
+){
+
+    document
+        .querySelectorAll('.category')
+        .forEach(
+            function(b){
+                b.classList.remove(
+                    'active'
+                );
+            }
+        );
+
+
+    button.classList.add(
+        'active'
     );
 
 
-    renderPlaces(category);
+    renderPlaces(
+        category
+    );
 
 }
 
 
 /* =====================================================
-   PLANNER
+   CREATE CARD
 ===================================================== */
 
-function comingSoon() {
+function makeCard(
+    place,
+    index,
+    planner
+){
 
-    alert(
-        "🎯 The Gang Planner is coming next!"
-    );
+    const card =
+        document.createElement(
+            'article'
+        );
+
+
+    card.className =
+        'place-card';
+
+
+    card.style.animationDelay =
+        (index * .045) + 's';
+
+
+    card.innerHTML =
+
+        '<div class="place-icon">' +
+
+            escapeHTML(place.icon) +
+
+        '</div>' +
+
+
+        '<h3>' +
+
+            escapeHTML(place.name) +
+
+        '</h3>' +
+
+
+        '<div class="place-description">' +
+
+            escapeHTML(
+                place.description
+            ) +
+
+        '</div>' +
+
+
+        '<div class="place-info">' +
+
+            '<span class="info-tag budget-tag">' +
+
+                '💰 ' +
+
+                escapeHTML(
+                    place.budget
+                ) +
+
+            '</span>' +
+
+
+            (
+
+                planner
+
+                ?
+
+                '<span class="info-tag time-tag">' +
+
+                    '⏰ ' +
+
+                    escapeHTML(
+                        place.time
+                    ) +
+
+                '</span>'
+
+                :
+
+                '<span class="info-tag time-tag">' +
+
+                    '⭐ ' +
+
+                    escapeHTML(
+                        place.rating ||
+                        'Popular'
+                    ) +
+
+                '</span>'
+
+            ) +
+
+
+            '<span class="info-tag type-tag">' +
+
+                escapeHTML(
+                    place.type
+                ) +
+
+            '</span>' +
+
+        '</div>' +
+
+
+        '<div class="place-area">' +
+
+            '📍 ' +
+
+            escapeHTML(
+                place.area
+            ) +
+
+        '</div>';
+
+
+    if(planner){
+
+        const travel =
+            document.createElement(
+                'div'
+            );
+
+
+        travel.className =
+            'travel-box';
+
+
+        const start =
+            meta()
+                .plannerArea
+                .replace(
+                    '📍 ',
+                    ''
+                );
+
+
+        travel.innerHTML =
+
+            '<div class="travel-title">' +
+
+                '🚦 Approx. travel from ' +
+
+                escapeHTML(
+                    start
+                ) +
+
+            '</div>' +
+
+
+            '<div class="travel-options">' +
+
+
+                '<div class="travel-option">' +
+
+                    '<strong>🚶</strong>' +
+
+                    '<span>' +
+
+                        escapeHTML(
+                            place.walk
+                        ) +
+
+                    '</span>' +
+
+                '</div>' +
+
+
+                '<div class="travel-option">' +
+
+                    '<strong>🛵</strong>' +
+
+                    '<span>' +
+
+                        escapeHTML(
+                            place.scooter
+                        ) +
+
+                    '</span>' +
+
+                '</div>' +
+
+
+                '<div class="travel-option">' +
+
+                    '<strong>🚌</strong>' +
+
+                    '<span>' +
+
+                        escapeHTML(
+                            place.bus
+                        ) +
+
+                    '</span>' +
+
+                '</div>' +
+
+
+            '</div>';
+
+
+        card.appendChild(
+            travel
+        );
+
+    }
+
+
+    return card;
 
 }
 
 
 /* =====================================================
-   ESCAPE HTML
+   OPEN PLANNER CATEGORY
 ===================================================== */
 
-function escapeHTML(text) {
+function openCategory(category){
+
+    const planner =
+        plannerForCollege();
+
+
+    const data =
+        planner[category] || [];
+
+
+    currentCategory =
+        category;
+
+
+    document
+        .getElementById(
+            'plannerCategories'
+        )
+        .style.display='none';
+
+
+    document
+        .getElementById(
+            'plannerResults'
+        )
+        .style.display='block';
+
+
+    const categoryInfo =
+        categories.find(
+            function(item){
+                return item[0] === category;
+            }
+        );
+
+
+    document
+        .getElementById(
+            'resultTitle'
+        )
+        .textContent =
+            categoryInfo
+            ? categoryInfo[2]
+            : 'Places';
+
+
+    const grid =
+        document.getElementById(
+            'plannerResultGrid'
+        );
+
+
+    grid.innerHTML='';
+
+
+    if(!data.length){
+
+        grid.innerHTML =
+            '<div class="empty">' +
+            'No places have been added to this category yet.' +
+            '</div>';
+
+    }
+
+    else{
+
+        data.forEach(
+            function(place,index){
+
+                grid.appendChild(
+                    makeCard(
+                        place,
+                        index,
+                        true
+                    )
+                );
+
+            }
+        );
+
+    }
+
+
+    document
+        .getElementById(
+            'plannerResults'
+        )
+        .scrollIntoView({
+            behavior:'smooth',
+            block:'start'
+        });
+
+}
+
+
+/* =====================================================
+   BACK TO CATEGORIES
+===================================================== */
+
+function backToCategories(
+    scroll=true
+){
+
+    currentCategory='';
+
+
+    document
+        .getElementById(
+            'plannerResults'
+        )
+        .style.display='none';
+
+
+    document
+        .getElementById(
+            'plannerCategories'
+        )
+        .style.display='block';
+
+
+    if(scroll){
+
+        document
+            .getElementById(
+                'plannerSection'
+            )
+            .scrollIntoView({
+                behavior:'smooth',
+                block:'start'
+            });
+
+    }
+
+}
+
+
+/* =====================================================
+   RESET PLANNER
+===================================================== */
+
+function resetPlannerView(){
+
+    backToCategories(false);
+
+
+    document
+        .getElementById(
+            'plannerResultGrid'
+        )
+        .innerHTML='';
+
+}
+
+
+/* =====================================================
+   SURPRISE ME
+===================================================== */
+
+function surpriseMe(){
+
+    const planner =
+        plannerForCollege();
+
+
+    const data =
+        planner[currentCategory] || [];
+
+
+    if(!data.length){
+
+        return;
+
+    }
+
+
+    const chosen =
+        data[
+            Math.floor(
+                Math.random() *
+                data.length
+            )
+        ];
+
+
+    const grid =
+        document.getElementById(
+            'plannerResultGrid'
+        );
+
+
+    grid.innerHTML='';
+
+
+    grid.appendChild(
+        makeCard(
+            chosen,
+            0,
+            true
+        )
+    );
+
+
+    grid.scrollIntoView({
+        behavior:'smooth',
+        block:'start'
+    });
+
+}
+
+
+/* =====================================================
+   GO TOP
+===================================================== */
+
+function goTop(){
+
+    window.scrollTo({
+        top:0,
+        behavior:'smooth'
+    });
+
+}
+
+
+window.addEventListener(
+    'scroll',
+    function(){
+
+        document
+            .getElementById(
+                'goTop'
+            )
+            .classList.toggle(
+                'show',
+                window.scrollY > 450
+            );
+
+    },
+    {
+        passive:true
+    }
+);
+
+
+/* =====================================================
+   HTML ESCAPE
+===================================================== */
+
+function escapeHTML(value){
 
     const div =
         document.createElement(
-            "div"
+            'div'
         );
 
 
     div.textContent =
-        text;
+        String(
+            value ?? ''
+        );
 
 
     return div.innerHTML;
 
 }
 
+
+/* =====================================================
+   START APP
+===================================================== */
+
+window.addEventListener(
+    'DOMContentLoaded',
+    init
+);
+
 </script>
 
-
 </body>
-
-  </html>
+      </html>
