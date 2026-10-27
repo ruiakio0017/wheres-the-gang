@@ -14,190 +14,397 @@
       padding: 0;
     }
 
+    html,
     body {
-      min-height: 100vh;
-      background: #111111;
-      color: white;
-      font-family: Arial, sans-serif;
+      width: 100%;
+      min-height: 100%;
     }
 
-    /* MAIN PAGE */
+    body {
+      background: #0b0b0d;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       MAIN HOME PAGE
+    ========================= */
 
     .home {
       min-height: 100vh;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 25px;
+
+      padding: 25px 20px;
+
       text-align: center;
     }
 
-    .container {
+    .home-content {
       width: 100%;
       max-width: 600px;
     }
 
     .logo {
-      font-size: 48px;
-      font-weight: 800;
-      line-height: 1.05;
+      font-size: clamp(40px, 10vw, 64px);
+
+      font-weight: 900;
+
+      line-height: 1.02;
+
+      letter-spacing: -2px;
+
       margin-bottom: 18px;
     }
 
     .tagline {
-      color: #bdbdbd;
+      color: #b8b8bd;
+
       font-size: 18px;
+
+      line-height: 1.5;
+
       margin-bottom: 35px;
     }
 
-    .button {
+    .home-button {
       width: 100%;
-      padding: 17px;
+
       border: none;
-      border-radius: 14px;
-      font-size: 17px;
-      font-weight: bold;
+
+      border-radius: 15px;
+
+      padding: 17px 20px;
+
       margin-top: 12px;
+
+      font-size: 17px;
+
+      font-weight: 700;
+
+      cursor: pointer;
     }
 
-    .white-button {
-      background: white;
+    .explore-button {
+      background: #ffffff;
+
       color: #111111;
     }
 
-    .dark-button {
-      background: #29292f;
-      color: white;
+    .planner-button {
+      background: #25252b;
+
+      color: #ffffff;
     }
 
-    /* DARK BACKGROUND OVERLAY */
+
+    /* =========================
+       OVERLAY
+    ========================= */
 
     .overlay {
       position: fixed;
+
       inset: 0;
 
-      background: rgba(0, 0, 0, 0.82);
+      width: 100%;
+      height: 100%;
+
+      background: rgba(0, 0, 0, 0.88);
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
       padding: 20px;
 
-      z-index: 1000;
+      z-index: 9999;
     }
 
-    /* POPUP */
+
+    /* =========================
+       POPUP
+    ========================= */
 
     .popup {
       width: 100%;
+
       max-width: 430px;
 
-      background: #1d1d22;
+      background: #1b1b20;
 
-      border-radius: 24px;
+      border-radius: 25px;
 
-      padding: 30px 24px;
+      padding: 30px 23px;
+
+      box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.7);
 
       text-align: center;
-
-      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.6);
     }
 
     .popup-icon {
-      font-size: 42px;
+      font-size: 46px;
+
       margin-bottom: 12px;
     }
 
     .popup-title {
-      font-size: 28px;
+      font-size: 29px;
+
       font-weight: 800;
+
+      line-height: 1.2;
+
       margin-bottom: 10px;
     }
 
-    .popup-text {
-      color: #aaaaaa;
-      font-size: 16px;
+    .popup-description {
+      color: #a8a8ad;
+
+      font-size: 15px;
+
+      line-height: 1.5;
+
       margin-bottom: 28px;
     }
 
-    .question {
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .form-group {
       text-align: left;
-      font-size: 15px;
-      font-weight: bold;
+
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+
+      color: #ffffff;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
       margin-bottom: 9px;
     }
 
-    .name-input {
+    .text-input {
       width: 100%;
 
-      padding: 16px;
+      height: 52px;
 
-      background: #111111;
-
-      color: white;
-
-      border: 1px solid #3b3b43;
+      padding: 0 15px;
 
       border-radius: 12px;
+
+      border: 1px solid #3c3c45;
+
+      background: #101014;
+
+      color: #ffffff;
 
       font-size: 16px;
 
       outline: none;
-
-      margin-bottom: 8px;
     }
 
-    .name-input:focus {
-      border-color: white;
+    .text-input:focus {
+      border-color: #ffffff;
     }
 
-    .error {
-      color: #ff7777;
+    .text-input::placeholder {
+      color: #77777e;
+    }
 
-      font-size: 14px;
+
+    /* =========================
+       COLLEGE OPTIONS
+    ========================= */
+
+    .college-options {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+    }
+
+    .college-button {
+      width: 100%;
+
+      min-height: 60px;
+
+      padding: 14px 16px;
+
+      border-radius: 14px;
+
+      border: 1px solid #3b3b43;
+
+      background: #111115;
+
+      color: #ffffff;
 
       text-align: left;
 
-      margin-bottom: 12px;
+      font-size: 16px;
 
-      display: none;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: 0.15s ease;
     }
+
+    .college-button:hover {
+      background: #29292f;
+    }
+
+    .college-button.selected {
+      background: #ffffff;
+
+      color: #111111;
+
+      border-color: #ffffff;
+    }
+
+    .college-small {
+      display: block;
+
+      font-size: 12px;
+
+      font-weight: 400;
+
+      margin-top: 4px;
+
+      opacity: 0.65;
+    }
+
+
+    /* =========================
+       CONTINUE BUTTON
+    ========================= */
 
     .continue-button {
       width: 100%;
 
-      padding: 16px;
+      height: 54px;
 
       border: none;
 
       border-radius: 13px;
 
-      background: white;
+      background: #ffffff;
 
       color: #111111;
 
       font-size: 17px;
 
-      font-weight: bold;
+      font-weight: 800;
 
-      margin-top: 10px;
+      cursor: pointer;
+
+      margin-top: 8px;
     }
 
-    /* MOBILE */
+    .continue-button:active {
+      transform: scale(0.98);
+    }
 
-    @media (max-width: 500px) {
 
-      .logo {
-        font-size: 40px;
-      }
+    /* =========================
+       BACK BUTTON
+    ========================= */
 
-      .tagline {
-        font-size: 17px;
-      }
+    .back-button {
+      width: 100%;
+
+      border: none;
+
+      background: transparent;
+
+      color: #8f8f96;
+
+      font-size: 14px;
+
+      margin-top: 17px;
+
+      padding: 8px;
+
+      cursor: pointer;
+    }
+
+
+    /* =========================
+       ERROR
+    ========================= */
+
+    .error {
+      display: none;
+
+      color: #ff7777;
+
+      text-align: left;
+
+      font-size: 13px;
+
+      margin-top: 8px;
+
+      margin-bottom: 8px;
+    }
+
+
+    /* =========================
+       WELCOME MESSAGE
+    ========================= */
+
+    .user-welcome {
+      display: none;
+
+      margin-top: 25px;
+
+      color: #9f9fa6;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+    }
+
+
+    /* =========================
+       HIDDEN
+    ========================= */
+
+    .hidden {
+      display: none !important;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 480px) {
 
       .popup {
         padding: 27px 20px;
+
+        border-radius: 23px;
+      }
+
+      .popup-title {
+        font-size: 27px;
+      }
+
+      .logo {
+        letter-spacing: -1.5px;
       }
 
     }
@@ -209,11 +416,13 @@
 <body>
 
 
-  <!-- MAIN WEBSITE -->
+  <!-- =================================
+       MAIN WEBSITE
+  ================================== -->
 
   <main class="home">
 
-    <div class="container">
+    <div class="home-content">
 
       <div class="logo">
         WHERE’S THE GANG?
@@ -224,14 +433,26 @@
       </div>
 
 
-      <button class="button white-button">
+      <button
+        class="home-button explore-button"
+        onclick="showComingSoon('Explore Places')"
+      >
         📍 Explore Places
       </button>
 
 
-      <button class="button dark-button">
+      <button
+        class="home-button planner-button"
+        onclick="showComingSoon('Where Should We Go?')"
+      >
         🎯 Where Should We Go?
       </button>
+
+
+      <div
+        id="userWelcome"
+        class="user-welcome"
+      ></div>
 
     </div>
 
@@ -239,16 +460,525 @@
 
 
 
-  <!-- FIRST TIME POPUP -->
+  <!-- =================================
+       SETUP POPUP
+  ================================== -->
 
-  <div class="overlay" id="namePopup">
+  <div
+    id="setupOverlay"
+    class="overlay"
+  >
 
     <div class="popup">
 
-      <div class="popup-icon">
-        👋
-      </div>
+
+      <!-- =========================
+           STEP 1 — NAME
+      ========================== -->
+
+      <section id="nameStep">
+
+        <div class="popup-icon">
+          👋
+        </div>
 
 
-      <div class="popup-title">
-        First things
+        <div class="popup-title">
+          First things first
+        </div>
+
+
+        <div class="popup-description">
+          Let's get to know you before we get started.
+        </div>
+
+
+        <div class="form-group">
+
+          <label
+            class="form-label"
+            for="nameInput"
+          >
+            What's your name?
+          </label>
+
+
+          <input
+            id="nameInput"
+            class="text-input"
+            type="text"
+            maxlength="30"
+            autocomplete="name"
+            placeholder="Enter your name"
+          >
+
+
+          <div
+            id="nameError"
+            class="error"
+          >
+            Please enter your name.
+          </div>
+
+        </div>
+
+
+        <button
+          class="continue-button"
+          onclick="goToCollegeStep()"
+        >
+          Continue →
+        </button>
+
+      </section>
+
+
+
+      <!-- =========================
+           STEP 2 — COLLEGE
+      ========================== -->
+
+      <section
+        id="collegeStep"
+        class="hidden"
+      >
+
+        <div class="popup-icon">
+          🎓
+        </div>
+
+
+        <div class="popup-title">
+          Which college?
+        </div>
+
+
+        <div class="popup-description">
+          Select your college to personalize your experience.
+        </div>
+
+
+        <div class="college-options">
+
+
+          <button
+            id="nmkButton"
+            class="college-button"
+            onclick="selectCollege('NMKRV')"
+          >
+
+            NMKRV
+
+            <span class="college-small">
+              NMKRV College
+            </span>
+
+          </button>
+
+
+
+          <button
+            id="apsButton"
+            class="college-button"
+            onclick="selectCollege('APS The Shanda')"
+          >
+
+            APS The Shanda
+
+            <span class="college-small">
+              APS
+            </span>
+
+          </button>
+
+
+        </div>
+
+
+        <div
+          id="collegeError"
+          class="error"
+        >
+          Please select your college.
+        </div>
+
+
+        <button
+          class="continue-button"
+          onclick="finishSetup()"
+        >
+          Let's Go 🚀
+        </button>
+
+
+        <button
+          class="back-button"
+          onclick="goBackToName()"
+        >
+          ← Go back
+        </button>
+
+      </section>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =================================
+       JAVASCRIPT
+  ================================== -->
+
+  <script>
+
+
+    /*
+      VERSION NUMBER
+
+      This makes sure the old broken
+      version does not interfere.
+    */
+
+    const APP_VERSION = "1.0";
+
+
+    /*
+      Selected college
+    */
+
+    let selectedCollege = "";
+
+
+    /*
+      When page loads
+    */
+
+    window.addEventListener("load", function() {
+
+      checkExistingUser();
+
+    });
+
+
+
+    /*
+      STEP 1
+
+      Check name and move to college.
+    */
+
+    function goToCollegeStep() {
+
+      const nameInput =
+        document.getElementById("nameInput");
+
+      const name =
+        nameInput.value.trim();
+
+      const error =
+        document.getElementById("nameError");
+
+
+      if (name === "") {
+
+        error.style.display = "block";
+
+        nameInput.focus();
+
+        return;
+
+      }
+
+
+      error.style.display = "none";
+
+
+      /*
+        Temporarily save name.
+      */
+
+      localStorage.setItem(
+        "gangNameTemp",
+        name
+      );
+
+
+      /*
+        Hide name step.
+      */
+
+      document
+        .getElementById("nameStep")
+        .classList.add("hidden");
+
+
+      /*
+        Show college step.
+      */
+
+      document
+        .getElementById("collegeStep")
+        .classList.remove("hidden");
+
+    }
+
+
+
+    /*
+      COLLEGE SELECTION
+    */
+
+    function selectCollege(college) {
+
+      selectedCollege = college;
+
+
+      /*
+        Remove selected state
+        from both buttons.
+      */
+
+      document
+        .getElementById("nmkButton")
+        .classList.remove("selected");
+
+      document
+        .getElementById("apsButton")
+        .classList.remove("selected");
+
+
+      /*
+        Highlight selected college.
+      */
+
+      if (college === "NMKRV") {
+
+        document
+          .getElementById("nmkButton")
+          .classList.add("selected");
+
+      }
+
+
+      if (college === "APS The Shanda") {
+
+        document
+          .getElementById("apsButton")
+          .classList.add("selected");
+
+      }
+
+
+      /*
+        Hide error if user
+        selects something.
+      */
+
+      document
+        .getElementById("collegeError")
+        .style.display = "none";
+
+    }
+
+
+
+    /*
+      FINISH SETUP
+    */
+
+    function finishSetup() {
+
+      const collegeError =
+        document.getElementById("collegeError");
+
+
+      /*
+        Make sure a college
+        has been selected.
+      */
+
+      if (selectedCollege === "") {
+
+        collegeError.style.display = "block";
+
+        return;
+
+      }
+
+
+      /*
+        Get saved name.
+      */
+
+      const name =
+        localStorage.getItem("gangNameTemp");
+
+
+      /*
+        Save final profile.
+      */
+
+      localStorage.setItem(
+        "gangName",
+        name
+      );
+
+      localStorage.setItem(
+        "gangCollege",
+        selectedCollege
+      );
+
+      localStorage.setItem(
+        "gangAppVersion",
+        APP_VERSION
+      );
+
+
+      /*
+        Remove temporary name.
+      */
+
+      localStorage.removeItem(
+        "gangNameTemp"
+      );
+
+
+      /*
+        Close popup.
+      */
+
+      document
+        .getElementById("setupOverlay")
+        .classList.add("hidden");
+
+
+      /*
+        Show welcome message.
+      */
+
+      showUserWelcome(name, selectedCollege);
+
+    }
+
+
+
+    /*
+      SHOW USER WELCOME
+    */
+
+    function showUserWelcome(name, college) {
+
+      const welcome =
+        document.getElementById("userWelcome");
+
+
+      welcome.innerHTML =
+        "Welcome, " +
+        escapeHTML(name) +
+        " 👋<br>" +
+        escapeHTML(college);
+
+
+      welcome.style.display = "block";
+
+    }
+
+
+
+    /*
+      CHECK EXISTING USER
+
+      Only skip the popup if they
+      completed THIS version.
+    */
+
+    function checkExistingUser() {
+
+      const savedVersion =
+        localStorage.getItem("gangAppVersion");
+
+      const savedName =
+        localStorage.getItem("gangName");
+
+      const savedCollege =
+        localStorage.getItem("gangCollege");
+
+
+      if (
+        savedVersion === APP_VERSION &&
+        savedName &&
+        savedCollege
+      ) {
+
+        document
+          .getElementById("setupOverlay")
+          .classList.add("hidden");
+
+
+        showUserWelcome(
+          savedName,
+          savedCollege
+        );
+
+      }
+
+    }
+
+
+
+    /*
+      GO BACK TO NAME
+    */
+
+    function goBackToName() {
+
+      document
+        .getElementById("collegeStep")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("nameStep")
+        .classList.remove("hidden");
+
+    }
+
+
+
+    /*
+      TEMP BUTTON FUNCTION
+    */
+
+    function showComingSoon(feature) {
+
+      alert(
+        feature +
+        " will be added next 🔥"
+      );
+
+    }
+
+
+
+    /*
+      BASIC HTML ESCAPING
+    */
+
+    function escapeHTML(text) {
+
+      const div =
+        document.createElement("div");
+
+      div.textContent = text;
+
+      return div.innerHTML;
+
+    }
+
+  </script>
+
+
+</body>
+</html>
