@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>WHERE'S THE GANG?</title>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -13,19 +15,21 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #0f0f12;
-      color: white;
       min-height: 100vh;
+      background: #111111;
+      color: white;
+      font-family: Arial, sans-serif;
     }
+
+    /* MAIN PAGE */
 
     .home {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 25px;
       text-align: center;
-      padding: 30px 20px;
     }
 
     .container {
@@ -33,10 +37,11 @@
       max-width: 600px;
     }
 
-    h1 {
-      font-size: clamp(38px, 10vw, 64px);
+    .logo {
+      font-size: 48px;
+      font-weight: 800;
       line-height: 1.05;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
     }
 
     .tagline {
@@ -45,78 +50,205 @@
       margin-bottom: 35px;
     }
 
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    button {
+    .button {
       width: 100%;
       padding: 17px;
       border: none;
       border-radius: 14px;
       font-size: 17px;
       font-weight: bold;
-      cursor: pointer;
+      margin-top: 12px;
     }
 
-    .primary {
+    .white-button {
       background: white;
-      color: #111;
+      color: #111111;
     }
 
-    .secondary {
-      background: #25252c;
+    .dark-button {
+      background: #29292f;
       color: white;
     }
 
-    /* POPUP */
+    /* DARK BACKGROUND OVERLAY */
 
     .overlay {
       position: fixed;
       inset: 0;
+
       background: rgba(0, 0, 0, 0.82);
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       padding: 20px;
+
       z-index: 1000;
     }
 
+    /* POPUP */
+
     .popup {
       width: 100%;
-      max-width: 420px;
-      background: #1b1b20;
-      border-radius: 22px;
-      padding: 28px 22px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+      max-width: 430px;
+
+      background: #1d1d22;
+
+      border-radius: 24px;
+
+      padding: 30px 24px;
+
+      text-align: center;
+
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.6);
     }
 
-    .popup h2 {
+    .popup-icon {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .popup-title {
       font-size: 28px;
-      margin-bottom: 8px;
+      font-weight: 800;
+      margin-bottom: 10px;
     }
 
-    .popup p {
-      color: #aaa;
-      margin-bottom: 25px;
+    .popup-text {
+      color: #aaaaaa;
+      font-size: 16px;
+      margin-bottom: 28px;
     }
 
-    label {
-      display: block;
+    .question {
       text-align: left;
-      margin-bottom: 8px;
+      font-size: 15px;
       font-weight: bold;
-      font-size: 14px;
+      margin-bottom: 9px;
     }
 
-    input, select {
+    .name-input {
       width: 100%;
-      padding: 14px;
-      margin-bottom: 18px;
-      border-radius: 11px;
-      border: 1px solid #3a3a42;
-      background: #111115;
+
+      padding: 16px;
+
+      background: #111111;
+
       color: white;
-      font-size: 
+
+      border: 1px solid #3b3b43;
+
+      border-radius: 12px;
+
+      font-size: 16px;
+
+      outline: none;
+
+      margin-bottom: 8px;
+    }
+
+    .name-input:focus {
+      border-color: white;
+    }
+
+    .error {
+      color: #ff7777;
+
+      font-size: 14px;
+
+      text-align: left;
+
+      margin-bottom: 12px;
+
+      display: none;
+    }
+
+    .continue-button {
+      width: 100%;
+
+      padding: 16px;
+
+      border: none;
+
+      border-radius: 13px;
+
+      background: white;
+
+      color: #111111;
+
+      font-size: 17px;
+
+      font-weight: bold;
+
+      margin-top: 10px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 500px) {
+
+      .logo {
+        font-size: 40px;
+      }
+
+      .tagline {
+        font-size: 17px;
+      }
+
+      .popup {
+        padding: 27px 20px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- MAIN WEBSITE -->
+
+  <main class="home">
+
+    <div class="container">
+
+      <div class="logo">
+        WHERE’S THE GANG?
+      </div>
+
+      <div class="tagline">
+        Class can wait. The gang can't. 😂
+      </div>
+
+
+      <button class="button white-button">
+        📍 Explore Places
+      </button>
+
+
+      <button class="button dark-button">
+        🎯 Where Should We Go?
+      </button>
+
+    </div>
+
+  </main>
+
+
+
+  <!-- FIRST TIME POPUP -->
+
+  <div class="overlay" id="namePopup">
+
+    <div class="popup">
+
+      <div class="popup-icon">
+        👋
+      </div>
+
+
+      <div class="popup-title">
+        First things
