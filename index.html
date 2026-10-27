@@ -17,25 +17,31 @@
       background: #0f0f12;
       color: white;
       min-height: 100vh;
+    }
+
+    .home {
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
+      padding: 30px 20px;
     }
 
     .container {
-      width: 90%;
+      width: 100%;
       max-width: 600px;
     }
 
     h1 {
-      font-size: 42px;
-      margin-bottom: 12px;
+      font-size: clamp(38px, 10vw, 64px);
+      line-height: 1.05;
+      margin-bottom: 15px;
     }
 
     .tagline {
-      font-size: 18px;
       color: #bdbdbd;
+      font-size: 18px;
       margin-bottom: 35px;
     }
 
@@ -46,9 +52,10 @@
     }
 
     button {
-      padding: 16px;
+      width: 100%;
+      padding: 17px;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       font-size: 17px;
       font-weight: bold;
       cursor: pointer;
@@ -60,26 +67,56 @@
     }
 
     .secondary {
-      background: #24242a;
+      background: #25252c;
       color: white;
     }
-  </style>
-</head>
 
-<body>
+    /* POPUP */
 
-  <div class="container">
-    <h1>WHERE’S THE GANG?</h1>
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+    }
 
-    <p class="tagline">
-      Class can wait. The gang can't. 😂
-    </p>
+    .popup {
+      width: 100%;
+      max-width: 420px;
+      background: #1b1b20;
+      border-radius: 22px;
+      padding: 28px 22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
 
-    <div class="buttons">
-      <button class="primary">📍 Explore Places</button>
-      <button class="secondary">🎯 Where Should We Go?</button>
-    </div>
-  </div>
+    .popup h2 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
 
-</body>
-</html>
+    .popup p {
+      color: #aaa;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 18px;
+      border-radius: 11px;
+      border: 1px solid #3a3a42;
+      background: #111115;
+      color: white;
+      font-size: 
