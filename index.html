@@ -1,984 +1,2175 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>WHERE'S THE GANG?</title>
+<meta charset="UTF-8">
 
-  <style>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<title>WHERE'S THE GANG?</title>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #09090b;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   HOME
+===================================================== */
+
+.home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.home-content {
+    width: 100%;
+    max-width: 650px;
+}
+
+.logo {
+    font-size: clamp(42px, 11vw, 70px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+    animation: fadeUp 0.8s ease;
+}
+
+.tagline {
+    margin-top: 20px;
+    color: #a7a7ad;
+    font-size: 18px;
+    animation: fadeUp 1s ease;
+}
+
+.home-buttons {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.main-button {
+    width: 100%;
+    border: none;
+    border-radius: 16px;
+    padding: 18px;
+    font-size: 17px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.main-button:hover {
+    transform: translateY(-3px);
+}
+
+.explore-button {
+    background: white;
+    color: #111;
+}
+
+.planner-button {
+    background: #25252b;
+    color: white;
+}
+
+.user-welcome {
+    display: none;
+    margin-top: 25px;
+    color: #96969e;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   EXPLORE
+===================================================== */
+
+.explore-section {
+    display: none;
+    min-height: 100vh;
+    padding: 30px 18px 100px;
+    background: #111114;
+}
+
+.explore-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+
+/* =====================================================
+   TOP NAV BUTTONS
+===================================================== */
+
+.navigation-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.page-back {
+    flex: 1;
+    padding: 13px 15px;
+    border: 1px solid #33333b;
+    border-radius: 13px;
+    background: #18181c;
+    color: #d7d7dc;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.page-back:hover {
+    background: #29292f;
+    transform: translateY(-2px);
+}
+
+.change-college {
+    flex: 1;
+}
+
+
+/* =====================================================
+   SECTION HEADING
+===================================================== */
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.section-heading h2 {
+    font-size: 34px;
+    margin-bottom: 9px;
+}
+
+.section-heading p {
+    color: #9999a1;
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   AREA BOX
+===================================================== */
+
+.area-box {
+    background: #1b1b20;
+    border: 1px solid #2d2d34;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 25px;
+    text-align: center;
+    animation: cardIn 0.5s ease;
+}
+
+.area-title {
+    color: #8e8e97;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.area-name {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   CATEGORIES
+===================================================== */
+
+.categories {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    scrollbar-width: none;
+}
+
+.categories::-webkit-scrollbar {
+    display: none;
+}
+
+.category {
+    flex-shrink: 0;
+    border: 1px solid #33333b;
+    background: #18181c;
+    color: white;
+    border-radius: 50px;
+    padding: 11px 17px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.category:hover {
+    transform: translateY(-2px);
+}
+
+.category.active {
+    background: white;
+    color: #111;
+    border-color: white;
+}
+
+
+/* =====================================================
+   PLACE GRID
+===================================================== */
+
+.place-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+
+/* =====================================================
+   PLACE CARD
+===================================================== */
+
+.place-card {
+    position: relative;
+    background: #1a1a1f;
+    border: 1px solid #292930;
+    border-radius: 20px;
+    padding: 21px;
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+
+    animation: cardIn 0.55s ease both;
+}
+
+.place-card::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    right: -60px;
+    top: -60px;
+    background: rgba(255,255,255,0.035);
+    border-radius: 50%;
+}
+
+.place-card:hover {
+    transform: translateY(-7px);
+    border-color: #55555f;
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.35);
+}
+
+.place-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 16px;
+    background: #29292f;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+    margin-bottom: 18px;
+
+    transition: 0.3s ease;
+}
+
+.place-card:hover .place-icon {
+    transform: rotate(-5deg) scale(1.08);
+}
+
+.place-card h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.place-description {
+    color: #9999a1;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.place-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.info-tag {
+    background: #29292f;
+    color: #d8d8dd;
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.budget-tag {
+    background: #16351f;
+    color: #8cffad;
+}
+
+.rating-tag {
+    background: #342d17;
+    color: #ffd96a;
+}
+
+.type-tag {
+    background: #252530;
+    color: #bdbdff;
+}
+
+.place-area {
+    margin-top: 13px;
+    color: #777780;
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.no-results {
+    display: none;
+    text-align: center;
+    padding: 40px;
+    color: #888891;
+}
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.9);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 9999;
+}
+
+.popup {
+    width: 100%;
+    max-width: 430px;
+
+    background: #1b1b20;
+
+    border-radius: 25px;
+
+    padding: 30px 23px;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,0.7);
+
+    text-align: center;
+
+    animation: popupIn 0.35s ease;
+}
+
+.popup-icon {
+    font-size: 45px;
+    margin-bottom: 12px;
+}
+
+.popup-title {
+    font-size: 29px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.popup-description {
+    color: #a7a7ad;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 28px;
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.form-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 9px;
+}
+
+.text-input {
+    width: 100%;
+    height: 52px;
+
+    padding: 0 15px;
+
+    border-radius: 12px;
+
+    border: 1px solid #3c3c45;
+
+    background: #101014;
+    color: white;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+.text-input:focus {
+    border-color: white;
+}
+
+.text-input::placeholder {
+    color: #707078;
+}
+
+
+/* =====================================================
+   COLLEGE
+===================================================== */
+
+.college-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.college-button {
+    width: 100%;
+    min-height: 62px;
+
+    padding: 14px 16px;
+
+    border-radius: 14px;
+
+    border: 1px solid #3b3b43;
+
+    background: #111115;
+
+    color: white;
+
+    text-align: left;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.college-button:hover {
+    background: #29292f;
+    transform: translateY(-2px);
+}
+
+.college-button.selected {
+    background: white;
+    color: #111;
+    border-color: white;
+}
+
+.college-small {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 4px;
+    opacity: 0.6;
+}
+
+
+/* =====================================================
+   POPUP BUTTONS
+===================================================== */
+
+.continue-button {
+    width: 100%;
+    height: 54px;
+
+    border: none;
+    border-radius: 13px;
+
+    background: white;
+    color: #111;
+
+    font-size: 17px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    margin-top: 15px;
+
+    transition: 0.25s ease;
+}
+
+.continue-button:hover {
+    transform: translateY(-2px);
+}
+
+.back-button {
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    color: #8f8f96;
+
+    font-size: 14px;
+
+    margin-top: 15px;
+
+    padding: 8px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.back-button:hover {
+    color: white;
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.error {
+    display: none;
+    color: #ff7777;
+    text-align: left;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+
+/* =====================================================
+   HIDDEN
+===================================================== */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
     }
 
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 
-    body {
-      background: #0b0b0d;
-      color: #ffffff;
-      font-family: Arial, Helvetica, sans-serif;
-      overflow-x: hidden;
+}
+
+@keyframes cardIn {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(30px)
+            scale(0.97);
     }
 
-    /* =========================
-       MAIN HOME PAGE
-    ========================= */
-
-    .home {
-      min-height: 100vh;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 25px 20px;
-
-      text-align: center;
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
     }
 
-    .home-content {
-      width: 100%;
-      max-width: 600px;
+}
+
+@keyframes popupIn {
+
+    from {
+        opacity: 0;
+        transform: scale(0.92);
     }
 
-    .logo {
-      font-size: clamp(40px, 10vw, 64px);
-
-      font-weight: 900;
-
-      line-height: 1.02;
-
-      letter-spacing: -2px;
-
-      margin-bottom: 18px;
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 
-    .tagline {
-      color: #b8b8bd;
+}
 
-      font-size: 18px;
 
-      line-height: 1.5;
+/* =====================================================
+   MOBILE
+===================================================== */
 
-      margin-bottom: 35px;
+@media (max-width: 600px) {
+
+    .place-grid {
+        grid-template-columns: 1fr;
     }
 
-    .home-button {
-      width: 100%;
-
-      border: none;
-
-      border-radius: 15px;
-
-      padding: 17px 20px;
-
-      margin-top: 12px;
-
-      font-size: 17px;
-
-      font-weight: 700;
-
-      cursor: pointer;
+    .explore-section {
+        padding-top: 25px;
     }
 
-    .explore-button {
-      background: #ffffff;
-
-      color: #111111;
+    .section-heading h2 {
+        font-size: 30px;
     }
 
-    .planner-button {
-      background: #25252b;
-
-      color: #ffffff;
+    .place-card {
+        padding: 19px;
     }
 
-
-    /* =========================
-       OVERLAY
-    ========================= */
-
-    .overlay {
-      position: fixed;
-
-      inset: 0;
-
-      width: 100%;
-      height: 100%;
-
-      background: rgba(0, 0, 0, 0.88);
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      padding: 20px;
-
-      z-index: 9999;
+    .navigation-buttons {
+        flex-direction: column;
     }
 
+}
 
-    /* =========================
-       POPUP
-    ========================= */
+</style>
 
-    .popup {
-      width: 100%;
-
-      max-width: 430px;
-
-      background: #1b1b20;
-
-      border-radius: 25px;
-
-      padding: 30px 23px;
-
-      box-shadow:
-        0 25px 80px rgba(0, 0, 0, 0.7);
-
-      text-align: center;
-    }
-
-    .popup-icon {
-      font-size: 46px;
-
-      margin-bottom: 12px;
-    }
-
-    .popup-title {
-      font-size: 29px;
-
-      font-weight: 800;
-
-      line-height: 1.2;
-
-      margin-bottom: 10px;
-    }
-
-    .popup-description {
-      color: #a8a8ad;
-
-      font-size: 15px;
-
-      line-height: 1.5;
-
-      margin-bottom: 28px;
-    }
-
-
-    /* =========================
-       FORM
-    ========================= */
-
-    .form-group {
-      text-align: left;
-
-      margin-bottom: 18px;
-    }
-
-    .form-label {
-      display: block;
-
-      color: #ffffff;
-
-      font-size: 14px;
-
-      font-weight: 700;
-
-      margin-bottom: 9px;
-    }
-
-    .text-input {
-      width: 100%;
-
-      height: 52px;
-
-      padding: 0 15px;
-
-      border-radius: 12px;
-
-      border: 1px solid #3c3c45;
-
-      background: #101014;
-
-      color: #ffffff;
-
-      font-size: 16px;
-
-      outline: none;
-    }
-
-    .text-input:focus {
-      border-color: #ffffff;
-    }
-
-    .text-input::placeholder {
-      color: #77777e;
-    }
-
-
-    /* =========================
-       COLLEGE OPTIONS
-    ========================= */
-
-    .college-options {
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 12px;
-    }
-
-    .college-button {
-      width: 100%;
-
-      min-height: 60px;
-
-      padding: 14px 16px;
-
-      border-radius: 14px;
-
-      border: 1px solid #3b3b43;
-
-      background: #111115;
-
-      color: #ffffff;
-
-      text-align: left;
-
-      font-size: 16px;
-
-      font-weight: 700;
-
-      cursor: pointer;
-
-      transition: 0.15s ease;
-    }
-
-    .college-button:hover {
-      background: #29292f;
-    }
-
-    .college-button.selected {
-      background: #ffffff;
-
-      color: #111111;
-
-      border-color: #ffffff;
-    }
-
-    .college-small {
-      display: block;
-
-      font-size: 12px;
-
-      font-weight: 400;
-
-      margin-top: 4px;
-
-      opacity: 0.65;
-    }
-
-
-    /* =========================
-       CONTINUE BUTTON
-    ========================= */
-
-    .continue-button {
-      width: 100%;
-
-      height: 54px;
-
-      border: none;
-
-      border-radius: 13px;
-
-      background: #ffffff;
-
-      color: #111111;
-
-      font-size: 17px;
-
-      font-weight: 800;
-
-      cursor: pointer;
-
-      margin-top: 8px;
-    }
-
-    .continue-button:active {
-      transform: scale(0.98);
-    }
-
-
-    /* =========================
-       BACK BUTTON
-    ========================= */
-
-    .back-button {
-      width: 100%;
-
-      border: none;
-
-      background: transparent;
-
-      color: #8f8f96;
-
-      font-size: 14px;
-
-      margin-top: 17px;
-
-      padding: 8px;
-
-      cursor: pointer;
-    }
-
-
-    /* =========================
-       ERROR
-    ========================= */
-
-    .error {
-      display: none;
-
-      color: #ff7777;
-
-      text-align: left;
-
-      font-size: 13px;
-
-      margin-top: 8px;
-
-      margin-bottom: 8px;
-    }
-
-
-    /* =========================
-       WELCOME MESSAGE
-    ========================= */
-
-    .user-welcome {
-      display: none;
-
-      margin-top: 25px;
-
-      color: #9f9fa6;
-
-      font-size: 14px;
-
-      line-height: 1.5;
-    }
-
-
-    /* =========================
-       HIDDEN
-    ========================= */
-
-    .hidden {
-      display: none !important;
-    }
-
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 480px) {
-
-      .popup {
-        padding: 27px 20px;
-
-        border-radius: 23px;
-      }
-
-      .popup-title {
-        font-size: 27px;
-      }
-
-      .logo {
-        letter-spacing: -1.5px;
-      }
-
-    }
-
-  </style>
 </head>
 
 
 <body>
 
 
-  <!-- =================================
-       MAIN WEBSITE
-  ================================== -->
+<!-- =====================================================
+     HOME
+===================================================== -->
 
-  <main class="home">
+<main class="home" id="homeSection">
 
-    <div class="home-content">
+<div class="home-content">
 
-      <div class="logo">
-        WHERE’S THE GANG?
-      </div>
 
-      <div class="tagline">
-        Class can wait. The gang can't. 😂
-      </div>
+<div class="logo">
+WHERE’S THE GANG?
+</div>
 
 
-      <button
-        class="home-button explore-button"
-        onclick="showComingSoon('Explore Places')"
-      >
-        📍 Explore Places
-      </button>
+<div class="tagline">
+Class can wait. The gang can't. 😂
+</div>
 
 
-      <button
-        class="home-button planner-button"
-        onclick="showComingSoon('Where Should We Go?')"
-      >
-        🎯 Where Should We Go?
-      </button>
+<div class="home-buttons">
 
 
-      <div
-        id="userWelcome"
-        class="user-welcome"
-      ></div>
+<button
+class="main-button explore-button"
+onclick="openExplore()"
+>
+📍 Explore Places
+</button>
 
-    </div>
 
-  </main>
+<button
+class="main-button planner-button"
+onclick="comingSoon()"
+>
+🎯 Where Should We Go?
+</button>
 
 
+</div>
 
-  <!-- =================================
-       SETUP POPUP
-  ================================== -->
 
-  <div
-    id="setupOverlay"
-    class="overlay"
-  >
+<div
+id="userWelcome"
+class="user-welcome"
+></div>
 
-    <div class="popup">
 
+</div>
 
-      <!-- =========================
-           STEP 1 — NAME
-      ========================== -->
+</main>
 
-      <section id="nameStep">
 
-        <div class="popup-icon">
-          👋
-        </div>
 
+<!-- =====================================================
+     EXPLORE
+===================================================== -->
 
-        <div class="popup-title">
-          First things first
-        </div>
+<section
+id="exploreSection"
+class="explore-section"
+>
 
+<div class="explore-container">
 
-        <div class="popup-description">
-          Let's get to know you before we get started.
-        </div>
 
+<!-- NAVIGATION -->
 
-        <div class="form-group">
+<div class="navigation-buttons">
 
-          <label
-            class="form-label"
-            for="nameInput"
-          >
-            What's your name?
-          </label>
+<button
+class="page-back"
+onclick="goBackHome()"
+>
+← Back to Home
+</button>
 
 
-          <input
-            id="nameInput"
-            class="text-input"
-            type="text"
-            maxlength="30"
-            autocomplete="name"
-            placeholder="Enter your name"
-          >
+<button
+class="page-back change-college"
+onclick="changeCollege()"
+>
+🎓 Change College
+</button>
 
+</div>
 
-          <div
-            id="nameError"
-            class="error"
-          >
-            Please enter your name.
-          </div>
 
-        </div>
+<div class="section-heading">
 
+<h2 id="exploreTitle">
+🔥 Places Near You
+</h2>
 
-        <button
-          class="continue-button"
-          onclick="goToCollegeStep()"
-        >
-          Continue →
-        </button>
+<p id="exploreSubtitle">
+Budget-friendly places for the gang
+</p>
 
-      </section>
+</div>
 
 
+<!-- AREA -->
 
-      <!-- =========================
-           STEP 2 — COLLEGE
-      ========================== -->
+<div class="area-box">
 
-      <section
-        id="collegeStep"
-        class="hidden"
-      >
+<div class="area-title">
+YOUR COLLEGE AREA
+</div>
 
-        <div class="popup-icon">
-          🎓
-        </div>
+<div
+id="areaName"
+class="area-name"
+>
+📍 Loading...
+</div>
 
+</div>
 
-        <div class="popup-title">
-          Which college?
-        </div>
 
+<!-- FILTERS -->
 
-        <div class="popup-description">
-          Select your college to personalize your experience.
-        </div>
+<div class="categories">
 
 
-        <div class="college-options">
+<button
+class="category active"
+onclick="filterPlaces('all', this)"
+>
+✨ All
+</button>
 
 
-          <button
-            id="nmkButton"
-            class="college-button"
-            onclick="selectCollege('NMKRV')"
-          >
+<button
+class="category"
+onclick="filterPlaces('restaurant', this)"
+>
+🍽️ Restaurants
+</button>
 
-            NMKRV
 
-            <span class="college-small">
-              NMKRV College
-            </span>
+<button
+class="category"
+onclick="filterPlaces('snack', this)"
+>
+🥪 Snacks
+</button>
 
-          </button>
 
+<button
+class="category"
+onclick="filterPlaces('cafe', this)"
+>
+☕ Cafés
+</button>
 
 
-          <button
-            id="apsButton"
-            class="college-button"
-            onclick="selectCollege('APS The Shanda')"
-          >
+<button
+class="category"
+onclick="filterPlaces('dessert', this)"
+>
+🍦 Desserts
+</button>
 
-            APS The Shanda
 
-            <span class="college-small">
-              APS
-            </span>
+</div>
 
-          </button>
 
+<div
+id="placeGrid"
+class="place-grid"
+></div>
 
-        </div>
 
+<div
+id="noResults"
+class="no-results"
+>
+Nothing here yet 😭
+</div>
 
-        <div
-          id="collegeError"
-          class="error"
-        >
-          Please select your college.
-        </div>
 
+</div>
 
-        <button
-          class="continue-button"
-          onclick="finishSetup()"
-        >
-          Let's Go 🚀
-        </button>
+</section>
 
 
-        <button
-          class="back-button"
-          onclick="goBackToName()"
-        >
-          ← Go back
-        </button>
 
-      </section>
+<!-- =====================================================
+     SETUP POPUP
+===================================================== -->
 
+<div
+id="setupOverlay"
+class="overlay"
+>
 
-    </div>
+<div class="popup">
 
-  </div>
 
+<!-- =====================================================
+     NAME
+===================================================== -->
 
+<section id="nameStep">
 
-  <!-- =================================
-       JAVASCRIPT
-  ================================== -->
 
-  <script>
+<div class="popup-icon">
+👋
+</div>
 
 
-    /*
-      VERSION NUMBER
+<div class="popup-title">
+First things first
+</div>
 
-      This makes sure the old broken
-      version does not interfere.
-    */
 
-    const APP_VERSION = "1.0";
+<div class="popup-description">
+Let's get to know you before we get started.
+</div>
 
 
-    /*
-      Selected college
-    */
+<div class="form-group">
 
-    let selectedCollege = "";
 
+<label
+class="form-label"
+for="nameInput"
+>
+What's your name?
+</label>
 
-    /*
-      When page loads
-    */
 
-    window.addEventListener("load", function() {
+<input
+id="nameInput"
+class="text-input"
+type="text"
+maxlength="30"
+placeholder="Enter your name"
+>
 
-      checkExistingUser();
 
-    });
+<div
+id="nameError"
+class="error"
+>
+Please enter your name.
+</div>
 
 
+</div>
 
-    /*
-      STEP 1
 
-      Check name and move to college.
-    */
+<button
+class="continue-button"
+onclick="goToCollegeStep()"
+>
+Continue →
+</button>
 
-    function goToCollegeStep() {
 
-      const nameInput =
+</section>
+
+
+
+<!-- =====================================================
+     COLLEGE
+===================================================== -->
+
+<section
+id="collegeStep"
+class="hidden"
+>
+
+
+<div class="popup-icon">
+🎓
+</div>
+
+
+<div class="popup-title">
+Which college?
+</div>
+
+
+<div class="popup-description">
+Select your college.
+</div>
+
+
+<div class="college-options">
+
+
+<button
+id="nmkButton"
+class="college-button"
+onclick="selectCollege('NMKRV')"
+>
+
+NMKRV
+
+<span class="college-small">
+NMKRV College
+</span>
+
+</button>
+
+
+<button
+id="apsButton"
+class="college-button"
+onclick="selectCollege('APS The Shanda')"
+>
+
+APS The Shanda
+
+<span class="college-small">
+APS College
+</span>
+
+</button>
+
+
+</div>
+
+
+<div
+id="collegeError"
+class="error"
+>
+Please select your college.
+</div>
+
+
+<button
+class="continue-button"
+onclick="finishSetup()"
+>
+Let's Go 🚀
+</button>
+
+
+<button
+class="back-button"
+onclick="goBackToName()"
+>
+← Go back
+</button>
+
+
+</section>
+
+
+</div>
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   VERSION
+===================================================== */
+
+const APP_VERSION = "1.30";
+
+
+/* =====================================================
+   SELECTED COLLEGE
+===================================================== */
+
+let selectedCollege = "";
+
+
+/* =====================================================
+   NMKRV PLACES
+===================================================== */
+
+const nmkrvPlaces = [
+
+{
+name: "Taaza Thindi",
+category: "snack",
+icon: "🥞",
+budget: "₹",
+rating: "4.6 ⭐",
+type: "South Indian",
+area: "Jayanagar",
+description:
+"Classic budget dosa, idli, vada and coffee stop. Great for a quick student breakfast."
+},
+
+{
+name: "Hari Super Sandwich",
+category: "snack",
+icon: "🥪",
+budget: "₹",
+rating: "4.2 ⭐",
+type: "Quick Bites",
+area: "Jayanagar",
+description:
+"Big student-friendly snack menu with sandwiches, chaats and quick bites."
+},
+
+{
+name: "Meghana Foods",
+category: "restaurant",
+icon: "🍗",
+budget: "₹₹",
+rating: "4.3 ⭐",
+type: "Biryani",
+area: "Jayanagar 4th Block",
+description:
+"Popular biryani and Andhra-style restaurant. Better for a proper meal with the gang."
+},
+
+{
+name: "KDC Jayanagar",
+category: "restaurant",
+icon: "🍛",
+budget: "₹",
+rating: "4.5 ⭐",
+type: "South Indian",
+area: "Jayanagar",
+description:
+"Budget South Indian option for dosas, meals and filter coffee."
+},
+
+{
+name: "Cool Joint",
+category: "dessert",
+icon: "🍦",
+budget: "₹",
+rating: "4.1 ⭐",
+type: "Desserts",
+area: "Jayanagar 4th Block",
+description:
+"Classic hangout for ice cream, shakes, sandwiches and quick snacks."
+},
+
+{
+name: "Glen's Bakehouse",
+category: "cafe",
+icon: "🧁",
+budget: "₹₹",
+rating: "3.9 ⭐",
+type: "Bakery",
+area: "Jayanagar",
+description:
+"Café-style hangout for cupcakes, desserts, coffee and casual food."
+},
+
+{
+name: "WAAW Cafe",
+category: "cafe",
+icon: "🍟",
+budget: "₹₹",
+rating: "4.4 ⭐",
+type: "Cafe",
+area: "Jayanagar",
+description:
+"Casual café option for burgers, fries, pasta, shakes and desserts."
+},
+
+{
+name: "Dose Manjanna",
+category: "restaurant",
+icon: "🥞",
+budget: "₹",
+rating: "4.4 ⭐",
+type: "Dosa",
+area: "Jayanagar",
+description:
+"Quick South Indian spot for crispy dosas and filling tiffin."
+},
+
+{
+name: "Sri Vasavi Chats",
+category: "snack",
+icon: "🌮",
+budget: "₹",
+rating: "4.2 ⭐",
+type: "Chaat",
+area: "Jayanagar",
+description:
+"Good pick when the gang wants pani puri, chaat and quick vegetarian snacks."
+},
+
+{
+name: "Kedia's Fun Food",
+category: "snack",
+icon: "🍜",
+budget: "₹",
+rating: "4.0 ⭐",
+type: "Quick Food",
+area: "Jayanagar",
+description:
+"Affordable quick-food option for a casual group stop."
+},
+
+{
+name: "Vijay Donne Biryani",
+category: "restaurant",
+icon: "🍚",
+budget: "₹",
+rating: "4.9 ⭐",
+type: "Biryani",
+area: "Jayanagar",
+description:
+"Budget biryani option when the gang wants a proper filling meal."
+},
+
+{
+name: "Karma Kaapi",
+category: "cafe",
+icon: "☕",
+budget: "₹₹",
+rating: "4.3 ⭐",
+type: "Coffee",
+area: "Jayanagar",
+description:
+"Coffee-focused hangout when you want to sit and chill."
+},
+
+{
+name: "Chaat Street",
+category: "snack",
+icon: "🌮",
+budget: "₹",
+rating: "4.1 ⭐",
+type: "Street Food",
+area: "Jayanagar",
+description:
+"Quick street-style snacks and chaat for a low-budget gang stop."
+},
+
+{
+name: "Juice Junction",
+category: "dessert",
+icon: "🥤",
+budget: "₹",
+rating: "4.2 ⭐",
+type: "Juices",
+area: "Jayanagar",
+description:
+"Juices, shakes and cold drinks for a quick break after class."
+},
+
+{
+name: "Filter Coffee Corner",
+category: "cafe",
+icon: "☕",
+budget: "₹",
+rating: "4.3 ⭐",
+type: "Coffee",
+area: "Jayanagar",
+description:
+"Simple coffee and snack stop for a short gang meetup."
+}
+
+];
+
+
+/* =====================================================
+   APS PLACES
+===================================================== */
+
+const apsPlaces = [
+
+{
+name: "S.M.V. Snacks Corner",
+category: "snack",
+icon: "🍟",
+budget: "₹",
+rating: "4.3 ⭐",
+type: "Student Snacks",
+area: "Vishweshwarapura",
+description:
+"Quick bites, snacks and casual student hangout near the college area."
+},
+
+{
+name: "By2 Coffee",
+category: "cafe",
+icon: "☕",
+budget: "₹",
+rating: "4.4 ⭐",
+type: "Coffee & Tiffin",
+area: "Basavanagudi",
+description:
+"Budget-friendly coffee and tiffin stop for a quick gang break."
+},
+
+{
+name: "South Kitchen",
+category: "restaurant",
+icon: "🍛",
+budget: "₹",
+rating: "4.4 ⭐",
+type: "South Indian",
+area: "N.R. Colony",
+description:
+"No-frills vegetarian South Indian food with quick service."
+},
+
+{
+name: "South Thindies",
+category: "restaurant",
+icon: "🥞",
+budget: "₹",
+rating: "4.1 ⭐",
+type: "Tiffin",
+area: "Basavanagudi",
+description:
+"Budget-friendly South Indian breakfast and tiffin spot."
+},
+
+{
+name: "Uphara Kendra",
+category: "restaurant",
+icon: "🍽️",
+budget: "₹",
+rating: "4.2 ⭐",
+type: "South Indian",
+area: "Basavanagudi",
+description:
+"Affordable South Indian meals, dosa, idli and vada."
+},
+
+{
+name: "Mahalaxmi Tiffin Room",
+category: "snack",
+icon: "🥣",
+budget: "₹",
+rating: "4.3 ⭐",
+type: "Tiffin",
+area: "DVG Road",
+description:
+"Old-school breakfast and evening snack option."
+},
+
+{
+name: "Nothing Before Coffee",
+category: "cafe",
+icon: "☕",
+budget: "₹₹",
+rating: "4.5 ⭐",
+type: "Cafe",
+area: "N.R. Colony",
+description:
+"Coffee, shakes, desserts and quick café snacks."
+},
+
+{
+name: "Friends Adda",
+category: "snack",
+icon: "🥪",
+budget: "₹",
+rating: "4.4 ⭐",
+type: "Quick Bites",
+area: "South End Road",
+description:
+"Casual student hangout for tea and quick bites."
+},
+
+{
+name: "Kesarii Cafe",
+category: "cafe",
+icon: "🍰",
+budget: "₹₹",
+rating: "4.8 ⭐",
+type: "Cafe",
+area: "VV Puram",
+description:
+"Small vegetarian café around the famous food-street area."
+},
+
+{
+name: "Asha Sweet Center",
+category: "dessert",
+icon: "🍬",
+budget: "₹",
+rating: "3.8 ⭐",
+type: "Sweets & Chaat",
+area: "Gandhi Bazaar",
+description:
+"Sweets, samosas, chaat and quick snacks."
+},
+
+{
+name: "Sri Venkateshwara Sweet-Meat Stall",
+category: "dessert",
+icon: "🍮",
+budget: "₹",
+rating: "—",
+type: "Sweets",
+area: "Gandhi Bazaar",
+description:
+"Traditional sweets, snacks and quick bites."
+},
+
+{
+name: "The 11th Bean Cafe",
+category: "cafe",
+icon: "☕",
+budget: "₹₹",
+rating: "4.8 ⭐",
+type: "Specialty Coffee",
+area: "Basavanagudi",
+description:
+"Calm coffee hangout when the gang wants something relaxed."
+},
+
+{
+name: "The Coffee San",
+category: "cafe",
+icon: "☕",
+budget: "₹₹",
+rating: "5.0 ⭐",
+type: "Coffee",
+area: "Vishweshwarapura",
+description:
+"Coffee spot with modern drinks for a relaxed break."
+},
+
+{
+name: "Jalandhar Street",
+category: "restaurant",
+icon: "🍽️",
+budget: "₹₹",
+rating: "4.6 ⭐",
+type: "North Indian",
+area: "Gandhi Bazaar",
+description:
+"North Indian and Indo-Chinese option for group meals."
+},
+
+{
+name: "VV Puram Food Street",
+category: "snack",
+icon: "🌮",
+budget: "₹",
+rating: "4.5 ⭐",
+type: "Street Food",
+area: "VV Puram",
+description:
+"Great area for the gang to walk around and try different snacks."
+},
+
+{
+name: "Gandhi Bazaar Snacks",
+category: "snack",
+icon: "🥘",
+budget: "₹",
+rating: "4.4 ⭐",
+type: "Street Food",
+area: "Gandhi Bazaar",
+description:
+"Multiple affordable snack options around the busy Gandhi Bazaar area."
+}
+
+];
+
+
+/* =====================================================
+   CURRENT PLACES
+===================================================== */
+
+let currentPlaces = nmkrvPlaces;
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+window.addEventListener(
+"load",
+function() {
+
+    checkExistingUser();
+
+    renderPlaces("all");
+
+}
+);
+
+
+/* =====================================================
+   NAME STEP
+===================================================== */
+
+function goToCollegeStep() {
+
+    const input =
         document.getElementById("nameInput");
 
-      const name =
-        nameInput.value.trim();
+    const name =
+        input.value.trim();
 
-      const error =
+    const error =
         document.getElementById("nameError");
 
 
-      if (name === "") {
+    if (name === "") {
 
         error.style.display = "block";
 
-        nameInput.focus();
+        input.focus();
 
         return;
 
-      }
+    }
 
 
-      error.style.display = "none";
+    error.style.display = "none";
 
 
-      /*
-        Temporarily save name.
-      */
-
-      localStorage.setItem(
+    localStorage.setItem(
         "gangNameTemp",
         name
-      );
+    );
 
 
-      /*
-        Hide name step.
-      */
-
-      document
+    document
         .getElementById("nameStep")
         .classList.add("hidden");
 
 
-      /*
-        Show college step.
-      */
-
-      document
+    document
         .getElementById("collegeStep")
         .classList.remove("hidden");
 
-    }
+}
 
 
+/* =====================================================
+   COLLEGE SELECTION
+===================================================== */
 
-    /*
-      COLLEGE SELECTION
-    */
+function selectCollege(college) {
 
-    function selectCollege(college) {
-
-      selectedCollege = college;
+    selectedCollege = college;
 
 
-      /*
-        Remove selected state
-        from both buttons.
-      */
-
-      document
+    document
         .getElementById("nmkButton")
         .classList.remove("selected");
 
-      document
+
+    document
         .getElementById("apsButton")
         .classList.remove("selected");
 
 
-      /*
-        Highlight selected college.
-      */
-
-      if (college === "NMKRV") {
+    if (college === "NMKRV") {
 
         document
-          .getElementById("nmkButton")
-          .classList.add("selected");
-
-      }
-
-
-      if (college === "APS The Shanda") {
-
-        document
-          .getElementById("apsButton")
-          .classList.add("selected");
-
-      }
-
-
-      /*
-        Hide error if user
-        selects something.
-      */
-
-      document
-        .getElementById("collegeError")
-        .style.display = "none";
+            .getElementById("nmkButton")
+            .classList.add("selected");
 
     }
 
 
+    if (college === "APS The Shanda") {
 
-    /*
-      FINISH SETUP
-    */
+        document
+            .getElementById("apsButton")
+            .classList.add("selected");
 
-    function finishSetup() {
+    }
 
-      const collegeError =
+
+    document
+        .getElementById("collegeError")
+        .style.display = "none";
+
+}
+
+
+/* =====================================================
+   FINISH SETUP
+===================================================== */
+
+function finishSetup() {
+
+    const error =
         document.getElementById("collegeError");
 
 
-      /*
-        Make sure a college
-        has been selected.
-      */
+    if (selectedCollege === "") {
 
-      if (selectedCollege === "") {
-
-        collegeError.style.display = "block";
+        error.style.display = "block";
 
         return;
 
-      }
+    }
 
 
-      /*
-        Get saved name.
-      */
-
-      const name =
+    const name =
         localStorage.getItem("gangNameTemp");
 
 
-      /*
-        Save final profile.
-      */
-
-      localStorage.setItem(
+    localStorage.setItem(
         "gangName",
         name
-      );
+    );
 
-      localStorage.setItem(
+
+    localStorage.setItem(
         "gangCollege",
         selectedCollege
-      );
+    );
 
-      localStorage.setItem(
+
+    localStorage.setItem(
         "gangAppVersion",
         APP_VERSION
-      );
+    );
 
 
-      /*
-        Remove temporary name.
-      */
-
-      localStorage.removeItem(
+    localStorage.removeItem(
         "gangNameTemp"
-      );
+    );
 
 
-      /*
-        Close popup.
-      */
-
-      document
+    document
         .getElementById("setupOverlay")
         .classList.add("hidden");
 
 
-      /*
-        Show welcome message.
-      */
+    showUserWelcome(
+        name,
+        selectedCollege
+    );
 
-      showUserWelcome(name, selectedCollege);
+
+    setupCollegePlaces();
+
+}
+
+
+/* =====================================================
+   EXISTING USER
+===================================================== */
+
+function checkExistingUser() {
+
+    const version =
+        localStorage.getItem(
+            "gangAppVersion"
+        );
+
+    const name =
+        localStorage.getItem(
+            "gangName"
+        );
+
+    const college =
+        localStorage.getItem(
+            "gangCollege"
+        );
+
+
+    if (
+        version === APP_VERSION &&
+        name &&
+        college
+    ) {
+
+        document
+            .getElementById("setupOverlay")
+            .classList.add("hidden");
+
+
+        selectedCollege =
+            college;
+
+
+        showUserWelcome(
+            name,
+            college
+        );
+
+
+        setupCollegePlaces();
 
     }
 
+}
 
 
-    /*
-      SHOW USER WELCOME
-    */
+/* =====================================================
+   WELCOME
+===================================================== */
 
-    function showUserWelcome(name, college) {
+function showUserWelcome(
+    name,
+    college
+) {
 
-      const welcome =
-        document.getElementById("userWelcome");
+    const welcome =
+        document.getElementById(
+            "userWelcome"
+        );
 
 
-      welcome.innerHTML =
+    welcome.innerHTML =
         "Welcome, " +
         escapeHTML(name) +
         " 👋<br>" +
         escapeHTML(college);
 
 
-      welcome.style.display = "block";
+    welcome.style.display = "block";
 
-    }
-
-
-
-    /*
-      CHECK EXISTING USER
-
-      Only skip the popup if they
-      completed THIS version.
-    */
-
-    function checkExistingUser() {
-
-      const savedVersion =
-        localStorage.getItem("gangAppVersion");
-
-      const savedName =
-        localStorage.getItem("gangName");
-
-      const savedCollege =
-        localStorage.getItem("gangCollege");
+}
 
 
-      if (
-        savedVersion === APP_VERSION &&
-        savedName &&
-        savedCollege
-      ) {
+/* =====================================================
+   COLLEGE DATA SWITCH
+===================================================== */
 
-        document
-          .getElementById("setupOverlay")
-          .classList.add("hidden");
+function setupCollegePlaces() {
 
-
-        showUserWelcome(
-          savedName,
-          savedCollege
+    const title =
+        document.getElementById(
+            "exploreTitle"
         );
 
-      }
+
+    const subtitle =
+        document.getElementById(
+            "exploreSubtitle"
+        );
+
+
+    const area =
+        document.getElementById(
+            "areaName"
+        );
+
+
+    if (
+        selectedCollege ===
+        "APS The Shanda"
+    ) {
+
+        currentPlaces =
+            apsPlaces;
+
+
+        title.innerHTML =
+            "🔥 Places Near APS";
+
+
+        subtitle.innerHTML =
+            "Budget-friendly spots around Basavanagudi";
+
+
+        area.innerHTML =
+            "📍 N.R. Colony • Basavanagudi";
+
+    }
+
+    else {
+
+        currentPlaces =
+            nmkrvPlaces;
+
+
+        title.innerHTML =
+            "🔥 Places Near NMKRV";
+
+
+        subtitle.innerHTML =
+            "Budget-friendly spots around Jayanagar";
+
+
+        area.innerHTML =
+            "📍 Jayanagar";
 
     }
 
 
+    resetFilters();
 
-    /*
-      GO BACK TO NAME
-    */
+    renderPlaces("all");
 
-    function goBackToName() {
+}
 
-      document
+
+/* =====================================================
+   BACK TO NAME
+===================================================== */
+
+function goBackToName() {
+
+    document
         .getElementById("collegeStep")
         .classList.add("hidden");
 
 
-      document
+    document
         .getElementById("nameStep")
         .classList.remove("hidden");
 
+}
+
+
+/* =====================================================
+   OPEN EXPLORE
+===================================================== */
+
+function openExplore() {
+
+    setupCollegePlaces();
+
+
+    const explore =
+        document.getElementById(
+            "exploreSection"
+        );
+
+
+    explore.style.display =
+        "block";
+
+
+    setTimeout(
+        function() {
+
+            explore.scrollIntoView({
+                behavior: "smooth"
+            });
+
+        },
+        100
+    );
+
+}
+
+
+/* =====================================================
+   BACK TO HOME
+===================================================== */
+
+function goBackHome() {
+
+    document
+        .getElementById(
+            "exploreSection"
+        )
+        .style.display = "none";
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =====================================================
+   CHANGE COLLEGE
+===================================================== */
+
+function changeCollege() {
+
+    /* Hide Explore */
+
+    document
+        .getElementById(
+            "exploreSection"
+        )
+        .style.display = "none";
+
+
+    /* Show setup popup */
+
+    document
+        .getElementById(
+            "setupOverlay"
+        )
+        .classList.remove("hidden");
+
+
+    /* Go directly to college selection */
+
+    document
+        .getElementById(
+            "nameStep"
+        )
+        .classList.add("hidden");
+
+
+    document
+        .getElementById(
+            "collegeStep"
+        )
+        .classList.remove("hidden");
+
+
+    /* Clear current selection */
+
+    selectedCollege = "";
+
+
+    document
+        .getElementById(
+            "nmkButton"
+        )
+        .classList.remove("selected");
+
+
+    document
+        .getElementById(
+            "apsButton"
+        )
+        .classList.remove("selected");
+
+
+    document
+        .getElementById(
+            "collegeError"
+        )
+        .style.display = "none";
+
+}
+
+
+/* =====================================================
+   RESET FILTERS
+===================================================== */
+
+function resetFilters() {
+
+    const buttons =
+        document.querySelectorAll(
+            ".category"
+        );
+
+
+    buttons.forEach(
+        function(button, index) {
+
+            if (index === 0) {
+
+                button.classList.add(
+                    "active"
+                );
+
+            }
+
+            else {
+
+                button.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   RENDER PLACES
+===================================================== */
+
+function renderPlaces(category) {
+
+    const grid =
+        document.getElementById(
+            "placeGrid"
+        );
+
+
+    const noResults =
+        document.getElementById(
+            "noResults"
+        );
+
+
+    grid.innerHTML = "";
+
+
+    const filtered =
+        category === "all"
+
+        ? currentPlaces
+
+        : currentPlaces.filter(
+            function(place) {
+
+                return (
+                    place.category ===
+                    category
+                );
+
+            }
+        );
+
+
+    if (
+        filtered.length === 0
+    ) {
+
+        noResults.style.display =
+            "block";
+
+        return;
+
     }
 
 
-
-    /*
-      TEMP BUTTON FUNCTION
-    */
-
-    function showComingSoon(feature) {
-
-      alert(
-        feature +
-        " will be added next 🔥"
-      );
-
-    }
+    noResults.style.display =
+        "none";
 
 
+    filtered.forEach(
+        function(place, index) {
 
-    /*
-      BASIC HTML ESCAPING
-    */
 
-    function escapeHTML(text) {
+            const card =
+                document.createElement(
+                    "div"
+                );
 
-      const div =
-        document.createElement("div");
 
-      div.textContent = text;
+            card.className =
+                "place-card";
 
-      return div.innerHTML;
 
-    }
+            card.style.animationDelay =
+                (index * 0.06) +
+                "s";
 
-  </script>
+
+            card.innerHTML = `
+
+                <div class="place-icon">
+                    ${place.icon}
+                </div>
+
+                <h3>
+                    ${escapeHTML(
+                        place.name
+                    )}
+                </h3>
+
+                <div class="place-description">
+                    ${escapeHTML(
+                        place.description
+                    )}
+                </div>
+
+                <div class="place-info">
+
+                    <span
+                    class="info-tag budget-tag"
+                    >
+                        💰 ${place.budget}
+                    </span>
+
+                    <span
+                    class="info-tag rating-tag"
+                    >
+                        ${place.rating}
+                    </span>
+
+                    <span
+                    class="info-tag type-tag"
+                    >
+                        ${escapeHTML(
+                            place.type
+                        )}
+                    </span>
+
+                </div>
+
+                <div class="place-area">
+
+                    📍 ${escapeHTML(
+                        place.area
+                    )}
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(card);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+function filterPlaces(
+    category,
+    clickedButton
+) {
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".category"
+        );
+
+
+    buttons.forEach(
+        function(button) {
+
+            button.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+
+    clickedButton.classList.add(
+        "active"
+    );
+
+
+    renderPlaces(category);
+
+}
+
+
+/* =====================================================
+   PLANNER
+===================================================== */
+
+function comingSoon() {
+
+    alert(
+        "🎯 The Gang Planner is coming next!"
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
+
+</script>
 
 
 </body>
-</html>
+
+  </html>
