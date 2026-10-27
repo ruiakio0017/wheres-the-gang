@@ -594,8 +594,8 @@ button{
           <small>Jayanagar • Jayanagar-only planner</small>
         </button>
 
-        <button id="apsOption" class="collegeOption" onclick="chooseCollege('APS The Shanda')">
-          <b>🎓 APS The Shanda</b>
+        <button id="apsOption" class="collegeOption" onclick="chooseCollege('Aps')">
+          <b>🎓 Aps</b>
           <small>N.R. Colony • Basavanagudi-only planner</small>
         </button>
       </div>
@@ -1125,28 +1125,28 @@ function loadData(){
    ========================================================= */
 
 function getArea(){
-  if(selectedCollege==="APS The Shanda"){
-    return "APS The Shanda • N.R. Colony • Basavanagudi";
+  if(selectedCollege==="Aps"){
+    return "Aps • N.R. Colony • Basavanagudi";
   }
 
   return "NMKRV • Jayanagar";
 }
 
 function getPlannerData(){
-  return selectedCollege==="APS The Shanda"
+  return selectedCollege==="Aps"
     ? apsPlanner
     : nmkrvPlanner;
 }
 
 function getExploreData(){
-  return selectedCollege==="APS The Shanda"
+  return selectedCollege==="Aps"
     ? apsExplore
     : nmkrvExplore;
 }
 
 function getCollegeShort(){
-  return selectedCollege==="APS The Shanda"
-    ? "APS The Shanda"
+  return selectedCollege==="Aps"
+    ? "Aps"
     : "NMKRV";
 }
 
@@ -1239,7 +1239,7 @@ function renderHome(){
         <p>
           ${selectedCollege==="NMKRV"
             ? "NMKRV is locked to Jayanagar. No Basavanagudi places are used in this planner."
-            : "APS The Shanda is locked to N.R. Colony / Basavanagudi. No Jayanagar places are used in this planner."
+            : "Aps is locked to N.R. Colony / Basavanagudi. No Jayanagar places are used in this planner."
           }
         </p>
         <button class="specialBtn" onclick="openChangeCollege()">
@@ -1741,7 +1741,7 @@ function updateCollegeSelection(){
     .classList.toggle("selected",temporaryCollege==="NMKRV");
 
   document.getElementById("apsOption")
-    .classList.toggle("selected",temporaryCollege==="APS The Shanda");
+    .classList.toggle("selected",temporaryCollege==="Aps");
 }
 
 function saveCollege(){
@@ -1923,7 +1923,7 @@ document.addEventListener("keydown",function(e){
 
     if(
       selectedCollege!=="NMKRV" &&
-      selectedCollege!=="APS The Shanda"
+      selectedCollege!=="Aps"
     ){
       selectedCollege="NMKRV";
       saveData();
@@ -1942,4 +1942,4 @@ document.addEventListener("keydown",function(e){
 </script>
 
 </body>
-  </html>
+</html>
