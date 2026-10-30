@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#08080b">
-<title>WHERE'S THE GANG?</title>
+<meta name="theme-color" content="#070611">
+<title>WHERE'S THE GANG? — V8 HORIZON</title>
 
 <style>
 *{
@@ -19,16 +19,193 @@ html{
 body{
   margin:0;
   min-height:100vh;
-  background:
-    radial-gradient(circle at 0% 20%,rgba(105,65,170,.16),transparent 32%),
-    radial-gradient(circle at 100% 80%,rgba(50,90,180,.12),transparent 32%),
-    #08080b;
   color:#fff;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
+  background:#06050b;
 }
 
-button,input{
+/* =========================================================
+   HORIZON BACKGROUND
+========================================================= */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:-35%;
+  z-index:-10;
+  pointer-events:none;
+
+  background:
+    radial-gradient(
+      circle at 18% 18%,
+      rgba(133,77,255,.28),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 82% 25%,
+      rgba(255,65,206,.22),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 50% 95%,
+      rgba(40,166,255,.18),
+      transparent 30%
+    );
+
+  animation:horizonMove 16s ease-in-out infinite alternate;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-9;
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255,255,255,.018) 45%,
+      transparent 55%
+    );
+
+  background-size:250% 250%;
+  animation:lightSweep 14s linear infinite;
+}
+
+@keyframes horizonMove{
+  0%{
+    transform:translate(-4%,-2%) scale(1);
+  }
+
+  50%{
+    transform:translate(4%,3%) scale(1.08);
+  }
+
+  100%{
+    transform:translate(-2%,6%) scale(1.15);
+  }
+}
+
+@keyframes lightSweep{
+  from{
+    background-position:200% 0;
+  }
+
+  to{
+    background-position:-200% 0;
+  }
+}
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+.horizonParticles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:-5;
+}
+
+.horizonParticles i{
+  position:absolute;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:#fff;
+  opacity:.3;
+
+  box-shadow:
+    0 0 12px rgba(255,255,255,.8);
+
+  animation:
+    particleFloat linear infinite;
+}
+
+.horizonParticles i:nth-child(1){
+  left:6%;
+  top:80%;
+  animation-duration:13s;
+}
+
+.horizonParticles i:nth-child(2){
+  left:16%;
+  top:45%;
+  animation-duration:17s;
+}
+
+.horizonParticles i:nth-child(3){
+  left:28%;
+  top:85%;
+  animation-duration:15s;
+}
+
+.horizonParticles i:nth-child(4){
+  left:39%;
+  top:30%;
+  animation-duration:19s;
+}
+
+.horizonParticles i:nth-child(5){
+  left:51%;
+  top:70%;
+  animation-duration:14s;
+}
+
+.horizonParticles i:nth-child(6){
+  left:63%;
+  top:25%;
+  animation-duration:18s;
+}
+
+.horizonParticles i:nth-child(7){
+  left:76%;
+  top:72%;
+  animation-duration:16s;
+}
+
+.horizonParticles i:nth-child(8){
+  left:88%;
+  top:35%;
+  animation-duration:20s;
+}
+
+.horizonParticles i:nth-child(9){
+  left:94%;
+  top:82%;
+  animation-duration:12s;
+}
+
+@keyframes particleFloat{
+  0%{
+    transform:translateY(50px);
+    opacity:0;
+  }
+
+  20%{
+    opacity:.4;
+  }
+
+  75%{
+    opacity:.25;
+  }
+
+  100%{
+    transform:translateY(-110vh);
+    opacity:0;
+  }
+}
+
+/* =========================================================
+   APP
+========================================================= */
+
+button,
+input{
   font:inherit;
 }
 
@@ -42,34 +219,38 @@ button{
   position:relative;
 }
 
+/* =========================================================
+   PAGE
+========================================================= */
+
 .page{
   width:100%;
-  max-width:900px;
+  max-width:940px;
   margin:auto;
   min-height:100vh;
-  padding:32px 18px 90px;
-  animation:pageIn .45s ease;
+  padding:32px 18px 100px;
+
+  animation:
+    pageIn .6s cubic-bezier(.2,.8,.2,1);
 }
 
 @keyframes pageIn{
-  from{opacity:0;transform:translateY(18px)}
-  to{opacity:1;transform:translateY(0)}
+  from{
+    opacity:0;
+    transform:translateY(25px) scale(.985);
+    filter:blur(5px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    filter:blur(0);
+  }
 }
 
-@keyframes floatIn{
-  from{opacity:0;transform:translateY(25px) scale(.97)}
-  to{opacity:1;transform:translateY(0) scale(1)}
-}
-
-@keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.025)}
-}
-
-@keyframes glow{
-  0%,100%{box-shadow:0 0 0 rgba(255,255,255,0)}
-  50%{box-shadow:0 0 35px rgba(255,255,255,.09)}
-}
+/* =========================================================
+   BRAND
+========================================================= */
 
 .brand{
   text-align:center;
@@ -77,169 +258,522 @@ button{
 }
 
 .made{
-  color:#9a9a9f;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:4px;
-  margin-bottom:42px;
+  color:#888493;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:5px;
+  margin-bottom:40px;
+
+  animation:
+    fadeDown .7s ease both;
+}
+
+@keyframes fadeDown{
+  from{
+    opacity:0;
+    transform:translateY(-15px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .logo{
-  font-size:clamp(42px,11vw,78px);
-  line-height:.86;
+  position:relative;
+
+  font-size:clamp(43px,11vw,82px);
+  line-height:.84;
+
   font-weight:1000;
-  letter-spacing:-4px;
+  letter-spacing:-5px;
+
   text-transform:uppercase;
+
+  text-shadow:
+    0 0 25px rgba(139,92,255,.15),
+    0 0 60px rgba(255,79,216,.08);
+
+  animation:
+    logoIn .8s cubic-bezier(.2,.8,.2,1);
 }
 
 .logo span{
   display:block;
 }
 
+.logo::after{
+  content:"";
+
+  display:block;
+
+  width:90px;
+  height:4px;
+
+  margin:25px auto 0;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #8b5cff,
+      #ff4fd8,
+      #42b9ff
+    );
+
+  box-shadow:
+    0 0 18px rgba(255,79,216,.6);
+
+  animation:
+    horizonLine 3s ease-in-out infinite;
+}
+
+@keyframes logoIn{
+  from{
+    opacity:0;
+    transform:scale(.88);
+    filter:blur(10px);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1);
+    filter:blur(0);
+  }
+}
+
+@keyframes horizonLine{
+  0%,100%{
+    width:70px;
+    opacity:.65;
+  }
+
+  50%{
+    width:160px;
+    opacity:1;
+  }
+}
+
 .tagline{
-  margin:42px auto 34px;
-  color:#aaaab0;
-  font-size:clamp(18px,4.7vw,29px);
+  margin:35px auto 28px;
+
+  color:#aaa7b5;
+
+  font-size:
+    clamp(17px,4.7vw,28px);
+
   line-height:1.25;
 }
+
+/* =========================================================
+   USER BADGE
+========================================================= */
 
 .userBadge{
   display:inline-flex;
   align-items:center;
   gap:7px;
-  color:#aaaab0;
-  font-size:15px;
-  margin-bottom:28px;
+
+  color:#aaa7b5;
+
+  font-size:14px;
+
+  margin-bottom:25px;
+
+  padding:8px 13px;
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  background:
+    rgba(255,255,255,.035);
+
+  border-radius:999px;
+
+  backdrop-filter:blur(12px);
 }
 
 .userBadge strong{
   color:#fff;
 }
 
+/* =========================================================
+   MAIN BUTTONS
+========================================================= */
+
 .actions{
   display:grid;
-  gap:16px;
+  gap:14px;
 }
 
 .mainBtn{
+  position:relative;
+  overflow:hidden;
+
   min-height:74px;
-  border-radius:30px;
+
+  border-radius:27px;
+
   padding:18px 20px;
-  background:#25242a;
+
   color:#fff;
+
   font-weight:900;
-  font-size:20px;
-  transition:.25s ease;
-  animation:floatIn .55s ease both;
+  font-size:19px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.09),
+      rgba(255,255,255,.025)
+    );
+
+  border:
+    1px solid rgba(255,255,255,.09);
+
+  backdrop-filter:blur(18px);
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.18);
+
+  transition:
+    transform .3s cubic-bezier(.2,.8,.2,1),
+    border-color .3s,
+    box-shadow .3s;
+
+  animation:
+    buttonIn .6s ease both;
 }
 
-.mainBtn:nth-child(2){animation-delay:.08s}
-.mainBtn:nth-child(3){animation-delay:.16s}
+.mainBtn:nth-child(2){
+  animation-delay:.08s;
+}
 
-.mainBtn.light{
-  background:#fff;
-  color:#111;
+.mainBtn:nth-child(3){
+  animation-delay:.16s;
+}
+
+@keyframes buttonIn{
+  from{
+    opacity:0;
+    transform:translateY(20px) scale(.96);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.mainBtn::before{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:-120%;
+
+  width:70%;
+  height:100%;
+
+  transform:skewX(-20deg);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.15),
+      transparent
+    );
+
+  transition:.7s;
+}
+
+.mainBtn:hover::before{
+  left:150%;
 }
 
 .mainBtn:hover{
-  transform:translateY(-3px);
+  transform:
+    translateY(-5px)
+    scale(1.015);
+
+  border-color:
+    rgba(255,255,255,.18);
+
+  box-shadow:
+    0 20px 55px rgba(0,0,0,.28),
+    0 0 35px rgba(139,92,255,.09);
 }
 
 .mainBtn:active{
-  transform:scale(.97);
+  transform:scale(.96);
 }
+
+.mainBtn.light{
+  background:
+    linear-gradient(
+      135deg,
+      #fff,
+      #eeeaff
+    );
+
+  color:#111;
+}
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
 
 .sectionTop{
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   gap:10px;
+
   margin-bottom:20px;
 }
 
-.backBtn{
-  background:#25242a;
-  color:#fff;
+.backBtn,
+.changeBtn{
   padding:11px 16px;
   border-radius:15px;
-  font-weight:800;
+  font-weight:900;
+
+  transition:.25s ease;
+}
+
+.backBtn{
+  color:#fff;
+
+  background:
+    rgba(255,255,255,.07);
+
+  border:
+    1px solid rgba(255,255,255,.08);
 }
 
 .changeBtn{
   background:#fff;
   color:#111;
-  padding:11px 16px;
-  border-radius:15px;
-  font-weight:900;
 }
 
+.backBtn:hover,
+.changeBtn:hover{
+  transform:translateY(-3px);
+}
+
+/* =========================================================
+   TITLES
+========================================================= */
+
 .pageTitle{
-  font-size:clamp(30px,8vw,48px);
+  font-size:
+    clamp(30px,8vw,50px);
+
   font-weight:1000;
-  letter-spacing:-1.5px;
+
+  letter-spacing:-2px;
+
   margin:18px 0 7px;
 }
 
 .pageSub{
-  color:#99999f;
-  line-height:1.5;
+  color:#9996a5;
+
+  line-height:1.55;
+
   margin-bottom:25px;
 }
 
+/* =========================================================
+   LOCATION
+========================================================= */
+
 .locationPill{
   display:inline-flex;
+
   padding:8px 13px;
+
   border-radius:999px;
-  background:#17171c;
-  border:1px solid #2d2d34;
-  color:#b9b9bf;
-  font-size:13px;
-  font-weight:800;
+
+  background:
+    rgba(255,255,255,.045);
+
+  border:
+    1px solid rgba(255,255,255,.09);
+
+  color:#bbb8c6;
+
+  font-size:12px;
+
+  font-weight:900;
+
   margin-bottom:20px;
+
+  backdrop-filter:blur(10px);
+}
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search,
+.input{
+  width:100%;
+
+  background:
+    rgba(10,10,17,.72);
+
+  border:
+    1px solid rgba(255,255,255,.10);
+
+  color:#fff;
+
+  padding:16px 18px;
+
+  border-radius:18px;
+
+  outline:none;
+
+  transition:.3s ease;
 }
 
 .search{
-  width:100%;
-  background:#15151a;
-  border:1px solid #303038;
-  color:#fff;
-  padding:16px 18px;
-  border-radius:18px;
-  outline:none;
   margin-bottom:18px;
 }
 
-.search:focus{
-  border-color:#777780;
+.search:focus,
+.input:focus{
+  border-color:
+    rgba(139,92,255,.7);
+
+  box-shadow:
+    0 0 0 4px rgba(139,92,255,.09),
+    0 0 25px rgba(139,92,255,.10);
 }
+
+/* =========================================================
+   CATEGORY GRID
+========================================================= */
 
 .categoryGrid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:13px;
 }
 
 .category{
-  background:#17171c;
-  border:1px solid #292930;
-  color:#fff;
-  min-height:100px;
-  border-radius:23px;
-  padding:15px;
+  position:relative;
+  overflow:hidden;
+
+  min-height:108px;
+
+  border-radius:24px;
+
+  padding:17px;
+
   text-align:left;
-  transition:.2s ease;
-  animation:floatIn .45s ease both;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(35,31,53,.78),
+      rgba(17,16,25,.78)
+    );
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(14px);
+
+  transition:
+    .3s cubic-bezier(.2,.8,.2,1);
+
+  animation:
+    cardIn .55s ease both;
+}
+
+@keyframes cardIn{
+  from{
+    opacity:0;
+    transform:
+      translateY(18px)
+      scale(.96);
+  }
+
+  to{
+    opacity:1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+.category::after{
+  content:"";
+
+  position:absolute;
+
+  width:110px;
+  height:110px;
+
+  right:-50px;
+  bottom:-60px;
+
+  border-radius:50%;
+
+  background:
+    rgba(139,92,255,.12);
+
+  filter:blur(12px);
+
+  transition:.4s;
 }
 
 .category:hover{
-  transform:translateY(-3px);
-  background:#202027;
+  transform:
+    translateY(-7px)
+    scale(1.02);
+
+  border-color:
+    rgba(255,255,255,.16);
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.25),
+    0 0 35px rgba(139,92,255,.08);
+}
+
+.category:hover::after{
+  transform:scale(1.8);
+}
+
+.category:active{
+  transform:scale(.96);
 }
 
 .category .emoji{
-  font-size:28px;
+  font-size:29px;
+
   display:block;
-  margin-bottom:8px;
+
+  margin-bottom:9px;
+
+  transition:.3s ease;
+}
+
+.category:hover .emoji{
+  transform:
+    scale(1.18)
+    rotate(-5deg);
 }
 
 .category b{
@@ -248,38 +782,92 @@ button{
 
 .category small{
   display:block;
-  color:#77777f;
+
+  color:#777483;
+
   margin-top:5px;
 }
 
+/* =========================================================
+   SPECIAL CARD
+========================================================= */
+
 .specialCard{
   margin-top:18px;
-  border:1px solid #35353d;
+
+  border:
+    1px solid rgba(255,255,255,.10);
+
   background:
-    linear-gradient(135deg,#1d1b22,#121218);
-  border-radius:25px;
+    linear-gradient(
+      135deg,
+      rgba(42,34,65,.78),
+      rgba(15,14,23,.8)
+    );
+
+  border-radius:26px;
+
   padding:20px;
-  animation:glow 3s ease infinite;
+
+  backdrop-filter:blur(18px);
+
+  animation:
+    specialGlow 4s ease-in-out infinite;
+}
+
+@keyframes specialGlow{
+  0%,100%{
+    box-shadow:
+      0 20px 55px rgba(0,0,0,.18);
+  }
+
+  50%{
+    box-shadow:
+      0 20px 55px rgba(0,0,0,.18),
+      0 0 40px rgba(139,92,255,.09);
+  }
 }
 
 .specialCard h3{
   margin:0 0 6px;
+
   font-size:20px;
 }
 
 .specialCard p{
-  color:#9b9ba3;
+  color:#9b98a7;
+
   margin:0 0 14px;
+
+  line-height:1.45;
 }
 
 .specialBtn{
   width:100%;
+
   border-radius:17px;
+
   padding:15px;
+
   background:#fff;
+
   color:#111;
+
   font-weight:1000;
+
+  transition:.25s ease;
 }
+
+.specialBtn:hover{
+  transform:translateY(-3px);
+
+  box-shadow:
+    0 12px 30px rgba(255,255,255,.12);
+}
+
+/* =========================================================
+   PLACE CARDS
+========================================================= */
 
 .cards{
   display:grid;
@@ -287,122 +875,301 @@ button{
 }
 
 .placeCard{
-  background:#15151a;
-  border:1px solid #292930;
-  border-radius:22px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(25,23,36,.78),
+      rgba(13,13,19,.78)
+    );
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  border-radius:23px;
+
   padding:18px;
-  animation:floatIn .4s ease both;
+
+  backdrop-filter:blur(15px);
+
+  transition:.3s ease;
+
+  animation:
+    cardIn .5s ease both;
+}
+
+.placeCard:hover{
+  transform:translateY(-4px);
+
+  border-color:
+    rgba(255,255,255,.15);
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.25);
 }
 
 .placeHead{
   display:flex;
+
   justify-content:space-between;
+
   gap:12px;
+
   align-items:flex-start;
 }
 
 .placeName{
   font-size:19px;
+
   font-weight:950;
+
   line-height:1.2;
 }
 
 .placeType{
   white-space:nowrap;
-  font-size:11px;
-  color:#aaaab1;
-  border:1px solid #35353d;
+
+  font-size:10px;
+
+  color:#aaa7b5;
+
+  border:
+    1px solid rgba(255,255,255,.09);
+
   border-radius:999px;
+
   padding:6px 9px;
 }
 
 .placeDesc{
-  color:#9898a0;
-  line-height:1.45;
+  color:#9895a2;
+
+  line-height:1.5;
+
   margin:10px 0 14px;
 }
 
 .placeBtns{
   display:flex;
+
   gap:8px;
+
   flex-wrap:wrap;
+}
+
+.mapBtn,
+.tag{
+  transition:.25s ease;
 }
 
 .mapBtn{
   background:#fff;
+
   color:#111;
+
   padding:10px 13px;
+
   border-radius:13px;
+
   font-size:13px;
+
   font-weight:900;
+
   text-decoration:none;
 }
 
+.mapBtn:hover{
+  transform:translateY(-2px);
+}
+
 .tag{
-  background:#222229;
-  color:#bdbdc4;
+  background:
+    rgba(255,255,255,.07);
+
+  color:#bdbac8;
+
   padding:9px 12px;
+
   border-radius:13px;
+
   font-size:12px;
+
   font-weight:800;
 }
 
+/* =========================================================
+   NOTICE
+========================================================= */
+
+.notice{
+  background:
+    rgba(255,255,255,.035);
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  border-radius:18px;
+
+  padding:14px;
+
+  color:#858290;
+
+  font-size:12px;
+
+  line-height:1.5;
+
+  margin-bottom:18px;
+
+  backdrop-filter:blur(12px);
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
 .empty{
   text-align:center;
+
   padding:50px 20px;
-  color:#85858d;
-  background:#121217;
+
+  color:#858290;
+
+  background:
+    rgba(255,255,255,.035);
+
+  border:
+    1px solid rgba(255,255,255,.06);
+
   border-radius:22px;
 }
 
+/* =========================================================
+   FLOATING BUTTON
+========================================================= */
+
 .floating{
   position:fixed;
+
   right:18px;
   bottom:20px;
+
   z-index:50;
+
   width:52px;
   height:52px;
+
   border-radius:50%;
-  background:#fff;
+
+  background:
+    rgba(255,255,255,.92);
+
   color:#111;
+
   font-size:20px;
+
   font-weight:1000;
-  box-shadow:0 8px 25px rgba(0,0,0,.35);
+
+  box-shadow:
+    0 8px 30px rgba(0,0,0,.4),
+    0 0 25px rgba(139,92,255,.12);
+
+  transition:.25s ease;
 }
+
+.floating:hover{
+  transform:
+    translateY(-5px)
+    rotate(-5deg);
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
 
 .modal{
   position:fixed;
+
   inset:0;
-  background:rgba(0,0,0,.76);
-  backdrop-filter:blur(12px);
+
+  background:
+    rgba(2,2,6,.78);
+
+  backdrop-filter:blur(18px);
+
   z-index:100;
+
   display:none;
+
   align-items:center;
   justify-content:center;
+
   padding:20px;
 }
 
 .modal.show{
   display:flex;
-  animation:pageIn .25s ease;
+
+  animation:
+    modalIn .3s ease;
+}
+
+@keyframes modalIn{
+  from{
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
 }
 
 .modalBox{
   width:min(520px,100%);
-  background:#17171c;
-  border:1px solid #303038;
-  border-radius:28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(31,28,46,.96),
+      rgba(13,13,20,.97)
+    );
+
+  border:
+    1px solid rgba(255,255,255,.11);
+
+  border-radius:30px;
+
   padding:24px;
-  box-shadow:0 30px 100px rgba(0,0,0,.6);
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.7),
+    0 0 50px rgba(139,92,255,.08);
+
+  animation:
+    modalBoxIn .4s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes modalBoxIn{
+  from{
+    transform:
+      translateY(25px)
+      scale(.94);
+  }
+
+  to{
+    transform:
+      translateY(0)
+      scale(1);
+  }
 }
 
 .modalBox h2{
   margin:0 0 8px;
+
   font-size:29px;
 }
 
 .modalBox p{
-  color:#94949c;
+  color:#94919e;
+
   line-height:1.45;
 }
 
@@ -415,129 +1182,296 @@ button{
 }
 
 .input{
-  width:100%;
-  padding:16px;
-  border-radius:17px;
-  background:#0e0e12;
-  border:1px solid #34343c;
-  color:#fff;
-  outline:none;
   margin:15px 0;
 }
 
 .collegeOptions{
   display:grid;
+
   gap:12px;
+
   margin-top:20px;
 }
 
 .collegeOption{
   text-align:left;
-  background:#222229;
+
+  background:
+    rgba(255,255,255,.055);
+
   color:#fff;
-  border:1px solid #34343d;
+
+  border:
+    1px solid rgba(255,255,255,.09);
+
   border-radius:20px;
+
   padding:17px;
-  transition:.2s;
+
+  transition:.25s ease;
+}
+
+.collegeOption:hover{
+  transform:translateX(4px);
 }
 
 .collegeOption.selected{
   background:#fff;
+
   color:#111;
+
   border-color:#fff;
+
+  box-shadow:
+    0 10px 35px rgba(255,255,255,.1);
 }
 
 .collegeOption b{
   display:block;
+
   font-size:17px;
 }
 
 .collegeOption small{
   display:block;
+
   margin-top:5px;
+
   opacity:.7;
 }
 
 .modalActions{
   display:flex;
+
   gap:10px;
+
   margin-top:18px;
 }
 
 .modalActions button{
   flex:1;
+
   padding:14px;
+
   border-radius:15px;
+
   font-weight:900;
 }
 
 .primary{
   background:#fff;
+
   color:#111;
 }
 
 .secondary{
-  background:#292930;
+  background:#292733;
+
   color:#fff;
 }
+
+/* =========================================================
+   BEAUTY MODE V8
+========================================================= */
 
 .beauty{
   text-align:center;
-  padding-top:15vh;
+
+  padding-top:8vh;
+
+  min-height:100vh;
+
+  position:relative;
+}
+
+.beauty::before{
+  content:"";
+
+  position:absolute;
+
+  width:330px;
+  height:330px;
+
+  top:18%;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,79,216,.17),
+      transparent 65%
+    );
+
+  filter:blur(25px);
+
+  pointer-events:none;
+
+  animation:
+    beautyGlow 5s ease-in-out infinite;
+}
+
+@keyframes beautyGlow{
+  0%,100%{
+    transform:
+      translateX(-50%)
+      scale(.9);
+
+    opacity:.6;
+  }
+
+  50%{
+    transform:
+      translateX(-50%)
+      scale(1.25);
+
+    opacity:1;
+  }
 }
 
 .beautyIcon{
+  position:relative;
+
   font-size:70px;
-  margin-bottom:25px;
-  animation:pulse 2s infinite;
+
+  margin:40px 0 30px;
+
+  animation:
+    beautyFloat 2.8s ease-in-out infinite;
+}
+
+@keyframes beautyFloat{
+  0%,100%{
+    transform:
+      translateY(0)
+      rotate(-3deg);
+  }
+
+  50%{
+    transform:
+      translateY(-13px)
+      rotate(3deg);
+  }
 }
 
 .beautyText{
-  font-size:clamp(25px,7vw,44px);
+  position:relative;
+
+  font-size:
+    clamp(25px,7vw,48px);
+
   font-weight:1000;
+
   line-height:1.08;
+
   max-width:700px;
-  margin:0 auto 35px;
+
+  margin:
+    0 auto 35px;
+
+  transition:
+    .35s ease;
+
+  text-shadow:
+    0 0 35px rgba(255,79,216,.12);
 }
 
+/*
+  THE BEAUTY BUTTON IS FIXED SO
+  IT CAN ESCAPE AROUND THE SCREEN.
+*/
+
 .beautyBtn{
+  position:fixed;
+
+  z-index:120;
+
+  left:50%;
+
+  bottom:88px;
+
+  transform:
+    translateX(-50%);
+
   background:#fff;
+
   color:#111;
+
   padding:16px 28px;
+
   border-radius:18px;
+
   font-weight:1000;
+
   min-width:150px;
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.35),
+    0 0 30px rgba(255,255,255,.08);
+
+  transition:
+    left .55s cubic-bezier(.2,.8,.2,1),
+    bottom .55s cubic-bezier(.2,.8,.2,1),
+    transform .35s ease,
+    box-shadow .3s ease;
+}
+
+.beautyBtn:hover{
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.45),
+    0 0 35px rgba(255,79,216,.16);
+}
+
+.beautyBtn:active{
+  transform:
+    translateX(-50%)
+    scale(.92);
 }
 
 .beautyBack{
-  margin-top:16px;
-  background:#25242a;
+  position:relative;
+
+  background:
+    rgba(255,255,255,.07);
+
   color:#fff;
+
   padding:12px 20px;
+
   border-radius:15px;
+
   font-weight:900;
+
+  transition:.25s ease;
 }
+
+.beautyBack:hover{
+  transform:translateY(-3px);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 .footer{
   text-align:center;
-  color:#55555d;
-  font-size:11px;
+
+  color:#555361;
+
+  font-size:10px;
+
   margin-top:50px;
-  letter-spacing:1px;
+
+  letter-spacing:2px;
 }
 
-.notice{
-  background:#111116;
-  border:1px solid #26262d;
-  border-radius:17px;
-  padding:14px;
-  color:#777780;
-  font-size:12px;
-  line-height:1.5;
-  margin-bottom:18px;
-}
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:520px){
+
   .page{
     padding-left:14px;
     padding-right:14px;
@@ -548,7 +1482,7 @@ button{
   }
 
   .category{
-    min-height:92px;
+    min-height:96px;
     border-radius:20px;
   }
 
@@ -561,559 +1495,698 @@ button{
     padding:9px 11px;
     font-size:12px;
   }
+
+  .beautyBtn{
+    bottom:82px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- HORIZON PARTICLES -->
+<div class="horizonParticles">
+  <i></i>
+  <i></i>
+  <i></i>
+  <i></i>
+  <i></i>
+  <i></i>
+  <i></i>
+  <i></i>
+  <i></i>
+</div>
+
 <div id="app" class="app"></div>
 
-<button class="floating" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button
+  class="floating"
+  onclick="window.scrollTo({top:0,behavior:'smooth'})"
+>
+  ↑
+</button>
 
-<!-- SETUP / CHANGE COLLEGE MODAL -->
+
+<!-- =========================================================
+     SETUP / CHANGE COLLEGE MODAL
+========================================================= -->
+
 <div id="modal" class="modal">
+
   <div class="modalBox">
 
     <div id="nameStep" class="setupStep active">
+
       <h2>Who's joining the gang? 👀</h2>
-      <p>First tell us your name. You'll see it throughout the website.</p>
-      <input id="nameInput" class="input" maxlength="30" placeholder="Your name">
+
+      <p>
+        First tell us your name.
+        You'll see it throughout the website.
+      </p>
+
+      <input
+        id="nameInput"
+        class="input"
+        maxlength="30"
+        placeholder="Your name"
+      >
+
       <div class="modalActions">
-        <button class="primary" onclick="goToCollegeStep()">Continue →</button>
+
+        <button
+          class="primary"
+          onclick="goToCollegeStep()"
+        >
+          Continue →
+        </button>
+
       </div>
+
     </div>
 
+
     <div id="collegeStep" class="setupStep">
-      <h2 id="collegeModalTitle">Pick your college 📍</h2>
-      <p id="collegeModalSub">We'll keep your places completely separated.</p>
+
+      <h2 id="collegeModalTitle">
+        Pick your college 📍
+      </h2>
+
+      <p id="collegeModalSub">
+        We'll keep your places completely separated.
+      </p>
 
       <div class="collegeOptions">
-        <button id="nmkrvOption" class="collegeOption" onclick="chooseCollege('NMKRV')">
+
+        <button
+          id="nmkrvOption"
+          class="collegeOption"
+          onclick="chooseCollege('NMKRV')"
+        >
           <b>🎓 NMKRV</b>
-          <small>Jayanagar • Jayanagar-only planner</small>
+
+          <small>
+            Jayanagar • Jayanagar-only planner
+          </small>
         </button>
 
-        <button id="apsOption" class="collegeOption" onclick="chooseCollege('Aps')">
+
+        <button
+          id="apsOption"
+          class="collegeOption"
+          onclick="chooseCollege('Aps')"
+        >
           <b>🎓 Aps</b>
-          <small>N.R. Colony • Basavanagudi-only planner</small>
+
+          <small>
+            N.R. Colony • Basavanagudi-only planner
+          </small>
         </button>
+
       </div>
+
 
       <div class="modalActions">
-        <button class="secondary" onclick="cancelCollegeChange()">Cancel</button>
-        <button class="primary" onclick="saveCollege()">Let's Go 🚀</button>
+
+        <button
+          class="secondary"
+          onclick="cancelCollegeChange()"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="primary"
+          onclick="saveCollege()"
+        >
+          Let's Go 🚀
+        </button>
+
       </div>
+
     </div>
 
   </div>
+
 </div>
 
+
 <script>
+
 /* =========================================================
    WHERE'S THE GANG?
-   FINAL UJV BUILD
-   ========================================================= */
+   V8 • HORIZON
+========================================================= */
 
-const APP_VERSION = "1.5215-UJV-FINAL";
-const STORAGE_KEY = "wheres_the_gang_final_v3";
+const APP_VERSION="V8 • HORIZON";
 
-/* -------------------------
+const STORAGE_KEY=
+  "wheres_the_gang_final_v8";
+
+
+/* =========================================================
    STATE
-------------------------- */
+========================================================= */
 
-let selectedName = "";
-let selectedCollege = "";
-let temporaryCollege = "";
-let collegeChangeMode = false;
-let returnPage = "home";
-let currentPage = "home";
-let currentCategory = "";
-let beautyStep = 0;
-let exploreFilter = "all";
+let selectedName="";
+let selectedCollege="";
 
-/* -------------------------
+let temporaryCollege="";
+
+let collegeChangeMode=false;
+
+let returnPage="home";
+
+let currentPage="home";
+
+let currentCategory="";
+
+let beautyStep=0;
+
+let exploreFilter="all";
+
+
+/* =========================================================
    SAFE HTML
-------------------------- */
+========================================================= */
 
 function escapeHtml(value){
+
   return String(value ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+
 }
 
+
 /* =========================================================
-   LOCATION-LOCKED DATA
-   IMPORTANT:
-   NMKRV = JAYANAGAR ONLY
-   APS = BASAVANAGUDI / N.R. COLONY ONLY
-   ========================================================= */
+   LOCATION LOCKED DATA
+========================================================= */
 
-const nmkrvPlanner = {
+const nmkrvPlanner={
 
-  gaming:[
-    ["The G.O.A.T Gaming Cafe","Jayanagar","Premium gaming café / esports-style hangout in Jayanagar.","PC gaming • console vibe • squad sessions"],
-    ["1vX Gaming | Jayanagar","Jayanagar 9th Block","Gaming hangout with PC, console and simulator-style activities.","PC • PS5 • simulators • squad"],
-    ["Amoeba Jayanagar","Jayanagar","Classic entertainment option for arcade/bowling-style fun.","Arcade • bowling-style outing"],
-    ["Esc Gaming Cafe","Jayanagar","Local gaming option previously listed among Jayanagar things to do.","Gaming • friends"],
-    ["Now Boarding Café","Jayanagar 1st/3rd Block","Board-game café with a large tabletop collection.","Board games • food • groups"],
-    ["Funzy Cafe","Jayanagar 5th Block","Creative café with painting, crafts, board games and activities.","Games • art • activities"]
-  ],
+gaming:[
+["The G.O.A.T Gaming Cafe","Jayanagar","Premium gaming café / esports-style hangout in Jayanagar.","PC gaming • console vibe • squad sessions"],
+["1vX Gaming | Jayanagar","Jayanagar 9th Block","Gaming hangout with PC, console and simulator-style activities.","PC • PS5 • simulators • squad"],
+["Amoeba Jayanagar","Jayanagar","Classic entertainment option for arcade/bowling-style fun.","Arcade • bowling-style outing"],
+["Esc Gaming Cafe","Jayanagar","Local gaming option previously listed among Jayanagar things to do.","Gaming • friends"],
+["Now Boarding Café","Jayanagar 1st/3rd Block","Board-game café with a large tabletop collection.","Board games • food • groups"],
+["Funzy Cafe","Jayanagar 5th Block","Creative café with painting, crafts, board games and activities.","Games • art • activities"]
+],
 
-  cinema:[
-    ["Jayanagar cinema listings","Jayanagar","Check the current movie showtimes around Jayanagar before heading out.","Movies • friends"],
-    ["Jayanagar 4th Block movie outing","Jayanagar 4th Block","Plan a food + movie hangout around the commercial core.","Movie • food • shopping"],
-    ["Jayanagar evening movie plan","Jayanagar","Easy combo: movie + café + dessert in Jayanagar.","Movie • café • dessert"],
-    ["Jayanagar weekend movie plan","Jayanagar","Keep the whole outing inside Jayanagar instead of crossing areas.","Weekend • movie"]
-  ],
+cinema:[
+["Jayanagar cinema listings","Jayanagar","Check the current movie showtimes around Jayanagar before heading out.","Movies • friends"],
+["Jayanagar 4th Block movie outing","Jayanagar 4th Block","Plan a food + movie hangout around the commercial core.","Movie • food • shopping"],
+["Jayanagar evening movie plan","Jayanagar","Easy combo: movie + café + dessert in Jayanagar.","Movie • café • dessert"],
+["Jayanagar weekend movie plan","Jayanagar","Keep the whole outing inside Jayanagar instead of crossing areas.","Weekend • movie"]
+],
 
-  shopping:[
-    ["Jayanagar Shopping Complex","Jayanagar 4th Block","Classic Jayanagar shopping hub with shops, accessories, clothes and snacks nearby.","Shopping • street market"],
-    ["Jayanagar Market","Jayanagar 4th Block","Busy local shopping district around the 4th Block area.","Market • street shopping"],
-    ["BDA Complex Jayanagara","Jayanagar 4th Block","Long-running commercial and shopping destination.","Shopping • local market"],
-    ["Jayanagar 4th Block","Jayanagar","The commercial heart of Jayanagar for browsing, snacks and shopping.","Shopping • food"],
-    ["Jayanagar 5th Block shopping streets","Jayanagar 5th Block","Smaller shops and local stores around the block.","Shopping • browsing"],
-    ["Jayanagar 9th Block shopping area","Jayanagar 9th Block","Local shopping around the 9th Block grid.","Shopping • essentials"]
-  ],
+shopping:[
+["Jayanagar Shopping Complex","Jayanagar 4th Block","Classic Jayanagar shopping hub with shops, accessories, clothes and snacks nearby.","Shopping • street market"],
+["Jayanagar Market","Jayanagar 4th Block","Busy local shopping district around the 4th Block area.","Market • street shopping"],
+["BDA Complex Jayanagara","Jayanagar 4th Block","Long-running commercial and shopping destination.","Shopping • local market"],
+["Jayanagar 4th Block","Jayanagar","The commercial heart of Jayanagar for browsing, snacks and shopping.","Shopping • food"],
+["Jayanagar 5th Block shopping streets","Jayanagar 5th Block","Smaller shops and local stores around the block.","Shopping • browsing"],
+["Jayanagar 9th Block shopping area","Jayanagar 9th Block","Local shopping around the 9th Block grid.","Shopping • essentials"]
+],
 
-  food:[
-    ["Taaza Thindi","Jayanagar","Popular Jayanagar breakfast/snack stop.","South Indian • budget"],
-    ["Hari Super Sandwich Jayanagar","Jayanagar","Quick sandwich-focused food stop.","Quick bite • friends"],
-    ["Upahara Darshini","Jayanagar","Local South Indian quick-service option.","Breakfast • snacks"],
-    ["Chutney Chang Jayanagar","Jayanagar","Jayanagar food option for a proper group meal.","Meal • friends"],
-    ["Cool Joint","Jayanagar","Classic quick-bite spot known for sandwiches, milkshakes and ice cream.","Sandwiches • shakes"],
-    ["The Lassi Park Jayanagar","Jayanagar","Casual lassi and snack stop.","Lassi • snacks"],
-    ["Ganesh Fruit Juice Centre","Jayanagar","Local juice and quick-refreshment stop.","Juices • quick stop"],
-    ["MTR area food walk","Jayanagar","Traditional Bengaluru food outing within the Jayanagar zone.","South Indian • food walk"]
-  ],
+food:[
+["Taaza Thindi","Jayanagar","Popular Jayanagar breakfast/snack stop.","South Indian • budget"],
+["Hari Super Sandwich Jayanagar","Jayanagar","Quick sandwich-focused food stop.","Quick bite • friends"],
+["Upahara Darshini","Jayanagar","Local South Indian quick-service option.","Breakfast • snacks"],
+["Chutney Chang Jayanagar","Jayanagar","Jayanagar food option for a proper group meal.","Meal • friends"],
+["Cool Joint","Jayanagar","Classic quick-bite spot known for sandwiches, milkshakes and ice cream.","Sandwiches • shakes"],
+["The Lassi Park Jayanagar","Jayanagar","Casual lassi and snack stop.","Lassi • snacks"],
+["Ganesh Fruit Juice Centre","Jayanagar","Local juice and quick-refreshment stop.","Juices • quick stop"],
+["MTR area food walk","Jayanagar","Traditional Bengaluru food outing within the Jayanagar zone.","South Indian • food walk"]
+],
 
-  cafes:[
-    ["Toffee And Talk","Jayanagar","Cozy specialty café suitable for conversations and longer hangs.","Coffee • café"],
-    ["Blue Tokai Coffee Roasters | Jayanagar","Jayanagar","Specialty coffee café in the Jayanagar commercial grid.","Coffee • study/hangout"],
-    ["Snuzzles Cafe Jayanagar","Jayanagar 4th Block","Vegetarian café with coffee and comfort food.","Coffee • food"],
-    ["Third Wave Coffee - Jaya Nagar","Jayanagar 5th Block","Specialty coffee café with indoor/outdoor seating.","Coffee • chill"],
-    ["Sypp - Everyday Specialty Coffee","Jayanagar 4th Block","Compact specialty coffee spot.","Coffee • snacks"],
-    ["Iris Cafe and Kitchen - Jayanagar","Jayanagar 4th/5th Block","Multi-cuisine café-restaurant for a longer hangout.","Café • meal"],
-    ["Block Two Coffee","Jayanagar 2nd Block","Small specialty coffee bar.","Coffee • quiet"],
-    ["Ground Up Coffee & Roastery","Jayanagar","Specialty-focused café and roastery.","Coffee • chill"],
-    ["KAHALE - Filter Kaapi Bar","Jayanagar 4th Block","South Indian filter-kaapi focused café.","Filter coffee • old Bengaluru vibe"],
-    ["Isobel Coffee House","Jayanagar 2nd Block","Boutique coffee and snacks hangout.","Coffee • snacks"]
-  ],
+cafes:[
+["Toffee And Talk","Jayanagar","Cozy specialty café suitable for conversations and longer hangs.","Coffee • café"],
+["Blue Tokai Coffee Roasters | Jayanagar","Jayanagar","Specialty coffee café in the Jayanagar commercial grid.","Coffee • study/hangout"],
+["Snuzzles Cafe Jayanagar","Jayanagar 4th Block","Vegetarian café with coffee and comfort food.","Coffee • food"],
+["Third Wave Coffee - Jaya Nagar","Jayanagar 5th Block","Specialty coffee café with indoor/outdoor seating.","Coffee • chill"],
+["Sypp - Everyday Specialty Coffee","Jayanagar 4th Block","Compact specialty coffee spot.","Coffee • snacks"],
+["Iris Cafe and Kitchen - Jayanagar","Jayanagar 4th/5th Block","Multi-cuisine café-restaurant for a longer hangout.","Café • meal"],
+["Block Two Coffee","Jayanagar 2nd Block","Small specialty coffee bar.","Coffee • quiet"],
+["Ground Up Coffee & Roastery","Jayanagar","Specialty-focused café and roastery.","Coffee • chill"],
+["KAHALE - Filter Kaapi Bar","Jayanagar 4th Block","South Indian filter-kaapi focused café.","Filter coffee • old Bengaluru vibe"],
+["Isobel Coffee House","Jayanagar 2nd Block","Boutique coffee and snacks hangout.","Coffee • snacks"]
+],
 
-  desserts:[
-    ["SMOOR Lounge - Jayanagar","Jayanagar 5th Block","Dessert-forward café and chocolate boutique.","Chocolate • cakes • desserts"],
-    ["Huber & Holly","Jayanagar 4th Block","Ice cream, sundaes and dessert stop.","Ice cream • desserts"],
-    ["Corner House - Jayanagar 5th Block","Jayanagar 5th Block","Classic Bengaluru ice-cream stop.","Ice cream • sundaes"],
-    ["Cre'me & Co","Jayanagar 9th Block","Dessert café with gelato, waffles and pastries.","Gelato • waffles"],
-    ["Sri Venkateshwara Sweet-Meat Stall","Jayanagar 4th Block","Traditional sweets and quick snacks.","Sweets • snacks"],
-    ["Jayanagar dessert walk","Jayanagar 4th/5th Block","Pick a dessert place and walk through the nearby commercial streets.","Dessert • walk"]
-  ],
+desserts:[
+["SMOOR Lounge - Jayanagar","Jayanagar 5th Block","Dessert-forward café and chocolate boutique.","Chocolate • cakes • desserts"],
+["Huber & Holly","Jayanagar 4th Block","Ice cream, sundaes and dessert stop.","Ice cream • desserts"],
+["Corner House - Jayanagar 5th Block","Jayanagar 5th Block","Classic Bengaluru ice-cream stop.","Ice cream • sundaes"],
+["Cre'me & Co","Jayanagar 9th Block","Dessert café with gelato, waffles and pastries.","Gelato • waffles"],
+["Sri Venkateshwara Sweet-Meat Stall","Jayanagar 4th Block","Traditional sweets and quick snacks.","Sweets • snacks"],
+["Jayanagar dessert walk","Jayanagar 4th/5th Block","Pick a dessert place and walk through the nearby commercial streets.","Dessert • walk"]
+],
 
-  parks:[
-    ["Yediyuru Lake Park","Jayanagar 6th Block","Lake park with walking space and outdoor recreation.","Walk • lake • park"],
-    ["Madhavan Park","Jayanagar","Green neighbourhood park suitable for a relaxed walk.","Park • walk"],
-    ["Nandanvana Children's Park","Jayanagar","Playground-style green space in Jayanagar.","Park • casual outing"],
-    ["Putha Narasimhachar Park","Jayanagar","Neighbourhood park for a simple outdoor break.","Park • walk"],
-    ["LIC Colony Park","Jayanagar","Local green space for a short break.","Park • chill"],
-    ["Vishnuvardhan Park","Jayanagar","Neighbourhood park option inside the Jayanagar area.","Park • walk"],
-    ["Jayanagar 4th Block Park","Jayanagar 4th Block","Local park for a quick reset from shopping streets.","Park • break"],
-    ["Jayanagar 5th Block Pu.Thi.Na Park","Jayanagar 5th Block","Local BBMP park with greenery and recreation space.","Park • outdoors"]
-  ],
+parks:[
+["Yediyuru Lake Park","Jayanagar 6th Block","Lake park with walking space and outdoor recreation.","Walk • lake • park"],
+["Madhavan Park","Jayanagar","Green neighbourhood park suitable for a relaxed walk.","Park • walk"],
+["Nandanvana Children's Park","Jayanagar","Playground-style green space in Jayanagar.","Park • casual outing"],
+["Putha Narasimhachar Park","Jayanagar","Neighbourhood park for a simple outdoor break.","Park • walk"],
+["LIC Colony Park","Jayanagar","Local green space for a short break.","Park • chill"],
+["Vishnuvardhan Park","Jayanagar","Neighbourhood park option inside the Jayanagar area.","Park • walk"],
+["Jayanagar 4th Block Park","Jayanagar 4th Block","Local park for a quick reset from shopping streets.","Park • break"],
+["Jayanagar 5th Block Pu.Thi.Na Park","Jayanagar 5th Block","Local BBMP park with greenery and recreation space.","Park • outdoors"]
+],
 
-  nature:[
-    ["Jayanagara Kiru Kādu","Jayanagar","Mini-forest style green escape for a quiet nature break.","Greenery • walk"],
-    ["Yediyuru Lake greenery","Jayanagar 6th Block","Urban lake ecosystem and surrounding greenery.","Nature • birds"],
-    ["Madhavan Park greenery","Jayanagar","Tree-filled neighbourhood green space.","Nature • walk"],
-    ["Jayanagar tree-lined blocks","Jayanagar","Slow walk through Jayanagar's tree-lined residential streets.","Nature • photography"],
-    ["Laxman Rao Boulevard green stretch","Jayanagar","Long green residential stretch for a calm walk.","Greenery • walk"]
-  ],
+nature:[
+["Jayanagara Kiru Kādu","Jayanagar","Mini-forest style green escape for a quiet nature break.","Greenery • walk"],
+["Yediyuru Lake greenery","Jayanagar 6th Block","Urban lake ecosystem and surrounding greenery.","Nature • birds"],
+["Madhavan Park greenery","Jayanagar","Tree-filled neighbourhood green space.","Nature • walk"],
+["Jayanagar tree-lined blocks","Jayanagar","Slow walk through Jayanagar's tree-lined residential streets.","Nature • photography"],
+["Laxman Rao Boulevard green stretch","Jayanagar","Long green residential stretch for a calm walk.","Greenery • walk"]
+],
 
-  lakes:[
-    ["Yediyuru Lake","Jayanagar 6th Block","Jayanagar's main lake hangout with walking and boating options.","Lake • walk"],
-    ["Yediyuru Lake Park","Jayanagar 6th Block","Park around the lake for an evening outing.","Lake • park"],
-    ["Shantala Boating Centre","Yediyuru, Jayanagar","Paddle-boating option at Yediyuru Lake.","Boating • lake"],
-    ["Yediyuru Lake photo walk","Jayanagar 6th Block","Golden-hour photography and walking around the lake.","Photos • sunset"]
-  ],
+lakes:[
+["Yediyuru Lake","Jayanagar 6th Block","Jayanagar's main lake hangout with walking and boating options.","Lake • walk"],
+["Yediyuru Lake Park","Jayanagar 6th Block","Park around the lake for an evening outing.","Lake • park"],
+["Shantala Boating Centre","Yediyuru, Jayanagar","Paddle-boating option at Yediyuru Lake.","Boating • lake"],
+["Yediyuru Lake photo walk","Jayanagar 6th Block","Golden-hour photography and walking around the lake.","Photos • sunset"]
+],
 
-  hills:[
-    ["Ragigudda hillock","Jayanagar 9th Block","Hillock-style outing around Ragigudda.","Hillock • views"],
-    ["Ragigudda temple hill area","Jayanagar 9th Block","Walk around the hillock and temple surroundings.","Hillock • heritage"],
-    ["Ragigudda viewpoint walk","Jayanagar 9th Block","Short uphill walk and neighbourhood views.","Walk • viewpoint"],
-    ["Jayanagar elevated green walks","Jayanagar","Easy local walking routes around Jayanagar's raised/green stretches.","Walk • outdoors"]
-  ],
+hills:[
+["Ragigudda hillock","Jayanagar 9th Block","Hillock-style outing around Ragigudda.","Hillock • views"],
+["Ragigudda temple hill area","Jayanagar 9th Block","Walk around the hillock and temple surroundings.","Hillock • heritage"],
+["Ragigudda viewpoint walk","Jayanagar 9th Block","Short uphill walk and neighbourhood views.","Walk • viewpoint"],
+["Jayanagar elevated green walks","Jayanagar","Easy local walking routes around Jayanagar's raised/green stretches.","Walk • outdoors"]
+],
 
-  temples:[
-    ["Ragigudda Sri Prasanna Anjaneyaswamy Temple","Jayanagar 9th Block","Major Jayanagar temple on/around Ragigudda hillock.","Temple • heritage"],
-    ["Shri Karya Siddhi Anjaneya Temple","Jayanagar","Hanuman temple option in the Jayanagar area.","Temple • peaceful"],
-    ["Jayanagar temple streets","Jayanagar","Explore the smaller local temples around the blocks.","Temple • walk"],
-    ["Jayanagar 4th Block local shrines","Jayanagar 4th Block","Small neighbourhood religious sites for a quiet stop.","Temple • local"]
-  ],
+temples:[
+["Ragigudda Sri Prasanna Anjaneyaswamy Temple","Jayanagar 9th Block","Major Jayanagar temple on/around Ragigudda hillock.","Temple • heritage"],
+["Shri Karya Siddhi Anjaneya Temple","Jayanagar","Hanuman temple option in the Jayanagar area.","Temple • peaceful"],
+["Jayanagar temple streets","Jayanagar","Explore the smaller local temples around the blocks.","Temple • walk"],
+["Jayanagar 4th Block local shrines","Jayanagar 4th Block","Small neighbourhood religious sites for a quiet stop.","Temple • local"]
+],
 
-  science:[
-    ["ParSEC-Jayanagar by Param","Jayanagar 7th Block","Interactive science centre with themed galleries and hands-on experiences.","Science • interactive"],
-    ["ParSEC science session","Jayanagar 7th Block","Book a science session for a different kind of group outing.","Science • learning"],
-    ["Jayanagar science photo challenge","Jayanagar","Turn a Jayanagar walk into a mini observation/science challenge.","Science • challenge"],
-    ["Yediyuru ecology walk","Jayanagar 6th Block","Observe urban lake ecology, plants and birds.","Nature • science"]
-  ],
+science:[
+["ParSEC-Jayanagar by Param","Jayanagar 7th Block","Interactive science centre with themed galleries and hands-on experiences.","Science • interactive"],
+["ParSEC science session","Jayanagar 7th Block","Book a science session for a different kind of group outing.","Science • learning"],
+["Jayanagar science photo challenge","Jayanagar","Turn a Jayanagar walk into a mini observation/science challenge.","Science • challenge"],
+["Yediyuru ecology walk","Jayanagar 6th Block","Observe urban lake ecology, plants and birds.","Nature • science"]
+],
 
-  photos:[
-    ["Yediyuru Lake","Jayanagar 6th Block","Water, reflections and greenery make this an easy photo stop.","Photography"],
-    ["Ragigudda hillock","Jayanagar 9th Block","Hillock and temple-area photography.","Photography"],
-    ["Jayanagar 4th Block streets","Jayanagar 4th Block","Busy market streets, signs and old Bengaluru details.","Street photography"],
-    ["Jayanagar tree-lined roads","Jayanagar","Classic residential Bengaluru visuals.","Street photography"],
-    ["Jayanagar cafés","Jayanagar","Café interiors and food photography.","Café photos"]
-  ],
+photos:[
+["Yediyuru Lake","Jayanagar 6th Block","Water, reflections and greenery make this an easy photo stop.","Photography"],
+["Ragigudda hillock","Jayanagar 9th Block","Hillock and temple-area photography.","Photography"],
+["Jayanagar 4th Block streets","Jayanagar 4th Block","Busy market streets, signs and old Bengaluru details.","Street photography"],
+["Jayanagar tree-lined roads","Jayanagar","Classic residential Bengaluru visuals.","Street photography"],
+["Jayanagar cafés","Jayanagar","Café interiors and food photography.","Café photos"]
+],
 
-  walk:[
-    ["Yediyuru Lake walking loop","Jayanagar 6th Block","Easy lake-side walking route.","Walk • lake"],
-    ["Jayanagar 4th Block market walk","Jayanagar 4th Block","Shopping + snacks + street walk.","Walk • shopping"],
-    ["Ragigudda hill walk","Jayanagar 9th Block","Short uphill walk around the hillock.","Walk • hill"],
-    ["Jayanagar 5th Block café walk","Jayanagar 5th Block","Walk between cafés and nearby streets.","Walk • cafés"],
-    ["Laxman Rao Boulevard walk","Jayanagar","Longer relaxed residential walk.","Walk • greenery"]
-  ],
+walk:[
+["Yediyuru Lake walking loop","Jayanagar 6th Block","Easy lake-side walking route.","Walk • lake"],
+["Jayanagar 4th Block market walk","Jayanagar 4th Block","Shopping + snacks + street walk.","Walk • shopping"],
+["Ragigudda hill walk","Jayanagar 9th Block","Short uphill walk around the hillock.","Walk • hill"],
+["Jayanagar 5th Block café walk","Jayanagar 5th Block","Walk between cafés and nearby streets.","Walk • cafés"],
+["Laxman Rao Boulevard walk","Jayanagar","Longer relaxed residential walk.","Walk • greenery"]
+],
 
-  sports:[
-    ["Amoeba Jayanagar","Jayanagar","Bowling/arcade-style entertainment option.","Bowling • arcade"],
-    ["Yediyuru Lake open recreation","Jayanagar 6th Block","Outdoor recreational space around the lake.","Outdoor • recreation"],
-    ["Jayanagar parks","Jayanagar","Use local parks for casual outdoor games.","Outdoor • games"],
-    ["Jayanagar block grounds","Jayanagar","Neighbourhood grounds for casual group activity.","Sports • outdoors"],
-    ["Jayanagar walking challenge","Jayanagar","Create your own walking route through the blocks.","Walking • fitness"]
-  ],
+sports:[
+["Amoeba Jayanagar","Jayanagar","Bowling/arcade-style entertainment option.","Bowling • arcade"],
+["Yediyuru Lake open recreation","Jayanagar 6th Block","Outdoor recreational space around the lake.","Outdoor • recreation"],
+["Jayanagar parks","Jayanagar","Use local parks for casual outdoor games.","Outdoor • games"],
+["Jayanagar block grounds","Jayanagar","Neighbourhood grounds for casual group activity.","Sports • outdoors"],
+["Jayanagar walking challenge","Jayanagar","Create your own walking route through the blocks.","Walking • fitness"]
+],
 
-  books:[
-    ["Sapna Book House - Jayanagar","Jayanagar","Books, stationery and study material in the Jayanagar area.","Books • stationery"],
-    ["Jayanagar public library","Jayanagar","Local reading/library option.","Books • reading"],
-    ["M.N. Krishna Rao-style reading plan — Jayanagar alternative","Jayanagar","Quiet reading break using a Jayanagar park.","Reading • outdoors"],
-    ["Jayanagar book + café day","Jayanagar","Book browsing followed by a café stop.","Books • café"]
-  ],
+books:[
+["Sapna Book House - Jayanagar","Jayanagar","Books, stationery and study material in the Jayanagar area.","Books • stationery"],
+["Jayanagar public library","Jayanagar","Local reading/library option.","Books • reading"],
+["M.N. Krishna Rao-style reading plan — Jayanagar alternative","Jayanagar","Quiet reading break using a Jayanagar park.","Reading • outdoors"],
+["Jayanagar book + café day","Jayanagar","Book browsing followed by a café stop.","Books • café"]
+],
 
-  art:[
-    ["Funzy Cafe","Jayanagar 5th Block","Painting, crafts, art activities and board games.","Art • activities"],
-    ["The Firefly Terrace","Jayanagar 2nd Block","Rooftop creative workshop venue with activities such as pottery/mosaic-style sessions.","Art • workshop"],
-    ["Jayanagar street photography","Jayanagar","Use the old/new mix of Jayanagar as an urban art walk.","Photography • art"],
-    ["Jayanagar craft shopping","Jayanagar","Browse local craft and stationery stores for DIY supplies.","Crafts • shopping"]
-  ],
+art:[
+["Funzy Cafe","Jayanagar 5th Block","Painting, crafts, art activities and board games.","Art • activities"],
+["The Firefly Terrace","Jayanagar 2nd Block","Rooftop creative workshop venue with activities such as pottery/mosaic-style sessions.","Art • workshop"],
+["Jayanagar street photography","Jayanagar","Use the old/new mix of Jayanagar as an urban art walk.","Photography • art"],
+["Jayanagar craft shopping","Jayanagar","Browse local craft and stationery stores for DIY supplies.","Crafts • shopping"]
+],
 
-  activities:[
-    ["Funzy Cafe","Jayanagar 5th Block","Painting, craft, board games, RC activities and entertainment.","Art • games"],
-    ["Now Boarding Café","Jayanagar","Tabletop gaming for a longer group session.","Board games"],
-    ["ParSEC-Jayanagar by Param","Jayanagar 7th Block","Interactive science experience.","Science • interactive"],
-    ["Amoeba Jayanagar","Jayanagar","Arcade/bowling-style group entertainment.","Games • fun"],
-    ["The G.O.A.T Gaming Cafe","Jayanagar","Gaming session with the gang.","Gaming"],
-    ["1vX Gaming | Jayanagar","Jayanagar 9th Block","Gaming + simulator-style hangout.","Gaming"],
-    ["Shantala Boating Centre","Yediyur, Jayanagar","Paddle boating at Yediyur Lake.","Boating"],
-    ["The Firefly Terrace","Jayanagar 2nd Block","Creative rooftop workshop activities.","Art • workshop"]
-  ],
+activities:[
+["Funzy Cafe","Jayanagar 5th Block","Painting, craft, board games, RC activities and entertainment.","Art • games"],
+["Now Boarding Café","Jayanagar","Tabletop gaming for a longer group session.","Board games"],
+["ParSEC-Jayanagar by Param","Jayanagar 7th Block","Interactive science experience.","Science • interactive"],
+["Amoeba Jayanagar","Jayanagar","Arcade/bowling-style group entertainment.","Games • fun"],
+["The G.O.A.T Gaming Cafe","Jayanagar","Gaming session with the gang.","Gaming"],
+["1vX Gaming | Jayanagar","Jayanagar 9th Block","Gaming + simulator-style hangout.","Gaming"],
+["Shantala Boating Centre","Yediyur, Jayanagar","Paddle boating at Yediyur Lake.","Boating"],
+["The Firefly Terrace","Jayanagar 2nd Block","Creative rooftop workshop activities.","Art • workshop"]
+],
 
-  sunset:[
-    ["Yediyuru Lake","Jayanagar 6th Block","Lake-side evening atmosphere and photos.","Sunset • lake"],
-    ["Ragigudda hillock","Jayanagar 9th Block","Elevated evening views around the hillock.","Sunset • hill"],
-    ["Jayanagar parks","Jayanagar","Relaxed evening greenery.","Sunset • park"],
-    ["Jayanagar tree-lined streets","Jayanagar","Slow evening walk through the blocks.","Sunset • walk"]
-  ],
+sunset:[
+["Yediyuru Lake","Jayanagar 6th Block","Lake-side evening atmosphere and photos.","Sunset • lake"],
+["Ragigudda hillock","Jayanagar 9th Block","Elevated evening views around the hillock.","Sunset • hill"],
+["Jayanagar parks","Jayanagar","Relaxed evening greenery.","Sunset • park"],
+["Jayanagar tree-lined streets","Jayanagar","Slow evening walk through the blocks.","Sunset • walk"]
+],
 
-  metro:[
-    ["Jayanagara Metro Station","Jayanagar","Main Green Line access for Jayanagar outings.","Green Line"],
-    ["Rashtreeya Vidyalaya Road Metro Station","Jayanagar","Green Line access serving the Jayanagar side.","Green Line"],
-    ["South End Circle Metro Station","Jayanagar-side access","Useful Green Line access around the Jayanagar edge.","Green Line"]
-  ],
+metro:[
+["Jayanagara Metro Station","Jayanagar","Main Green Line access for Jayanagar outings.","Green Line"],
+["Rashtreeya Vidyalaya Road Metro Station","Jayanagar","Green Line access serving the Jayanagar side.","Green Line"],
+["South End Circle Metro Station","Jayanagar-side access","Useful Green Line access around the Jayanagar edge.","Green Line"]
+],
 
-  nearby:[
-    ["Jayanagar 4th Block","Jayanagar","Shopping, food, cafés and market energy.","Jayanagar"],
-    ["Jayanagar 5th Block","Jayanagar","Cafés, desserts, shops and activities.","Jayanagar"],
-    ["Jayanagar 6th Block / Yediyur","Jayanagar","Lake, park and boating side.","Jayanagar"],
-    ["Jayanagar 7th Block","Jayanagar","ParSEC and local cafés/streets.","Jayanagar"],
-    ["Jayanagar 9th Block","Jayanagar","Ragigudda, gaming and local food options.","Jayanagar"]
-  ]
+nearby:[
+["Jayanagar 4th Block","Jayanagar","Shopping, food, cafés and market energy.","Jayanagar"],
+["Jayanagar 5th Block","Jayanagar","Cafés, desserts, shops and activities.","Jayanagar"],
+["Jayanagar 6th Block / Yediyur","Jayanagar","Lake, park and boating side.","Jayanagar"],
+["Jayanagar 7th Block","Jayanagar","ParSEC and local cafés/streets.","Jayanagar"],
+["Jayanagar 9th Block","Jayanagar","Ragigudda, gaming and local food options.","Jayanagar"]
+]
+
 };
 
 
 /* =========================================================
-   APS / BASAVANAGUDI ONLY
-   ========================================================= */
+   APS / BASAVANAGUDI
+========================================================= */
 
-const apsPlanner = {
+const apsPlanner={
 
-  gaming:[
-    ["Echo Esports Gaming Cafe","Vishweshwarapura / Basavanagudi","Esports-style gaming café near National High School Road.","PC gaming • esports"],
-    ["Board 4 Bored","D.V. Gundappa Road, Basavanagudi","Board-game café with a large tabletop collection.","Board games • groups"],
-    ["DBR Splendid Game Station","Gandhi Bazaar, Basavanagudi","Legacy gaming-station listing with arcade/VR-style activities.","⚠️ Verify current status"],
-    ["Basavanagudi board-game hangout","Basavanagudi","Use Board 4 Bored for a dedicated tabletop session.","Board games"]
-  ],
+gaming:[
+["Echo Esports Gaming Cafe","Vishweshwarapura / Basavanagudi","Esports-style gaming café near National High School Road.","PC gaming • esports"],
+["Board 4 Bored","D.V. Gundappa Road, Basavanagudi","Board-game café with a large tabletop collection.","Board games • groups"],
+["DBR Splendid Game Station","Gandhi Bazaar, Basavanagudi","Legacy gaming-station listing with arcade/VR-style activities.","⚠️ Verify current status"],
+["Basavanagudi board-game hangout","Basavanagudi","Use Board 4 Bored for a dedicated tabletop session.","Board games"]
+],
 
-  cinema:[
-    ["Prasanna Theatre","Basavanagudi area","Local single-screen movie outing option to check for current shows.","Movies"],
-    ["Basavanagudi movie + food plan","Basavanagudi","Movie followed by Gandhi Bazaar/VV Puram food.","Movie • food"],
-    ["Gandhi Bazaar movie evening","Basavanagudi","Keep the outing within the Basavanagudi heritage zone.","Movie • walk"],
-    ["Basavanagudi weekend cinema plan","Basavanagudi","Movie + food street + dessert route.","Movie • food"]
-  ],
+cinema:[
+["Prasanna Theatre","Basavanagudi area","Local single-screen movie outing option to check for current shows.","Movies"],
+["Basavanagudi movie + food plan","Basavanagudi","Movie followed by Gandhi Bazaar/VV Puram food.","Movie • food"],
+["Gandhi Bazaar movie evening","Basavanagudi","Keep the outing within the Basavanagudi heritage zone.","Movie • walk"],
+["Basavanagudi weekend cinema plan","Basavanagudi","Movie + food street + dessert route.","Movie • food"]
+],
 
-  shopping:[
-    ["Gandhi Bazaar","Basavanagudi","Classic Basavanagudi market area for shopping and browsing.","Market • shopping"],
-    ["Gopalan Arcade area","Basavanagudi side","Shopping/entertainment option around the local commercial zone.","Shopping"],
-    ["D.V. Gundappa Road shops","Basavanagudi","Browse local stores around DVG Road.","Shopping • walk"],
-    ["VV Puram local shops","Basavanagudi / Vishweshwarapura","Small local shopping stops around Food Street.","Shopping • food"]
-  ],
+shopping:[
+["Gandhi Bazaar","Basavanagudi","Classic Basavanagudi market area for shopping and browsing.","Market • shopping"],
+["Gopalan Arcade area","Basavanagudi side","Shopping/entertainment option around the local commercial zone.","Shopping"],
+["D.V. Gundappa Road shops","Basavanagudi","Browse local stores around DVG Road.","Shopping • walk"],
+["VV Puram local shops","Basavanagudi / Vishweshwarapura","Small local shopping stops around Food Street.","Shopping • food"]
+],
 
-  food:[
-    ["Vidyarthi Bhavan","Gandhi Bazaar, Basavanagudi","Iconic South Indian food stop, especially known for masala dosa.","South Indian • iconic"],
-    ["VV Puram Food Street","Vishweshwarapura","Street-food stretch with many vegetarian food stalls.","Food street"],
-    ["Gandhi Bazaar food walk","Basavanagudi","Explore classic snacks and local eateries around Gandhi Bazaar.","Food • walk"],
-    ["Gokul Veg","DVG Road / Gandhi Bazaar","Vegetarian meal option in the Basavanagudi zone.","Vegetarian • meal"],
-    ["Hungerez","Gandhi Bazaar Main Road","Quick local food stop.","Quick bite"],
-    ["Ice Thunder","DVG Road / Gandhi Bazaar","Local café/quick-food stop.","Quick bite"],
-    ["Asha Sweets and Snacks","Bugle Rock Road","Local sweets/snacks option near the Basavanagudi heritage area.","Snacks • sweets"],
-    ["Bombay and Kolkata Chats","Anjaneya Temple Street","Street-snack option in the Basavanagudi/VV Puram zone.","Chats • snacks"]
-  ],
+food:[
+["Vidyarthi Bhavan","Gandhi Bazaar, Basavanagudi","Iconic South Indian food stop, especially known for masala dosa.","South Indian • iconic"],
+["VV Puram Food Street","Vishweshwarapura","Street-food stretch with many vegetarian food stalls.","Food street"],
+["Gandhi Bazaar food walk","Basavanagudi","Explore classic snacks and local eateries around Gandhi Bazaar.","Food • walk"],
+["Gokul Veg","DVG Road / Gandhi Bazaar","Vegetarian meal option in the Basavanagudi zone.","Vegetarian • meal"],
+["Hungerez","Gandhi Bazaar Main Road","Quick local food stop.","Quick bite"],
+["Ice Thunder","DVG Road / Gandhi Bazaar","Local café/quick-food stop.","Quick bite"],
+["Asha Sweets and Snacks","Bugle Rock Road","Local sweets/snacks option near the Basavanagudi heritage area.","Snacks • sweets"],
+["Bombay and Kolkata Chats","Anjaneya Temple Street","Street-snack option in the Basavanagudi/VV Puram zone.","Chats • snacks"]
+],
 
-  cafes:[
-    ["Board 4 Bored","D.V. Gundappa Road","Board games + vegetarian café experience.","Games • café"],
-    ["Gandhi Bazaar cafés","Gandhi Bazaar","Casual café stops around the market streets.","Coffee • snacks"],
-    ["VV Puram cafés","Vishweshwarapura","Quick café/snack stops around the food-street area.","Café • snacks"],
-    ["DVG Road café walk","Basavanagudi","Pick a café and continue into a heritage walk.","Café • walk"]
-  ],
+cafes:[
+["Board 4 Bored","D.V. Gundappa Road","Board games + vegetarian café experience.","Games • café"],
+["Gandhi Bazaar cafés","Gandhi Bazaar","Casual café stops around the market streets.","Coffee • snacks"],
+["VV Puram cafés","Vishweshwarapura","Quick café/snack stops around the food-street area.","Café • snacks"],
+["DVG Road café walk","Basavanagudi","Pick a café and continue into a heritage walk.","Café • walk"]
+],
 
-  desserts:[
-    ["VV Puram sweets & desserts","Vishweshwarapura","Dessert-hopping around the food-street zone.","Desserts"],
-    ["Asha Sweets and Snacks","Bugle Rock Road","Traditional sweets and snacks.","Sweets"],
-    ["Gandhi Bazaar sweet shops","Gandhi Bazaar","Local sweets and snack browsing.","Sweets • shopping"],
-    ["VV Puram dessert walk","Vishweshwarapura","Finish a food-street outing with a dessert stop.","Dessert • walk"]
-  ],
+desserts:[
+["VV Puram sweets & desserts","Vishweshwarapura","Dessert-hopping around the food-street zone.","Desserts"],
+["Asha Sweets and Snacks","Bugle Rock Road","Traditional sweets and snacks.","Sweets"],
+["Gandhi Bazaar sweet shops","Gandhi Bazaar","Local sweets and snack browsing.","Sweets • shopping"],
+["VV Puram dessert walk","Vishweshwarapura","Finish a food-street outing with a dessert stop.","Dessert • walk"]
+],
 
-  parks:[
-    ["Bugle Rock Park","Basavanagudi","Rocky green park with old geological formations and a watchtower.","Park • heritage"],
-    ["M.N. Krishna Rao Park","Basavanagudi","Large green park with walking, basketball, cricket and library facilities.","Park • sports"],
-    ["Madhava Rao Park","Basavanagudi","Local green space for walking and relaxing.","Park • walk"],
-    ["Jayanti Garden","Basavanagudi","Neighbourhood garden option.","Park • chill"],
-    ["Sajjan Rao Park","Basavanagudi","Local park near the VV Puram side.","Park • walk"],
-    ["Shamanna Park","Basavanagudi","Local green recreation space.","Park • outdoors"]
-  ],
+parks:[
+["Bugle Rock Park","Basavanagudi","Rocky green park with old geological formations and a watchtower.","Park • heritage"],
+["M.N. Krishna Rao Park","Basavanagudi","Large green park with walking, basketball, cricket and library facilities.","Park • sports"],
+["Madhava Rao Park","Basavanagudi","Local green space for walking and relaxing.","Park • walk"],
+["Jayanti Garden","Basavanagudi","Neighbourhood garden option.","Park • chill"],
+["Sajjan Rao Park","Basavanagudi","Local park near the VV Puram side.","Park • walk"],
+["Shamanna Park","Basavanagudi","Local green recreation space.","Park • outdoors"]
+],
 
-  nature:[
-    ["Bugle Rock greenery","Basavanagudi","Rock formations surrounded by mature greenery.","Nature • rocks"],
-    ["M.N. Krishna Rao Park","Basavanagudi","Large tree-filled urban green space.","Nature • walk"],
-    ["Basavanagudi heritage streets","Basavanagudi","Tree-lined old Bengaluru streets around the heritage zone.","Nature • photography"],
-    ["Gandhi Bazaar tree-lined streets","Basavanagudi","Slow walk through old neighbourhood streets.","Nature • walk"]
-  ],
+nature:[
+["Bugle Rock greenery","Basavanagudi","Rock formations surrounded by mature greenery.","Nature • rocks"],
+["M.N. Krishna Rao Park","Basavanagudi","Large tree-filled urban green space.","Nature • walk"],
+["Basavanagudi heritage streets","Basavanagudi","Tree-lined old Bengaluru streets around the heritage zone.","Nature • photography"],
+["Gandhi Bazaar tree-lined streets","Basavanagudi","Slow walk through old neighbourhood streets.","Nature • walk"]
+],
 
-  lakes:[
-    ["Basavanagudi lake-area walk","Basavanagudi","Use local green spaces rather than crossing into another college's area.","Lake-style walk"],
-    ["Bugle Rock artificial lake area","Basavanagudi","Small water feature within the Bugle Rock surroundings.","Water • park"],
-    ["Basavanagudi water-feature photo walk","Basavanagudi","Photo walk around the local park surroundings.","Photos • outdoors"]
-  ],
+lakes:[
+["Basavanagudi lake-area walk","Basavanagudi","Use local green spaces rather than crossing into another college's area.","Lake-style walk"],
+["Bugle Rock artificial lake area","Basavanagudi","Small water feature within the Bugle Rock surroundings.","Water • park"],
+["Basavanagudi water-feature photo walk","Basavanagudi","Photo walk around the local park surroundings.","Photos • outdoors"]
+],
 
-  hills:[
-    ["Bugle Rock","Basavanagudi","Ancient rocky hillock/formation and viewpoint area.","Rock • viewpoint"],
-    ["Bugle Rock watchtower area","Basavanagudi","Elevated viewpoint within the park.","Viewpoint • heritage"],
-    ["Bull Temple hillock","N.R. Colony, Basavanagudi","Historic hillock around the Bull Temple.","Hillock • heritage"],
-    ["Basavanagudi rock walk","Basavanagudi","Short heritage/geology-focused walk around the rocky landscape.","Rocks • walk"]
-  ],
+hills:[
+["Bugle Rock","Basavanagudi","Ancient rocky hillock/formation and viewpoint area.","Rock • viewpoint"],
+["Bugle Rock watchtower area","Basavanagudi","Elevated viewpoint within the park.","Viewpoint • heritage"],
+["Bull Temple hillock","N.R. Colony, Basavanagudi","Historic hillock around the Bull Temple.","Hillock • heritage"],
+["Basavanagudi rock walk","Basavanagudi","Short heritage/geology-focused walk around the rocky landscape.","Rocks • walk"]
+],
 
-  temples:[
-    ["Bull Temple / Dodda Basavana Gudi","N.R. Colony, Basavanagudi","Historic Basavanagudi landmark with the huge monolithic Nandi.","Temple • heritage"],
-    ["Dodda Ganesha Temple","Basavanagudi","Historic temple beside the Bull Temple.","Temple • heritage"],
-    ["Gavi Gangadhareshwara Temple","Gavipuram, Basavanagudi","Historic cave temple dedicated to Shiva.","Temple • heritage"],
-    ["Anjaneya Temple Street","Basavanagudi","Temple street and local heritage walk.","Temple • walk"],
-    ["Ramanjaneya Temple area","Basavanagudi","Local religious/heritage stop in the Basavanagudi zone.","Temple • heritage"]
-  ],
+temples:[
+["Bull Temple / Dodda Basavana Gudi","N.R. Colony, Basavanagudi","Historic Basavanagudi landmark with the huge monolithic Nandi.","Temple • heritage"],
+["Dodda Ganesha Temple","Basavanagudi","Historic temple beside the Bull Temple.","Temple • heritage"],
+["Gavi Gangadhareshwara Temple","Gavipuram, Basavanagudi","Historic cave temple dedicated to Shiva.","Temple • heritage"],
+["Anjaneya Temple Street","Basavanagudi","Temple street and local heritage walk.","Temple • walk"],
+["Ramanjaneya Temple area","Basavanagudi","Local religious/heritage stop in the Basavanagudi zone.","Temple • heritage"]
+],
 
-  science:[
-    ["Bugle Rock geology walk","Basavanagudi","Explore one of Bengaluru's famous ancient rock formations.","Geology • nature"],
-    ["Bull Temple heritage study","N.R. Colony, Basavanagudi","Architecture, history and heritage observation outing.","History • heritage"],
-    ["M.N. Krishna Rao Park nature study","Basavanagudi","Observe plants, trees and urban biodiversity.","Nature • learning"],
-    ["Basavanagudi heritage architecture walk","Basavanagudi","Observe old neighbourhood architecture and planning.","Architecture • history"]
-  ],
+science:[
+["Bugle Rock geology walk","Basavanagudi","Explore one of Bengaluru's famous ancient rock formations.","Geology • nature"],
+["Bull Temple heritage study","N.R. Colony, Basavanagudi","Architecture, history and heritage observation outing.","History • heritage"],
+["M.N. Krishna Rao Park nature study","Basavanagudi","Observe plants, trees and urban biodiversity.","Nature • learning"],
+["Basavanagudi heritage architecture walk","Basavanagudi","Observe old neighbourhood architecture and planning.","Architecture • history"]
+],
 
-  photos:[
-    ["Bugle Rock","Basavanagudi","Rocks, trees and the historic watchtower.","Photography"],
-    ["Bull Temple","N.R. Colony, Basavanagudi","Architecture and heritage photography.","Photography • heritage"],
-    ["Gandhi Bazaar","Basavanagudi","Busy street-market photography.","Street photography"],
-    ["VV Puram Food Street","Vishweshwarapura","Food and street photography.","Food photography"],
-    ["DVG Road","Basavanagudi","Old Bengaluru street scenes.","Street photography"],
-    ["M.N. Krishna Rao Park","Basavanagudi","Greenery and park photography.","Nature photography"]
-  ],
+photos:[
+["Bugle Rock","Basavanagudi","Rocks, trees and the historic watchtower.","Photography"],
+["Bull Temple","N.R. Colony, Basavanagudi","Architecture and heritage photography.","Photography • heritage"],
+["Gandhi Bazaar","Basavanagudi","Busy street-market photography.","Street photography"],
+["VV Puram Food Street","Vishweshwarapura","Food and street photography.","Food photography"],
+["DVG Road","Basavanagudi","Old Bengaluru street scenes.","Street photography"],
+["M.N. Krishna Rao Park","Basavanagudi","Greenery and park photography.","Nature photography"]
+],
 
-  walk:[
-    ["Gandhi Bazaar heritage walk","Basavanagudi","Food, shops and old Bengaluru streets.","Walk • food"],
-    ["Bull Temple → Bugle Rock walk","Basavanagudi","Classic Basavanagudi heritage route.","Walk • heritage"],
-    ["DVG Road walk","Basavanagudi","Walk through the historic commercial street.","Walk • shopping"],
-    ["VV Puram Food Street walk","Vishweshwarapura","Food-street hopping on foot.","Walk • food"],
-    ["M.N. Krishna Rao Park loop","Basavanagudi","Walking/jogging around the large park.","Walk • park"],
-    ["Gavi Gangadhareshwara heritage walk","Gavipuram, Basavanagudi","Temple + old-neighbourhood walking route.","Walk • heritage"]
-  ],
+walk:[
+["Gandhi Bazaar heritage walk","Basavanagudi","Food, shops and old Bengaluru streets.","Walk • food"],
+["Bull Temple → Bugle Rock walk","Basavanagudi","Classic Basavanagudi heritage route.","Walk • heritage"],
+["DVG Road walk","Basavanagudi","Walk through the historic commercial street.","Walk • shopping"],
+["VV Puram Food Street walk","Vishweshwarapura","Food-street hopping on foot.","Walk • food"],
+["M.N. Krishna Rao Park loop","Basavanagudi","Walking/jogging around the large park.","Walk • park"],
+["Gavi Gangadhareshwara heritage walk","Gavipuram, Basavanagudi","Temple + old-neighbourhood walking route.","Walk • heritage"]
+],
 
-  sports:[
-    ["M.N. Krishna Rao Park","Basavanagudi","Basketball, cricket, badminton and jogging-style recreation.","Sports • park"],
-    ["Bugle Rock outdoor walk","Basavanagudi","Active outdoor walk through rocky terrain.","Outdoor • walk"],
-    ["Basavanagudi park games","Basavanagudi","Casual outdoor games in local parks.","Outdoor • games"],
-    ["Board 4 Bored","Basavanagudi","Competitive tabletop games for groups.","Board games"],
-    ["Echo Esports Gaming Cafe","Basavanagudi","Competitive gaming session.","Esports • gaming"]
-  ],
+sports:[
+["M.N. Krishna Rao Park","Basavanagudi","Basketball, cricket, badminton and jogging-style recreation.","Sports • park"],
+["Bugle Rock outdoor walk","Basavanagudi","Active outdoor walk through rocky terrain.","Outdoor • walk"],
+["Basavanagudi park games","Basavanagudi","Casual outdoor games in local parks.","Outdoor • games"],
+["Board 4 Bored","Basavanagudi","Competitive tabletop games for groups.","Board games"],
+["Echo Esports Gaming Cafe","Basavanagudi","Competitive gaming session.","Esports • gaming"]
+],
 
-  books:[
-    ["M.N. Krishna Rao Park Library","Basavanagudi","Park library/reading space inside the large green park.","Library • reading"],
-    ["Gandhi Bazaar book/stationery shops","Basavanagudi","Browse local books and stationery around the market.","Books • shopping"],
-    ["Basavanagudi reading walk","Basavanagudi","Combine a park reading session with a neighbourhood walk.","Reading • outdoors"],
-    ["DVG Road book browsing","Basavanagudi","Look through local book/stationery stores around DVG Road.","Books • shopping"]
-  ],
+books:[
+["M.N. Krishna Rao Park Library","Basavanagudi","Park library/reading space inside the large green park.","Library • reading"],
+["Gandhi Bazaar book/stationery shops","Basavanagudi","Browse local books and stationery around the market.","Books • shopping"],
+["Basavanagudi reading walk","Basavanagudi","Combine a park reading session with a neighbourhood walk.","Reading • outdoors"],
+["DVG Road book browsing","Basavanagudi","Look through local book/stationery stores around DVG Road.","Books • shopping"]
+],
 
-  art:[
-    ["Prabhath Kalapoornima","N.R. Colony, Basavanagudi","Intimate auditorium for plays, music and cultural performances.","Theatre • culture"],
-    ["Basavanagudi heritage architecture","Basavanagudi","Old Bengaluru architecture as a visual art walk.","Architecture • art"],
-    ["Gandhi Bazaar street art/photo walk","Basavanagudi","Street scenes, signs and market visuals.","Street art • photography"],
-    ["VV Puram food presentation walk","Vishweshwarapura","Food, stalls and colourful street scenes for photography.","Food art • photos"]
-  ],
+art:[
+["Prabhath Kalapoornima","N.R. Colony, Basavanagudi","Intimate auditorium for plays, music and cultural performances.","Theatre • culture"],
+["Basavanagudi heritage architecture","Basavanagudi","Old Bengaluru architecture as a visual art walk.","Architecture • art"],
+["Gandhi Bazaar street art/photo walk","Basavanagudi","Street scenes, signs and market visuals.","Street art • photography"],
+["VV Puram food presentation walk","Vishweshwarapura","Food, stalls and colourful street scenes for photography.","Food art • photos"]
+],
 
-  activities:[
-    ["Board 4 Bored","D.V. Gundappa Road","Large board-game café for group sessions.","Board games"],
-    ["Echo Esports Gaming Cafe","Vishweshwarapura","PC gaming/esports hangout.","Gaming"],
-    ["Bugle Rock","Basavanagudi","Rock, park and viewpoint outing.","Nature • heritage"],
-    ["M.N. Krishna Rao Park","Basavanagudi","Walk, sports, library and green-space outing.","Park • sports"],
-    ["Bull Temple","N.R. Colony, Basavanagudi","Historic temple + heritage outing.","Heritage"],
-    ["VV Puram Food Street","Vishweshwarapura","Food-street hopping.","Food • walk"],
-    ["Prabhath Kalapoornima","N.R. Colony, Basavanagudi","Check for plays/cultural performances.","Theatre"],
-    ["Gandhi Bazaar","Basavanagudi","Shopping + snacks + heritage walk.","Shopping • food"]
-  ],
+activities:[
+["Board 4 Bored","D.V. Gundappa Road","Large board-game café for group sessions.","Board games"],
+["Echo Esports Gaming Cafe","Vishweshwarapura","PC gaming/esports hangout.","Gaming"],
+["Bugle Rock","Basavanagudi","Rock, park and viewpoint outing.","Nature • heritage"],
+["M.N. Krishna Rao Park","Basavanagudi","Walk, sports, library and green-space outing.","Park • sports"],
+["Bull Temple","N.R. Colony, Basavanagudi","Historic temple + heritage outing.","Heritage"],
+["VV Puram Food Street","Vishweshwarapura","Food-street hopping.","Food • walk"],
+["Prabhath Kalapoornima","N.R. Colony, Basavanagudi","Check for plays/cultural performances.","Theatre"],
+["Gandhi Bazaar","Basavanagudi","Shopping + snacks + heritage walk.","Shopping • food"]
+],
 
-  sunset:[
-    ["Bugle Rock","Basavanagudi","Elevated rocky park atmosphere for evening views.","Sunset • rocks"],
-    ["M.N. Krishna Rao Park","Basavanagudi","Large green space for a relaxed evening.","Sunset • park"],
-    ["Gandhi Bazaar evening walk","Basavanagudi","Market streets become lively in the evening.","Sunset • street"],
-    ["VV Puram Food Street evening","Vishweshwarapura","Classic evening food-street plan.","Sunset • food"],
-    ["Bull Temple surroundings","N.R. Colony, Basavanagudi","Heritage-area evening walk.","Sunset • heritage"]
-  ],
+sunset:[
+["Bugle Rock","Basavanagudi","Elevated rocky park atmosphere for evening views.","Sunset • rocks"],
+["M.N. Krishna Rao Park","Basavanagudi","Large green space for a relaxed evening.","Sunset • park"],
+["Gandhi Bazaar evening walk","Basavanagudi","Market streets become lively in the evening.","Sunset • street"],
+["VV Puram Food Street evening","Vishweshwarapura","Classic evening food-street plan.","Sunset • food"],
+["Bull Temple surroundings","N.R. Colony, Basavanagudi","Heritage-area evening walk.","Sunset • heritage"]
+],
 
-  metro:[
-    ["National College Metro Station","Basavanagudi","Green Line station serving the Basavanagudi area.","Green Line"],
-    ["Basavanagudi Green Line access","Basavanagudi","Use National College and nearby Green Line access for outings.","Metro • Green Line"],
-    ["Local bus + metro combo","Basavanagudi","Combine Green Line access with walking inside Basavanagudi.","Metro • walk"]
-  ],
+metro:[
+["National College Metro Station","Basavanagudi","Green Line station serving the Basavanagudi area.","Green Line"],
+["Basavanagudi Green Line access","Basavanagudi","Use National College and nearby Green Line access for outings.","Metro • Green Line"],
+["Local bus + metro combo","Basavanagudi","Combine Green Line access with walking inside Basavanagudi.","Metro • walk"]
+],
 
-  nearby:[
-    ["N.R. Colony","Basavanagudi","Core APS-area neighbourhood with heritage and local streets.","Basavanagudi"],
-    ["Gandhi Bazaar","Basavanagudi","Shopping, food and old-Bengaluru atmosphere.","Basavanagudi"],
-    ["D.V. Gundappa Road","Basavanagudi","Board games, cafés and local shops.","Basavanagudi"],
-    ["Vishweshwarapura / VV Puram","Basavanagudi","Food Street and local activity zone.","Basavanagudi"],
-    ["Gavipuram","Basavanagudi","Gavi Gangadhareshwara heritage area.","Basavanagudi"],
-    ["Bull Temple Road","N.R. Colony, Basavanagudi","Major heritage/temple stretch.","Basavanagudi"]
-  ]
+nearby:[
+["N.R. Colony","Basavanagudi","Core APS-area neighbourhood with heritage and local streets.","Basavanagudi"],
+["Gandhi Bazaar","Basavanagudi","Shopping, food and old-Bengaluru atmosphere.","Basavanagudi"],
+["D.V. Gundappa Road","Basavanagudi","Board games, cafés and local shops.","Basavanagudi"],
+["Vishweshwarapura / VV Puram","Basavanagudi","Food Street and local activity zone.","Basavanagudi"],
+["Gavipuram","Basavanagudi","Gavi Gangadhareshwara heritage area.","Basavanagudi"],
+["Bull Temple Road","N.R. Colony, Basavanagudi","Major heritage/temple stretch.","Basavanagudi"]
+]
+
 };
 
 
 /* =========================================================
-   EXPLORE PLACES
-   ========================================================= */
+   EXPLORE
+========================================================= */
 
-const nmkrvExplore = [
-  ["The G.O.A.T Gaming Cafe","Gaming","Jayanagar","PC/esports-style gaming hangout"],
-  ["1vX Gaming | Jayanagar","Gaming","Jayanagar 9th Block","PC + console + simulator-style gaming"],
-  ["Now Boarding Café","Activities","Jayanagar","Board games + café"],
-  ["Funzy Cafe","Activities","Jayanagar 5th Block","Art + games + food"],
-  ["ParSEC-Jayanagar by Param","Science","Jayanagar 7th Block","Interactive science centre"],
-  ["Jayanagar Shopping Complex","Shopping","Jayanagar 4th Block","Shopping + street market"],
-  ["Jayanagar Market","Shopping","Jayanagar 4th Block","Local market"],
-  ["BDA Complex Jayanagara","Shopping","Jayanagar 4th Block","Commercial hub"],
-  ["Toffee And Talk","Cafe","Jayanagar","Coffee + hangout"],
-  ["Blue Tokai Coffee Roasters | Jayanagar","Cafe","Jayanagar","Specialty coffee"],
-  ["Snuzzles Cafe Jayanagar","Cafe","Jayanagar 4th Block","Coffee + food"],
-  ["Third Wave Coffee - Jaya Nagar","Cafe","Jayanagar 5th Block","Coffee + chill"],
-  ["Sypp - Everyday Specialty Coffee","Cafe","Jayanagar 4th Block","Specialty coffee"],
-  ["Iris Cafe and Kitchen - Jayanagar","Cafe","Jayanagar 4th/5th Block","Café + meal"],
-  ["SMOOR Lounge - Jayanagar","Dessert","Jayanagar 5th Block","Chocolate + desserts"],
-  ["Huber & Holly","Dessert","Jayanagar 4th Block","Ice cream"],
-  ["Corner House - Jayanagar 5th Block","Dessert","Jayanagar 5th Block","Ice cream + sundaes"],
-  ["Cre'me & Co","Dessert","Jayanagar 9th Block","Gelato + waffles"],
-  ["Yediyuru Lake","Nature","Jayanagar 6th Block","Lake + walk"],
-  ["Shantala Boating Centre","Activities","Yediyur, Jayanagar","Paddle boating"],
-  ["Ragigudda hillock","Nature","Jayanagar 9th Block","Hillock + views"],
-  ["Madhavan Park","Park","Jayanagar","Green space"],
-  ["Nandanvana Children's Park","Park","Jayanagar","Playground + park"],
-  ["Jayanagar Kiru Kādu","Nature","Jayanagar","Green escape"],
-  ["Sapna Book House - Jayanagar","Books","Jayanagar","Books + stationery"],
-  ["The Firefly Terrace","Art","Jayanagar 2nd Block","Creative workshops"],
-  ["KAHALE - Filter Kaapi Bar","Cafe","Jayanagar 4th Block","Filter coffee"],
-  ["Isobel Coffee House","Cafe","Jayanagar 2nd Block","Coffee + snacks"]
+const nmkrvExplore=[
+["The G.O.A.T Gaming Cafe","Gaming","Jayanagar","PC/esports-style gaming hangout"],
+["1vX Gaming | Jayanagar","Gaming","Jayanagar 9th Block","PC + console + simulator-style gaming"],
+["Now Boarding Café","Activities","Jayanagar","Board games + café"],
+["Funzy Cafe","Activities","Jayanagar 5th Block","Art + games + food"],
+["ParSEC-Jayanagar by Param","Science","Jayanagar 7th Block","Interactive science centre"],
+["Jayanagar Shopping Complex","Shopping","Jayanagar 4th Block","Shopping + street market"],
+["Jayanagar Market","Shopping","Jayanagar 4th Block","Local market"],
+["BDA Complex Jayanagara","Shopping","Jayanagar 4th Block","Commercial hub"],
+["Toffee And Talk","Cafe","Jayanagar","Coffee + hangout"],
+["Blue Tokai Coffee Roasters | Jayanagar","Cafe","Jayanagar","Specialty coffee"],
+["Snuzzles Cafe Jayanagar","Cafe","Jayanagar 4th Block","Coffee + food"],
+["Third Wave Coffee - Jaya Nagar","Cafe","Jayanagar 5th Block","Coffee + chill"],
+["Sypp - Everyday Specialty Coffee","Cafe","Jayanagar 4th Block","Specialty coffee"],
+["Iris Cafe and Kitchen - Jayanagar","Cafe","Jayanagar 4th/5th Block","Café + meal"],
+["SMOOR Lounge - Jayanagar","Dessert","Jayanagar 5th Block","Chocolate + desserts"],
+["Huber & Holly","Dessert","Jayanagar 4th Block","Ice cream"],
+["Corner House - Jayanagar 5th Block","Dessert","Jayanagar 5th Block","Ice cream + sundaes"],
+["Cre'me & Co","Dessert","Jayanagar 9th Block","Gelato + waffles"],
+["Yediyuru Lake","Nature","Jayanagar 6th Block","Lake + walk"],
+["Shantala Boating Centre","Activities","Yediyur, Jayanagar","Paddle boating"],
+["Ragigudda hillock","Nature","Jayanagar 9th Block","Hillock + views"],
+["Madhavan Park","Park","Jayanagar","Green space"],
+["Nandanvana Children's Park","Park","Jayanagar","Playground + park"],
+["Jayanagar Kiru Kādu","Nature","Jayanagar","Green escape"],
+["Sapna Book House - Jayanagar","Books","Jayanagar","Books + stationery"],
+["The Firefly Terrace","Art","Jayanagar 2nd Block","Creative workshops"],
+["KAHALE - Filter Kaapi Bar","Cafe","Jayanagar 4th Block","Filter coffee"],
+["Isobel Coffee House","Cafe","Jayanagar 2nd Block","Coffee + snacks"]
 ];
 
-const apsExplore = [
-  ["Echo Esports Gaming Cafe","Gaming","Vishweshwarapura / Basavanagudi","Esports gaming"],
-  ["Board 4 Bored","Activities","D.V. Gundappa Road","Board games + café"],
-  ["DBR Splendid Game Station","Gaming","Gandhi Bazaar","Legacy listing — verify before visiting"],
-  ["Vidyarthi Bhavan","Food","Gandhi Bazaar","Classic South Indian food"],
-  ["VV Puram Food Street","Food","Vishweshwarapura","Street food"],
-  ["Gandhi Bazaar","Shopping","Basavanagudi","Market + food"],
-  ["Gopalan Arcade area","Shopping","Basavanagudi side","Shopping + entertainment"],
-  ["Bugle Rock Park","Nature","Basavanagudi","Rock + park + viewpoint"],
-  ["M.N. Krishna Rao Park","Park","Basavanagudi","Walking + sports + library"],
-  ["Madhava Rao Park","Park","Basavanagudi","Green space"],
-  ["Jayanti Garden","Park","Basavanagudi","Garden"],
-  ["Sajjan Rao Park","Park","Basavanagudi","Park + walk"],
-  ["Bull Temple","Temple","N.R. Colony","Historic Nandi temple"],
-  ["Dodda Ganesha Temple","Temple","Basavanagudi","Historic temple"],
-  ["Gavi Gangadhareshwara Temple","Temple","Gavipuram","Historic cave temple"],
-  ["Prabhath Kalapoornima","Art","N.R. Colony","Plays + cultural events"],
-  ["Gandhi Bazaar food walk","Food","Basavanagudi","Local food"],
-  ["D.V. Gundappa Road","Shopping","Basavanagudi","Local shops"],
-  ["Anjaneya Temple Street","Heritage","Basavanagudi","Temple street"],
-  ["National College Metro Station","Metro","Basavanagudi","Green Line access"]
+const apsExplore=[
+["Echo Esports Gaming Cafe","Gaming","Vishweshwarapura / Basavanagudi","Esports gaming"],
+["Board 4 Bored","Activities","D.V. Gundappa Road","Board games + café"],
+["DBR Splendid Game Station","Gaming","Gandhi Bazaar","Legacy listing — verify before visiting"],
+["Vidyarthi Bhavan","Food","Gandhi Bazaar","Classic South Indian food"],
+["VV Puram Food Street","Food","Vishweshwarapura","Street food"],
+["Gandhi Bazaar","Shopping","Basavanagudi","Market + food"],
+["Gopalan Arcade area","Shopping","Basavanagudi side","Shopping + entertainment"],
+["Bugle Rock Park","Nature","Basavanagudi","Rock + park + viewpoint"],
+["M.N. Krishna Rao Park","Park","Basavanagudi","Walking + sports + library"],
+["Madhava Rao Park","Park","Basavanagudi","Green space"],
+["Jayanti Garden","Park","Basavanagudi","Garden"],
+["Sajjan Rao Park","Park","Basavanagudi","Park + walk"],
+["Bull Temple","Temple","N.R. Colony","Historic Nandi temple"],
+["Dodda Ganesha Temple","Temple","Basavanagudi","Historic temple"],
+["Gavi Gangadhareshwara Temple","Temple","Gavipuram","Historic cave temple"],
+["Prabhath Kalapoornima","Art","N.R. Colony","Plays + cultural events"],
+["Gandhi Bazaar food walk","Food","Basavanagudi","Local food"],
+["D.V. Gundappa Road","Shopping","Basavanagudi","Local shops"],
+["Anjaneya Temple Street","Heritage","Basavanagudi","Temple street"],
+["National College Metro Station","Metro","Basavanagudi","Green Line access"]
 ];
 
 
 /* =========================================================
-   CATEGORY DEFINITIONS — EXACTLY 21
-   ========================================================= */
+   EXACTLY 21 CATEGORIES
+========================================================= */
 
-const categories = [
-  ["gaming","🎮","Gaming","PC, console & group gaming"],
-  ["cinema","🎬","Cinema","Movie plans"],
-  ["shopping","🛍️","Shopping","Markets & stores"],
-  ["food","🍴","Food","Budget-friendly food"],
-  ["cafes","☕","Cafés","Coffee & hangouts"],
-  ["desserts","🍦","Desserts","Sweet stops"],
-  ["parks","🌳","Parks","Green spaces"],
-  ["nature","🌿","Nature","Fresh-air plans"],
-  ["lakes","🌊","Lakes","Water & walks"],
-  ["hills","⛰️","Hills","Viewpoints & hillocks"],
-  ["temples","🛕","Temples","Heritage & peaceful stops"],
-  ["science","🔬","Science","Curiosity mode"],
-  ["photos","📸","Photos","Photo spots"],
-  ["walk","🚶","Walk","Walking plans"],
-  ["sports","🏀","Sports","Outdoor/group activity"],
-  ["books","📚","Books","Reading & bookstores"],
-  ["art","🎨","Art","Creative & cultural"],
-  ["activities","🎯","Activities","Things to actually do"],
-  ["sunset","🌇","Sunset","Evening plans"],
-  ["metro","🚇","Metro","Easy transit"],
-  ["nearby","📍","Nearby","Local-only options"]
+const categories=[
+["gaming","🎮","Gaming","PC, console & group gaming"],
+["cinema","🎬","Cinema","Movie plans"],
+["shopping","🛍️","Shopping","Markets & stores"],
+["food","🍴","Food","Budget-friendly food"],
+["cafes","☕","Cafés","Coffee & hangouts"],
+["desserts","🍦","Desserts","Sweet stops"],
+["parks","🌳","Parks","Green spaces"],
+["nature","🌿","Nature","Fresh-air plans"],
+["lakes","🌊","Lakes","Water & walks"],
+["hills","⛰️","Hills","Viewpoints & hillocks"],
+["temples","🛕","Temples","Heritage & peaceful stops"],
+["science","🔬","Science","Curiosity mode"],
+["photos","📸","Photos","Photo spots"],
+["walk","🚶","Walk","Walking plans"],
+["sports","🏀","Sports","Outdoor/group activity"],
+["books","📚","Books","Reading & bookstores"],
+["art","🎨","Art","Creative & cultural"],
+["activities","🎯","Activities","Things to actually do"],
+["sunset","🌇","Sunset","Evening plans"],
+["metro","🚇","Metro","Easy transit"],
+["nearby","📍","Nearby","Local-only options"]
 ];
 
 
 /* =========================================================
    STORAGE
-   ========================================================= */
+========================================================= */
 
 function saveData(){
-  localStorage.setItem(STORAGE_KEY,JSON.stringify({
-    version:APP_VERSION,
-    name:selectedName,
-    college:selectedCollege
-  }));
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify({
+      version:APP_VERSION,
+      name:selectedName,
+      college:selectedCollege
+    })
+  );
+
 }
 
 function loadData(){
-  try{
-    const data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null");
 
-    if(data && data.name && data.college){
+  try{
+
+    const data=
+      JSON.parse(
+        localStorage.getItem(STORAGE_KEY)||"null"
+      );
+
+    if(
+      data &&
+      data.name &&
+      data.college
+    ){
+
       selectedName=data.name;
       selectedCollege=data.college;
+
       return true;
     }
+
   }catch(e){
-    console.warn("Storage reset:",e);
+
+    console.warn(
+      "Storage reset:",
+      e
+    );
+
   }
 
   return false;
@@ -1122,9 +2195,10 @@ function loadData(){
 
 /* =========================================================
    LOCATION HELPERS
-   ========================================================= */
+========================================================= */
 
 function getArea(){
+
   if(selectedCollege==="Aps"){
     return "Aps • N.R. Colony • Basavanagudi";
   }
@@ -1133,149 +2207,306 @@ function getArea(){
 }
 
 function getPlannerData(){
+
   return selectedCollege==="Aps"
     ? apsPlanner
     : nmkrvPlanner;
+
 }
 
 function getExploreData(){
+
   return selectedCollege==="Aps"
     ? apsExplore
     : nmkrvExplore;
+
 }
 
 function getCollegeShort(){
+
   return selectedCollege==="Aps"
     ? "Aps"
     : "NMKRV";
+
 }
 
 
 /* =========================================================
-   MAP
-   ========================================================= */
+   MAPS
+========================================================= */
 
 function mapLink(place,area){
-  const query=encodeURIComponent(place+", "+area+", Bengaluru, Karnataka");
-  return "https://www.google.com/maps/search/?api=1&query="+query;
+
+  const query=
+    encodeURIComponent(
+      place+
+      ", "+
+      area+
+      ", Bengaluru, Karnataka"
+    );
+
+  return(
+    "https://www.google.com/maps/search/?api=1&query="+
+    query
+  );
+
 }
 
 
 /* =========================================================
    COMMON HEADER
-   ========================================================= */
+========================================================= */
 
 function header(title,subtitle=""){
-  return `
+
+  return`
+
     <div class="sectionTop">
-      <button class="backBtn" onclick="goHome()">← Home</button>
-      <button class="changeBtn" onclick="openChangeCollege()">Change College</button>
+
+      <button
+        class="backBtn"
+        onclick="goHome()"
+      >
+        ← Home
+      </button>
+
+      <button
+        class="changeBtn"
+        onclick="openChangeCollege()"
+      >
+        Change College
+      </button>
+
     </div>
+
 
     <div class="userBadge">
-      👋 <strong>${escapeHtml(selectedName)}</strong>
+
+      👋
+
+      <strong>
+        ${escapeHtml(selectedName)}
+      </strong>
+
       <span>•</span>
-      <span>${escapeHtml(getCollegeShort())}</span>
+
+      <span>
+        ${escapeHtml(getCollegeShort())}
+      </span>
+
     </div>
 
-    <div class="locationPill">📍 ${escapeHtml(getArea())}</div>
 
-    <h1 class="pageTitle">${escapeHtml(title)}</h1>
+    <div class="locationPill">
 
-    ${subtitle ? `<div class="pageSub">${escapeHtml(subtitle)}</div>` : ""}
+      📍
+      ${escapeHtml(getArea())}
+
+    </div>
+
+
+    <h1 class="pageTitle">
+
+      ${escapeHtml(title)}
+
+    </h1>
+
+
+    ${
+      subtitle
+      ?
+      `<div class="pageSub">
+        ${escapeHtml(subtitle)}
+      </div>`
+      :
+      ""
+    }
+
   `;
+
 }
 
 
 /* =========================================================
    HOME
-   ========================================================= */
+========================================================= */
 
 function renderHome(){
+
   currentPage="home";
 
   document.getElementById("app").innerHTML=`
+
     <main class="page">
 
       <div class="brand">
 
-        <div class="made">MADE BY KUSH KUMAR</div>
+        <div class="made">
+          MADE BY KUSH KUMAR
+        </div>
+
 
         <div class="logo">
-          <span>WHERE'S THE</span>
-          <span>GANG?</span>
+
+          <span>
+            WHERE'S THE
+          </span>
+
+          <span>
+            GANG?
+          </span>
+
         </div>
+
 
         <div class="tagline">
-          Class can wait. The gang can't. 😂
+
+          Class can wait.
+          The gang can't. 😂
+
         </div>
 
+
         <div class="userBadge">
-          Hey <strong>${escapeHtml(selectedName)}</strong> 👋
+
+          Hey
+
+          <strong>
+            ${escapeHtml(selectedName)}
+          </strong>
+
+          👋
+
           <span>•</span>
-          <span>${escapeHtml(selectedCollege)}</span>
+
+          <span>
+            ${escapeHtml(selectedCollege)}
+          </span>
+
         </div>
 
       </div>
 
+
       <div class="actions">
 
-        <button class="mainBtn light" onclick="openExplore()">
+        <button
+          class="mainBtn light"
+          onclick="openExplore()"
+        >
           📍 Explore Places
         </button>
 
-        <button class="mainBtn" onclick="openPlanner()">
+
+        <button
+          class="mainBtn"
+          onclick="openPlanner()"
+        >
           🎯 Where Should We Go?
         </button>
 
-        <button class="mainBtn light" onclick="openBeauty()">
+
+        <button
+          class="mainBtn light"
+          onclick="openBeauty()"
+        >
           💅 Beauty Mode
         </button>
 
       </div>
 
+
       <div class="specialCard">
-        <h3>📌 Your location lock</h3>
+
+        <h3>
+          📌 Your location lock
+        </h3>
+
         <p>
-          ${selectedCollege==="NMKRV"
-            ? "NMKRV is locked to Jayanagar. No Basavanagudi places are used in this planner."
-            : "Aps is locked to N.R. Colony / Basavanagudi. No Jayanagar places are used in this planner."
+
+          ${
+            selectedCollege==="NMKRV"
+
+            ?
+
+            "NMKRV is locked to Jayanagar. No Basavanagudi places are used in this planner."
+
+            :
+
+            "Aps is locked to N.R. Colony / Basavanagudi. No Jayanagar places are used in this planner."
+
           }
+
         </p>
-        <button class="specialBtn" onclick="openChangeCollege()">
+
+
+        <button
+          class="specialBtn"
+          onclick="openChangeCollege()"
+        >
           Change College
         </button>
+
       </div>
 
+
       <div class="footer">
-        ${APP_VERSION} • LOCATION-LOCKED BUILD
+
+        ${APP_VERSION}
+
+        •
+
+        LOCATION-LOCKED BUILD
+
+        <br><br>
+
+        MADE BY KUSH KUMAR
+
       </div>
 
     </main>
+
   `;
+
 }
 
 
 /* =========================================================
    EXPLORE
-   ========================================================= */
+========================================================= */
 
 function openExplore(){
+
   currentPage="explore";
+
   exploreFilter="all";
+
   renderExplore();
-  window.scrollTo({top:0,behavior:"smooth"});
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
 }
 
 function renderExplore(){
-  const data=getExploreData();
+
+  const data=
+    getExploreData();
 
   const filters=[
     "all",
-    ...Array.from(new Set(data.map(x=>x[1])))
+    ...Array.from(
+      new Set(
+        data.map(x=>x[1])
+      )
+    )
   ];
 
+
   document.getElementById("app").innerHTML=`
+
     <main class="page">
 
       ${header(
@@ -1283,13 +2514,30 @@ function renderExplore(){
         "Everything shown below belongs to your selected college's location."
       )}
 
+
       <div class="notice">
-        🔒 <b>Location lock:</b>
-        ${selectedCollege==="NMKRV"
-          ? "Every card below is Jayanagar-focused."
-          : "Every card below is Basavanagudi / N.R. Colony-focused."
+
+        🔒
+
+        <b>
+          Location lock:
+        </b>
+
+        ${
+          selectedCollege==="NMKRV"
+
+          ?
+
+          "Every card below is Jayanagar-focused."
+
+          :
+
+          "Every card below is Basavanagudi / N.R. Colony-focused."
+
         }
+
       </div>
+
 
       <input
         id="exploreSearch"
@@ -1298,108 +2546,245 @@ function renderExplore(){
         oninput="filterExplore()"
       >
 
-      <div id="exploreFilters" class="placeBtns" style="margin-bottom:18px;">
+
+      <div
+        id="exploreFilters"
+        class="placeBtns"
+        style="margin-bottom:18px;"
+      >
+
         ${filters.map(f=>`
+
           <button
             class="tag"
             onclick="setExploreFilter('${escapeHtml(f)}')"
-            style="${exploreFilter===f ? "background:#fff;color:#111;" : ""}"
+
+            style="${
+              exploreFilter===f
+              ?
+              "background:#fff;color:#111;"
+              :
+              ""
+            }"
           >
-            ${escapeHtml(f==="all"?"All":f)}
+
+            ${
+              escapeHtml(
+                f==="all"
+                ?
+                "All"
+                :
+                f
+              )
+            }
+
           </button>
+
         `).join("")}
+
       </div>
 
-      <div id="exploreCards" class="cards"></div>
+
+      <div
+        id="exploreCards"
+        class="cards"
+      ></div>
+
 
       <div class="footer">
-        Always check current hours/status before travelling.
+
+        Always check current hours/status
+        before travelling.
+
+        <br><br>
+
+        MADE BY KUSH KUMAR
+
       </div>
 
     </main>
+
   `;
 
+
   drawExploreCards(data);
+
 }
+
 
 function setExploreFilter(filter){
+
   exploreFilter=filter;
+
   renderExplore();
+
 }
+
 
 function filterExplore(){
-  const data=getExploreData();
+
+  const data=
+    getExploreData();
+
   drawExploreCards(data);
+
 }
 
+
 function drawExploreCards(data){
-  const search=(document.getElementById("exploreSearch")?.value||"").toLowerCase();
 
-  const filtered=data.filter(item=>{
-    const matchesFilter=
-      exploreFilter==="all" || item[1]===exploreFilter;
+  const search=
+    (
+      document.getElementById(
+        "exploreSearch"
+      )?.value||""
+    ).toLowerCase();
 
-    const text=item.join(" ").toLowerCase();
 
-    return matchesFilter && text.includes(search);
-  });
+  const filtered=
+    data.filter(item=>{
 
-  const box=document.getElementById("exploreCards");
+      const matchesFilter=
+        exploreFilter==="all" ||
+        item[1]===exploreFilter;
+
+      const text=
+        item.join(" ").toLowerCase();
+
+      return(
+        matchesFilter &&
+        text.includes(search)
+      );
+
+    });
+
+
+  const box=
+    document.getElementById(
+      "exploreCards"
+    );
 
   if(!box)return;
 
+
   if(!filtered.length){
-    box.innerHTML=`<div class="empty">No matching place found 😭</div>`;
+
+    box.innerHTML=`
+
+      <div class="empty">
+
+        No matching place found 😭
+
+      </div>
+
+    `;
+
     return;
+
   }
 
-  box.innerHTML=filtered.map(item=>{
-    const [name,type,area,desc]=item;
 
-    return `
-      <article class="placeCard">
-        <div class="placeHead">
-          <div class="placeName">${escapeHtml(name)}</div>
-          <div class="placeType">${escapeHtml(type)}</div>
-        </div>
+  box.innerHTML=
+    filtered.map(item=>{
 
-        <div class="placeDesc">
-          ${escapeHtml(desc)}
-          <br>
-          <span style="color:#666670">${escapeHtml(area)}</span>
-        </div>
+      const [
+        name,
+        type,
+        area,
+        desc
+      ]=item;
 
-        <div class="placeBtns">
-          <a
-            class="mapBtn"
-            href="${mapLink(name,area)}"
-            target="_blank"
-            rel="noopener"
-          >
-            📍 Maps
-          </a>
 
-          <span class="tag">${escapeHtml(getCollegeShort())}</span>
-        </div>
-      </article>
-    `;
-  }).join("");
+      return`
+
+        <article class="placeCard">
+
+          <div class="placeHead">
+
+            <div class="placeName">
+
+              ${escapeHtml(name)}
+
+            </div>
+
+
+            <div class="placeType">
+
+              ${escapeHtml(type)}
+
+            </div>
+
+          </div>
+
+
+          <div class="placeDesc">
+
+            ${escapeHtml(desc)}
+
+            <br>
+
+            <span
+              style="color:#666670"
+            >
+              ${escapeHtml(area)}
+            </span>
+
+          </div>
+
+
+          <div class="placeBtns">
+
+            <a
+              class="mapBtn"
+              href="${mapLink(name,area)}"
+              target="_blank"
+              rel="noopener"
+            >
+              📍 Maps
+            </a>
+
+
+            <span class="tag">
+
+              ${escapeHtml(
+                getCollegeShort()
+              )}
+
+            </span>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
+
 }
 
 
 /* =========================================================
    PLANNER
-   ========================================================= */
+========================================================= */
 
 function openPlanner(){
+
   currentPage="planner";
+
   renderCategories();
-  window.scrollTo({top:0,behavior:"smooth"});
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
 }
+
 
 function renderCategories(){
 
   document.getElementById("app").innerHTML=`
+
     <main class="page">
 
       ${header(
@@ -1407,113 +2792,315 @@ function renderCategories(){
         "Pick a category. The planner automatically uses only your selected college's area."
       )}
 
+
       <div class="notice">
-        🔐 <b>${escapeHtml(getCollegeShort())} mode:</b>
-        ${selectedCollege==="NMKRV"
-          ? "Jayanagar-only places."
-          : "N.R. Colony / Basavanagudi-only places."
+
+        🔐
+
+        <b>
+          ${escapeHtml(
+            getCollegeShort()
+          )}
+          mode:
+        </b>
+
+        ${
+          selectedCollege==="NMKRV"
+
+          ?
+
+          "Jayanagar-only places."
+
+          :
+
+          "N.R. Colony / Basavanagudi-only places."
+
         }
+
       </div>
+
 
       <div class="categoryGrid">
 
-        ${categories.map((c,index)=>`
-          <button
-            class="category"
-            style="animation-delay:${Math.min(index*25,500)}ms"
-            onclick="openCategory('${c[0]}')"
-          >
-            <span class="emoji">${c[1]}</span>
-            <b>${escapeHtml(c[2])}</b>
-            <small>${escapeHtml(c[3])}</small>
-          </button>
-        `).join("")}
+        ${categories.map(
+          (c,index)=>`
+
+            <button
+              class="category"
+
+              style="
+                animation-delay:
+                ${Math.min(index*25,500)}ms
+              "
+
+              onclick="
+                openCategory('${c[0]}')
+              "
+            >
+
+              <span class="emoji">
+
+                ${c[1]}
+
+              </span>
+
+
+              <b>
+
+                ${escapeHtml(c[2])}
+
+              </b>
+
+
+              <small>
+
+                ${escapeHtml(c[3])}
+
+              </small>
+
+            </button>
+
+          `
+        ).join("")}
 
       </div>
 
+
       <div class="specialCard">
 
-        <h3>🎲 Can't decide?</h3>
+        <h3>
+          🎲 Can't decide?
+        </h3>
+
 
         <p>
-          Let the gang planner randomly pick something from
-          ${selectedCollege==="NMKRV" ? "Jayanagar" : "Basavanagudi"}.
+
+          Let the gang planner randomly
+          pick something from
+
+          ${
+            selectedCollege==="NMKRV"
+            ?
+            "Jayanagar"
+            :
+            "Basavanagudi"
+          }.
+
         </p>
 
-        <button class="specialBtn" onclick="surpriseMe()">
+
+        <button
+          class="specialBtn"
+          onclick="surpriseMe()"
+        >
           Surprise Me 🎲
         </button>
 
       </div>
 
+
       <div class="footer">
-        21 categories • Beauty Mode stays separate
+
+        21 categories
+
+        •
+
+        Beauty Mode stays separate
+
+        <br><br>
+
+        MADE BY KUSH KUMAR
+
       </div>
 
     </main>
+
   `;
+
 }
 
+
 function openCategory(category){
+
   currentPage="category";
+
   currentCategory=category;
 
-  const definition=categories.find(c=>c[0]===category);
-  const data=getPlannerData()[category]||[];
+
+  const definition=
+    categories.find(
+      c=>c[0]===category
+    );
+
+
+  const data=
+    getPlannerData()[category]||[];
+
 
   document.getElementById("app").innerHTML=`
+
     <main class="page">
 
       <div class="sectionTop">
-        <button class="backBtn" onclick="openPlanner()">← Categories</button>
-        <button class="changeBtn" onclick="openChangeCollege()">Change College</button>
+
+        <button
+          class="backBtn"
+          onclick="openPlanner()"
+        >
+          ← Categories
+        </button>
+
+
+        <button
+          class="changeBtn"
+          onclick="openChangeCollege()"
+        >
+          Change College
+        </button>
+
       </div>
+
 
       <div class="userBadge">
-        👋 <strong>${escapeHtml(selectedName)}</strong>
+
+        👋
+
+        <strong>
+          ${escapeHtml(selectedName)}
+        </strong>
+
         <span>•</span>
-        <span>${escapeHtml(getCollegeShort())}</span>
+
+        <span>
+          ${escapeHtml(getCollegeShort())}
+        </span>
+
       </div>
+
 
       <div class="locationPill">
-        📍 ${escapeHtml(getArea())}
+
+        📍
+        ${escapeHtml(getArea())}
+
       </div>
+
 
       <h1 class="pageTitle">
-        ${definition ? definition[1] : ""} ${definition ? definition[2] : ""}
+
+        ${
+          definition
+          ?
+          definition[1]
+          :
+          ""
+        }
+
+        ${
+          definition
+          ?
+          definition[2]
+          :
+          ""
+        }
+
       </h1>
 
+
       <div class="pageSub">
-        ${escapeHtml(definition ? definition[3] : "")}
+
+        ${escapeHtml(
+          definition
+          ?
+          definition[3]
+          :
+          ""
+        )}
+
       </div>
 
+
       <div class="cards">
-        ${data.length
-          ? data.map(item=>placeCard(item)).join("")
-          : `<div class="empty">Nothing listed yet. Pick another category 👀</div>`
+
+        ${
+          data.length
+
+          ?
+
+          data
+            .map(item=>placeCard(item))
+            .join("")
+
+          :
+
+          `
+          <div class="empty">
+            Nothing listed yet.
+            Pick another category 👀
+          </div>
+          `
         }
+
+      </div>
+
+
+      <div class="footer">
+
+        MADE BY KUSH KUMAR
+
       </div>
 
     </main>
+
   `;
 
-  window.scrollTo({top:0,behavior:"smooth"});
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
 }
 
-function placeCard(item){
-  const [name,area,desc,tags]=item;
 
-  return `
+function placeCard(item){
+
+  const [
+    name,
+    area,
+    desc,
+    tags
+  ]=item;
+
+
+  return`
+
     <article class="placeCard">
 
       <div class="placeHead">
-        <div class="placeName">${escapeHtml(name)}</div>
-        <div class="placeType">${escapeHtml(area)}</div>
+
+        <div class="placeName">
+
+          ${escapeHtml(name)}
+
+        </div>
+
+
+        <div class="placeType">
+
+          ${escapeHtml(area)}
+
+        </div>
+
       </div>
 
+
       <div class="placeDesc">
+
         ${escapeHtml(desc)}
+
       </div>
+
 
       <div class="placeBtns">
 
@@ -1526,86 +3113,205 @@ function placeCard(item){
           📍 Open Maps
         </a>
 
+
         <span class="tag">
+
           ${escapeHtml(tags)}
+
         </span>
 
       </div>
 
     </article>
+
   `;
+
 }
 
-function backToCategories(){
-  openPlanner();
-}
+
+/* =========================================================
+   SURPRISE ME
+========================================================= */
 
 function surpriseMe(){
-  const planner=getPlannerData();
+
+  const planner=
+    getPlannerData();
+
   const all=[];
 
-  Object.keys(planner).forEach(category=>{
-    planner[category].forEach(item=>{
-      all.push({
-        category,
-        item
-      });
+
+  Object.keys(planner)
+    .forEach(category=>{
+
+      planner[category]
+        .forEach(item=>{
+
+          all.push({
+            category,
+            item
+          });
+
+        });
+
     });
-  });
+
 
   if(!all.length)return;
 
-  const random=all[Math.floor(Math.random()*all.length)];
-  const definition=categories.find(c=>c[0]===random.category);
+
+  const random=
+    all[
+      Math.floor(
+        Math.random()*all.length
+      )
+    ];
+
+
+  const definition=
+    categories.find(
+      c=>c[0]===random.category
+    );
+
 
   document.getElementById("app").innerHTML=`
+
     <main class="page">
 
       <div class="sectionTop">
-        <button class="backBtn" onclick="openPlanner()">← Planner</button>
-        <button class="changeBtn" onclick="openChangeCollege()">Change College</button>
+
+        <button
+          class="backBtn"
+          onclick="openPlanner()"
+        >
+          ← Planner
+        </button>
+
+
+        <button
+          class="changeBtn"
+          onclick="openChangeCollege()"
+        >
+          Change College
+        </button>
+
       </div>
+
 
       <div class="userBadge">
-        👋 <strong>${escapeHtml(selectedName)}</strong>
+
+        👋
+
+        <strong>
+          ${escapeHtml(selectedName)}
+        </strong>
+
       </div>
+
 
       <div class="locationPill">
-        📍 ${escapeHtml(getArea())}
+
+        📍
+
+        ${escapeHtml(getArea())}
+
       </div>
 
-      <div style="text-align:center;padding:60px 10px;">
 
-        <div style="font-size:65px;margin-bottom:18px;">🎲</div>
+      <div
+        style="
+          text-align:center;
+          padding:60px 10px;
+        "
+      >
 
-        <div style="color:#888892;font-weight:800;margin-bottom:10px;">
+        <div
+          style="
+            font-size:65px;
+            margin-bottom:18px;
+            animation:
+              beautyFloat 2s ease-in-out infinite;
+          "
+        >
+          🎲
+        </div>
+
+
+        <div
+          style="
+            color:#888892;
+            font-weight:800;
+            margin-bottom:10px;
+          "
+        >
           RANDOM PICK
         </div>
 
+
         <h1 class="pageTitle">
-          ${escapeHtml(random.item[0])}
+
+          ${escapeHtml(
+            random.item[0]
+          )}
+
         </h1>
 
+
         <p class="pageSub">
-          ${escapeHtml(random.item[2])}
+
+          ${escapeHtml(
+            random.item[2]
+          )}
+
         </p>
 
+
         <div class="locationPill">
-          ${definition ? definition[1] : ""} ${definition ? definition[2] : ""}
+
+          ${
+            definition
+            ?
+            definition[1]
+            :
+            ""
+          }
+
+          ${
+            definition
+            ?
+            definition[2]
+            :
+            ""
+          }
+
         </div>
 
-        <div class="placeBtns" style="justify-content:center;margin-top:20px;">
+
+        <div
+          class="placeBtns"
+          style="
+            justify-content:center;
+            margin-top:20px;
+          "
+        >
 
           <a
             class="mapBtn"
-            href="${mapLink(random.item[0],random.item[1])}"
+            href="${mapLink(
+              random.item[0],
+              random.item[1]
+            )}"
             target="_blank"
             rel="noopener"
           >
             📍 Maps
           </a>
 
-          <button class="tag" onclick="surpriseMe()">
+
+          <button
+            class="tag"
+            onclick="surpriseMe()"
+          >
             Again 🎲
           </button>
 
@@ -1613,52 +3319,123 @@ function surpriseMe(){
 
       </div>
 
+
+      <div class="footer">
+
+        MADE BY KUSH KUMAR
+
+      </div>
+
     </main>
+
   `;
 
-  window.scrollTo({top:0,behavior:"smooth"});
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
 }
 
 
 /* =========================================================
    BEAUTY MODE
-   ========================================================= */
+========================================================= */
 
 const beautyMessages=[
-  "Beauty section? 👀 You're already doing pretty well.",
-  "Okay okay… someone's clearly here to upgrade the vibe ✨",
-  "At this point, the website is getting nervous 💀",
-  "WAIT 😭 Why are you making the whole page look better just by being here?",
-  "BADDIE DETECTED 🚨✨ Certified vibe detected. No further upgrades required."
+
+  "✨ Beauty section? 👀 You're already doing pretty well.",
+
+  "😎 Okay okay… someone's clearly here to upgrade the vibe ✨",
+
+  "💀 At this point… the website is getting nervous 💀",
+
+  "🚨 WAIT 😭 Why are you making the whole page look better just by being here?",
+
+  "✨ BADDIE DETECTED 🚨 Certified vibe detected. No further upgrades required."
+
 ];
 
+
 function openBeauty(){
+
   currentPage="beauty";
+
   beautyStep=0;
+
   renderBeauty();
-  window.scrollTo({top:0,behavior:"smooth"});
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
 }
 
+
+/* =========================================================
+   BEAUTY RENDER
+========================================================= */
+
 function renderBeauty(){
+
   document.getElementById("app").innerHTML=`
+
     <main class="page beauty">
 
-      <div class="sectionTop" style="text-align:left;">
-        <button class="backBtn" onclick="goHome()">← Home</button>
-        <button class="changeBtn" onclick="openChangeCollege()">Change College</button>
+      <div
+        class="sectionTop"
+        style="text-align:left;"
+      >
+
+        <button
+          class="backBtn"
+          onclick="goHome()"
+        >
+          ← Home
+        </button>
+
+
+        <button
+          class="changeBtn"
+          onclick="openChangeCollege()"
+        >
+          Change College
+        </button>
+
       </div>
+
 
       <div class="userBadge">
-        👋 <strong>${escapeHtml(selectedName)}</strong>
+
+        👋
+
+        <strong>
+          ${escapeHtml(selectedName)}
+        </strong>
+
         <span>•</span>
-        <span>${escapeHtml(getCollegeShort())}</span>
+
+        <span>
+          ${escapeHtml(getCollegeShort())}
+        </span>
+
       </div>
 
-      <div class="beautyIcon">💅</div>
 
-      <div id="beautyText" class="beautyText">
+      <div class="beautyIcon">
+        💅
+      </div>
+
+
+      <div
+        id="beautyText"
+        class="beautyText"
+      >
         ${beautyMessages[0]}
       </div>
+
 
       <button
         id="beautyNext"
@@ -1668,7 +3445,6 @@ function renderBeauty(){
         Next →
       </button>
 
-      <br>
 
       <button
         class="beautyBack"
@@ -1677,261 +3453,669 @@ function renderBeauty(){
         ← Back
       </button>
 
+
+      <div
+        class="footer"
+        style="margin-top:60px;"
+      >
+        MADE BY KUSH KUMAR
+      </div>
+
     </main>
+
   `;
+
+
+  const next=
+    document.getElementById(
+      "beautyNext"
+    );
+
+
+  if(next){
+
+    next.style.left="50%";
+
+    next.style.bottom=
+      window.innerWidth<=520
+      ?
+      "82px"
+      :
+      "88px";
+
+  }
+
 }
+
+
+/* =========================================================
+   BEAUTY NEXT — MOVING BUTTON
+========================================================= */
 
 function nextBeauty(){
 
-  if(beautyStep < beautyMessages.length-1){
+  if(
+    beautyStep<
+    beautyMessages.length-1
+  ){
+
     beautyStep++;
+
   }
 
-  const text=document.getElementById("beautyText");
-  const next=document.getElementById("beautyNext");
+
+  const text=
+    document.getElementById(
+      "beautyText"
+    );
+
+
+  const next=
+    document.getElementById(
+      "beautyNext"
+    );
+
+
+  /* TEXT ANIMATION */
 
   if(text){
+
     text.style.opacity="0";
-    text.style.transform="translateY(10px)";
+
+    text.style.transform=
+      "translateY(15px) scale(.96)";
+
 
     setTimeout(()=>{
-      text.textContent=beautyMessages[beautyStep];
+
+      text.textContent=
+        beautyMessages[
+          beautyStep
+        ];
+
+
       text.style.opacity="1";
-      text.style.transform="translateY(0)";
-    },150);
+
+      text.style.transform=
+        "translateY(0) scale(1)";
+
+    },180);
+
   }
 
-  if(beautyStep===beautyMessages.length-1 && next){
-    next.style.display="none";
+
+  /* BUTTON MOVEMENT */
+
+  if(next){
+
+    if(
+      beautyStep<
+      beautyMessages.length-1
+    ){
+
+      const positions=[
+
+        {
+          left:"50%",
+          bottom:"88px"
+        },
+
+        {
+          left:"19%",
+          bottom:"23%"
+        },
+
+        {
+          left:"79%",
+          bottom:"28%"
+        },
+
+        {
+          left:"29%",
+          bottom:"48%"
+        },
+
+        {
+          left:"73%",
+          bottom:"51%"
+        }
+
+      ];
+
+
+      const pos=
+        positions[
+          beautyStep
+        ];
+
+
+      next.style.left=
+        pos.left;
+
+      next.style.bottom=
+        pos.bottom;
+
+
+      /*
+        POP + ROTATE
+      */
+
+      const rotation=
+        beautyStep%2===0
+        ?
+        -3
+        :
+        3;
+
+
+      next.animate(
+
+        [
+
+          {
+            transform:
+              "translateX(-50%) scale(.65) rotate(12deg)",
+            opacity:.25
+          },
+
+          {
+            transform:
+              "translateX(-50%) scale(1.15) rotate(-5deg)",
+            opacity:1
+          },
+
+          {
+            transform:
+              "translateX(-50%) scale(1) rotate("+
+              rotation+
+              "deg)"
+          }
+
+        ],
+
+        {
+          duration:520,
+          easing:
+            "cubic-bezier(.2,.8,.2,1)"
+        }
+
+      );
+
+    }
+
+
+    /* FINAL STEP */
+
+    if(
+      beautyStep===
+      beautyMessages.length-1
+    ){
+
+      next.animate(
+
+        [
+
+          {
+            opacity:1,
+
+            transform:
+              "translateX(-50%) scale(1)"
+          },
+
+          {
+            opacity:0,
+
+            transform:
+              "translateX(-50%) scale(.35) rotate(25deg)"
+          }
+
+        ],
+
+        {
+          duration:500,
+          easing:"ease-in"
+        }
+
+      );
+
+
+      setTimeout(()=>{
+
+        next.style.display="none";
+
+      },450);
+
+    }
+
   }
+
 }
 
 
 /* =========================================================
    COLLEGE CHANGE
-   ========================================================= */
+========================================================= */
 
 function openChangeCollege(){
 
   collegeChangeMode=true;
-  returnPage=currentPage;
 
-  temporaryCollege=selectedCollege;
+  returnPage=
+    currentPage;
 
-  document.getElementById("collegeModalTitle").textContent="Change College 📍";
-  document.getElementById("collegeModalSub").textContent=
+  temporaryCollege=
+    selectedCollege;
+
+
+  document.getElementById(
+    "collegeModalTitle"
+  ).textContent=
+    "Change College 📍";
+
+
+  document.getElementById(
+    "collegeModalSub"
+  ).textContent=
     "Your name stays saved. Only the location data will change.";
 
-  document.getElementById("nameStep").classList.remove("active");
-  document.getElementById("collegeStep").classList.add("active");
+
+  document.getElementById(
+    "nameStep"
+  ).classList.remove("active");
+
+
+  document.getElementById(
+    "collegeStep"
+  ).classList.add("active");
+
 
   updateCollegeSelection();
 
-  document.getElementById("modal").classList.add("show");
+
+  document.getElementById(
+    "modal"
+  ).classList.add("show");
+
 }
+
 
 function chooseCollege(college){
-  temporaryCollege=college;
+
+  temporaryCollege=
+    college;
+
   updateCollegeSelection();
+
 }
+
 
 function updateCollegeSelection(){
 
-  document.getElementById("nmkrvOption")
-    .classList.toggle("selected",temporaryCollege==="NMKRV");
+  document.getElementById(
+    "nmkrvOption"
+  )
+  .classList.toggle(
+    "selected",
+    temporaryCollege==="NMKRV"
+  );
 
-  document.getElementById("apsOption")
-    .classList.toggle("selected",temporaryCollege==="Aps");
+
+  document.getElementById(
+    "apsOption"
+  )
+  .classList.toggle(
+    "selected",
+    temporaryCollege==="Aps"
+  );
+
 }
+
 
 function saveCollege(){
 
   if(!temporaryCollege){
-    alert("Pick a college first.");
+
+    alert(
+      "Pick a college first."
+    );
+
     return;
+
   }
 
-  selectedCollege=temporaryCollege;
+
+  selectedCollege=
+    temporaryCollege;
+
   saveData();
 
-  document.getElementById("modal").classList.remove("show");
+
+  document.getElementById(
+    "modal"
+  ).classList.remove("show");
+
 
   collegeChangeMode=false;
 
-  /*
-    IMPORTANT:
-    Stay on the page the user was already using.
-    Re-render using ONLY the newly selected college data.
-  */
 
   if(returnPage==="explore"){
+
     renderExplore();
-  }else if(returnPage==="planner"){
-    renderCategories();
-  }else if(returnPage==="category"){
-    openCategory(currentCategory);
-  }else if(returnPage==="beauty"){
-    renderBeauty();
-  }else{
-    renderHome();
+
   }
 
-  window.scrollTo({top:0,behavior:"smooth"});
+  else if(returnPage==="planner"){
+
+    renderCategories();
+
+  }
+
+  else if(returnPage==="category"){
+
+    openCategory(
+      currentCategory
+    );
+
+  }
+
+  else if(returnPage==="beauty"){
+
+    renderBeauty();
+
+  }
+
+  else{
+
+    renderHome();
+
+  }
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
 }
+
 
 function cancelCollegeChange(){
 
   if(collegeChangeMode){
-    temporaryCollege=selectedCollege;
+
+    temporaryCollege=
+      selectedCollege;
+
     collegeChangeMode=false;
 
-    document.getElementById("modal").classList.remove("show");
+
+    document.getElementById(
+      "modal"
+    ).classList.remove("show");
+
     return;
+
   }
 
+
   closeSetup();
+
 }
 
+
 function closeSetup(){
-  document.getElementById("modal").classList.remove("show");
+
+  document.getElementById(
+    "modal"
+  ).classList.remove("show");
+
 }
 
 
 /* =========================================================
    FIRST SETUP
-   ========================================================= */
+========================================================= */
 
 function showFirstSetup(){
 
   collegeChangeMode=false;
+
   temporaryCollege="";
 
-  document.getElementById("collegeModalTitle").textContent="Pick your college 📍";
-  document.getElementById("collegeModalSub").textContent=
+
+  document.getElementById(
+    "collegeModalTitle"
+  ).textContent=
+    "Pick your college 📍";
+
+
+  document.getElementById(
+    "collegeModalSub"
+  ).textContent=
     "We'll keep your places completely separated.";
 
-  document.getElementById("nameStep").classList.add("active");
-  document.getElementById("collegeStep").classList.remove("active");
 
-  document.getElementById("nameInput").value="";
+  document.getElementById(
+    "nameStep"
+  ).classList.add("active");
 
-  document.getElementById("modal").classList.add("show");
+
+  document.getElementById(
+    "collegeStep"
+  ).classList.remove("active");
+
+
+  document.getElementById(
+    "nameInput"
+  ).value="";
+
+
+  document.getElementById(
+    "modal"
+  ).classList.add("show");
+
 }
+
 
 function goToCollegeStep(){
 
-  const input=document.getElementById("nameInput");
-  const name=(input.value||"").trim();
+  const input=
+    document.getElementById(
+      "nameInput"
+    );
+
+
+  const name=
+    (input.value||"").trim();
+
 
   if(!name){
+
     input.focus();
+
     return;
+
   }
 
-  selectedName=name;
+
+  selectedName=
+    name;
+
   temporaryCollege="";
 
-  document.getElementById("nameStep").classList.remove("active");
-  document.getElementById("collegeStep").classList.add("active");
+
+  document.getElementById(
+    "nameStep"
+  ).classList.remove("active");
+
+
+  document.getElementById(
+    "collegeStep"
+  ).classList.add("active");
+
 
   updateCollegeSelection();
+
 }
+
 
 function initialCollegeSave(){
 
   if(!temporaryCollege){
-    alert("Pick a college first.");
+
+    alert(
+      "Pick a college first."
+    );
+
     return;
+
   }
 
-  selectedCollege=temporaryCollege;
+
+  selectedCollege=
+    temporaryCollege;
+
   saveData();
 
-  document.getElementById("modal").classList.remove("show");
+
+  document.getElementById(
+    "modal"
+  ).classList.remove("show");
+
 
   renderHome();
+
 }
 
 
-/*
-  The same saveCollege button handles both:
-  - first setup
-  - change college
+/* =========================================================
+   SAVE COLLEGE WRAPPER
+========================================================= */
 
-  We intercept first setup here by wrapping the old behavior.
-*/
-const originalSaveCollege=saveCollege;
+const originalSaveCollege=
+  saveCollege;
+
 
 saveCollege=function(){
 
   if(!collegeChangeMode){
+
     initialCollegeSave();
+
     return;
+
   }
 
+
   originalSaveCollege();
+
 };
 
 
 /* =========================================================
    HOME
-   ========================================================= */
+========================================================= */
 
 function goHome(){
+
   renderHome();
-  window.scrollTo({top:0,behavior:"smooth"});
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
 }
 
 
 /* =========================================================
    KEYBOARD
-   ========================================================= */
+========================================================= */
 
-document.addEventListener("keydown",function(e){
+document.addEventListener(
+  "keydown",
+  function(e){
 
-  if(e.key==="Enter"){
+    if(e.key==="Enter"){
 
-    const nameStep=document.getElementById("nameStep");
+      const nameStep=
+        document.getElementById(
+          "nameStep"
+        );
 
-    if(
-      document.getElementById("modal")?.classList.contains("show") &&
-      nameStep?.classList.contains("active")
-    ){
-      goToCollegeStep();
+
+      if(
+
+        document.getElementById(
+          "modal"
+        )?.classList.contains("show")
+
+        &&
+
+        nameStep?.classList.contains(
+          "active"
+        )
+
+      ){
+
+        goToCollegeStep();
+
+      }
+
+    }
+
+
+    if(e.key==="Escape"){
+
+      const modal=
+        document.getElementById(
+          "modal"
+        );
+
+
+      if(
+        modal?.classList.contains("show")
+      ){
+
+        cancelCollegeChange();
+
+      }
+
     }
 
   }
-
-  if(e.key==="Escape"){
-    const modal=document.getElementById("modal");
-
-    if(modal?.classList.contains("show")){
-      cancelCollegeChange();
-    }
-  }
-
-});
+);
 
 
 /* =========================================================
    START
-   ========================================================= */
+========================================================= */
 
 (function start(){
 
   if(loadData()){
 
     if(
+
       selectedCollege!=="NMKRV" &&
+
       selectedCollege!=="Aps"
+
     ){
-      selectedCollege="NMKRV";
+
+      selectedCollege=
+        "NMKRV";
+
       saveData();
+
     }
+
 
     renderHome();
 
-  }else{
+  }
+
+  else{
 
     showFirstSetup();
 
@@ -1942,4 +4126,4 @@ document.addEventListener("keydown",function(e){
 </script>
 
 </body>
-</html>
+  </html>
