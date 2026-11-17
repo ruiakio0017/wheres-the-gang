@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#070611">
-<title>WHERE'S THE GANG? — NEXORA V8.9 HORIZON ULTRA</title>
+<title>WHERE'S THE GANG? — NEXORA V9.1 LQA</title>
 
 <style>
 :root{
@@ -321,7 +321,7 @@ body::after{
 }
 
 /* =========================================================
-   APP & SCROLL PROGRESS BAR (ZERO EXCESS BOTTOM SPACE)
+   APP & SCROLL PROGRESS BAR
 ========================================================= */
 
 #scrollBar{
@@ -710,7 +710,7 @@ button{
 }
 
 /* =========================================================
-   MAIN BUTTONS (SPACIOUS FULL-WIDTH STACKED)
+   MAIN BUTTONS
 ========================================================= */
 
 .actions{
@@ -860,7 +860,7 @@ button{
 }
 
 /* =========================================================
-   SEARCH & INPUTS (CENTER TYPING FOR SETUP / PASSWORD)
+   SEARCH & INPUTS
 ========================================================= */
 
 .search,
@@ -892,6 +892,56 @@ button{
 .selectInput:focus{
   border-color:var(--accent-1);
   box-shadow:0 0 0 4px rgba(139,92,255,.15);
+}
+
+.input:disabled,
+button:disabled{
+  opacity:.42 !important;
+  cursor:not-allowed !important;
+  pointer-events:none !important;
+}
+
+/* =========================================================
+   TEACHER LOCKOUT WARNING BANNER
+========================================================= */
+
+.teacherLockAlert{
+  background:linear-gradient(135deg, rgba(255,23,68,.24), rgba(213,0,249,.16));
+  border:1.5px solid #ff1744;
+  border-radius:18px;
+  padding:14px 14px;
+  margin:10px 0 6px;
+  color:#ffd6de;
+  box-shadow:0 0 28px rgba(255,23,68,.35);
+  animation:popCelebrate .35s ease;
+}
+
+.teacherLockAlert b{
+  display:block;
+  font-size:14.5px;
+  color:#ff5277;
+  letter-spacing:.5px;
+  margin-bottom:4px;
+}
+
+.teacherLockAlert span{
+  display:block;
+  font-size:12.5px;
+  line-height:1.4;
+  color:#f5d0d8;
+}
+
+.teacherLockTimer{
+  display:inline-block;
+  margin-top:8px;
+  padding:5px 12px;
+  border-radius:999px;
+  background:rgba(0,0,0,.45);
+  border:1px solid rgba(255,82,119,.45);
+  font-family:"Courier New",monospace;
+  font-weight:1000;
+  font-size:13px;
+  color:#fff;
 }
 
 /* =========================================================
@@ -1453,7 +1503,7 @@ button{
 }
 
 /* =========================================================
-   MANAGEMENT DASHBOARD (CENTERED)
+   MANAGEMENT DASHBOARD
 ========================================================= */
 
 .mgmtCenteredWrap{
@@ -1966,7 +2016,7 @@ button{
 }
 
 /* =========================================================
-   BEAUTY MODE (CORNER USER BADGE + CENTER STAGE)
+   BEAUTY MODE
 ========================================================= */
 
 .beauty{
@@ -2092,7 +2142,7 @@ button{
 }
 
 /* =========================================================
-   FOOTER (MINIMAL NATURAL BOTTOM SPACING)
+   FOOTER
 ========================================================= */
 
 .footer{
@@ -2170,12 +2220,12 @@ button{
 
 
 <!-- =========================================================
-     STEP 1: STUDENT ACCESS VERIFICATION WINDOW
+     STEP 1: STUDENT ACCESS VERIFICATION WINDOW (48H TEACHER LOCK)
 ========================================================= -->
 
 <div id="studentAccessModal" class="modal">
   <div class="modalBox" id="studentAccessBox">
-    <button class="modalCloseX" onclick="closeStudentAccessModal()" title="Close">✕</button>
+    <button class="modalCloseX" id="studentCloseXBtn" onclick="closeStudentAccessModal()" title="Close">✕</button>
 
     <div style="font-size:38px;margin-bottom:4px;">🎓🔐</div>
     <h2>STUDENT ACCESS</h2>
@@ -2193,8 +2243,14 @@ button{
 
     <div id="studentCodeError" class="errorMsg"></div>
 
+    <div id="teacherLockBanner" class="teacherLockAlert" style="display:none;">
+      <b>⚠️ WARNING: TEACHERS NOT ALLOWED</b>
+      <span>Access has been locked because the verification window was closed. You cannot type or edit the password for 48 hours.</span>
+      <div id="teacherLockCountdown" class="teacherLockTimer">48h 00m 00s remaining</div>
+    </div>
+
     <div class="modalActions">
-      <button class="secondary" onclick="closeStudentAccessModal()">Close</button>
+      <button class="secondary" id="studentCloseBtn" onclick="closeStudentAccessModal()">Close</button>
       <button class="primary" id="studentVerifyBtn" onclick="verifyStudentAccessCode()">CONTINUE →</button>
     </div>
   </div>
@@ -2277,6 +2333,15 @@ button{
         </button>
 
         <button
+          id="rvpuOption"
+          class="collegeOption"
+          onclick="chooseCollege('RV PU College')"
+        >
+          <b>🎓 RV PU College</b>
+          <small>Jayanagar 3rd Block • Jayanagar-only planner</small>
+        </button>
+
+        <button
           id="apsOption"
           class="collegeOption"
           onclick="chooseCollege('Aps')"
@@ -2329,7 +2394,7 @@ button{
 
 
 <!-- =========================================================
-     CENTERED CUSTOM ACTION MODAL (RECEIPT / POLL / WINNER / STAMP)
+     CENTERED CUSTOM ACTION MODAL
 ========================================================= -->
 
 <div id="customModal" class="modal">
@@ -2341,26 +2406,131 @@ button{
 
 /* =========================================================
    WHERE'S THE GANG?
-   NEXORA V8.9 • HORIZON ULTRA
+   NEXORA V9.1 • LQA (LOCATION-LOCKED QUALITY ASSURANCE)
 ========================================================= */
 
-const APP_VERSION="NEXORA V8.9 • HORIZON ULTRA";
+const APP_VERSION="NEXORA V9.1 • LQA";
 
-const STORAGE_KEY="wheres_the_gang_final_v8";
-const RECORDS_STORAGE_KEY="wheres_the_gang_login_records_v8";
-const BUCKET_STORAGE_KEY="wheres_the_gang_bucket_v8";
-const CUSTOM_SPOTS_KEY="wheres_the_gang_custom_spots_v8";
-const THEME_STORAGE_KEY="wheres_the_gang_theme_v8";
-const STUDENT_ACCESS_KEY="wheres_the_gang_student_verified_v89";
+const STORAGE_KEY="wheres_the_gang_final_v91";
+const RECORDS_STORAGE_KEY="wheres_the_gang_login_records_v91";
+const BUCKET_STORAGE_KEY="wheres_the_gang_bucket_v91";
+const CUSTOM_SPOTS_KEY="wheres_the_gang_custom_spots_v91";
+const THEME_STORAGE_KEY="wheres_the_gang_theme_v91";
+const STUDENT_ACCESS_KEY="wheres_the_gang_student_verified_v91";
+const TEACHER_LOCK_UNTIL_KEY="wheres_the_gang_teacher_lock_until_v91";
 
 /* Student Access Code */
 const STUDENT_ACCESS_CODE="277102BUNK";
+const LOCKOUT_DURATION_MS=48*60*60*1000; /* 48 Hours */
 
 const MGMT_PASSWORD="1234";
+const VALID_COLLEGES=["NMKRV","RV PU College","Aps"];
 
 
 /* =========================================================
-   EXCLUSIVE MODAL CONTROLLER (HIDES PREVIOUS SCREEN COMPLETELY)
+   48-HOUR TEACHER LOCKOUT ENGINE
+========================================================= */
+
+let teacherLockInterval=null;
+
+function getTeacherLockRemainingMs(){
+  const until=Number(localStorage.getItem(TEACHER_LOCK_UNTIL_KEY)||0);
+  if(!until) return 0;
+  const rem=until-Date.now();
+  if(rem<=0){
+    localStorage.removeItem(TEACHER_LOCK_UNTIL_KEY);
+    return 0;
+  }
+  return rem;
+}
+
+function isTeacherLockedOut(){
+  return getTeacherLockRemainingMs()>0;
+}
+
+function formatDuration48H(ms){
+  const totalSec=Math.max(0,Math.ceil(ms/1000));
+  const hrs=Math.floor(totalSec/3600);
+  const mins=Math.floor((totalSec%3600)/60);
+  const secs=totalSec%60;
+  return `${String(hrs).padStart(2,"0")}h ${String(mins).padStart(2,"0")}m ${String(secs).padStart(2,"0")}s remaining`;
+}
+
+function applyTeacherLockUI(){
+  const inp=document.getElementById("studentCodeInput");
+  const verifyBtn=document.getElementById("studentVerifyBtn");
+  const closeBtn=document.getElementById("studentCloseBtn");
+  const closeXBtn=document.getElementById("studentCloseXBtn");
+  const banner=document.getElementById("teacherLockBanner");
+  const countdown=document.getElementById("teacherLockCountdown");
+  const err=document.getElementById("studentCodeError");
+  const box=document.getElementById("studentAccessBox");
+
+  const rem=getTeacherLockRemainingMs();
+  if(rem>0){
+    if(inp){
+      inp.value="";
+      inp.disabled=true;
+      inp.readOnly=true;
+      inp.placeholder="LOCKED (48 HOURS)";
+    }
+    if(verifyBtn) verifyBtn.disabled=true;
+    if(closeBtn) closeBtn.disabled=true;
+    if(closeXBtn) closeXBtn.disabled=true;
+    if(err) err.textContent="";
+    if(banner) banner.style.display="block";
+    if(countdown) countdown.textContent=formatDuration48H(rem);
+
+    box?.classList.remove("shakeAnim");
+    void box?.offsetWidth;
+    box?.classList.add("shakeAnim");
+
+    clearInterval(teacherLockInterval);
+    teacherLockInterval=setInterval(()=>{
+      const left=getTeacherLockRemainingMs();
+      if(left<=0){
+        clearInterval(teacherLockInterval);
+        resetTeacherLockUI();
+        return;
+      }
+      if(countdown) countdown.textContent=formatDuration48H(left);
+    },1000);
+  }else{
+    resetTeacherLockUI();
+  }
+}
+
+function resetTeacherLockUI(){
+  clearInterval(teacherLockInterval);
+  const inp=document.getElementById("studentCodeInput");
+  const verifyBtn=document.getElementById("studentVerifyBtn");
+  const closeBtn=document.getElementById("studentCloseBtn");
+  const closeXBtn=document.getElementById("studentCloseXBtn");
+  const banner=document.getElementById("teacherLockBanner");
+
+  if(inp){
+    inp.disabled=false;
+    inp.readOnly=false;
+    inp.placeholder="☆☆☆☆☆☆☆☆";
+  }
+  if(verifyBtn) verifyBtn.disabled=false;
+  if(closeBtn) closeBtn.disabled=false;
+  if(closeXBtn) closeXBtn.disabled=false;
+  if(banner) banner.style.display="none";
+}
+
+function triggerTeacherLockout(){
+  const lockUntil=Date.now()+LOCKOUT_DURATION_MS;
+  localStorage.setItem(TEACHER_LOCK_UNTIL_KEY,String(lockUntil));
+  localStorage.removeItem(STUDENT_ACCESS_KEY);
+  openExclusiveModal("studentAccessModal");
+  applyTeacherLockUI();
+  showToast("⚠️ Teachers not allowed! Locked for 48 hours.");
+}
+
+
+/* =========================================================
+   EXCLUSIVE MODAL CONTROLLER
 ========================================================= */
 
 let savedScrollY=0;
@@ -2387,6 +2557,11 @@ function openExclusiveModal(modalId){
 }
 
 function closeExclusiveModals(){
+  if(isTeacherLockedOut()){
+    openExclusiveModal("studentAccessModal");
+    applyTeacherLockUI();
+    return;
+  }
   closeAllModalsOnly();
   document.body.classList.remove("modalOpen");
   updateFloatingBtnVisibility();
@@ -2417,7 +2592,7 @@ const GANG_BRIEFING_ITEMS=[
   {
     emoji:"📍",
     name:"Explore Places",
-    desc:"Browse and search all curated spots locked strictly to your selected college zone (Jayanagar for NMKRV or Basavanagudi / N.R. Colony for Aps), filter by type, open Google Maps, or add spots to a Squad Poll."
+    desc:"Browse and search all curated spots locked strictly to your selected college zone (Jayanagar for NMKRV & RV PU College, or Basavanagudi / N.R. Colony for Aps), filter by type, open Google Maps, or add spots to a Squad Poll."
   },
   {
     emoji:"✨",
@@ -2474,7 +2649,7 @@ const GANG_BRIEFING_ITEMS=[
 let pendingPostBriefingSetup=false;
 
 function isStudentVerified(){
-  return localStorage.getItem(STUDENT_ACCESS_KEY)==="true";
+  return !isTeacherLockedOut() && localStorage.getItem(STUDENT_ACCESS_KEY)==="true";
 }
 
 function openJoinTheGangFlow(requireSetupAfter=false){
@@ -2484,17 +2659,26 @@ function openJoinTheGangFlow(requireSetupAfter=false){
   if(inp) inp.value="";
   if(err) err.textContent="";
   openExclusiveModal("studentAccessModal");
-  setTimeout(()=>inp?.focus(),120);
-}
 
-function closeStudentAccessModal(){
-  closeExclusiveModals();
-  if(!hasCompletedProfile()){
-    showFirstSetup();
+  if(isTeacherLockedOut()){
+    applyTeacherLockUI();
+  }else{
+    resetTeacherLockUI();
+    setTimeout(()=>inp?.focus(),120);
   }
 }
 
+function closeStudentAccessModal(){
+  /* Closing without verifying triggers the 48-hour Teacher Lockout */
+  triggerTeacherLockout();
+}
+
 function verifyStudentAccessCode(){
+  if(isTeacherLockedOut()){
+    applyTeacherLockUI();
+    return;
+  }
+
   const inp=document.getElementById("studentCodeInput");
   const err=document.getElementById("studentCodeError");
   const box=document.getElementById("studentAccessBox");
@@ -2526,10 +2710,8 @@ function verifyStudentAccessCode(){
   spawnSparks(window.innerWidth/2,window.innerHeight/2,26);
   showToast("Student access verified ✅");
 
-  /* Step 1: Close Student Access window completely first */
   closeAllModalsOnly();
 
-  /* Step 2: Open Gang Briefing screen as the sole centered window */
   setTimeout(()=>{
     openGangBriefingWindow();
   },140);
@@ -2593,7 +2775,6 @@ function closeGangBriefingModal(){
 }
 
 function enterGangFromBriefing(){
-  /* Close Gang Briefing window completely first */
   closeExclusiveModals();
   spawnSparks(window.innerWidth/2,window.innerHeight/2,28);
 
@@ -2738,7 +2919,7 @@ function showToast(msg){
   el.textContent=msg;
   el.classList.add("show");
   clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>el.classList.remove("show"),2600);
+  toastTimer=setTimeout(()=>el.classList.remove("show"),2800);
 }
 
 
@@ -2791,7 +2972,7 @@ function displayName(){
 }
 
 function hasCompletedProfile(){
-  return Boolean((selectedName||"").trim() && (selectedCollege==="NMKRV" || selectedCollege==="Aps"));
+  return Boolean((selectedName||"").trim() && VALID_COLLEGES.includes(selectedCollege));
 }
 
 
@@ -2893,7 +3074,7 @@ function openAddSecretAddaModal(){
     <p>Add your hidden <strong>${escapeHtml(getCollegeShort())}</strong> hangout spot to the planner.</p>
 
     <input id="customSpotName" class="input centerInput" maxlength="40" placeholder="Spot Name">
-    <input id="customSpotArea" class="input centerInput" maxlength="40" placeholder="Block / Street (e.g. 4th Block / DVG Road)">
+    <input id="customSpotArea" class="input centerInput" maxlength="40" placeholder="Block / Street (e.g. 3rd Block / 4th Block / DVG Road)">
     <select id="customSpotCat" class="selectInput" style="margin:8px 0;text-align:center;">
       ${categories.map(c=>`<option value="${c[0]}">${c[1]} ${escapeHtml(c[2])}</option>`).join("")}
     </select>
@@ -2944,16 +3125,16 @@ function deleteCustomSpot(id){
 
 
 /* =========================================================
-   LOCATION LOCKED DATA
+   LOCATION LOCKED DATA (JAYANAGAR & BASAVANAGUDI)
 ========================================================= */
 
-const nmkrvPlanner={
+const jayanagarPlanner={
 gaming:[
 ["The G.O.A.T Gaming Cafe","Jayanagar","Premium gaming café / esports-style hangout in Jayanagar.","PC gaming • console vibe • squad sessions"],
 ["1vX Gaming | Jayanagar","Jayanagar 9th Block","Gaming hangout with PC, console and simulator-style activities.","PC • PS5 • simulators • squad"],
 ["Amoeba Jayanagar","Jayanagar","Classic entertainment option for arcade/bowling-style fun.","Arcade • bowling-style outing"],
 ["Esc Gaming Cafe","Jayanagar","Local gaming option previously listed among Jayanagar things to do.","Gaming • friends"],
-["Now Boarding Café","Jayanagar 1st/3rd Block","Board-game café with a large tabletop collection.","Board games • food • groups"],
+["Now Boarding Café","Jayanagar 1st/3rd Block","Board-game café right near RV PU College with a large tabletop collection.","Board games • food • groups"],
 ["Funzy Cafe","Jayanagar 5th Block","Creative café with painting, crafts, board games and activities.","Games • art • activities"]
 ],
 cinema:[
@@ -2966,23 +3147,23 @@ shopping:[
 ["Jayanagar Shopping Complex","Jayanagar 4th Block","Classic Jayanagar shopping hub with shops, accessories, clothes and snacks nearby.","Shopping • street market"],
 ["Jayanagar Market","Jayanagar 4th Block","Busy local shopping district around the 4th Block area.","Market • street shopping"],
 ["BDA Complex Jayanagara","Jayanagar 4th Block","Long-running commercial and shopping destination.","Shopping • local market"],
-["Jayanagar 4th Block","Jayanagar","The commercial heart of Jayanagar for browsing, snacks and shopping.","Shopping • food"],
+["Jayanagar 3rd & 4th Block","Jayanagar","The commercial heart of Jayanagar for browsing, snacks and shopping.","Shopping • food"],
 ["Jayanagar 5th Block shopping streets","Jayanagar 5th Block","Smaller shops and local stores around the block.","Shopping • browsing"],
 ["Jayanagar 9th Block shopping area","Jayanagar 9th Block","Local shopping around the 9th Block grid.","Shopping • essentials"]
 ],
 food:[
 ["Taaza Thindi","Jayanagar","Popular Jayanagar breakfast/snack stop.","South Indian • budget"],
-["Hari Super Sandwich Jayanagar","Jayanagar","Quick sandwich-focused food stop.","Quick bite • friends"],
+["Hari Super Sandwich Jayanagar","Jayanagar 3rd Block","Quick sandwich-focused food stop walking distance from RV PU College.","Quick bite • friends"],
 ["Upahara Darshini","Jayanagar","Local South Indian quick-service option.","Breakfast • snacks"],
 ["Chutney Chang Jayanagar","Jayanagar","Jayanagar food option for a proper group meal.","Meal • friends"],
-["Cool Joint","Jayanagar","Classic quick-bite spot known for sandwiches, milkshakes and ice cream.","Sandwiches • shakes"],
+["Cool Joint","Jayanagar 4th Block","Classic quick-bite spot known for sandwiches, milkshakes and ice cream.","Sandwiches • shakes"],
 ["The Lassi Park Jayanagar","Jayanagar","Casual lassi and snack stop.","Lassi • snacks"],
 ["Ganesh Fruit Juice Centre","Jayanagar","Local juice and quick-refreshment stop.","Juices • quick stop"],
 ["MTR area food walk","Jayanagar","Traditional Bengaluru food outing within the Jayanagar zone.","South Indian • food walk"]
 ],
 cafes:[
 ["Toffee And Talk","Jayanagar","Cozy specialty café suitable for conversations and longer hangs.","Coffee • café"],
-["Blue Tokai Coffee Roasters | Jayanagar","Jayanagar","Specialty coffee café in the Jayanagar commercial grid.","Coffee • study/hangout"],
+["Blue Tokai Coffee Roasters | Jayanagar","Jayanagar 3rd Block","Specialty coffee café in the Jayanagar commercial grid.","Coffee • study/hangout"],
 ["Snuzzles Cafe Jayanagar","Jayanagar 4th Block","Vegetarian café with coffee and comfort food.","Coffee • food"],
 ["Third Wave Coffee - Jaya Nagar","Jayanagar 5th Block","Specialty coffee café with indoor/outdoor seating.","Coffee • chill"],
 ["Sypp - Everyday Specialty Coffee","Jayanagar 4th Block","Compact specialty coffee spot.","Coffee • snacks"],
@@ -3002,7 +3183,7 @@ desserts:[
 ],
 parks:[
 ["Yediyuru Lake Park","Jayanagar 6th Block","Lake park with walking space and outdoor recreation.","Walk • lake • park"],
-["Madhavan Park","Jayanagar","Green neighbourhood park suitable for a relaxed walk.","Park • walk"],
+["Madhavan Park","Jayanagar 3rd Block","Green neighbourhood park right beside RV PU College for a relaxed walk.","Park • walk"],
 ["Nandanvana Children's Park","Jayanagar","Playground-style green space in Jayanagar.","Park • casual outing"],
 ["Putha Narasimhachar Park","Jayanagar","Neighbourhood park for a simple outdoor break.","Park • walk"],
 ["LIC Colony Park","Jayanagar","Local green space for a short break.","Park • chill"],
@@ -3013,7 +3194,7 @@ parks:[
 nature:[
 ["Jayanagara Kiru Kādu","Jayanagar","Mini-forest style green escape for a quiet nature break.","Greenery • walk"],
 ["Yediyuru Lake greenery","Jayanagar 6th Block","Urban lake ecosystem and surrounding greenery.","Nature • birds"],
-["Madhavan Park greenery","Jayanagar","Tree-filled neighbourhood green space.","Nature • walk"],
+["Madhavan Park greenery","Jayanagar 3rd Block","Tree-filled neighbourhood green space near RV PU College.","Nature • walk"],
 ["Jayanagar tree-lined blocks","Jayanagar","Slow walk through Jayanagar's tree-lined residential streets.","Nature • photography"],
 ["Laxman Rao Boulevard green stretch","Jayanagar","Long green residential stretch for a calm walk.","Greenery • walk"]
 ],
@@ -3044,13 +3225,13 @@ science:[
 photos:[
 ["Yediyuru Lake","Jayanagar 6th Block","Water, reflections and greenery make this an easy photo stop.","Photography"],
 ["Ragigudda hillock","Jayanagar 9th Block","Hillock and temple-area photography.","Photography"],
-["Jayanagar 4th Block streets","Jayanagar 4th Block","Busy market streets, signs and old Bengaluru details.","Street photography"],
+["Jayanagar 3rd & 4th Block streets","Jayanagar","Busy market streets, signs and old Bengaluru details.","Street photography"],
 ["Jayanagar tree-lined roads","Jayanagar","Classic residential Bengaluru visuals.","Street photography"],
 ["Jayanagar cafés","Jayanagar","Café interiors and food photography.","Café photos"]
 ],
 walk:[
 ["Yediyuru Lake walking loop","Jayanagar 6th Block","Easy lake-side walking route.","Walk • lake"],
-["Jayanagar 4th Block market walk","Jayanagar 4th Block","Shopping + snacks + street walk.","Walk • shopping"],
+["Jayanagar 3rd to 4th Block walk","Jayanagar","Shopping + snacks + street walk straight from campus.","Walk • shopping"],
 ["Ragigudda hill walk","Jayanagar 9th Block","Short uphill walk around the hillock.","Walk • hill"],
 ["Jayanagar 5th Block café walk","Jayanagar 5th Block","Walk between cafés and nearby streets.","Walk • cafés"],
 ["Laxman Rao Boulevard walk","Jayanagar","Longer relaxed residential walk.","Walk • greenery"]
@@ -3058,14 +3239,14 @@ walk:[
 sports:[
 ["Amoeba Jayanagar","Jayanagar","Bowling/arcade-style entertainment option.","Bowling • arcade"],
 ["Yediyuru Lake open recreation","Jayanagar 6th Block","Outdoor recreational space around the lake.","Outdoor • recreation"],
-["Jayanagar parks","Jayanagar","Use local parks for casual outdoor games.","Outdoor • games"],
+["Madhavan Park & Jayanagar parks","Jayanagar 3rd Block","Use local parks for casual outdoor games.","Outdoor • games"],
 ["Jayanagar block grounds","Jayanagar","Neighbourhood grounds for casual group activity.","Sports • outdoors"],
 ["Jayanagar walking challenge","Jayanagar","Create your own walking route through the blocks.","Walking • fitness"]
 ],
 books:[
-["Sapna Book House - Jayanagar","Jayanagar","Books, stationery and study material in the Jayanagar area.","Books • stationery"],
+["Sapna Book House - Jayanagar","Jayanagar 3rd Block","Books, stationery and study material right in Jayanagar 3rd Block.","Books • stationery"],
 ["Jayanagar public library","Jayanagar","Local reading/library option.","Books • reading"],
-["M.N. Krishna Rao-style reading plan — Jayanagar alternative","Jayanagar","Quiet reading break using a Jayanagar park.","Reading • outdoors"],
+["Madhavan Park reading plan","Jayanagar 3rd Block","Quiet reading break inside Madhavan Park.","Reading • outdoors"],
 ["Jayanagar book + café day","Jayanagar","Book browsing followed by a café stop.","Books • café"]
 ],
 art:[
@@ -3076,7 +3257,7 @@ art:[
 ],
 activities:[
 ["Funzy Cafe","Jayanagar 5th Block","Painting, craft, board games, RC activities and entertainment.","Art • games"],
-["Now Boarding Café","Jayanagar","Tabletop gaming for a longer group session.","Board games"],
+["Now Boarding Café","Jayanagar 1st/3rd Block","Tabletop gaming for a longer group session.","Board games"],
 ["ParSEC-Jayanagar by Param","Jayanagar 7th Block","Interactive science experience.","Science • interactive"],
 ["Amoeba Jayanagar","Jayanagar","Arcade/bowling-style group entertainment.","Games • fun"],
 ["The G.O.A.T Gaming Cafe","Jayanagar","Gaming session with the gang.","Gaming"],
@@ -3087,15 +3268,16 @@ activities:[
 sunset:[
 ["Yediyuru Lake","Jayanagar 6th Block","Lake-side evening atmosphere and photos.","Sunset • lake"],
 ["Ragigudda hillock","Jayanagar 9th Block","Elevated evening views around the hillock.","Sunset • hill"],
-["Jayanagar parks","Jayanagar","Relaxed evening greenery.","Sunset • park"],
+["Madhavan Park","Jayanagar 3rd Block","Relaxed evening greenery near RV PU College.","Sunset • park"],
 ["Jayanagar tree-lined streets","Jayanagar","Slow evening walk through the blocks.","Sunset • walk"]
 ],
 metro:[
+["South End Circle Metro Station","Jayanagar 3rd Block","Closest Green Line station right beside RV PU College.","Green Line"],
 ["Jayanagara Metro Station","Jayanagar","Main Green Line access for Jayanagar outings.","Green Line"],
-["Rashtreeya Vidyalaya Road Metro Station","Jayanagar","Green Line access serving the Jayanagar side.","Green Line"],
-["South End Circle Metro Station","Jayanagar-side access","Useful Green Line access around the Jayanagar edge.","Green Line"]
+["Rashtreeya Vidyalaya Road Metro Station","Jayanagar","Green Line access serving the Jayanagar side.","Green Line"]
 ],
 nearby:[
+["Jayanagar 3rd Block","Jayanagar","Core RV PU College / Madhavan Park / South End Circle hangout zone.","Jayanagar"],
 ["Jayanagar 4th Block","Jayanagar","Shopping, food, cafés and market energy.","Jayanagar"],
 ["Jayanagar 5th Block","Jayanagar","Cafés, desserts, shops and activities.","Jayanagar"],
 ["Jayanagar 6th Block / Yediyur","Jayanagar","Lake, park and boating side.","Jayanagar"],
@@ -3250,17 +3432,17 @@ nearby:[
 ]
 };
 
-const nmkrvExplore=[
+const jayanagarExplore=[
 ["The G.O.A.T Gaming Cafe","Gaming","Jayanagar","PC/esports-style gaming hangout"],
 ["1vX Gaming | Jayanagar","Gaming","Jayanagar 9th Block","PC + console + simulator-style gaming"],
-["Now Boarding Café","Activities","Jayanagar","Board games + café"],
+["Now Boarding Café","Activities","Jayanagar 1st/3rd Block","Board games + café near RV PU College"],
 ["Funzy Cafe","Activities","Jayanagar 5th Block","Art + games + food"],
 ["ParSEC-Jayanagar by Param","Science","Jayanagar 7th Block","Interactive science centre"],
 ["Jayanagar Shopping Complex","Shopping","Jayanagar 4th Block","Shopping + street market"],
 ["Jayanagar Market","Shopping","Jayanagar 4th Block","Local market"],
 ["BDA Complex Jayanagara","Shopping","Jayanagar 4th Block","Commercial hub"],
 ["Toffee And Talk","Cafe","Jayanagar","Coffee + hangout"],
-["Blue Tokai Coffee Roasters | Jayanagar","Cafe","Jayanagar","Specialty coffee"],
+["Blue Tokai Coffee Roasters | Jayanagar","Cafe","Jayanagar 3rd Block","Specialty coffee"],
 ["Snuzzles Cafe Jayanagar","Cafe","Jayanagar 4th Block","Coffee + food"],
 ["Third Wave Coffee - Jaya Nagar","Cafe","Jayanagar 5th Block","Coffee + chill"],
 ["Sypp - Everyday Specialty Coffee","Cafe","Jayanagar 4th Block","Specialty coffee"],
@@ -3272,13 +3454,14 @@ const nmkrvExplore=[
 ["Yediyuru Lake","Nature","Jayanagar 6th Block","Lake + walk"],
 ["Shantala Boating Centre","Activities","Yediyur, Jayanagar","Paddle boating"],
 ["Ragigudda hillock","Nature","Jayanagar 9th Block","Hillock + views"],
-["Madhavan Park","Park","Jayanagar","Green space"],
+["Madhavan Park","Park","Jayanagar 3rd Block","Green space right beside RV PU College"],
 ["Nandanvana Children's Park","Park","Jayanagar","Playground + park"],
 ["Jayanagar Kiru Kādu","Nature","Jayanagar","Green escape"],
-["Sapna Book House - Jayanagar","Books","Jayanagar","Books + stationery"],
+["Sapna Book House - Jayanagar","Books","Jayanagar 3rd Block","Books + stationery"],
 ["The Firefly Terrace","Art","Jayanagar 2nd Block","Creative workshops"],
 ["KAHALE - Filter Kaapi Bar","Cafe","Jayanagar 4th Block","Filter coffee"],
-["Isobel Coffee House","Cafe","Jayanagar 2nd Block","Coffee + snacks"]
+["Isobel Coffee House","Cafe","Jayanagar 2nd Block","Coffee + snacks"],
+["South End Circle Metro Station","Metro","Jayanagar 3rd Block","Green Line metro beside RV PU College"]
 ];
 
 const apsExplore=[
@@ -3291,7 +3474,7 @@ const apsExplore=[
 ["Gopalan Arcade area","Shopping","Basavanagudi side","Shopping + entertainment"],
 ["Bugle Rock Park","Nature","Basavanagudi","Rock + park + viewpoint"],
 ["M.N. Krishna Rao Park","Park","Basavanagudi","Walking + sports + library"],
-["Madhava Rao Park","Basavanagudi","Green space"],
+["Madhava Rao Park","Park","Basavanagudi","Green space"],
 ["Jayanti Garden","Park","Basavanagudi","Garden"],
 ["Sajjan Rao Park","Park","Basavanagudi","Park + walk"],
 ["Bull Temple","Temple","N.R. Colony","Historic Nandi temple"],
@@ -3392,8 +3575,8 @@ function loadData(){
     const data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null");
     if(data && data.college){
       selectedName=data.name||"";
-      selectedCollege=data.college==="Aps" ? "Aps" : "NMKRV";
-      return Boolean(data.name && data.college);
+      selectedCollege=VALID_COLLEGES.includes(data.college) ? data.college : "NMKRV";
+      return Boolean(data.name && VALID_COLLEGES.includes(data.college));
     }
   }catch(e){}
   return false;
@@ -3678,7 +3861,7 @@ function openReceiptStoryExporter(mode){
   ctx.textAlign="center";
   ctx.font="bold 14px Courier New";
   ctx.fillStyle="#4a465c";
-  ctx.fillText("MADE BY KUSH KUMAR • NEXORA V8.9",360,1096);
+  ctx.fillText("MADE BY KUSH KUMAR • NEXORA V9.1 LQA",360,1096);
 
   const dataUrl=canvas.toDataURL("image/png");
   const box=document.getElementById("customModalBox");
@@ -3817,13 +4000,13 @@ function sendPollWhatsApp(){
 ========================================================= */
 
 function getArea(){
-  return selectedCollege==="Aps"
-    ? "Aps • N.R. Colony • Basavanagudi"
-    : "NMKRV • Jayanagar";
+  if(selectedCollege==="Aps") return "Aps • N.R. Colony • Basavanagudi";
+  if(selectedCollege==="RV PU College") return "RV PU College • Jayanagar 3rd Block";
+  return "NMKRV • Jayanagar";
 }
 
 function getPlannerData(){
-  const base=selectedCollege==="Aps" ? apsPlanner : nmkrvPlanner;
+  const base=selectedCollege==="Aps" ? apsPlanner : jayanagarPlanner;
   const merged={};
   Object.keys(base).forEach(k=>{ merged[k]=[...base[k]]; });
 
@@ -3838,7 +4021,7 @@ function getPlannerData(){
 }
 
 function getExploreData(){
-  const base=selectedCollege==="Aps" ? apsExplore : nmkrvExplore;
+  const base=selectedCollege==="Aps" ? apsExplore : jayanagarExplore;
   const custom=getCustomSpots()
     .filter(s=>s.college===selectedCollege)
     .map(s=>[s.name,"Secret Adda",s.area,`${s.desc} (Pinned by ${s.addedBy})`]);
@@ -3846,7 +4029,9 @@ function getExploreData(){
 }
 
 function getCollegeShort(){
-  return selectedCollege==="Aps" ? "Aps" : "NMKRV";
+  if(selectedCollege==="Aps") return "Aps";
+  if(selectedCollege==="RV PU College") return "RV PU College";
+  return "NMKRV";
 }
 
 function mapLink(place,area){
@@ -3855,6 +4040,11 @@ function mapLink(place,area){
 }
 
 function openEditName(){
+  if(isTeacherLockedOut()){
+    openExclusiveModal("studentAccessModal");
+    applyTeacherLockUI();
+    return;
+  }
   collegeChangeMode=false;
   document.getElementById("nameStep").classList.add("active");
   document.getElementById("collegeStep").classList.remove("active");
@@ -3906,6 +4096,13 @@ function renderHome(){
   const bucketMap=getBucketMap();
   const collegeEntries=Object.values(bucketMap).filter(x=>x.college===selectedCollege);
   const visitedCount=collegeEntries.filter(x=>x.visited).length;
+
+  let lockNote="NMKRV is locked to Jayanagar. No Basavanagudi places are used in this planner.";
+  if(selectedCollege==="RV PU College"){
+    lockNote="RV PU College is locked to Jayanagar (3rd Block / South End Circle). No Basavanagudi places are used in this planner.";
+  }else if(selectedCollege==="Aps"){
+    lockNote="Aps is locked to N.R. Colony / Basavanagudi. No Jayanagar places are used in this planner.";
+  }
 
   document.getElementById("app").innerHTML=`
     <main class="page ${squadPoll.length?'hasDock':''}">
@@ -3998,13 +4195,7 @@ function renderHome(){
 
       <div class="specialCard">
         <h3>📌 Your location lock</h3>
-        <p>
-          ${
-            selectedCollege==="NMKRV"
-            ? "NMKRV is locked to Jayanagar. No Basavanagudi places are used in this planner."
-            : "Aps is locked to N.R. Colony / Basavanagudi. No Jayanagar places are used in this planner."
-          }
-        </p>
+        <p>${escapeHtml(lockNote)}</p>
         <div class="modalActions" style="margin-top:0;">
           <button class="secondary" onclick="openEditName()">✏️ Rename</button>
           <button class="primary" onclick="openChangeCollege()">Change College</button>
@@ -4842,7 +5033,7 @@ function renderBucketList(){
 
 
 /* =========================================================
-   MANAGEMENT & LOGIN RECORDS (CENTERED DASHBOARD)
+   MANAGEMENT & LOGIN RECORDS
 ========================================================= */
 
 function openManagementAuth(){
@@ -4900,7 +5091,7 @@ function renderManagementDashboard(){
     String(now.getDate()).padStart(2,"0");
 
   const todayLogins=records.filter(r=>r.dayKey===todayKey).length;
-  const filterOptions=["all","NMKRV","Aps"];
+  const filterOptions=["all","NMKRV","RV PU College","Aps"];
 
   document.getElementById("app").innerHTML=`
     <main class="page">
@@ -5138,7 +5329,7 @@ function renderExplore(){
 
       <div class="notice">
         🔒 <b>Location lock:</b>
-        ${selectedCollege==="NMKRV" ? "Every card below is Jayanagar-focused." : "Every card below is Basavanagudi / N.R. Colony-focused."}
+        ${selectedCollege==="Aps" ? "Every card below is Basavanagudi / N.R. Colony-focused." : "Every card below is Jayanagar-focused."}
       </div>
 
       <input
@@ -5296,7 +5487,7 @@ function renderCategories(){
 
       <div class="notice">
         🔐 <b>${escapeHtml(getCollegeShort())} mode:</b>
-        ${selectedCollege==="NMKRV" ? "Jayanagar-only places." : "N.R. Colony / Basavanagudi-only places."}
+        ${selectedCollege==="Aps" ? "N.R. Colony / Basavanagudi-only places." : "Jayanagar-only places."}
       </div>
 
       <div class="categoryGrid">
@@ -5321,7 +5512,7 @@ function renderCategories(){
         <h3>🎲 Can't decide?</h3>
         <p>
           Let the gang planner randomly pick something from
-          ${selectedCollege==="NMKRV" ? "Jayanagar" : "Basavanagudi"}.
+          ${selectedCollege==="Aps" ? "Basavanagudi" : "Jayanagar"}.
         </p>
         <button class="specialBtn" onclick="surpriseMe()">
           Surprise Me 🎲
@@ -5533,7 +5724,7 @@ function surpriseMe(){
 
 
 /* =========================================================
-   BEAUTY MODE (CORNER USER & COLLEGE BADGE)
+   BEAUTY MODE
 ========================================================= */
 
 const beautyMessages=[
@@ -5679,10 +5870,15 @@ function refreshCurrentView(){
 
 
 /* =========================================================
-   COLLEGE CHANGE & INITIAL SETUP (EXCLUSIVE POP-UP WINDOWS)
+   COLLEGE CHANGE & INITIAL SETUP
 ========================================================= */
 
 function openChangeCollege(){
+  if(isTeacherLockedOut()){
+    openExclusiveModal("studentAccessModal");
+    applyTeacherLockUI();
+    return;
+  }
   collegeChangeMode=true;
   returnPage=currentPage;
   temporaryCollege=selectedCollege;
@@ -5703,8 +5899,9 @@ function chooseCollege(college){
 }
 
 function updateCollegeSelection(){
-  document.getElementById("nmkrvOption").classList.toggle("selected",temporaryCollege==="NMKRV");
-  document.getElementById("apsOption").classList.toggle("selected",temporaryCollege==="Aps");
+  document.getElementById("nmkrvOption")?.classList.toggle("selected",temporaryCollege==="NMKRV");
+  document.getElementById("rvpuOption")?.classList.toggle("selected",temporaryCollege==="RV PU College");
+  document.getElementById("apsOption")?.classList.toggle("selected",temporaryCollege==="Aps");
 }
 
 function saveCollege(){
@@ -5756,6 +5953,11 @@ function closeSetup(){
 }
 
 function showFirstSetup(){
+  if(isTeacherLockedOut()){
+    openExclusiveModal("studentAccessModal");
+    applyTeacherLockUI();
+    return;
+  }
   collegeChangeMode=false;
   temporaryCollege="";
 
@@ -5789,6 +5991,11 @@ function goToCollegeStep(){
 }
 
 function goHome(){
+  if(isTeacherLockedOut()){
+    openExclusiveModal("studentAccessModal");
+    applyTeacherLockUI();
+    return;
+  }
   renderHome();
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -5852,7 +6059,7 @@ document.addEventListener("keydown",function(e){
 
   const profileReady=loadData();
   if(profileReady){
-    if(selectedCollege!=="NMKRV" && selectedCollege!=="Aps"){
+    if(!VALID_COLLEGES.includes(selectedCollege)){
       selectedCollege="NMKRV";
       saveData();
     }
@@ -5861,7 +6068,9 @@ document.addEventListener("keydown",function(e){
 
   renderHome();
 
-  if(!isStudentVerified()){
+  if(isTeacherLockedOut()){
+    openJoinTheGangFlow(!profileReady);
+  }else if(!isStudentVerified()){
     openJoinTheGangFlow(!profileReady);
   }else if(!profileReady){
     showFirstSetup();
@@ -5871,4 +6080,4 @@ document.addEventListener("keydown",function(e){
 </script>
 
 </body>
-</html>
+  </html>
