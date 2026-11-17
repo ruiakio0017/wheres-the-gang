@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#070611">
-<title>WHERE'S THE GANG? — V8.8 LTE HORIZON ULTRA</title>
+<title>WHERE'S THE GANG? — NEXORA V8.9 HORIZON ULTRA</title>
 
 <style>
 :root{
@@ -540,8 +540,17 @@ button{
 }
 
 /* =========================================================
-   USER BADGE WITH LIVE PULSE DOT
+   USER BADGE WITH LIVE PULSE DOT + JOIN THE GANG PILL
 ========================================================= */
+
+.userBadgeRow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
 
 .userBadge{
   display:inline-flex;
@@ -561,6 +570,10 @@ button{
   animation:fadeUp .65s .15s ease both;
 }
 
+.userBadgeRow .userBadge{
+  margin-bottom:0;
+}
+
 .userBadge:hover{
   border-color:var(--accent-1);
   transform:translateY(-2px);
@@ -568,6 +581,28 @@ button{
 
 .userBadge strong{
   color:#fff;
+}
+
+.joinGangPillBtn{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:8px 15px;
+  border-radius:999px;
+  font-size:12.5px;
+  font-weight:1000;
+  letter-spacing:.6px;
+  color:#fff;
+  background:linear-gradient(135deg, rgba(139,92,255,.32), rgba(255,79,216,.26));
+  border:1px solid var(--accent-2);
+  box-shadow:0 0 20px var(--glow-main);
+  transition:.25s ease;
+  animation:fadeUp .65s .18s ease both;
+}
+
+.joinGangPillBtn:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 0 28px var(--glow-pink);
 }
 
 .liveDot{
@@ -845,7 +880,7 @@ button{
   text-align:center;
   font-weight:900;
   font-size:17px;
-  letter-spacing:1px;
+  letter-spacing:1.2px;
 }
 
 .search{
@@ -1601,6 +1636,218 @@ button{
   animation:modalBoxIn .35s cubic-bezier(.16,1,.3,1);
 }
 
+/* =========================================================
+   GANG BRIEFING WINDOW (PREMIUM ONBOARDING)
+========================================================= */
+
+.briefingModalBox{
+  position:relative;
+  width:min(680px,100%);
+  max-height:90dvh;
+  display:flex;
+  flex-direction:column;
+  margin:auto;
+  background:linear-gradient(145deg, rgba(28,24,46,.98), rgba(10,10,18,.99));
+  border:1px solid rgba(168,125,255,.38);
+  border-radius:28px;
+  box-shadow:0 30px 100px rgba(0,0,0,.9), 0 0 70px var(--glow-main);
+  animation:modalBoxIn .38s cubic-bezier(.16,1,.3,1);
+  overflow:hidden;
+}
+
+.briefingTopHeader{
+  padding:22px 22px 14px;
+  text-align:center;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(180deg, rgba(139,92,255,.14), transparent);
+  flex-shrink:0;
+}
+
+.briefingVerifiedBadge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 12px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:1.2px;
+  color:#8affdf;
+  background:rgba(0,255,163,.14);
+  border:1px solid rgba(0,255,163,.45);
+  box-shadow:0 0 16px rgba(0,255,163,.25);
+  margin-bottom:8px;
+}
+
+.briefingTopHeader h2{
+  margin:0 0 4px;
+  font-size:clamp(22px,5.8vw,30px);
+  font-weight:1000;
+  letter-spacing:-.6px;
+  background:linear-gradient(135deg,#fff 35%,#d5c4ff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.briefingTopHeader p{
+  margin:0 auto;
+  max-width:520px;
+  color:#b6b2c8;
+  font-size:13px;
+  line-height:1.4;
+}
+
+.briefingProgressBarRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:12px;
+  padding:7px 12px;
+  border-radius:12px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:11.5px;
+  font-weight:900;
+  color:#cbbfff;
+}
+
+.briefingProgressTrack{
+  flex:1;
+  height:5px;
+  border-radius:999px;
+  background:rgba(255,255,255,.1);
+  overflow:hidden;
+}
+
+.briefingProgressFill{
+  height:100%;
+  width:8.33%;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-4));
+  transition:width .25s ease;
+}
+
+.briefingScrollBody{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  padding:16px 18px 22px;
+  display:grid;
+  gap:11px;
+  scroll-behavior:smooth;
+}
+
+.briefingCard{
+  text-align:left;
+  padding:15px 16px;
+  border-radius:20px;
+  background:linear-gradient(145deg, rgba(36,31,58,.82), rgba(16,15,26,.88));
+  border:1px solid rgba(168,125,255,.22);
+  box-shadow:0 8px 24px rgba(0,0,0,.3);
+  transition:border-color .25s ease, transform .25s ease;
+}
+
+.briefingCard:hover{
+  border-color:var(--accent-2);
+  transform:translateY(-2px);
+}
+
+.briefingCardTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:6px;
+}
+
+.briefingCardTitle{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:16px;
+  font-weight:1000;
+  color:#fff;
+}
+
+.briefingCardTitle .bEmoji{
+  font-size:21px;
+  line-height:1;
+}
+
+.briefingStepNum{
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:1.2px;
+  color:#cbbfff;
+  background:rgba(139,92,255,.18);
+  border:1px solid rgba(168,125,255,.32);
+  padding:4px 9px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+
+.briefingCardDesc{
+  margin:0;
+  color:#b6b2c8;
+  font-size:13.2px;
+  line-height:1.45;
+}
+
+.briefingBottomCta{
+  margin-top:8px;
+  padding:22px 18px;
+  border-radius:24px;
+  text-align:center;
+  background:linear-gradient(135deg, rgba(139,92,255,.24), rgba(255,79,216,.18));
+  border:1px solid var(--accent-2);
+  box-shadow:0 0 32px var(--glow-main);
+}
+
+.briefingBottomCta h3{
+  margin:0 0 6px;
+  font-size:21px;
+  font-weight:1000;
+  letter-spacing:.4px;
+  color:#fff;
+}
+
+.briefingBottomCta p{
+  margin:0 0 16px;
+  color:#dfd9f2;
+  font-size:13.5px;
+  line-height:1.4;
+}
+
+.letsGoGlowBtn{
+  width:100%;
+  padding:16px 24px;
+  border-radius:18px;
+  font-size:17px;
+  font-weight:1000;
+  letter-spacing:.6px;
+  color:#0e0d15;
+  background:linear-gradient(135deg, #ffffff 0%, #f3e5ff 55%, #d6fff2 100%);
+  box-shadow:0 0 28px var(--glow-pink), 0 14px 34px rgba(0,0,0,.45);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.letsGoGlowBtn:hover{
+  transform:translateY(-2px) scale(1.015);
+  box-shadow:0 0 40px var(--glow-pink), 0 18px 40px rgba(0,0,0,.55);
+}
+
+.shakeAnim{
+  animation:inputShake .38s ease;
+}
+
+@keyframes inputShake{
+  0%,100%{ transform:translateX(0); }
+  20%,60%{ transform:translateX(-8px); }
+  40%,80%{ transform:translateX(8px); }
+}
+
 .modalCloseX{
   position:absolute;
   top:14px;
@@ -1616,6 +1863,7 @@ button{
   display:flex;
   align-items:center;
   justify-content:center;
+  z-index:10;
   transition:.2s ease;
 }
 
@@ -1884,6 +2132,14 @@ button{
     flex-direction:column;
     align-items:flex-start;
   }
+
+  .briefingTopHeader{
+    padding:18px 16px 12px;
+  }
+
+  .briefingScrollBody{
+    padding:12px 13px 18px;
+  }
 }
 </style>
 </head>
@@ -1911,6 +2167,67 @@ button{
 >
   ↑
 </button>
+
+
+<!-- =========================================================
+     STEP 1: STUDENT ACCESS VERIFICATION WINDOW
+========================================================= -->
+
+<div id="studentAccessModal" class="modal">
+  <div class="modalBox" id="studentAccessBox">
+    <button class="modalCloseX" onclick="closeStudentAccessModal()" title="Close">✕</button>
+
+    <div style="font-size:38px;margin-bottom:4px;">🎓🔐</div>
+    <h2>STUDENT ACCESS</h2>
+    <p>Enter your student access code to continue.</p>
+
+    <input
+      id="studentCodeInput"
+      class="input centerInput"
+      maxlength="24"
+      autocomplete="off"
+      autocapitalize="characters"
+      placeholder="☆☆☆☆☆☆☆☆"
+      onkeydown="if(event.key==='Enter') verifyStudentAccessCode()"
+    >
+
+    <div id="studentCodeError" class="errorMsg"></div>
+
+    <div class="modalActions">
+      <button class="secondary" onclick="closeStudentAccessModal()">Close</button>
+      <button class="primary" id="studentVerifyBtn" onclick="verifyStudentAccessCode()">CONTINUE →</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- =========================================================
+     STEP 2: GANG BRIEFING SCREEN (12 EXISTING OPTIONS)
+========================================================= -->
+
+<div id="gangBriefingModal" class="modal">
+  <div class="briefingModalBox">
+    <button class="modalCloseX" onclick="closeGangBriefingModal()" title="Close">✕</button>
+
+    <div class="briefingTopHeader">
+      <div class="briefingVerifiedBadge">✅ YOUR ACCESS HAS BEEN VERIFIED</div>
+      <h2>WELCOME TO THE GANG</h2>
+      <p>
+        Here is a quick guide to every feature and activity waiting inside NEXORA so your squad can plan effortlessly.
+      </p>
+
+      <div class="briefingProgressBarRow">
+        <span id="briefingProgressText">01 / 12</span>
+        <div class="briefingProgressTrack">
+          <div id="briefingProgressFill" class="briefingProgressFill"></div>
+        </div>
+        <span>BRIEFING</span>
+      </div>
+    </div>
+
+    <div id="briefingScrollBody" class="briefingScrollBody" onscroll="updateBriefingScrollProgress()"></div>
+  </div>
+</div>
 
 
 <!-- =========================================================
@@ -2024,16 +2341,20 @@ button{
 
 /* =========================================================
    WHERE'S THE GANG?
-   V8.8 LTE • HORIZON ULTRA
+   NEXORA V8.9 • HORIZON ULTRA
 ========================================================= */
 
-const APP_VERSION="V8.8 LTE • HORIZON ULTRA";
+const APP_VERSION="NEXORA V8.9 • HORIZON ULTRA";
 
 const STORAGE_KEY="wheres_the_gang_final_v8";
 const RECORDS_STORAGE_KEY="wheres_the_gang_login_records_v8";
 const BUCKET_STORAGE_KEY="wheres_the_gang_bucket_v8";
 const CUSTOM_SPOTS_KEY="wheres_the_gang_custom_spots_v8";
 const THEME_STORAGE_KEY="wheres_the_gang_theme_v8";
+const STUDENT_ACCESS_KEY="wheres_the_gang_student_verified_v89";
+
+/* SHA-256 hash of normalized student code */
+const STUDENT_CODE_SHA256="65c025d241ed1846df405e9ed3f86bc7057a1ebcb93038148d7269f5b42a9d22";
 
 const MGMT_PASSWORD="1234";
 
@@ -2045,6 +2366,8 @@ const MGMT_PASSWORD="1234";
 let savedScrollY=0;
 
 function closeAllModalsOnly(){
+  document.getElementById("studentAccessModal")?.classList.remove("show");
+  document.getElementById("gangBriefingModal")?.classList.remove("show");
   document.getElementById("modal")?.classList.remove("show");
   document.getElementById("mgmtModal")?.classList.remove("show");
   document.getElementById("customModal")?.classList.remove("show");
@@ -2078,6 +2401,230 @@ function updateFloatingBtnVisibility(){
   }else{
     btn.style.display="";
   }
+}
+
+
+/* =========================================================
+   STUDENT ACCESS VERIFICATION & GANG BRIEFING SYSTEM
+========================================================= */
+
+const GANG_BRIEFING_ITEMS=[
+  {
+    emoji:"⚡",
+    name:"Prime Options",
+    desc:"Automatically highlights the best hangout categories and places for the current time of day—morning breakfast & walks, afternoon indoor AC escapes, golden hour sunsets, or late-night desserts."
+  },
+  {
+    emoji:"📍",
+    name:"Explore Places",
+    desc:"Browse and search all curated spots locked strictly to your selected college zone (Jayanagar for NMKRV or Basavanagudi / N.R. Colony for Aps), filter by type, open Google Maps, or add spots to a Squad Poll."
+  },
+  {
+    emoji:"✨",
+    name:"Nexora AI",
+    desc:"Your location-locked hangout concierge. Type your mood, budget, or vibe—or tap a quick prompt—to get instant local spot recommendations with one-tap Maps and Poll actions."
+  },
+  {
+    emoji:"🎯",
+    name:"Where Should We Go?",
+    desc:"Explore 21 organized categories ranging from Gaming, Food, Cafés, and Desserts to Lakes, Parks, Temples, and Metro stations—or hit 'Surprise Me' for a random pick."
+  },
+  {
+    emoji:"🔥",
+    name:"Vibe Swipe Decider",
+    desc:"A fast-paced card swiper where you swipe right (or tap ♥) to keep spots and swipe left (or tap ✕) to ditch them until one final survivor wins for your squad."
+  },
+  {
+    emoji:"⚡",
+    name:"3-Stop Auto-Combo & Receipt",
+    desc:"Generates a complete 3-stop outing route chaining three local spots in sequence by vibe (Chill, Gaming & Food, or Street Walk), complete with WhatsApp sharing and a downloadable 9:16 Story Receipt PNG."
+  },
+  {
+    emoji:"🎡",
+    name:"Who Pays? Spin & Split",
+    desc:"Add your friends' names to spin an interactive wheel that crowns who treats the gang, plus an instant per-person bill splitter you can share directly on WhatsApp."
+  },
+  {
+    emoji:"🃏",
+    name:"Truth, Dare, or Pay Deck",
+    desc:"A table party deck of truths and dares to play while waiting for food. Anyone who chickens out gets an extra penalty slice added straight onto the Who Pays? Spin Wheel."
+  },
+  {
+    emoji:"🏆",
+    name:"Squad Bucket List",
+    desc:"Save dream hangout spots to your wishlist, stamp places you've conquered with 1–5 star ratings and memories, level up your Gang Rank, and export your list as a Story Receipt."
+  },
+  {
+    emoji:"📌",
+    name:"Pin Secret Adda",
+    desc:"Save your own hidden hangout spots with a custom name, street/block, category, and note so they appear right inside your college's planner and explore lists."
+  },
+  {
+    emoji:"💅",
+    name:"Beauty Mode",
+    desc:"A playful interactive confidence booster with animated compliments and a dodging 'Next' button whenever the squad needs an instant vibe upgrade."
+  },
+  {
+    emoji:"⚙️",
+    name:"Management",
+    desc:"A restricted administrative section reserved for authorized coordinators to monitor campus usage records and manage custom spot entries."
+  }
+];
+
+let pendingPostBriefingSetup=false;
+
+function isStudentVerified(){
+  return localStorage.getItem(STUDENT_ACCESS_KEY)==="true";
+}
+
+function openJoinTheGangFlow(requireSetupAfter=false){
+  pendingPostBriefingSetup=requireSetupAfter;
+  const inp=document.getElementById("studentCodeInput");
+  const err=document.getElementById("studentCodeError");
+  if(inp) inp.value="";
+  if(err) err.textContent="";
+  openExclusiveModal("studentAccessModal");
+  setTimeout(()=>inp?.focus(),120);
+}
+
+function closeStudentAccessModal(){
+  closeExclusiveModals();
+  if(!hasCompletedProfile()){
+    showFirstSetup();
+  }
+}
+
+async function computeSha256Hex(text){
+  const encoder=new TextEncoder();
+  const data=encoder.encode(text);
+  const hashBuffer=await crypto.subtle.digest("SHA-256",data);
+  const hashArray=Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+async function verifyStudentAccessCode(){
+  const inp=document.getElementById("studentCodeInput");
+  const err=document.getElementById("studentCodeError");
+  const box=document.getElementById("studentAccessBox");
+  const normalized=(inp?.value||"").trim().toUpperCase();
+
+  if(!normalized){
+    if(err) err.textContent="⚠️ Please enter your student access code.";
+    box?.classList.remove("shakeAnim");
+    void box?.offsetWidth;
+    box?.classList.add("shakeAnim");
+    inp?.focus();
+    return;
+  }
+
+  let isValid=false;
+  try{
+    if(window.crypto && crypto.subtle){
+      const digest=await computeSha256Hex(normalized);
+      isValid=(digest===STUDENT_CODE_SHA256);
+    }else{
+      isValid=(btoa(normalized)==="MktFWTgxTkFDTEc=");
+    }
+  }catch(e){
+    isValid=(btoa(normalized)==="MktFWTgxTkFDTEc=");
+  }
+
+  if(!isValid){
+    if(err) err.textContent="❌ Invalid student access code. Please check and try again.";
+    box?.classList.remove("shakeAnim");
+    void box?.offsetWidth;
+    box?.classList.add("shakeAnim");
+    if(inp){
+      inp.value="";
+      inp.focus();
+    }
+    return;
+  }
+
+  localStorage.setItem(STUDENT_ACCESS_KEY,"true");
+  if(err) err.textContent="";
+  spawnSparks(window.innerWidth/2,window.innerHeight/2,26);
+  showToast("Student access verified ✅");
+
+  /* Step 1: Close Student Access window completely first */
+  closeAllModalsOnly();
+
+  /* Step 2: Open Gang Briefing screen as the sole centered window */
+  setTimeout(()=>{
+    openGangBriefingWindow();
+  },140);
+}
+
+function openGangBriefingWindow(){
+  const scrollBody=document.getElementById("briefingScrollBody");
+  if(!scrollBody) return;
+
+  scrollBody.innerHTML=`
+    ${GANG_BRIEFING_ITEMS.map((item,idx)=>{
+      const numStr=String(idx+1).padStart(2,"0")+" / 12";
+      return`
+        <article class="briefingCard" data-brief-idx="${idx+1}">
+          <div class="briefingCardTop">
+            <div class="briefingCardTitle">
+              <span class="bEmoji">${item.emoji}</span>
+              <span>${escapeHtml(item.name)}</span>
+            </div>
+            <span class="briefingStepNum">${numStr}</span>
+          </div>
+          <p class="briefingCardDesc">${escapeHtml(item.desc)}</p>
+        </article>
+      `;
+    }).join("")}
+
+    <div class="briefingBottomCta">
+      <h3>READY TO JOIN THE GANG?</h3>
+      <p>"Now that you know what awaits, let's plan something unforgettable."</p>
+      <button class="letsGoGlowBtn" onclick="enterGangFromBriefing()">
+        LET'S GO →
+      </button>
+    </div>
+  `;
+
+  openExclusiveModal("gangBriefingModal");
+  scrollBody.scrollTop=0;
+  updateBriefingScrollProgress();
+}
+
+function updateBriefingScrollProgress(){
+  const scrollBody=document.getElementById("briefingScrollBody");
+  const textEl=document.getElementById("briefingProgressText");
+  const fillEl=document.getElementById("briefingProgressFill");
+  if(!scrollBody || !textEl || !fillEl) return;
+
+  const maxScroll=scrollBody.scrollHeight - scrollBody.clientHeight;
+  const ratio=maxScroll>0 ? Math.min(1,Math.max(0,scrollBody.scrollTop/maxScroll)) : 1;
+  const step=Math.min(12,Math.max(1,Math.round(ratio*11)+1));
+
+  textEl.textContent=`${String(step).padStart(2,"0")} / 12`;
+  fillEl.style.width=`${(step/12)*100}%`;
+}
+
+function closeGangBriefingModal(){
+  closeExclusiveModals();
+  if(pendingPostBriefingSetup && !hasCompletedProfile()){
+    pendingPostBriefingSetup=false;
+    showFirstSetup();
+  }
+}
+
+function enterGangFromBriefing(){
+  /* Close Gang Briefing window completely first */
+  closeExclusiveModals();
+  spawnSparks(window.innerWidth/2,window.innerHeight/2,28);
+
+  if(pendingPostBriefingSetup && !hasCompletedProfile()){
+    pendingPostBriefingSetup=false;
+    showFirstSetup();
+    return;
+  }
+
+  renderHome();
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 
@@ -2261,6 +2808,10 @@ function escapeHtml(value){
 function displayName(){
   const clean=(selectedName||"").trim();
   return clean ? clean : "☆☆☆☆☆☆☆☆";
+}
+
+function hasCompletedProfile(){
+  return Boolean((selectedName||"").trim() && (selectedCollege==="NMKRV" || selectedCollege==="Aps"));
 }
 
 
@@ -3147,7 +3698,7 @@ function openReceiptStoryExporter(mode){
   ctx.textAlign="center";
   ctx.font="bold 14px Courier New";
   ctx.fillStyle="#4a465c";
-  ctx.fillText("MADE BY KUSH KUMAR • V8.8 LTE",360,1096);
+  ctx.fillText("MADE BY KUSH KUMAR • NEXORA V8.9",360,1096);
 
   const dataUrl=canvas.toDataURL("image/png");
   const box=document.getElementById("customModalBox");
@@ -3393,13 +3944,19 @@ function renderHome(){
           Class can wait. The gang can't. 😂
         </div>
 
-        <div class="userBadge" onclick="openEditName()" title="Click to rename">
-          <span class="liveDot"></span>
-          Hey
-          <strong>${escapeHtml(displayName())}</strong>
-          👋
-          <span>•</span>
-          <span>${escapeHtml(selectedCollege)}</span>
+        <div class="userBadgeRow">
+          <div class="userBadge" onclick="openEditName()" title="Click to rename">
+            <span class="liveDot"></span>
+            Hey
+            <strong>${escapeHtml(displayName())}</strong>
+            👋
+            <span>•</span>
+            <span>${escapeHtml(selectedCollege)}</span>
+          </div>
+
+          <button class="joinGangPillBtn" onclick="openJoinTheGangFlow(false)">
+            🎓 JOIN THE GANG
+          </button>
         </div>
       </div>
 
@@ -5263,6 +5820,12 @@ function goHome(){
 
 document.addEventListener("keydown",function(e){
   if(e.key==="Enter"){
+    const studentModal=document.getElementById("studentAccessModal");
+    if(studentModal?.classList.contains("show")){
+      verifyStudentAccessCode();
+      return;
+    }
+
     const mgmtModal=document.getElementById("mgmtModal");
     if(mgmtModal?.classList.contains("show")){
       verifyMgmtPassword();
@@ -5276,6 +5839,14 @@ document.addEventListener("keydown",function(e){
   }
 
   if(e.key==="Escape"){
+    if(document.getElementById("studentAccessModal")?.classList.contains("show")){
+      closeStudentAccessModal();
+      return;
+    }
+    if(document.getElementById("gangBriefingModal")?.classList.contains("show")){
+      closeGangBriefingModal();
+      return;
+    }
     if(document.getElementById("customModal")?.classList.contains("show")){
       closeCustomModal();
       return;
@@ -5299,15 +5870,20 @@ document.addEventListener("keydown",function(e){
   const savedTheme=localStorage.getItem(THEME_STORAGE_KEY);
   if(savedTheme) applyTheme(savedTheme);
 
-  if(loadData()){
+  const profileReady=loadData();
+  if(profileReady){
     if(selectedCollege!=="NMKRV" && selectedCollege!=="Aps"){
       selectedCollege="NMKRV";
       saveData();
     }
     recordLoginEvent(displayName(),selectedCollege);
-    renderHome();
-  }else{
-    renderHome();
+  }
+
+  renderHome();
+
+  if(!isStudentVerified()){
+    openJoinTheGangFlow(!profileReady);
+  }else if(!profileReady){
     showFirstSetup();
   }
 })();
