@@ -4,9 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#070611">
-<title>WHERE'S THE GANG? — V8.6 HORIZON ULTRA</title>
+<title>WHERE'S THE GANG? — V8.7 HORIZON ULTRA</title>
 
 <style>
+:root{
+  --aurora-1: rgba(133,77,255,.34);
+  --aurora-2: rgba(255,65,206,.28);
+  --aurora-3: rgba(40,166,255,.24);
+  --aurora-4: rgba(0,255,195,.12);
+  --accent-1: #8b5cff;
+  --accent-2: #ff4fd8;
+  --accent-3: #42b9ff;
+  --accent-4: #00ffc3;
+  --logo-grad: linear-gradient(135deg, #ffffff 0%, #e2d8ff 35%, #ff8ce6 70%, #7cd4ff 100%);
+  --glow-main: rgba(139,92,255,.35);
+  --glow-pink: rgba(255,79,216,.45);
+}
+
+body[data-theme="mint"]{
+  --aurora-1: rgba(0,255,163,.30);
+  --aurora-2: rgba(0,210,255,.26);
+  --aurora-3: rgba(163,255,18,.20);
+  --aurora-4: rgba(0,255,195,.14);
+  --accent-1: #00ffa3;
+  --accent-2: #00d2ff;
+  --accent-3: #a3ff12;
+  --accent-4: #ffffff;
+  --logo-grad: linear-gradient(135deg, #ffffff 0%, #c8ffea 35%, #00ffa3 70%, #5ce1e6 100%);
+  --glow-main: rgba(0,255,163,.35);
+  --glow-pink: rgba(0,210,255,.45);
+}
+
+body[data-theme="mango"]{
+  --aurora-1: rgba(255,154,0,.34);
+  --aurora-2: rgba(255,61,119,.28);
+  --aurora-3: rgba(255,214,10,.22);
+  --aurora-4: rgba(255,107,0,.14);
+  --accent-1: #ff9a00;
+  --accent-2: #ff3d77;
+  --accent-3: #ffd60a;
+  --accent-4: #ff7b00;
+  --logo-grad: linear-gradient(135deg, #ffffff 0%, #ffe8b3 35%, #ff9a00 70%, #ff5e8e 100%);
+  --glow-main: rgba(255,154,0,.35);
+  --glow-pink: rgba(255,61,119,.45);
+}
+
+body[data-theme="crimson"]{
+  --aurora-1: rgba(255,23,68,.36);
+  --aurora-2: rgba(213,0,249,.28);
+  --aurora-3: rgba(255,110,64,.24);
+  --aurora-4: rgba(255,64,129,.14);
+  --accent-1: #ff1744;
+  --accent-2: #d500f9;
+  --accent-3: #ff6e40;
+  --accent-4: #ff80ab;
+  --logo-grad: linear-gradient(135deg, #ffffff 0%, #ffcdd2 35%, #ff4081 70%, #ea80fc 100%);
+  --glow-main: rgba(255,23,68,.38);
+  --glow-pink: rgba(213,0,249,.45);
+}
+
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
@@ -32,20 +88,20 @@ body{
 
 #cursorGlow{
   position:fixed;
-  width:460px;
-  height:460px;
+  width:440px;
+  height:440px;
   border-radius:50%;
   pointer-events:none;
   z-index:-4;
   transform:translate(-50%,-50%);
   background:radial-gradient(
     circle,
-    rgba(139,92,255,.16) 0%,
-    rgba(255,79,216,.08) 35%,
+    var(--aurora-1) 0%,
+    var(--aurora-2) 35%,
     transparent 70%
   );
   transition:opacity .4s ease;
-  filter:blur(10px);
+  filter:blur(12px);
 }
 
 .cyberGrid{
@@ -78,10 +134,10 @@ body::before{
   z-index:-10;
   pointer-events:none;
   background:
-    radial-gradient(circle at 18% 18%, rgba(133,77,255,.34), transparent 28%),
-    radial-gradient(circle at 82% 25%, rgba(255,65,206,.28), transparent 28%),
-    radial-gradient(circle at 50% 92%, rgba(40,166,255,.24), transparent 32%),
-    radial-gradient(circle at 20% 75%, rgba(0,255,195,.12), transparent 26%);
+    radial-gradient(circle at 18% 18%, var(--aurora-1), transparent 28%),
+    radial-gradient(circle at 82% 25%, var(--aurora-2), transparent 28%),
+    radial-gradient(circle at 50% 92%, var(--aurora-3), transparent 32%),
+    radial-gradient(circle at 20% 75%, var(--aurora-4), transparent 26%);
   animation:horizonMove 14s ease-in-out infinite alternate;
 }
 
@@ -91,8 +147,7 @@ body::after{
   inset:0;
   z-index:-9;
   pointer-events:none;
-  background:
-    linear-gradient(120deg, transparent 0%, rgba(255,255,255,.025) 45%, transparent 55%);
+  background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.025) 45%, transparent 55%);
   background-size:250% 250%;
   animation:lightSweep 11s linear infinite;
 }
@@ -127,9 +182,7 @@ body::after{
   border-radius:50%;
   background:#fff;
   opacity:.35;
-  box-shadow:
-    0 0 12px rgba(255,255,255,.9),
-    0 0 24px rgba(139,92,255,.7);
+  box-shadow:0 0 12px rgba(255,255,255,.9), 0 0 24px var(--glow-main);
   animation:particleFloat linear infinite;
 }
 
@@ -175,19 +228,21 @@ body::after{
 .toast{
   position:fixed;
   left:50%;
-  bottom:90px;
+  bottom:84px;
   transform:translateX(-50%) translateY(20px);
   background:rgba(24,20,38,.96);
-  border:1px solid rgba(168,125,255,.45);
+  border:1px solid var(--accent-1);
   color:#fff;
-  padding:12px 20px;
+  padding:11px 18px;
   border-radius:999px;
   font-size:13px;
   font-weight:900;
   z-index:9500;
   opacity:0;
   pointer-events:none;
-  box-shadow:0 12px 35px rgba(0,0,0,.6), 0 0 24px rgba(139,92,255,.35);
+  text-align:center;
+  max-width:90vw;
+  box-shadow:0 12px 35px rgba(0,0,0,.6), 0 0 24px var(--glow-main);
   transition:.28s cubic-bezier(.16,1,.3,1);
 }
 
@@ -207,8 +262,8 @@ body::after{
   height:3px;
   width:0%;
   z-index:200;
-  background:linear-gradient(90deg,#8b5cff,#ff4fd8,#42b9ff,#00ffc3);
-  box-shadow:0 0 14px rgba(255,79,216,.8);
+  background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3),var(--accent-4));
+  box-shadow:0 0 14px var(--glow-pink);
   transition:width .1s ease-out;
 }
 
@@ -231,18 +286,18 @@ button{
 
 .page{
   width:100%;
-  max-width:940px;
+  max-width:860px;
   margin:auto;
   min-height:100vh;
-  padding:32px 18px 120px;
-  animation:pageIn .65s cubic-bezier(.16,1,.3,1);
+  padding:18px 16px 96px;
+  animation:pageIn .55s cubic-bezier(.16,1,.3,1);
 }
 
 @keyframes pageIn{
   from{
     opacity:0;
-    transform:translateY(30px) scale(.97);
-    filter:blur(8px);
+    transform:translateY(22px) scale(.98);
+    filter:blur(6px);
   }
   to{
     opacity:1;
@@ -252,36 +307,42 @@ button{
 }
 
 /* =========================================================
-   BRAND & GLOWING MADE BY KUSH KUMAR
+   BRAND & GLOWING MADE BY KUSH KUMAR (SECRET THEME TRIGGER)
 ========================================================= */
 
 .brand{
   text-align:center;
-  margin-top:8px;
+  margin-top:2px;
 }
 
 .made{
   color:#f6e8ff;
   font-size:11px;
   font-weight:900;
-  letter-spacing:6px;
-  margin-bottom:36px;
+  letter-spacing:5px;
+  margin-bottom:18px;
   display:inline-block;
-  padding:8px 18px;
+  padding:7px 16px;
   border-radius:999px;
+  cursor:pointer;
+  user-select:none;
   background:linear-gradient(135deg, rgba(139,92,255,.22), rgba(255,79,216,.18));
-  border:1px solid rgba(255,79,216,.52);
+  border:1px solid var(--accent-2);
   text-shadow:
     0 0 8px rgba(255,255,255,.85),
-    0 0 18px rgba(255,79,216,.9),
-    0 0 32px rgba(139,92,255,.85);
+    0 0 18px var(--accent-2),
+    0 0 32px var(--accent-1);
   box-shadow:
-    0 0 22px rgba(139,92,255,.35),
-    0 0 42px rgba(255,79,216,.24),
+    0 0 22px var(--glow-main),
+    0 0 42px var(--glow-pink),
     inset 0 0 14px rgba(255,255,255,.15);
   animation:
     fadeDown .7s ease both,
     kushGlowPulse 2.8s ease-in-out infinite;
+}
+
+.made:active{
+  transform:scale(.94);
 }
 
 .kushGlow{
@@ -291,32 +352,29 @@ button{
   letter-spacing:3.5px;
   text-shadow:
     0 0 8px rgba(255,255,255,.8),
-    0 0 18px rgba(255,79,216,.95),
-    0 0 32px rgba(139,92,255,.85),
-    0 0 46px rgba(66,185,255,.65);
+    0 0 18px var(--accent-2),
+    0 0 32px var(--accent-1),
+    0 0 46px var(--accent-3);
   animation:kushTextPulse 2.8s ease-in-out infinite;
 }
 
 @keyframes fadeDown{
-  from{ opacity:0; transform:translateY(-20px); }
+  from{ opacity:0; transform:translateY(-14px); }
   to{ opacity:1; transform:translateY(0); }
 }
 
 @keyframes kushGlowPulse{
   0%,100%{
-    border-color:rgba(255,79,216,.48);
     box-shadow:
-      0 0 18px rgba(139,92,255,.3),
-      0 0 36px rgba(255,79,216,.2),
+      0 0 18px var(--glow-main),
+      0 0 34px var(--glow-pink),
       inset 0 0 10px rgba(255,255,255,.12);
     transform:scale(1);
   }
   50%{
-    border-color:rgba(255,140,230,.9);
     box-shadow:
-      0 0 28px rgba(139,92,255,.6),
-      0 0 56px rgba(255,79,216,.45),
-      0 0 75px rgba(66,185,255,.25),
+      0 0 28px var(--glow-main),
+      0 0 54px var(--glow-pink),
       inset 0 0 16px rgba(255,255,255,.25);
     transform:scale(1.03);
   }
@@ -326,39 +384,32 @@ button{
   0%,100%{
     text-shadow:
       0 0 6px rgba(255,255,255,.7),
-      0 0 16px rgba(255,79,216,.85),
-      0 0 28px rgba(139,92,255,.75);
+      0 0 16px var(--accent-2),
+      0 0 28px var(--accent-1);
   }
   50%{
     text-shadow:
       0 0 10px rgba(255,255,255,.95),
-      0 0 24px rgba(255,79,216,1),
-      0 0 40px rgba(139,92,255,.95),
-      0 0 55px rgba(66,185,255,.8);
+      0 0 24px var(--accent-2),
+      0 0 40px var(--accent-1);
   }
 }
 
 .logo{
   position:relative;
-  font-size:clamp(43px,11vw,84px);
-  line-height:.85;
+  font-size:clamp(42px,10.5vw,80px);
+  line-height:.86;
   font-weight:1000;
-  letter-spacing:-5px;
+  letter-spacing:-4px;
   text-transform:uppercase;
-  background:linear-gradient(
-    135deg,
-    #ffffff 0%,
-    #e2d8ff 35%,
-    #ff8ce6 70%,
-    #7cd4ff 100%
-  );
+  background:var(--logo-grad);
   background-size:200% 200%;
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-  filter:drop-shadow(0 0 28px rgba(139,92,255,.28));
+  filter:drop-shadow(0 0 28px var(--glow-main));
   animation:
-    logoIn .85s cubic-bezier(.16,1,.3,1),
+    logoIn .8s cubic-bezier(.16,1,.3,1),
     textShimmer 6s ease infinite;
 }
 
@@ -376,13 +427,11 @@ button{
   display:block;
   width:90px;
   height:4px;
-  margin:25px auto 0;
+  margin:14px auto 0;
   border-radius:999px;
-  background:linear-gradient(90deg,#8b5cff,#ff4fd8,#42b9ff,#8b5cff);
+  background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3),var(--accent-1));
   background-size:200% 100%;
-  box-shadow:
-    0 0 22px rgba(255,79,216,.8),
-    0 0 40px rgba(139,92,255,.5);
+  box-shadow:0 0 22px var(--glow-pink), 0 0 40px var(--glow-main);
   animation:
     horizonLine 3s ease-in-out infinite,
     gradientSlide 3s linear infinite;
@@ -394,25 +443,25 @@ button{
 }
 
 @keyframes logoIn{
-  from{ opacity:0; transform:scale(.85) rotateX(15deg); filter:blur(12px); }
-  to{ opacity:1; transform:scale(1) rotateX(0deg); filter:blur(0); }
+  from{ opacity:0; transform:scale(.88); filter:blur(10px); }
+  to{ opacity:1; transform:scale(1); filter:blur(0); }
 }
 
 @keyframes horizonLine{
-  0%,100%{ width:75px; opacity:.7; }
-  50%{ width:185px; opacity:1; }
+  0%,100%{ width:75px; opacity:.75; }
+  50%{ width:175px; opacity:1; }
 }
 
 .tagline{
-  margin:32px auto 26px;
+  margin:16px auto 14px;
   color:#b6b2c4;
-  font-size:clamp(17px,4.7vw,28px);
+  font-size:clamp(16px,4.4vw,24px);
   line-height:1.25;
-  animation:fadeUp .8s .15s ease both;
+  animation:fadeUp .7s .1s ease both;
 }
 
 @keyframes fadeUp{
-  from{ opacity:0; transform:translateY(16px); }
+  from{ opacity:0; transform:translateY(12px); }
   to{ opacity:1; transform:translateY(0); }
 }
 
@@ -426,20 +475,20 @@ button{
   gap:8px;
   color:#bbb8c8;
   font-size:14px;
-  margin-bottom:25px;
-  padding:9px 15px;
-  border:1px solid rgba(255,255,255,.1);
-  background:rgba(255,255,255,.045);
+  margin-bottom:14px;
+  padding:8px 15px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);
   border-radius:999px;
   backdrop-filter:blur(14px);
   box-shadow:0 8px 25px rgba(0,0,0,.25);
   cursor:pointer;
   transition:.25s ease;
-  animation:fadeUp .7s .2s ease both;
+  animation:fadeUp .65s .15s ease both;
 }
 
 .userBadge:hover{
-  border-color:rgba(168,125,255,.45);
+  border-color:var(--accent-1);
   transform:translateY(-2px);
 }
 
@@ -469,29 +518,28 @@ button{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:14px;
-  margin:0 auto 22px;
-  padding:15px 18px;
-  border-radius:22px;
+  gap:12px;
+  margin:0 auto 14px;
+  padding:13px 16px;
+  border-radius:20px;
   background:linear-gradient(135deg, rgba(139,92,255,.14), rgba(66,185,255,.08));
   border:1px solid rgba(168,125,255,.26);
   backdrop-filter:blur(16px);
   text-align:left;
-  animation:fadeUp .75s .22s ease both;
 }
 
 .timeVibeBanner b{
   display:block;
-  font-size:14px;
+  font-size:13px;
   color:#fff;
-  margin-bottom:3px;
+  margin-bottom:2px;
 }
 
 .timeVibeBanner small{
   display:block;
   color:#b6b2c8;
-  font-size:12px;
-  line-height:1.4;
+  font-size:11.5px;
+  line-height:1.35;
 }
 
 .timeVibeBtn{
@@ -499,8 +547,8 @@ button{
   background:rgba(255,255,255,.12);
   color:#fff;
   border:1px solid rgba(255,255,255,.18);
-  padding:10px 14px;
-  border-radius:14px;
+  padding:9px 13px;
+  border-radius:13px;
   font-size:12px;
   font-weight:900;
   transition:.25s ease;
@@ -518,42 +566,34 @@ button{
 
 .actions{
   display:grid;
-  gap:15px;
+  gap:11px;
 }
 
 .mainBtn{
   position:relative;
   overflow:hidden;
-  min-height:76px;
-  border-radius:27px;
-  padding:18px 22px;
+  min-height:64px;
+  border-radius:24px;
+  padding:15px 20px;
   color:#fff;
   font-weight:900;
-  font-size:19px;
+  font-size:18px;
   letter-spacing:-.2px;
   background:linear-gradient(135deg, rgba(255,255,255,.11), rgba(255,255,255,.03));
   border:1px solid rgba(255,255,255,.12);
   backdrop-filter:blur(20px);
   box-shadow:
-    0 15px 40px rgba(0,0,0,.25),
+    0 12px 32px rgba(0,0,0,.25),
     inset 0 1px 0 rgba(255,255,255,.15);
   transition:
     transform .28s cubic-bezier(.16,1,.3,1),
     border-color .3s,
     box-shadow .3s;
-  animation:buttonIn .65s cubic-bezier(.16,1,.3,1) both;
+  animation:buttonIn .55s cubic-bezier(.16,1,.3,1) both;
 }
 
-.mainBtn:nth-child(2){ animation-delay:.06s; }
-.mainBtn:nth-child(3){ animation-delay:.12s; }
-.mainBtn:nth-child(4){ animation-delay:.18s; }
-.mainBtn:nth-child(5){ animation-delay:.24s; }
-.mainBtn:nth-child(6){ animation-delay:.30s; }
-.mainBtn:nth-child(7){ animation-delay:.36s; }
-.mainBtn:nth-child(8){ animation-delay:.42s; }
-
 @keyframes buttonIn{
-  from{ opacity:0; transform:translateY(26px) scale(.94); }
+  from{ opacity:0; transform:translateY(18px) scale(.96); }
   to{ opacity:1; transform:translateY(0) scale(1); }
 }
 
@@ -574,39 +614,32 @@ button{
 }
 
 .mainBtn:hover{
-  transform:translateY(-6px) scale(1.02);
-  border-color:rgba(255,79,216,.45);
+  transform:translateY(-4px) scale(1.015);
+  border-color:var(--accent-2);
   box-shadow:
-    0 24px 60px rgba(0,0,0,.4),
-    0 0 40px rgba(139,92,255,.25),
-    0 0 20px rgba(255,79,216,.18);
+    0 18px 45px rgba(0,0,0,.4),
+    0 0 32px var(--glow-main);
 }
 
 .mainBtn:active{
-  transform:scale(.95);
+  transform:scale(.96);
 }
 
 .mainBtn.light{
   background:linear-gradient(135deg, #ffffff, #ebe4ff);
   color:#0e0d15;
   box-shadow:
-    0 16px 42px rgba(139,92,255,.18),
+    0 14px 36px var(--glow-main),
     inset 0 1px 0 #fff;
-}
-
-.mainBtn.light:hover{
-  box-shadow:
-    0 24px 60px rgba(255,255,255,.25),
-    0 0 45px rgba(139,92,255,.35);
 }
 
 .mainBtn.nexoraBtn{
   background:linear-gradient(135deg, rgba(139,92,255,.28), rgba(255,79,216,.18));
-  border-color:rgba(168,125,255,.42);
+  border-color:rgba(168,125,255,.45);
 }
 
 /* =========================================================
-   SECTION HEADER
+   SECTION HEADER & TITLES
 ========================================================= */
 
 .sectionTop{
@@ -614,14 +647,15 @@ button{
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  margin-bottom:20px;
+  margin-bottom:14px;
 }
 
 .backBtn,
 .changeBtn{
-  padding:11px 16px;
-  border-radius:15px;
+  padding:10px 14px;
+  border-radius:14px;
   font-weight:900;
+  font-size:13px;
   transition:.25s cubic-bezier(.16,1,.3,1);
 }
 
@@ -640,23 +674,14 @@ button{
 
 .backBtn:hover,
 .changeBtn:hover{
-  transform:translateY(-3px) scale(1.03);
+  transform:translateY(-2px) scale(1.03);
 }
-
-.backBtn:active,
-.changeBtn:active{
-  transform:scale(.95);
-}
-
-/* =========================================================
-   TITLES & LOCATION PILL
-========================================================= */
 
 .pageTitle{
-  font-size:clamp(30px,8vw,52px);
+  font-size:clamp(28px,7.5vw,46px);
   font-weight:1000;
-  letter-spacing:-2px;
-  margin:18px 0 7px;
+  letter-spacing:-1.5px;
+  margin:10px 0 6px;
   background:linear-gradient(135deg,#fff 40%,#cbb8ff 100%);
   -webkit-background-clip:text;
   background-clip:text;
@@ -665,55 +690,59 @@ button{
 
 .pageSub{
   color:#9f9cb0;
-  line-height:1.55;
-  margin-bottom:25px;
+  line-height:1.45;
+  margin-bottom:16px;
+  font-size:14px;
 }
 
 .locationPill{
   display:inline-flex;
   align-items:center;
   gap:6px;
-  padding:8px 14px;
+  padding:7px 13px;
   border-radius:999px;
   background:rgba(139,92,255,.12);
   border:1px solid rgba(139,92,255,.3);
   color:#dfd6ff;
   font-size:12px;
   font-weight:900;
-  margin-bottom:20px;
+  margin-bottom:12px;
   backdrop-filter:blur(10px);
-  box-shadow:0 0 20px rgba(139,92,255,.15);
 }
 
 /* =========================================================
-   SEARCH & INPUTS
+   SEARCH & INPUTS (CENTER TYPING FOR SETUP / PASSWORD)
 ========================================================= */
 
 .search,
 .input,
 .selectInput{
   width:100%;
-  background:rgba(12,11,20,.78);
-  border:1px solid rgba(255,255,255,.12);
+  background:rgba(12,11,20,.82);
+  border:1px solid rgba(255,255,255,.14);
   color:#fff;
-  padding:16px 18px;
-  border-radius:18px;
+  padding:14px 16px;
+  border-radius:16px;
   outline:none;
   transition:.3s cubic-bezier(.16,1,.3,1);
 }
 
+.centerInput{
+  text-align:center;
+  font-weight:900;
+  font-size:17px;
+  letter-spacing:1px;
+}
+
 .search{
-  margin-bottom:18px;
+  margin-bottom:14px;
 }
 
 .search:focus,
 .input:focus,
 .selectInput:focus{
-  border-color:#a87dff;
-  transform:translateY(-2px);
-  box-shadow:
-    0 0 0 4px rgba(139,92,255,.14),
-    0 12px 30px rgba(139,92,255,.18);
+  border-color:var(--accent-1);
+  box-shadow:0 0 0 4px rgba(139,92,255,.15);
 }
 
 /* =========================================================
@@ -723,109 +752,60 @@ button{
 .categoryGrid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:13px;
+  gap:11px;
 }
 
 .category{
   position:relative;
   overflow:hidden;
-  min-height:112px;
-  border-radius:24px;
-  padding:18px;
+  min-height:102px;
+  border-radius:22px;
+  padding:15px;
   text-align:left;
   color:#fff;
-  transform-style:preserve-3d;
   background:linear-gradient(145deg, rgba(38,33,58,.82), rgba(16,15,25,.85));
   border:1px solid rgba(255,255,255,.09);
   backdrop-filter:blur(16px);
-  transition:
-    transform .28s cubic-bezier(.16,1,.3,1),
-    border-color .3s,
-    box-shadow .3s;
-  animation:cardIn .55s cubic-bezier(.16,1,.3,1) both;
+  transition:.28s cubic-bezier(.16,1,.3,1);
+  animation:cardIn .5s cubic-bezier(.16,1,.3,1) both;
 }
 
 @keyframes cardIn{
-  from{ opacity:0; transform:translateY(24px) scale(.93); }
+  from{ opacity:0; transform:translateY(16px) scale(.95); }
   to{ opacity:1; transform:translateY(0) scale(1); }
 }
 
-.category::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(
-    circle at var(--mx, 50%) var(--my, 50%),
-    rgba(255,255,255,.14),
-    transparent 60%
-  );
-  opacity:0;
-  transition:opacity .3s;
-  pointer-events:none;
-}
-
-.category:hover::before{
-  opacity:1;
-}
-
-.category::after{
-  content:"";
-  position:absolute;
-  width:120px;
-  height:120px;
-  right:-50px;
-  bottom:-60px;
-  border-radius:50%;
-  background:linear-gradient(135deg,rgba(139,92,255,.25),rgba(255,79,216,.2));
-  filter:blur(14px);
-  transition:.45s ease;
-}
-
 .category:hover{
-  transform:translateY(-8px) scale(1.025);
-  border-color:rgba(168,125,255,.45);
-  box-shadow:
-    0 22px 50px rgba(0,0,0,.38),
-    0 0 38px rgba(139,92,255,.22);
-}
-
-.category:hover::after{
-  transform:scale(2);
-}
-
-.category:active{
-  transform:scale(.95);
+  transform:translateY(-5px) scale(1.02);
+  border-color:var(--accent-1);
+  box-shadow:0 16px 38px rgba(0,0,0,.38), 0 0 28px var(--glow-main);
 }
 
 .category .emoji{
-  font-size:31px;
+  font-size:28px;
   display:inline-block;
-  margin-bottom:9px;
-  transition:.35s cubic-bezier(.34,1.56,.64,1);
-}
-
-.category:hover .emoji{
-  transform:scale(1.26) rotate(-8deg) translateY(-2px);
+  margin-bottom:7px;
 }
 
 .category b{
   display:block;
-  font-size:15px;
+  font-size:14.5px;
 }
 
 .category small{
   display:block;
   color:#868296;
-  margin-top:5px;
+  margin-top:4px;
+  font-size:12px;
 }
 
 .primeTag{
   position:absolute;
-  top:12px;
-  right:12px;
+  top:10px;
+  right:10px;
   font-size:10px;
   font-weight:900;
-  padding:4px 8px;
+  padding:3px 8px;
   border-radius:999px;
   background:rgba(0,255,163,.16);
   border:1px solid rgba(0,255,163,.4);
@@ -833,100 +813,79 @@ button{
 }
 
 /* =========================================================
-   SPECIAL CARD
+   SPECIAL CARD & PLACE CARDS
 ========================================================= */
 
 .specialCard{
   position:relative;
-  margin-top:20px;
+  margin-top:16px;
   border:1px solid rgba(168,125,255,.28);
   background:linear-gradient(135deg, rgba(48,38,76,.82), rgba(16,14,26,.86));
-  border-radius:28px;
-  padding:22px;
+  border-radius:24px;
+  padding:18px;
   backdrop-filter:blur(20px);
-  overflow:hidden;
-  animation:specialGlow 3.5s ease-in-out infinite;
-}
-
-@keyframes specialGlow{
-  0%,100%{
-    box-shadow:0 20px 55px rgba(0,0,0,.25), 0 0 25px rgba(139,92,255,.1);
-  }
-  50%{
-    box-shadow:0 24px 65px rgba(0,0,0,.32), 0 0 48px rgba(255,79,216,.22);
-  }
 }
 
 .specialCard h3{
-  margin:0 0 6px;
-  font-size:21px;
+  margin:0 0 5px;
+  font-size:19px;
 }
 
 .specialCard p{
   color:#a8a4b8;
-  margin:0 0 16px;
-  line-height:1.45;
+  margin:0 0 14px;
+  line-height:1.4;
+  font-size:13.5px;
 }
 
 .specialBtn{
   width:100%;
-  border-radius:17px;
-  padding:15px;
+  border-radius:15px;
+  padding:13px;
   background:linear-gradient(135deg,#fff,#ece4ff);
   color:#111;
   font-weight:1000;
-  transition:.25s cubic-bezier(.16,1,.3,1);
+  transition:.25s ease;
 }
 
 .specialBtn:hover{
-  transform:translateY(-3px) scale(1.01);
-  box-shadow:0 14px 35px rgba(255,255,255,.22);
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px rgba(255,255,255,.22);
 }
-
-.specialBtn:active{
-  transform:scale(.97);
-}
-
-/* =========================================================
-   PLACE CARDS & INTERACTIVE ACTION CHIPS
-========================================================= */
 
 .cards{
   display:grid;
-  gap:14px;
+  gap:11px;
 }
 
 .placeCard{
   position:relative;
   overflow:hidden;
-  background:linear-gradient(145deg, rgba(28,25,42,.82), rgba(13,13,20,.85));
+  background:linear-gradient(145deg, rgba(28,25,42,.84), rgba(13,13,20,.88));
   border:1px solid rgba(255,255,255,.09);
-  border-radius:24px;
-  padding:19px;
+  border-radius:22px;
+  padding:16px;
   backdrop-filter:blur(16px);
-  transition:.3s cubic-bezier(.16,1,.3,1);
-  animation:cardIn .5s cubic-bezier(.16,1,.3,1) both;
+  transition:.28s cubic-bezier(.16,1,.3,1);
+  animation:cardIn .45s cubic-bezier(.16,1,.3,1) both;
 }
 
 .placeCard:hover{
-  transform:translateY(-5px) scale(1.01);
+  transform:translateY(-4px);
   border-color:rgba(168,125,255,.38);
-  box-shadow:
-    0 18px 45px rgba(0,0,0,.35),
-    0 0 30px rgba(139,92,255,.14);
 }
 
 .placeHead{
   display:flex;
   justify-content:space-between;
-  gap:12px;
+  gap:10px;
   align-items:flex-start;
 }
 
 .placeName{
-  font-size:19px;
+  font-size:17.5px;
   font-weight:950;
-  line-height:1.2;
+  line-height:1.25;
 }
 
 .placeType{
@@ -936,73 +895,50 @@ button{
   background:rgba(139,92,255,.14);
   border:1px solid rgba(139,92,255,.28);
   border-radius:999px;
-  padding:6px 10px;
+  padding:5px 9px;
   font-weight:800;
 }
 
 .placeDesc{
   color:#9f9cad;
-  line-height:1.5;
-  margin:10px 0 14px;
+  line-height:1.45;
+  margin:8px 0 12px;
+  font-size:13.5px;
 }
 
 .placeBtns{
   display:flex;
-  gap:8px;
+  gap:7px;
   flex-wrap:wrap;
   align-items:center;
-}
-
-.mapBtn,
-.tag,
-.actionChip{
-  transition:.25s cubic-bezier(.16,1,.3,1);
 }
 
 .mapBtn{
   background:linear-gradient(135deg,#fff,#ece4ff);
   color:#111;
-  padding:10px 14px;
-  border-radius:13px;
-  font-size:13px;
+  padding:8px 12px;
+  border-radius:12px;
+  font-size:12.5px;
   font-weight:900;
   text-decoration:none;
-  box-shadow:0 6px 18px rgba(255,255,255,.12);
 }
 
-.mapBtn:hover{
-  transform:translateY(-2px) scale(1.04);
-  box-shadow:0 10px 25px rgba(255,255,255,.24);
-}
-
-.tag{
+.tag,
+.actionChip{
   background:rgba(255,255,255,.07);
-  color:#c5c1d4;
-  padding:9px 12px;
-  border-radius:13px;
+  color:#d9d5e8;
+  padding:8px 11px;
+  border-radius:12px;
   font-size:12px;
   font-weight:800;
-  border:1px solid rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  transition:.2s ease;
 }
 
-.tag:hover{
-  background:rgba(255,255,255,.13);
-  transform:translateY(-2px);
-}
-
-.actionChip{
-  background:rgba(255,255,255,.06);
-  color:#d9d5e8;
-  padding:9px 12px;
-  border-radius:13px;
-  font-size:12px;
-  font-weight:900;
-  border:1px solid rgba(255,255,255,.1);
-}
-
+.tag:hover,
 .actionChip:hover{
-  background:rgba(255,255,255,.14);
-  transform:translateY(-2px);
+  background:rgba(255,255,255,.15);
+  transform:translateY(-1px);
 }
 
 .actionChip.activePoll{
@@ -1030,25 +966,25 @@ button{
 .pollDock{
   position:fixed;
   left:50%;
-  bottom:18px;
+  bottom:14px;
   transform:translateX(-50%);
-  width:min(620px, calc(100% - 28px));
+  width:min(620px, calc(100% - 24px));
   background:linear-gradient(135deg, rgba(28,22,48,.96), rgba(14,13,24,.97));
   border:1px solid rgba(168,125,255,.45);
-  border-radius:22px;
-  padding:13px 16px;
+  border-radius:20px;
+  padding:11px 14px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px;
+  gap:10px;
   z-index:90;
   backdrop-filter:blur(20px);
-  box-shadow:0 18px 50px rgba(0,0,0,.65), 0 0 35px rgba(139,92,255,.28);
+  box-shadow:0 16px 42px rgba(0,0,0,.65);
 }
 
 .pollDockInfo b{
   display:block;
-  font-size:13px;
+  font-size:12.5px;
   color:#fff;
 }
 
@@ -1061,15 +997,15 @@ button{
 
 .pollDockBtns{
   display:flex;
-  gap:8px;
+  gap:7px;
   flex-shrink:0;
 }
 
 .pollDockShare{
   background:linear-gradient(135deg,#00ffa3,#38ef7d);
   color:#071911;
-  padding:10px 14px;
-  border-radius:13px;
+  padding:9px 13px;
+  border-radius:12px;
   font-size:12px;
   font-weight:1000;
 }
@@ -1077,8 +1013,8 @@ button{
 .pollDockClear{
   background:rgba(255,255,255,.1);
   color:#fff;
-  padding:10px 12px;
-  border-radius:13px;
+  padding:9px 11px;
+  border-radius:12px;
   font-size:12px;
   font-weight:900;
 }
@@ -1090,22 +1026,21 @@ button{
 .nexoraHero{
   display:flex;
   align-items:center;
-  gap:16px;
-  padding:20px;
-  border-radius:26px;
+  gap:14px;
+  padding:16px;
+  border-radius:22px;
   background:linear-gradient(135deg, rgba(139,92,255,.22), rgba(255,79,216,.12));
   border:1px solid rgba(168,125,255,.35);
-  margin-bottom:18px;
-  backdrop-filter:blur(18px);
+  margin-bottom:14px;
 }
 
 .nexoraOrb{
-  width:54px;
-  height:54px;
+  width:46px;
+  height:46px;
   border-radius:50%;
   flex-shrink:0;
-  background:radial-gradient(circle at 30% 30%, #ffffff, #ff4fd8 45%, #8b5cff 80%, #1d1242 100%);
-  box-shadow:0 0 25px rgba(255,79,216,.65), 0 0 45px rgba(139,92,255,.45);
+  background:radial-gradient(circle at 30% 30%, #ffffff, var(--accent-2) 45%, var(--accent-1) 80%, #1d1242 100%);
+  box-shadow:0 0 22px var(--glow-pink), 0 0 40px var(--glow-main);
   animation:orbPulse 3s ease-in-out infinite;
 }
 
@@ -1116,29 +1051,28 @@ button{
 
 .nexoraChips{
   display:flex;
-  gap:8px;
+  gap:7px;
   flex-wrap:wrap;
-  margin-bottom:16px;
+  margin-bottom:12px;
 }
 
 .nexoraChatBox{
   display:grid;
-  gap:12px;
-  max-height:430px;
+  gap:10px;
+  max-height:400px;
   overflow-y:auto;
-  padding:16px;
-  border-radius:24px;
-  background:rgba(12,11,20,.72);
+  padding:14px;
+  border-radius:20px;
+  background:rgba(12,11,20,.75);
   border:1px solid rgba(255,255,255,.09);
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
 
 .chatMsg{
-  padding:14px 16px;
-  border-radius:20px;
-  line-height:1.5;
-  font-size:14px;
-  animation:fadeUp .3s ease both;
+  padding:12px 14px;
+  border-radius:18px;
+  line-height:1.45;
+  font-size:13.5px;
 }
 
 .chatMsg.ai{
@@ -1157,7 +1091,7 @@ button{
 
 .nexoraInputBar{
   display:flex;
-  gap:10px;
+  gap:8px;
 }
 
 .nexoraInputBar .input{
@@ -1167,43 +1101,42 @@ button{
 .nexoraSendBtn{
   background:linear-gradient(135deg,#fff,#ece4ff);
   color:#111;
-  padding:0 22px;
-  border-radius:18px;
+  padding:0 18px;
+  border-radius:16px;
   font-weight:1000;
   white-space:nowrap;
 }
 
 /* =========================================================
-   3-STOP COMBO GENERATOR & SPIN WHEEL
+   3-STOP COMBO, SPIN WHEEL & WINNER CELEBRATION
 ========================================================= */
 
 .comboStepCard{
   position:relative;
   background:linear-gradient(145deg, rgba(32,28,52,.88), rgba(14,13,24,.9));
   border:1px solid rgba(168,125,255,.25);
-  border-radius:24px;
-  padding:18px;
-  backdrop-filter:blur(16px);
+  border-radius:22px;
+  padding:16px;
 }
 
 .comboStepBadge{
   display:inline-block;
-  font-size:11px;
+  font-size:10.5px;
   font-weight:1000;
-  letter-spacing:1.5px;
-  padding:5px 11px;
+  letter-spacing:1.2px;
+  padding:4px 10px;
   border-radius:999px;
   background:rgba(255,79,216,.18);
   border:1px solid rgba(255,79,216,.4);
   color:#ffb3ee;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
 .wheelWrap{
   position:relative;
-  width:min(310px, 84vw);
-  height:min(310px, 84vw);
-  margin:22px auto;
+  width:min(290px, 80vw);
+  height:min(290px, 80vw);
+  margin:16px auto;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -1214,7 +1147,7 @@ button{
   top:-12px;
   left:50%;
   transform:translateX(-50%);
-  font-size:28px;
+  font-size:26px;
   z-index:5;
   filter:drop-shadow(0 4px 12px rgba(0,0,0,.8));
 }
@@ -1223,47 +1156,128 @@ button{
   width:100%;
   height:100%;
   border-radius:50%;
-  box-shadow:0 0 40px rgba(139,92,255,.35), 0 18px 45px rgba(0,0,0,.6);
+  box-shadow:0 0 36px var(--glow-main), 0 16px 40px rgba(0,0,0,.6);
   transition:transform 4.2s cubic-bezier(.14,.85,.22,1);
 }
 
+.winnerCelebrationCard{
+  text-align:center;
+  padding:22px 18px;
+  border-radius:26px;
+  background:linear-gradient(135deg, rgba(0,255,163,.18), rgba(139,92,255,.25), rgba(255,79,216,.2));
+  border:2px solid #00ffa3;
+  box-shadow:0 0 45px rgba(0,255,163,.32), 0 20px 50px rgba(0,0,0,.65);
+  animation:popCelebrate .5s cubic-bezier(.34,1.56,.64,1);
+}
+
+@keyframes popCelebrate{
+  0%{ transform:scale(.75); opacity:0; }
+  100%{ transform:scale(1); opacity:1; }
+}
+
 /* =========================================================
-   MANAGEMENT DASHBOARD
+   VIBE SWIPE DECIDER & TRUTH/DARE DECK
 ========================================================= */
+
+.swipeDeckCard{
+  position:relative;
+  max-width:460px;
+  margin:14px auto;
+  padding:26px 22px;
+  border-radius:28px;
+  background:linear-gradient(145deg, rgba(42,36,68,.92), rgba(16,15,28,.95));
+  border:1px solid rgba(168,125,255,.38);
+  box-shadow:0 22px 55px rgba(0,0,0,.55), 0 0 35px var(--glow-main);
+  text-align:center;
+  touch-action:pan-y;
+  user-select:none;
+  transition:transform .28s ease, opacity .28s ease;
+}
+
+.swipeStamp{
+  display:inline-block;
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:2px;
+  margin-bottom:14px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);
+}
+
+.swipeControls{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  margin-top:16px;
+}
+
+.swipeCircleBtn{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  font-size:24px;
+  font-weight:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.22s cubic-bezier(.34,1.56,.64,1);
+}
+
+.swipeCircleBtn.ditch{
+  background:rgba(255,65,90,.18);
+  border:1px solid rgba(255,65,90,.45);
+  color:#ff6b81;
+}
+
+.swipeCircleBtn.keep{
+  background:rgba(0,255,163,.2);
+  border:1px solid rgba(0,255,163,.5);
+  color:#00ffa3;
+}
+
+.swipeCircleBtn:hover{
+  transform:scale(1.12);
+}
+
+/* =========================================================
+   MANAGEMENT DASHBOARD (CENTERED)
+========================================================= */
+
+.mgmtCenteredWrap{
+  max-width:740px;
+  margin:0 auto;
+  text-align:center;
+}
 
 .statsGrid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-bottom:20px;
+  gap:10px;
+  margin-bottom:16px;
 }
 
 .statCard{
   background:linear-gradient(145deg, rgba(38,33,58,.82), rgba(16,15,25,.85));
   border:1px solid rgba(255,255,255,.1);
-  border-radius:20px;
-  padding:16px;
+  border-radius:18px;
+  padding:14px 10px;
   text-align:center;
   backdrop-filter:blur(14px);
-  transition:.3s ease;
-}
-
-.statCard:hover{
-  transform:translateY(-4px);
-  border-color:rgba(139,92,255,.4);
 }
 
 .statCard b{
   display:block;
-  font-size:28px;
+  font-size:24px;
   font-weight:1000;
   color:#fff;
-  margin-bottom:4px;
+  margin-bottom:3px;
 }
 
 .statCard small{
   color:#9996a5;
-  font-size:11px;
+  font-size:10.5px;
   font-weight:900;
   text-transform:uppercase;
   letter-spacing:1px;
@@ -1271,23 +1285,24 @@ button{
 
 .mgmtControls{
   display:flex;
-  gap:10px;
+  gap:8px;
   flex-wrap:wrap;
-  margin-bottom:18px;
+  justify-content:center;
+  margin-bottom:14px;
 }
 
 .mgmtControls .search{
   flex:1;
   min-width:200px;
   margin-bottom:0;
+  text-align:center;
 }
 
 .mgmtBtn{
-  padding:14px 16px;
-  border-radius:16px;
+  padding:13px 15px;
+  border-radius:15px;
   font-weight:900;
-  font-size:13px;
-  transition:.25s ease;
+  font-size:12.5px;
   white-space:nowrap;
 }
 
@@ -1302,22 +1317,13 @@ button{
   border:1px solid rgba(255,65,90,.3);
 }
 
-.mgmtBtn:hover{
-  transform:translateY(-2px);
-}
-
 .recordMeta{
   display:grid;
-  gap:6px;
-  margin-top:10px;
-  font-size:13px;
+  gap:5px;
+  margin-top:8px;
+  font-size:12.5px;
   color:#aaa7b5;
-}
-
-.recordMeta span{
-  display:flex;
-  align-items:center;
-  gap:6px;
+  text-align:left;
 }
 
 .errorMsg{
@@ -1326,78 +1332,72 @@ button{
   font-weight:800;
   margin-top:8px;
   min-height:18px;
+  text-align:center;
 }
 
 /* =========================================================
-   NOTICE & EMPTY
+   NOTICE, EMPTY & FLOATING BUTTON
 ========================================================= */
 
 .notice{
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
-  border-radius:18px;
-  padding:14px;
+  border-radius:16px;
+  padding:12px 14px;
   color:#9490a3;
   font-size:12px;
-  line-height:1.5;
-  margin-bottom:18px;
-  backdrop-filter:blur(12px);
+  line-height:1.45;
+  margin-bottom:14px;
 }
 
 .empty{
   text-align:center;
-  padding:50px 20px;
+  padding:38px 18px;
   color:#858290;
   background:rgba(255,255,255,.035);
   border:1px solid rgba(255,255,255,.06);
-  border-radius:22px;
+  border-radius:20px;
 }
-
-/* =========================================================
-   FLOATING SCROLL TOP BUTTON
-========================================================= */
 
 .floating{
   position:fixed;
-  right:18px;
-  bottom:86px;
+  right:16px;
+  bottom:82px;
   z-index:50;
-  width:48px;
-  height:48px;
+  width:44px;
+  height:44px;
   border-radius:50%;
   background:rgba(255,255,255,.94);
   color:#111;
-  font-size:20px;
+  font-size:18px;
   font-weight:1000;
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.45),
-    0 0 28px rgba(139,92,255,.25);
-  transition:.3s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 10px 26px rgba(0,0,0,.45);
+  transition:.25s ease;
 }
 
 .floating:hover{
-  transform:translateY(-6px) scale(1.1) rotate(-8deg);
+  transform:translateY(-4px) scale(1.08);
 }
 
 /* =========================================================
-   MODAL
+   CENTERED MODALS (SETUP, PASSWORD & CUSTOM)
 ========================================================= */
 
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(2,2,6,.82);
+  background:rgba(2,2,6,.84);
   backdrop-filter:blur(22px);
   z-index:100;
   display:none;
   align-items:center;
   justify-content:center;
-  padding:20px;
+  padding:16px;
 }
 
 .modal.show{
   display:flex;
-  animation:modalIn .3s ease;
+  animation:modalIn .25s ease;
 }
 
 @keyframes modalIn{
@@ -1406,30 +1406,32 @@ button{
 }
 
 .modalBox{
-  width:min(520px,100%);
-  background:linear-gradient(145deg, rgba(34,30,52,.97), rgba(13,13,20,.98));
-  border:1px solid rgba(168,125,255,.22);
-  border-radius:30px;
-  padding:26px;
-  box-shadow:
-    0 30px 100px rgba(0,0,0,.8),
-    0 0 60px rgba(139,92,255,.16);
-  animation:modalBoxIn .45s cubic-bezier(.16,1,.3,1);
+  width:min(460px,100%);
+  margin:auto;
+  text-align:center;
+  background:linear-gradient(145deg, rgba(34,30,52,.98), rgba(13,13,20,.99));
+  border:1px solid rgba(168,125,255,.28);
+  border-radius:28px;
+  padding:24px 22px;
+  box-shadow:0 30px 100px rgba(0,0,0,.85), 0 0 60px var(--glow-main);
+  animation:modalBoxIn .4s cubic-bezier(.16,1,.3,1);
 }
 
 @keyframes modalBoxIn{
-  from{ transform:translateY(30px) scale(.92); opacity:0; }
+  from{ transform:translateY(24px) scale(.94); opacity:0; }
   to{ transform:translateY(0) scale(1); opacity:1; }
 }
 
 .modalBox h2{
   margin:0 0 8px;
-  font-size:29px;
+  font-size:26px;
 }
 
 .modalBox p{
   color:#9894a6;
-  line-height:1.45;
+  line-height:1.4;
+  font-size:14px;
+  margin:0 0 12px;
 }
 
 .setupStep{
@@ -1440,61 +1442,60 @@ button{
   display:block;
 }
 
-.input{
-  margin:15px 0;
+.modalBox .input{
+  margin:12px 0;
 }
 
 .collegeOptions{
   display:grid;
-  gap:12px;
-  margin-top:20px;
+  gap:10px;
+  margin-top:14px;
 }
 
 .collegeOption{
-  text-align:left;
+  text-align:center;
   background:rgba(255,255,255,.055);
   color:#fff;
   border:1px solid rgba(255,255,255,.09);
-  border-radius:20px;
-  padding:17px;
-  transition:.25s cubic-bezier(.16,1,.3,1);
+  border-radius:18px;
+  padding:15px;
+  transition:.25s ease;
 }
 
 .collegeOption:hover{
-  transform:translateX(6px);
-  border-color:rgba(168,125,255,.4);
+  border-color:var(--accent-1);
 }
 
 .collegeOption.selected{
   background:linear-gradient(135deg,#fff,#ece4ff);
   color:#111;
   border-color:#fff;
-  box-shadow:0 12px 35px rgba(139,92,255,.25);
+  box-shadow:0 10px 30px var(--glow-main);
 }
 
 .collegeOption b{
   display:block;
-  font-size:17px;
+  font-size:16.5px;
 }
 
 .collegeOption small{
   display:block;
-  margin-top:5px;
-  opacity:.72;
+  margin-top:4px;
+  opacity:.75;
 }
 
 .modalActions{
   display:flex;
   gap:10px;
-  margin-top:18px;
+  margin-top:14px;
 }
 
 .modalActions button{
   flex:1;
-  padding:14px;
-  border-radius:15px;
+  padding:13px;
+  border-radius:14px;
   font-weight:900;
-  transition:.25s ease;
+  transition:.22s ease;
 }
 
 .primary{
@@ -1502,18 +1503,9 @@ button{
   color:#111;
 }
 
-.primary:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 25px rgba(255,255,255,.2);
-}
-
 .secondary{
   background:#292733;
   color:#fff;
-}
-
-.secondary:hover{
-  background:#343140;
 }
 
 /* =========================================================
@@ -1522,7 +1514,7 @@ button{
 
 .beauty{
   text-align:center;
-  padding-top:24px;
+  padding-top:18px;
   min-height:100vh;
   position:relative;
 }
@@ -1530,17 +1522,12 @@ button{
 .beauty::before{
   content:"";
   position:absolute;
-  width:380px;
-  height:380px;
+  width:340px;
+  height:340px;
   top:16%;
   left:50%;
   transform:translateX(-50%);
-  background:radial-gradient(
-    circle,
-    rgba(255,79,216,.26),
-    rgba(139,92,255,.15) 45%,
-    transparent 70%
-  );
+  background:radial-gradient(circle, var(--aurora-2), var(--aurora-1) 45%, transparent 70%);
   filter:blur(28px);
   pointer-events:none;
   animation:beautyGlow 4.5s ease-in-out infinite;
@@ -1548,7 +1535,7 @@ button{
 
 @keyframes beautyGlow{
   0%,100%{ transform:translateX(-50%) scale(.9); opacity:.65; }
-  50%{ transform:translateX(-50%) scale(1.32); opacity:1; }
+  50%{ transform:translateX(-50%) scale(1.28); opacity:1; }
 }
 
 .beautyTopBar{
@@ -1556,7 +1543,7 @@ button{
   align-items:flex-start;
   justify-content:space-between;
   gap:10px;
-  margin-bottom:24px;
+  margin-bottom:20px;
   text-align:left;
 }
 
@@ -1571,81 +1558,61 @@ button{
 
 .beautyCornerBadge{
   margin-bottom:0 !important;
-  padding:8px 13px;
+  padding:8px 12px;
   font-size:12px;
 }
 
 .beautyIcon{
   position:relative;
-  font-size:76px;
-  margin:36px 0 28px;
+  font-size:72px;
+  margin:28px 0 22px;
   display:inline-block;
-  filter:drop-shadow(0 0 25px rgba(255,79,216,.45));
+  filter:drop-shadow(0 0 25px var(--glow-pink));
   animation:beautyFloat 2.6s ease-in-out infinite;
 }
 
 @keyframes beautyFloat{
   0%,100%{ transform:translateY(0) rotate(-4deg) scale(1); }
-  50%{ transform:translateY(-16px) rotate(5deg) scale(1.08); }
+  50%{ transform:translateY(-14px) rotate(5deg) scale(1.07); }
 }
 
 .beautyText{
   position:relative;
-  font-size:clamp(25px,7vw,48px);
+  font-size:clamp(24px,6.8vw,46px);
   font-weight:1000;
-  line-height:1.1;
-  max-width:720px;
-  margin:0 auto 35px;
+  line-height:1.12;
+  max-width:680px;
+  margin:0 auto 28px;
   transition:.35s cubic-bezier(.16,1,.3,1);
-  text-shadow:0 0 35px rgba(255,79,216,.2);
 }
 
 .beautyBtn{
   position:fixed;
   z-index:120;
   left:50%;
-  bottom:88px;
+  bottom:82px;
   transform:translateX(-50%);
   background:linear-gradient(135deg,#fff,#f5d9ff);
   color:#111;
-  padding:16px 30px;
-  border-radius:18px;
+  padding:15px 28px;
+  border-radius:16px;
   font-weight:1000;
-  min-width:155px;
-  box-shadow:
-    0 14px 38px rgba(0,0,0,.4),
-    0 0 32px rgba(255,79,216,.25);
+  min-width:150px;
+  box-shadow:0 14px 36px rgba(0,0,0,.45), 0 0 30px var(--glow-pink);
   transition:
     left .55s cubic-bezier(.16,1,.3,1),
     bottom .55s cubic-bezier(.16,1,.3,1),
-    transform .35s ease,
-    box-shadow .3s ease;
-}
-
-.beautyBtn:hover{
-  box-shadow:
-    0 20px 50px rgba(0,0,0,.5),
-    0 0 42px rgba(255,79,216,.4);
-}
-
-.beautyBtn:active{
-  transform:translateX(-50%) scale(.9);
+    transform .35s ease;
 }
 
 .beautyBack{
   position:relative;
   background:rgba(255,255,255,.08);
   color:#fff;
-  padding:12px 22px;
-  border-radius:15px;
+  padding:11px 20px;
+  border-radius:14px;
   font-weight:900;
   border:1px solid rgba(255,255,255,.1);
-  transition:.25s ease;
-}
-
-.beautyBack:hover{
-  transform:translateY(-3px);
-  background:rgba(255,255,255,.14);
 }
 
 /* =========================================================
@@ -1654,17 +1621,17 @@ button{
 
 .diceSpin{
   display:inline-block;
-  font-size:76px;
-  margin-bottom:18px;
-  filter:drop-shadow(0 0 28px rgba(139,92,255,.55));
+  font-size:72px;
+  margin-bottom:14px;
+  filter:drop-shadow(0 0 28px var(--glow-main));
   animation:
     diceTumble .85s cubic-bezier(.34,1.56,.64,1),
     beautyFloat 2.4s .85s ease-in-out infinite;
 }
 
 @keyframes diceTumble{
-  0%{ transform:scale(.3) rotate(-360deg) translateY(-40px); opacity:0; }
-  70%{ transform:scale(1.18) rotate(18deg) translateY(4px); opacity:1; }
+  0%{ transform:scale(.3) rotate(-360deg) translateY(-30px); opacity:0; }
+  70%{ transform:scale(1.16) rotate(18deg) translateY(4px); opacity:1; }
   100%{ transform:scale(1) rotate(0deg) translateY(0); }
 }
 
@@ -1676,18 +1643,13 @@ button{
   text-align:center;
   color:#605d6e;
   font-size:10px;
-  margin-top:55px;
-  letter-spacing:2.5px;
+  margin-top:30px;
+  letter-spacing:2.2px;
 }
-
-/* =========================================================
-   MOBILE
-========================================================= */
 
 @media(max-width:520px){
   .page{
-    padding-left:14px;
-    padding-right:14px;
+    padding:14px 13px 90px;
   }
 
   .categoryGrid{
@@ -1695,32 +1657,8 @@ button{
   }
 
   .category{
-    min-height:96px;
-    border-radius:20px;
-  }
-
-  .statsGrid{
-    gap:8px;
-  }
-
-  .statCard{
-    padding:12px 8px;
-  }
-
-  .statCard b{
-    font-size:22px;
-  }
-
-  .sectionTop{
-    align-items:flex-start;
-  }
-
-  .sectionTop .changeBtn,
-  .sectionTop .backBtn,
-  .beautyTopBar .changeBtn,
-  .beautyTopBar .backBtn{
-    padding:9px 11px;
-    font-size:12px;
+    min-height:94px;
+    border-radius:18px;
   }
 
   .beautyCornerGroup{
@@ -1728,21 +1666,9 @@ button{
     align-items:flex-end;
   }
 
-  .beautyBtn{
-    bottom:82px;
-  }
-
   .timeVibeBanner{
     flex-direction:column;
     align-items:flex-start;
-  }
-}
-
-@media(prefers-reduced-motion:reduce){
-  *, *::before, *::after{
-    animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
-    transition-duration:.01ms !important;
   }
 }
 </style>
@@ -1754,7 +1680,6 @@ button{
 <div id="cursorGlow"></div>
 <div class="cyberGrid"></div>
 
-<!-- HORIZON PARTICLES -->
 <div class="horizonParticles">
   <i></i><i></i><i></i><i></i><i></i><i></i>
   <i></i><i></i><i></i><i></i><i></i><i></i>
@@ -1774,7 +1699,7 @@ button{
 
 
 <!-- =========================================================
-     SETUP / CHANGE COLLEGE MODAL
+     CENTERED SETUP / CHANGE COLLEGE MODAL
 ========================================================= -->
 
 <div id="modal" class="modal">
@@ -1789,9 +1714,9 @@ button{
 
       <input
         id="nameInput"
-        class="input"
+        class="input centerInput"
         maxlength="30"
-        placeholder="☆☆☆☆"
+        placeholder="☆☆☆☆☆☆☆☆"
       >
 
       <div class="modalActions">
@@ -1840,20 +1765,20 @@ button{
 
 
 <!-- =========================================================
-     MANAGEMENT PASSWORD MODAL
+     CENTERED MANAGEMENT PASSWORD MODAL
 ========================================================= -->
 
 <div id="mgmtModal" class="modal">
   <div class="modalBox">
     <h2>⚙️ Management Access</h2>
-    <p>Enter the admin password to view login records and analytics.</p>
+    <p>Enter the admin password to view login records and custom spots.</p>
 
     <input
       id="mgmtPassInput"
-      class="input"
+      class="input centerInput"
       type="password"
       maxlength="20"
-      placeholder="Enter password"
+      placeholder="☆☆☆☆☆☆☆☆"
     >
 
     <div id="mgmtPassError" class="errorMsg"></div>
@@ -1867,7 +1792,7 @@ button{
 
 
 <!-- =========================================================
-     GENERIC ACTION MODAL (POLL / BUCKET RATING / CONFIRM)
+     CENTERED CUSTOM ACTION MODAL (RECEIPT / POLL / WINNER / STAMP)
 ========================================================= -->
 
 <div id="customModal" class="modal">
@@ -1879,16 +1804,92 @@ button{
 
 /* =========================================================
    WHERE'S THE GANG?
-   V8.6 • HORIZON ULTRA
+   V8.7 • HORIZON ULTRA
 ========================================================= */
 
-const APP_VERSION="V8.6 • HORIZON ULTRA";
+const APP_VERSION="V8.7 • HORIZON ULTRA";
 
 const STORAGE_KEY="wheres_the_gang_final_v8";
 const RECORDS_STORAGE_KEY="wheres_the_gang_login_records_v8";
 const BUCKET_STORAGE_KEY="wheres_the_gang_bucket_v8";
+const CUSTOM_SPOTS_KEY="wheres_the_gang_custom_spots_v8";
+const THEME_STORAGE_KEY="wheres_the_gang_theme_v8";
 
 const MGMT_PASSWORD="1234";
+
+
+/* =========================================================
+   SECRET THEME SKINS EASTER EGG (TAP KUSH BADGE 5x)
+========================================================= */
+
+const THEMES=[
+  {id:"horizon",name:"Horizon Ultra",emoji:"🌌",desc:"Signature violet, neon pink & electric cyan."},
+  {id:"mint",name:"Cyber Mint",emoji:"💚",desc:"Emerald matrix, glacial aqua & lime glow."},
+  {id:"mango",name:"Sunset Mango",emoji:"🌅",desc:"Golden hour amber, coral pink & warm solar aura."},
+  {id:"crimson",name:"Crimson Horizon",emoji:"🔥",desc:"Ruby red, hyper-magenta & volcanic glow."}
+];
+
+let activeTheme="horizon";
+let secretTapCount=0;
+let secretTapTimer=null;
+
+function applyTheme(themeId){
+  activeTheme=themeId||"horizon";
+  if(activeTheme==="horizon"){
+    document.body.removeAttribute("data-theme");
+  }else{
+    document.body.setAttribute("data-theme",activeTheme);
+  }
+  localStorage.setItem(THEME_STORAGE_KEY,activeTheme);
+}
+
+function handleSecretBadgeTap(e){
+  secretTapCount++;
+  clearTimeout(secretTapTimer);
+  secretTapTimer=setTimeout(()=>{ secretTapCount=0; },2200);
+
+  if(secretTapCount===3 || secretTapCount===4){
+    showToast(`✨ ${5-secretTapCount} more tap${5-secretTapCount===1?"":"s"} to unlock Secret Skins...`);
+  }
+
+  if(secretTapCount>=5){
+    secretTapCount=0;
+    spawnSparks(e?.clientX||window.innerWidth/2, e?.clientY||120, 30);
+    openThemeSkinsModal();
+  }
+}
+
+function openThemeSkinsModal(){
+  const box=document.getElementById("customModalBox");
+  box.innerHTML=`
+    <h2>🎨 Secret Theme Skins</h2>
+    <p>Easter egg unlocked! Pick your cosmic aurora theme.</p>
+
+    <div class="collegeOptions">
+      ${THEMES.map(t=>`
+        <button
+          class="collegeOption ${activeTheme===t.id?'selected':''}"
+          onclick="selectSecretTheme('${t.id}')"
+        >
+          <b>${t.emoji} ${escapeHtml(t.name)}</b>
+          <small>${escapeHtml(t.desc)}</small>
+        </button>
+      `).join("")}
+    </div>
+
+    <div class="modalActions">
+      <button class="primary" onclick="closeCustomModal()">Done ✨</button>
+    </div>
+  `;
+  document.getElementById("customModal").classList.add("show");
+}
+
+function selectSecretTheme(id){
+  applyTheme(id);
+  const found=THEMES.find(t=>t.id===id);
+  showToast(`Theme switched to ${found ? found.name : id} 🎨`);
+  openThemeSkinsModal();
+}
 
 
 /* =========================================================
@@ -1901,13 +1902,6 @@ document.addEventListener("mousemove",function(e){
     glow.style.left=e.clientX+"px";
     glow.style.top=e.clientY+"px";
   }
-
-  const card=e.target.closest(".category");
-  if(card){
-    const rect=card.getBoundingClientRect();
-    card.style.setProperty("--mx",(e.clientX-rect.left)+"px");
-    card.style.setProperty("--my",(e.clientY-rect.top)+"px");
-  }
 });
 
 window.addEventListener("scroll",function(){
@@ -1919,12 +1913,12 @@ window.addEventListener("scroll",function(){
 });
 
 function spawnSparks(x,y,count=10){
-  const colors=["#8b5cff","#ff4fd8","#42b9ff","#00ffa3","#ffffff"];
+  const colors=["#8b5cff","#ff4fd8","#42b9ff","#00ffa3","#ffd60a","#ffffff"];
   for(let i=0;i<count;i++){
     const spark=document.createElement("i");
     spark.className="clickSpark";
     const angle=(Math.PI*2*i)/count + (Math.random()-.5)*.5;
-    const dist=28+Math.random()*42;
+    const dist=28+Math.random()*54;
     spark.style.left=x+"px";
     spark.style.top=y+"px";
     spark.style.background=colors[i%colors.length];
@@ -1938,7 +1932,7 @@ function spawnSparks(x,y,count=10){
 
 document.addEventListener("click",function(e){
   if(e.target.closest("button, .mapBtn")){
-    spawnSparks(e.clientX,e.clientY,10);
+    spawnSparks(e.clientX,e.clientY,9);
   }
 });
 
@@ -1968,6 +1962,7 @@ let beautyStep=0;
 let exploreFilter="all";
 let explorePrimeOnly=false;
 let mgmtCollegeFilter="all";
+let mgmtTab="records";
 
 let squadPoll=[];
 let nexoraHistory=[];
@@ -1977,9 +1972,14 @@ let wheelRotation=0;
 let wheelSpinning=false;
 let bucketTab="saved";
 
+let swipeDeck=[];
+let swipeKept=[];
+let truthDareIdx=0;
+let truthDareMode="all";
+
 
 /* =========================================================
-   SAFE HTML & EMPTY NAME PLACEHOLDER ("☆☆☆☆")
+   SAFE HTML & EMPTY NAME PLACEHOLDER ("☆☆☆☆☆☆☆☆")
 ========================================================= */
 
 function escapeHtml(value){
@@ -1993,7 +1993,7 @@ function escapeHtml(value){
 
 function displayName(){
   const clean=(selectedName||"").trim();
-  return clean ? clean : "☆☆☆☆";
+  return clean ? clean : "☆☆☆☆☆☆☆☆";
 }
 
 
@@ -2071,11 +2071,84 @@ function recordLoginEvent(name,college){
 
 
 /* =========================================================
-   LOCATION LOCKED DATA (EXACT ORIGINAL DATASETS)
+   CUSTOM SECRET ADDAS (USER-ADDED SPOTS)
+========================================================= */
+
+function getCustomSpots(){
+  try{
+    const list=JSON.parse(localStorage.getItem(CUSTOM_SPOTS_KEY)||"[]");
+    return Array.isArray(list) ? list : [];
+  }catch(e){
+    return [];
+  }
+}
+
+function saveCustomSpots(list){
+  localStorage.setItem(CUSTOM_SPOTS_KEY,JSON.stringify(list));
+}
+
+function openAddSecretAddaModal(){
+  const box=document.getElementById("customModalBox");
+  box.innerHTML=`
+    <h2>📍 Pin Secret Adda</h2>
+    <p>Add your hidden <strong>${escapeHtml(getCollegeShort())}</strong> hangout spot to the planner.</p>
+
+    <input id="customSpotName" class="input centerInput" maxlength="40" placeholder="Spot Name">
+    <input id="customSpotArea" class="input centerInput" maxlength="40" placeholder="Block / Street (e.g. 4th Block / DVG Road)">
+    <select id="customSpotCat" class="selectInput" style="margin:8px 0;text-align:center;">
+      ${categories.map(c=>`<option value="${c[0]}">${c[1]} ${escapeHtml(c[2])}</option>`).join("")}
+    </select>
+    <input id="customSpotDesc" class="input centerInput" maxlength="90" placeholder="Why is this adda elite?">
+
+    <div class="modalActions">
+      <button class="secondary" onclick="closeCustomModal()">Cancel</button>
+      <button class="primary" onclick="submitSecretAdda()">Pin Spot 📌</button>
+    </div>
+  `;
+  document.getElementById("customModal").classList.add("show");
+}
+
+function submitSecretAdda(){
+  const name=(document.getElementById("customSpotName")?.value||"").trim();
+  const area=(document.getElementById("customSpotArea")?.value||"").trim() || (selectedCollege==="Aps" ? "Basavanagudi" : "Jayanagar");
+  const category=document.getElementById("customSpotCat")?.value||"nearby";
+  const desc=(document.getElementById("customSpotDesc")?.value||"").trim() || "Squad-pinned secret adda.";
+
+  if(!name){
+    showToast("Enter the spot name first 👀");
+    return;
+  }
+
+  const list=getCustomSpots();
+  list.unshift({
+    id:"adda_"+Date.now(),
+    college:selectedCollege,
+    name,
+    area,
+    category,
+    desc,
+    addedBy:displayName(),
+    createdAt:new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"})
+  });
+  saveCustomSpots(list);
+  closeCustomModal();
+  showToast(`Pinned "${name}" to ${getCollegeShort()} 📌`);
+  refreshCurrentView();
+}
+
+function deleteCustomSpot(id){
+  const list=getCustomSpots().filter(s=>s.id!==id);
+  saveCustomSpots(list);
+  showToast("Secret adda deleted");
+  if(currentPage==="management") renderManagementDashboard();
+}
+
+
+/* =========================================================
+   LOCATION LOCKED DATA
 ========================================================= */
 
 const nmkrvPlanner={
-
 gaming:[
 ["The G.O.A.T Gaming Cafe","Jayanagar","Premium gaming café / esports-style hangout in Jayanagar.","PC gaming • console vibe • squad sessions"],
 ["1vX Gaming | Jayanagar","Jayanagar 9th Block","Gaming hangout with PC, console and simulator-style activities.","PC • PS5 • simulators • squad"],
@@ -2084,14 +2157,12 @@ gaming:[
 ["Now Boarding Café","Jayanagar 1st/3rd Block","Board-game café with a large tabletop collection.","Board games • food • groups"],
 ["Funzy Cafe","Jayanagar 5th Block","Creative café with painting, crafts, board games and activities.","Games • art • activities"]
 ],
-
 cinema:[
 ["Jayanagar cinema listings","Jayanagar","Check the current movie showtimes around Jayanagar before heading out.","Movies • friends"],
 ["Jayanagar 4th Block movie outing","Jayanagar 4th Block","Plan a food + movie hangout around the commercial core.","Movie • food • shopping"],
 ["Jayanagar evening movie plan","Jayanagar","Easy combo: movie + café + dessert in Jayanagar.","Movie • café • dessert"],
 ["Jayanagar weekend movie plan","Jayanagar","Keep the whole outing inside Jayanagar instead of crossing areas.","Weekend • movie"]
 ],
-
 shopping:[
 ["Jayanagar Shopping Complex","Jayanagar 4th Block","Classic Jayanagar shopping hub with shops, accessories, clothes and snacks nearby.","Shopping • street market"],
 ["Jayanagar Market","Jayanagar 4th Block","Busy local shopping district around the 4th Block area.","Market • street shopping"],
@@ -2100,7 +2171,6 @@ shopping:[
 ["Jayanagar 5th Block shopping streets","Jayanagar 5th Block","Smaller shops and local stores around the block.","Shopping • browsing"],
 ["Jayanagar 9th Block shopping area","Jayanagar 9th Block","Local shopping around the 9th Block grid.","Shopping • essentials"]
 ],
-
 food:[
 ["Taaza Thindi","Jayanagar","Popular Jayanagar breakfast/snack stop.","South Indian • budget"],
 ["Hari Super Sandwich Jayanagar","Jayanagar","Quick sandwich-focused food stop.","Quick bite • friends"],
@@ -2111,7 +2181,6 @@ food:[
 ["Ganesh Fruit Juice Centre","Jayanagar","Local juice and quick-refreshment stop.","Juices • quick stop"],
 ["MTR area food walk","Jayanagar","Traditional Bengaluru food outing within the Jayanagar zone.","South Indian • food walk"]
 ],
-
 cafes:[
 ["Toffee And Talk","Jayanagar","Cozy specialty café suitable for conversations and longer hangs.","Coffee • café"],
 ["Blue Tokai Coffee Roasters | Jayanagar","Jayanagar","Specialty coffee café in the Jayanagar commercial grid.","Coffee • study/hangout"],
@@ -2124,7 +2193,6 @@ cafes:[
 ["KAHALE - Filter Kaapi Bar","Jayanagar 4th Block","South Indian filter-kaapi focused café.","Filter coffee • old Bengaluru vibe"],
 ["Isobel Coffee House","Jayanagar 2nd Block","Boutique coffee and snacks hangout.","Coffee • snacks"]
 ],
-
 desserts:[
 ["SMOOR Lounge - Jayanagar","Jayanagar 5th Block","Dessert-forward café and chocolate boutique.","Chocolate • cakes • desserts"],
 ["Huber & Holly","Jayanagar 4th Block","Ice cream, sundaes and dessert stop.","Ice cream • desserts"],
@@ -2133,7 +2201,6 @@ desserts:[
 ["Sri Venkateshwara Sweet-Meat Stall","Jayanagar 4th Block","Traditional sweets and quick snacks.","Sweets • snacks"],
 ["Jayanagar dessert walk","Jayanagar 4th/5th Block","Pick a dessert place and walk through the nearby commercial streets.","Dessert • walk"]
 ],
-
 parks:[
 ["Yediyuru Lake Park","Jayanagar 6th Block","Lake park with walking space and outdoor recreation.","Walk • lake • park"],
 ["Madhavan Park","Jayanagar","Green neighbourhood park suitable for a relaxed walk.","Park • walk"],
@@ -2144,7 +2211,6 @@ parks:[
 ["Jayanagar 4th Block Park","Jayanagar 4th Block","Local park for a quick reset from shopping streets.","Park • break"],
 ["Jayanagar 5th Block Pu.Thi.Na Park","Jayanagar 5th Block","Local BBMP park with greenery and recreation space.","Park • outdoors"]
 ],
-
 nature:[
 ["Jayanagara Kiru Kādu","Jayanagar","Mini-forest style green escape for a quiet nature break.","Greenery • walk"],
 ["Yediyuru Lake greenery","Jayanagar 6th Block","Urban lake ecosystem and surrounding greenery.","Nature • birds"],
@@ -2152,35 +2218,30 @@ nature:[
 ["Jayanagar tree-lined blocks","Jayanagar","Slow walk through Jayanagar's tree-lined residential streets.","Nature • photography"],
 ["Laxman Rao Boulevard green stretch","Jayanagar","Long green residential stretch for a calm walk.","Greenery • walk"]
 ],
-
 lakes:[
 ["Yediyuru Lake","Jayanagar 6th Block","Jayanagar's main lake hangout with walking and boating options.","Lake • walk"],
 ["Yediyuru Lake Park","Jayanagar 6th Block","Park around the lake for an evening outing.","Lake • park"],
 ["Shantala Boating Centre","Yediyuru, Jayanagar","Paddle-boating option at Yediyuru Lake.","Boating • lake"],
 ["Yediyuru Lake photo walk","Jayanagar 6th Block","Golden-hour photography and walking around the lake.","Photos • sunset"]
 ],
-
 hills:[
 ["Ragigudda hillock","Jayanagar 9th Block","Hillock-style outing around Ragigudda.","Hillock • views"],
 ["Ragigudda temple hill area","Jayanagar 9th Block","Walk around the hillock and temple surroundings.","Hillock • heritage"],
 ["Ragigudda viewpoint walk","Jayanagar 9th Block","Short uphill walk and neighbourhood views.","Walk • viewpoint"],
 ["Jayanagar elevated green walks","Jayanagar","Easy local walking routes around Jayanagar's raised/green stretches.","Walk • outdoors"]
 ],
-
 temples:[
 ["Ragigudda Sri Prasanna Anjaneyaswamy Temple","Jayanagar 9th Block","Major Jayanagar temple on/around Ragigudda hillock.","Temple • heritage"],
 ["Shri Karya Siddhi Anjaneya Temple","Jayanagar","Hanuman temple option in the Jayanagar area.","Temple • peaceful"],
 ["Jayanagar temple streets","Jayanagar","Explore the smaller local temples around the blocks.","Temple • walk"],
 ["Jayanagar 4th Block local shrines","Jayanagar 4th Block","Small neighbourhood religious sites for a quiet stop.","Temple • local"]
 ],
-
 science:[
 ["ParSEC-Jayanagar by Param","Jayanagar 7th Block","Interactive science centre with themed galleries and hands-on experiences.","Science • interactive"],
 ["ParSEC science session","Jayanagar 7th Block","Book a science session for a different kind of group outing.","Science • learning"],
 ["Jayanagar science photo challenge","Jayanagar","Turn a Jayanagar walk into a mini observation/science challenge.","Science • challenge"],
 ["Yediyuru ecology walk","Jayanagar 6th Block","Observe urban lake ecology, plants and birds.","Nature • science"]
 ],
-
 photos:[
 ["Yediyuru Lake","Jayanagar 6th Block","Water, reflections and greenery make this an easy photo stop.","Photography"],
 ["Ragigudda hillock","Jayanagar 9th Block","Hillock and temple-area photography.","Photography"],
@@ -2188,7 +2249,6 @@ photos:[
 ["Jayanagar tree-lined roads","Jayanagar","Classic residential Bengaluru visuals.","Street photography"],
 ["Jayanagar cafés","Jayanagar","Café interiors and food photography.","Café photos"]
 ],
-
 walk:[
 ["Yediyuru Lake walking loop","Jayanagar 6th Block","Easy lake-side walking route.","Walk • lake"],
 ["Jayanagar 4th Block market walk","Jayanagar 4th Block","Shopping + snacks + street walk.","Walk • shopping"],
@@ -2196,7 +2256,6 @@ walk:[
 ["Jayanagar 5th Block café walk","Jayanagar 5th Block","Walk between cafés and nearby streets.","Walk • cafés"],
 ["Laxman Rao Boulevard walk","Jayanagar","Longer relaxed residential walk.","Walk • greenery"]
 ],
-
 sports:[
 ["Amoeba Jayanagar","Jayanagar","Bowling/arcade-style entertainment option.","Bowling • arcade"],
 ["Yediyuru Lake open recreation","Jayanagar 6th Block","Outdoor recreational space around the lake.","Outdoor • recreation"],
@@ -2204,21 +2263,18 @@ sports:[
 ["Jayanagar block grounds","Jayanagar","Neighbourhood grounds for casual group activity.","Sports • outdoors"],
 ["Jayanagar walking challenge","Jayanagar","Create your own walking route through the blocks.","Walking • fitness"]
 ],
-
 books:[
 ["Sapna Book House - Jayanagar","Jayanagar","Books, stationery and study material in the Jayanagar area.","Books • stationery"],
 ["Jayanagar public library","Jayanagar","Local reading/library option.","Books • reading"],
 ["M.N. Krishna Rao-style reading plan — Jayanagar alternative","Jayanagar","Quiet reading break using a Jayanagar park.","Reading • outdoors"],
 ["Jayanagar book + café day","Jayanagar","Book browsing followed by a café stop.","Books • café"]
 ],
-
 art:[
 ["Funzy Cafe","Jayanagar 5th Block","Painting, crafts, art activities and board games.","Art • activities"],
 ["The Firefly Terrace","Jayanagar 2nd Block","Rooftop creative workshop venue with activities such as pottery/mosaic-style sessions.","Art • workshop"],
 ["Jayanagar street photography","Jayanagar","Use the old/new mix of Jayanagar as an urban art walk.","Photography • art"],
 ["Jayanagar craft shopping","Jayanagar","Browse local craft and stationery stores for DIY supplies.","Crafts • shopping"]
 ],
-
 activities:[
 ["Funzy Cafe","Jayanagar 5th Block","Painting, craft, board games, RC activities and entertainment.","Art • games"],
 ["Now Boarding Café","Jayanagar","Tabletop gaming for a longer group session.","Board games"],
@@ -2229,20 +2285,17 @@ activities:[
 ["Shantala Boating Centre","Yediyur, Jayanagar","Paddle boating at Yediyur Lake.","Boating"],
 ["The Firefly Terrace","Jayanagar 2nd Block","Creative rooftop workshop activities.","Art • workshop"]
 ],
-
 sunset:[
 ["Yediyuru Lake","Jayanagar 6th Block","Lake-side evening atmosphere and photos.","Sunset • lake"],
 ["Ragigudda hillock","Jayanagar 9th Block","Elevated evening views around the hillock.","Sunset • hill"],
 ["Jayanagar parks","Jayanagar","Relaxed evening greenery.","Sunset • park"],
 ["Jayanagar tree-lined streets","Jayanagar","Slow evening walk through the blocks.","Sunset • walk"]
 ],
-
 metro:[
 ["Jayanagara Metro Station","Jayanagar","Main Green Line access for Jayanagar outings.","Green Line"],
 ["Rashtreeya Vidyalaya Road Metro Station","Jayanagar","Green Line access serving the Jayanagar side.","Green Line"],
 ["South End Circle Metro Station","Jayanagar-side access","Useful Green Line access around the Jayanagar edge.","Green Line"]
 ],
-
 nearby:[
 ["Jayanagar 4th Block","Jayanagar","Shopping, food, cafés and market energy.","Jayanagar"],
 ["Jayanagar 5th Block","Jayanagar","Cafés, desserts, shops and activities.","Jayanagar"],
@@ -2250,32 +2303,27 @@ nearby:[
 ["Jayanagar 7th Block","Jayanagar","ParSEC and local cafés/streets.","Jayanagar"],
 ["Jayanagar 9th Block","Jayanagar","Ragigudda, gaming and local food options.","Jayanagar"]
 ]
-
 };
 
 const apsPlanner={
-
 gaming:[
 ["Echo Esports Gaming Cafe","Vishweshwarapura / Basavanagudi","Esports-style gaming café near National High School Road.","PC gaming • esports"],
 ["Board 4 Bored","D.V. Gundappa Road, Basavanagudi","Board-game café with a large tabletop collection.","Board games • groups"],
 ["DBR Splendid Game Station","Gandhi Bazaar, Basavanagudi","Legacy gaming-station listing with arcade/VR-style activities.","⚠️ Verify current status"],
 ["Basavanagudi board-game hangout","Basavanagudi","Use Board 4 Bored for a dedicated tabletop session.","Board games"]
 ],
-
 cinema:[
 ["Prasanna Theatre","Basavanagudi area","Local single-screen movie outing option to check for current shows.","Movies"],
 ["Basavanagudi movie + food plan","Basavanagudi","Movie followed by Gandhi Bazaar/VV Puram food.","Movie • food"],
 ["Gandhi Bazaar movie evening","Basavanagudi","Keep the outing within the Basavanagudi heritage zone.","Movie • walk"],
 ["Basavanagudi weekend cinema plan","Basavanagudi","Movie + food street + dessert route.","Movie • food"]
 ],
-
 shopping:[
 ["Gandhi Bazaar","Basavanagudi","Classic Basavanagudi market area for shopping and browsing.","Market • shopping"],
 ["Gopalan Arcade area","Basavanagudi side","Shopping/entertainment option around the local commercial zone.","Shopping"],
 ["D.V. Gundappa Road shops","Basavanagudi","Browse local stores around DVG Road.","Shopping • walk"],
 ["VV Puram local shops","Basavanagudi / Vishweshwarapura","Small local shopping stops around Food Street.","Shopping • food"]
 ],
-
 food:[
 ["Vidyarthi Bhavan","Gandhi Bazaar, Basavanagudi","Iconic South Indian food stop, especially known for masala dosa.","South Indian • iconic"],
 ["VV Puram Food Street","Vishweshwarapura","Street-food stretch with many vegetarian food stalls.","Food street"],
@@ -2286,21 +2334,18 @@ food:[
 ["Asha Sweets and Snacks","Bugle Rock Road","Local sweets/snacks option near the Basavanagudi heritage area.","Snacks • sweets"],
 ["Bombay and Kolkata Chats","Anjaneya Temple Street","Street-snack option in the Basavanagudi/VV Puram zone.","Chats • snacks"]
 ],
-
 cafes:[
 ["Board 4 Bored","D.V. Gundappa Road","Board games + vegetarian café experience.","Games • café"],
 ["Gandhi Bazaar cafés","Gandhi Bazaar","Casual café stops around the market streets.","Coffee • snacks"],
 ["VV Puram cafés","Vishweshwarapura","Quick café/snack stops around the food-street area.","Café • snacks"],
 ["DVG Road café walk","Basavanagudi","Pick a café and continue into a heritage walk.","Café • walk"]
 ],
-
 desserts:[
 ["VV Puram sweets & desserts","Vishweshwarapura","Dessert-hopping around the food-street zone.","Desserts"],
 ["Asha Sweets and Snacks","Bugle Rock Road","Traditional sweets and snacks.","Sweets"],
 ["Gandhi Bazaar sweet shops","Gandhi Bazaar","Local sweets and snack browsing.","Sweets • shopping"],
 ["VV Puram dessert walk","Vishweshwarapura","Finish a food-street outing with a dessert stop.","Dessert • walk"]
 ],
-
 parks:[
 ["Bugle Rock Park","Basavanagudi","Rocky green park with old geological formations and a watchtower.","Park • heritage"],
 ["M.N. Krishna Rao Park","Basavanagudi","Large green park with walking, basketball, cricket and library facilities.","Park • sports"],
@@ -2309,27 +2354,23 @@ parks:[
 ["Sajjan Rao Park","Basavanagudi","Local park near the VV Puram side.","Park • walk"],
 ["Shamanna Park","Basavanagudi","Local green recreation space.","Park • outdoors"]
 ],
-
 nature:[
 ["Bugle Rock greenery","Basavanagudi","Rock formations surrounded by mature greenery.","Nature • rocks"],
 ["M.N. Krishna Rao Park","Basavanagudi","Large tree-filled urban green space.","Nature • walk"],
 ["Basavanagudi heritage streets","Basavanagudi","Tree-lined old Bengaluru streets around the heritage zone.","Nature • photography"],
 ["Gandhi Bazaar tree-lined streets","Basavanagudi","Slow walk through old neighbourhood streets.","Nature • walk"]
 ],
-
 lakes:[
 ["Basavanagudi lake-area walk","Basavanagudi","Use local green spaces rather than crossing into another college's area.","Lake-style walk"],
 ["Bugle Rock artificial lake area","Basavanagudi","Small water feature within the Bugle Rock surroundings.","Water • park"],
 ["Basavanagudi water-feature photo walk","Basavanagudi","Photo walk around the local park surroundings.","Photos • outdoors"]
 ],
-
 hills:[
 ["Bugle Rock","Basavanagudi","Ancient rocky hillock/formation and viewpoint area.","Rock • viewpoint"],
 ["Bugle Rock watchtower area","Basavanagudi","Elevated viewpoint within the park.","Viewpoint • heritage"],
 ["Bull Temple hillock","N.R. Colony, Basavanagudi","Historic hillock around the Bull Temple.","Hillock • heritage"],
 ["Basavanagudi rock walk","Basavanagudi","Short heritage/geology-focused walk around the rocky landscape.","Rocks • walk"]
 ],
-
 temples:[
 ["Bull Temple / Dodda Basavana Gudi","N.R. Colony, Basavanagudi","Historic Basavanagudi landmark with the huge monolithic Nandi.","Temple • heritage"],
 ["Dodda Ganesha Temple","Basavanagudi","Historic temple beside the Bull Temple.","Temple • heritage"],
@@ -2337,14 +2378,12 @@ temples:[
 ["Anjaneya Temple Street","Basavanagudi","Temple street and local heritage walk.","Temple • walk"],
 ["Ramanjaneya Temple area","Basavanagudi","Local religious/heritage stop in the Basavanagudi zone.","Temple • heritage"]
 ],
-
 science:[
 ["Bugle Rock geology walk","Basavanagudi","Explore one of Bengaluru's famous ancient rock formations.","Geology • nature"],
 ["Bull Temple heritage study","N.R. Colony, Basavanagudi","Architecture, history and heritage observation outing.","History • heritage"],
 ["M.N. Krishna Rao Park nature study","Basavanagudi","Observe plants, trees and urban biodiversity.","Nature • learning"],
 ["Basavanagudi heritage architecture walk","Basavanagudi","Observe old neighbourhood architecture and planning.","Architecture • history"]
 ],
-
 photos:[
 ["Bugle Rock","Basavanagudi","Rocks, trees and the historic watchtower.","Photography"],
 ["Bull Temple","N.R. Colony, Basavanagudi","Architecture and heritage photography.","Photography • heritage"],
@@ -2353,7 +2392,6 @@ photos:[
 ["DVG Road","Basavanagudi","Old Bengaluru street scenes.","Street photography"],
 ["M.N. Krishna Rao Park","Basavanagudi","Greenery and park photography.","Nature photography"]
 ],
-
 walk:[
 ["Gandhi Bazaar heritage walk","Basavanagudi","Food, shops and old Bengaluru streets.","Walk • food"],
 ["Bull Temple → Bugle Rock walk","Basavanagudi","Classic Basavanagudi heritage route.","Walk • heritage"],
@@ -2362,7 +2400,6 @@ walk:[
 ["M.N. Krishna Rao Park loop","Basavanagudi","Walking/jogging around the large park.","Walk • park"],
 ["Gavi Gangadhareshwara heritage walk","Gavipuram, Basavanagudi","Temple + old-neighbourhood walking route.","Walk • heritage"]
 ],
-
 sports:[
 ["M.N. Krishna Rao Park","Basavanagudi","Basketball, cricket, badminton and jogging-style recreation.","Sports • park"],
 ["Bugle Rock outdoor walk","Basavanagudi","Active outdoor walk through rocky terrain.","Outdoor • walk"],
@@ -2370,21 +2407,18 @@ sports:[
 ["Board 4 Bored","Basavanagudi","Competitive tabletop games for groups.","Board games"],
 ["Echo Esports Gaming Cafe","Basavanagudi","Competitive gaming session.","Esports • gaming"]
 ],
-
 books:[
 ["M.N. Krishna Rao Park Library","Basavanagudi","Park library/reading space inside the large green park.","Library • reading"],
 ["Gandhi Bazaar book/stationery shops","Basavanagudi","Browse local books and stationery around the market.","Books • shopping"],
 ["Basavanagudi reading walk","Basavanagudi","Combine a park reading session with a neighbourhood walk.","Reading • outdoors"],
 ["DVG Road book browsing","Basavanagudi","Look through local book/stationery stores around DVG Road.","Books • shopping"]
 ],
-
 art:[
 ["Prabhath Kalapoornima","N.R. Colony, Basavanagudi","Intimate auditorium for plays, music and cultural performances.","Theatre • culture"],
 ["Basavanagudi heritage architecture","Basavanagudi","Old Bengaluru architecture as a visual art walk.","Architecture • art"],
 ["Gandhi Bazaar street art/photo walk","Basavanagudi","Street scenes, signs and market visuals.","Street art • photography"],
 ["VV Puram food presentation walk","Vishweshwarapura","Food, stalls and colourful street scenes for photography.","Food art • photos"]
 ],
-
 activities:[
 ["Board 4 Bored","D.V. Gundappa Road","Large board-game café for group sessions.","Board games"],
 ["Echo Esports Gaming Cafe","Vishweshwarapura","PC gaming/esports hangout.","Gaming"],
@@ -2395,7 +2429,6 @@ activities:[
 ["Prabhath Kalapoornima","N.R. Colony, Basavanagudi","Check for plays/cultural performances.","Theatre"],
 ["Gandhi Bazaar","Basavanagudi","Shopping + snacks + heritage walk.","Shopping • food"]
 ],
-
 sunset:[
 ["Bugle Rock","Basavanagudi","Elevated rocky park atmosphere for evening views.","Sunset • rocks"],
 ["M.N. Krishna Rao Park","Basavanagudi","Large green space for a relaxed evening.","Sunset • park"],
@@ -2403,13 +2436,11 @@ sunset:[
 ["VV Puram Food Street evening","Vishweshwarapura","Classic evening food-street plan.","Sunset • food"],
 ["Bull Temple surroundings","N.R. Colony, Basavanagudi","Heritage-area evening walk.","Sunset • heritage"]
 ],
-
 metro:[
 ["National College Metro Station","Basavanagudi","Green Line station serving the Basavanagudi area.","Green Line"],
 ["Basavanagudi Green Line access","Basavanagudi","Use National College and nearby Green Line access for outings.","Metro • Green Line"],
 ["Local bus + metro combo","Basavanagudi","Combine Green Line access with walking inside Basavanagudi.","Metro • walk"]
 ],
-
 nearby:[
 ["N.R. Colony","Basavanagudi","Core APS-area neighbourhood with heritage and local streets.","Basavanagudi"],
 ["Gandhi Bazaar","Basavanagudi","Shopping, food and old-Bengaluru atmosphere.","Basavanagudi"],
@@ -2418,7 +2449,6 @@ nearby:[
 ["Gavipuram","Basavanagudi","Gavi Gangadhareshwara heritage area.","Basavanagudi"],
 ["Bull Temple Road","N.R. Colony, Basavanagudi","Major heritage/temple stretch.","Basavanagudi"]
 ]
-
 };
 
 const nmkrvExplore=[
@@ -2508,41 +2538,37 @@ function getTimeVibeInfo(){
   const hr=new Date().getHours();
   if(hr>=6 && hr<12){
     return {
-      id:"morning",
       badge:"☀️ Morning Bunk Mode",
       title:"Breakfast, Filter Kaapi & Morning Walks",
       desc:"Prime hours for dosa runs, lakes, parks, and temple heritage walks.",
       primeCats:["food","cafes","parks","lakes","temples","walk"],
-      exploreTypes:["Food","Cafe","Park","Nature","Temple"]
+      exploreTypes:["Food","Cafe","Park","Nature","Temple","Secret Adda"]
     };
   }
   if(hr>=12 && hr<16){
     return {
-      id:"afternoon",
       badge:"🔥 Afternoon Heat Dodge",
       title:"AC Gaming Cafés, Board Games & Indoor Hangouts",
       desc:"Beat the afternoon sun inside gaming zones, specialty cafés, and science galleries.",
       primeCats:["gaming","cafes","activities","science","books","shopping"],
-      exploreTypes:["Gaming","Cafe","Activities","Science","Books","Shopping"]
+      exploreTypes:["Gaming","Cafe","Activities","Science","Books","Shopping","Secret Adda"]
     };
   }
   if(hr>=16 && hr<20){
     return {
-      id:"evening",
       badge:"🌇 Golden Hour & Sunset",
       title:"Lakes, Viewpoints, Street Snacks & Sunset Walks",
       desc:"Best window for sunset spots, chaats, desserts, and evening street walks.",
       primeCats:["sunset","lakes","hills","desserts","food","photos","walk"],
-      exploreTypes:["Nature","Dessert","Food","Park","Shopping"]
+      exploreTypes:["Nature","Dessert","Food","Park","Shopping","Secret Adda"]
     };
   }
   return {
-    id:"night",
     badge:"🌙 Night Squad Vibe",
     title:"Late Desserts, Gaming Sessions & Chill Cafés",
     desc:"Wind down with sundaes, waffles, esports sessions, or a quick food street run.",
     primeCats:["desserts","gaming","cafes","food","cinema"],
-    exploreTypes:["Dessert","Gaming","Cafe","Food"]
+    exploreTypes:["Dessert","Gaming","Cafe","Food","Secret Adda"]
   };
 }
 
@@ -2570,9 +2596,7 @@ function loadData(){
       selectedCollege=data.college==="Aps" ? "Aps" : "NMKRV";
       return Boolean(data.name && data.college);
     }
-  }catch(e){
-    console.warn("Storage reset:",e);
-  }
+  }catch(e){}
   return false;
 }
 
@@ -2619,7 +2643,7 @@ function openVisitStampModal(name,area,desc){
     <h2>✅ Stamp Visited</h2>
     <p>Rate <strong>${escapeHtml(name)}</strong> for the ${escapeHtml(getCollegeShort())} squad log.</p>
 
-    <div style="display:flex;gap:8px;margin:16px 0;" id="ratingRow">
+    <div style="display:flex;gap:8px;margin:14px 0;" id="ratingRow">
       ${[1,2,3,4,5].map(n=>`
         <button
           type="button"
@@ -2633,7 +2657,7 @@ function openVisitStampModal(name,area,desc){
 
     <input
       id="visitNoteInput"
-      class="input"
+      class="input centerInput"
       maxlength="80"
       placeholder="Quick squad memory (optional)"
       value="${escapeHtml(existing.note||"")}"
@@ -2713,6 +2737,172 @@ function closeCustomModal(){
 
 
 /* =========================================================
+   AESTHETIC "RECEIPT" STORY EXPORTER (HTML5 CANVAS PNG)
+========================================================= */
+
+function openReceiptStoryExporter(mode){
+  let title="3-STOP AUTO-COMBO";
+  let rows=[];
+
+  if(mode==="bucket"){
+    title="SQUAD BUCKET LIST";
+    const entries=Object.values(getBucketMap()).filter(x=>x.college===selectedCollege);
+    rows=entries.slice(0,6).map(e=>({
+      name:e.name,
+      sub:e.area,
+      badge:e.visited ? `${e.rating||5}★ VISITED` : "WISHLIST"
+    }));
+  }else{
+    rows=comboState.stops.map((s,idx)=>({
+      name:s.item[0],
+      sub:s.item[1],
+      badge:`STOP 0${idx+1}`
+    }));
+  }
+
+  if(!rows.length){
+    showToast("Add some spots first to print a receipt 🧾");
+    return;
+  }
+
+  const canvas=document.createElement("canvas");
+  canvas.width=720;
+  canvas.height=1280;
+  const ctx=canvas.getContext("2d");
+
+  // Cosmic background
+  const bg=ctx.createLinearGradient(0,0,720,1280);
+  bg.addColorStop(0,"#090714");
+  bg.addColorStop(0.5,"#16102c");
+  bg.addColorStop(1,"#070611");
+  ctx.fillStyle=bg;
+  ctx.fillRect(0,0,720,1280);
+
+  // Subtle aurora glow circles
+  const orb1=ctx.createRadialGradient(140,220,10,140,220,280);
+  orb1.addColorStop(0,"rgba(139,92,255,0.42)");
+  orb1.addColorStop(1,"transparent");
+  ctx.fillStyle=orb1;
+  ctx.fillRect(0,0,720,1280);
+
+  const orb2=ctx.createRadialGradient(580,1020,10,580,1020,300);
+  orb2.addColorStop(0,"rgba(255,79,216,0.35)");
+  orb2.addColorStop(1,"transparent");
+  ctx.fillStyle=orb2;
+  ctx.fillRect(0,0,720,1280);
+
+  // Paper receipt box
+  const rx=75, ry=130, rw=570, rh=990;
+  ctx.fillStyle="#f7f6fb";
+  ctx.beginPath();
+  ctx.moveTo(rx,ry);
+  for(let x=rx;x<rx+rw;x+=19){
+    ctx.lineTo(x+9.5,ry-11);
+    ctx.lineTo(x+19,ry);
+  }
+  ctx.lineTo(rx+rw,ry+rh);
+  for(let x=rx+rw;x>rx;x-=19){
+    ctx.lineTo(x-9.5,ry+rh+11);
+    ctx.lineTo(x-19,ry+rh);
+  }
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle="#111019";
+  ctx.textAlign="center";
+  ctx.font="900 38px Arial";
+  ctx.fillText("WHERE'S THE GANG?",360,210);
+
+  ctx.font="bold 16px Courier New";
+  ctx.fillStyle="#55506b";
+  ctx.fillText(`OFFICIAL ${title} RECEIPT`,360,242);
+  ctx.fillText(`ZONE: ${getArea().toUpperCase()}`,360,268);
+
+  const nowStr=new Date().toLocaleString("en-IN",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"});
+  ctx.fillText(`ISSUED TO: ${displayName().toUpperCase()}`,360,296);
+  ctx.fillText(nowStr.toUpperCase(),360,320);
+
+  // Dashed divider
+  ctx.strokeStyle="#b8b3cc";
+  ctx.setLineDash([8,6]);
+  ctx.beginPath();
+  ctx.moveTo(110,348);
+  ctx.lineTo(610,348);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Rows
+  let curY=400;
+  rows.forEach((r,idx)=>{
+    ctx.textAlign="left";
+    ctx.fillStyle="#111019";
+    ctx.font="900 22px Arial";
+    const label=`0${idx+1}  ${r.name.slice(0,26)}`;
+    ctx.fillText(label,115,curY);
+
+    ctx.textAlign="right";
+    ctx.font="bold 15px Courier New";
+    ctx.fillStyle="#6b46c1";
+    ctx.fillText(r.badge,605,curY);
+
+    ctx.textAlign="left";
+    ctx.font="16px Arial";
+    ctx.fillStyle="#5a566e";
+    ctx.fillText(`    ${r.sub.slice(0,38)}`,115,curY+26);
+    curY+=88;
+  });
+
+  // Bottom dashed divider
+  ctx.strokeStyle="#b8b3cc";
+  ctx.setLineDash([8,6]);
+  ctx.beginPath();
+  ctx.moveTo(110,930);
+  ctx.lineTo(610,930);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.textAlign="left";
+  ctx.fillStyle="#111019";
+  ctx.font="900 20px Courier New";
+  ctx.fillText("TOTAL SPOTS:",115,970);
+  ctx.textAlign="right";
+  ctx.fillText(`0${rows.length} LOCKED`,605,970);
+
+  ctx.textAlign="left";
+  ctx.fillText("VIBE TAX:",115,1000);
+  ctx.textAlign="right";
+  ctx.fillText("100% CERTIFIED",605,1000);
+
+  // Barcode
+  ctx.fillStyle="#111019";
+  let bx=165;
+  for(let i=0;i<56;i++){
+    const bw=(i%3===0)?4:2;
+    ctx.fillRect(bx,1025,bw,48);
+    bx+=bw+((i%2===0)?3:5);
+  }
+
+  ctx.textAlign="center";
+  ctx.font="bold 14px Courier New";
+  ctx.fillStyle="#4a465c";
+  ctx.fillText("MADE BY KUSH KUMAR • V8.7",360,1096);
+
+  const dataUrl=canvas.toDataURL("image/png");
+  const box=document.getElementById("customModalBox");
+  box.innerHTML=`
+    <h2>🧾 Story Receipt Ready</h2>
+    <p>Download this 9:16 receipt and drop it on your Instagram Story or WhatsApp.</p>
+    <img src="${dataUrl}" alt="Gang Receipt" style="width:min(240px,65vw);border-radius:18px;border:1px solid rgba(255,255,255,.2);margin:8px auto 12px;display:block;box-shadow:0 14px 35px rgba(0,0,0,.6);">
+    <div class="modalActions">
+      <button class="secondary" onclick="closeCustomModal()">Close</button>
+      <a class="primary" href="${dataUrl}" download="wheres-the-gang-receipt.png" style="display:flex;align-items:center;justify-content:center;text-decoration:none;border-radius:14px;font-weight:900;">Download PNG 📥</a>
+    </div>
+  `;
+  document.getElementById("customModal").classList.add("show");
+}
+
+
+/* =========================================================
    SQUAD POLL BUILDER
 ========================================================= */
 
@@ -2770,13 +2960,13 @@ function openPollShareModal(){
 
     <input
       id="pollTimeInput"
-      class="input"
+      class="input centerInput"
       maxlength="40"
       value="Right after class"
       oninput="updatePollPreview()"
     >
 
-    <pre id="pollPreview" style="white-space:pre-wrap;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.1);padding:14px;border-radius:16px;font-size:12px;color:#e5e1f5;line-height:1.45;margin:10px 0;">${escapeHtml(msg)}</pre>
+    <pre id="pollPreview" style="white-space:pre-wrap;text-align:left;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.1);padding:12px;border-radius:14px;font-size:12px;color:#e5e1f5;line-height:1.4;margin:10px 0;">${escapeHtml(msg)}</pre>
 
     <div class="modalActions">
       <button class="secondary" onclick="copyPollText()">📋 Copy</button>
@@ -2814,35 +3004,47 @@ function updatePollPreview(){
 
 function copyPollText(){
   const timeVal=document.getElementById("pollTimeInput")?.value||"Right after class";
-  const text=buildPollMessage(timeVal);
-  navigator.clipboard?.writeText(text);
+  navigator.clipboard?.writeText(buildPollMessage(timeVal));
   showToast("Poll copied to clipboard 📋");
 }
 
 function sendPollWhatsApp(){
   const timeVal=document.getElementById("pollTimeInput")?.value||"Right after class";
-  const text=encodeURIComponent(buildPollMessage(timeVal));
-  window.open("https://wa.me/?text="+text,"_blank","noopener,noreferrer");
+  window.open("https://wa.me/?text="+encodeURIComponent(buildPollMessage(timeVal)),"_blank","noopener,noreferrer");
 }
 
 
 /* =========================================================
-   LOCATION HELPERS & MAPS
+   LOCATION HELPERS (MERGING CUSTOM SECRET ADDAS)
 ========================================================= */
 
 function getArea(){
-  if(selectedCollege==="Aps"){
-    return "Aps • N.R. Colony • Basavanagudi";
-  }
-  return "NMKRV • Jayanagar";
+  return selectedCollege==="Aps"
+    ? "Aps • N.R. Colony • Basavanagudi"
+    : "NMKRV • Jayanagar";
 }
 
 function getPlannerData(){
-  return selectedCollege==="Aps" ? apsPlanner : nmkrvPlanner;
+  const base=selectedCollege==="Aps" ? apsPlanner : nmkrvPlanner;
+  const merged={};
+  Object.keys(base).forEach(k=>{ merged[k]=[...base[k]]; });
+
+  getCustomSpots()
+    .filter(s=>s.college===selectedCollege)
+    .forEach(s=>{
+      const cat=merged[s.category] ? s.category : "nearby";
+      merged[cat].unshift([s.name,s.area,s.desc,`⭐ Secret Adda • by ${s.addedBy}`]);
+    });
+
+  return merged;
 }
 
 function getExploreData(){
-  return selectedCollege==="Aps" ? apsExplore : nmkrvExplore;
+  const base=selectedCollege==="Aps" ? apsExplore : nmkrvExplore;
+  const custom=getCustomSpots()
+    .filter(s=>s.college===selectedCollege)
+    .map(s=>[s.name,"Secret Adda",s.area,`${s.desc} (Pinned by ${s.addedBy})`]);
+  return [...custom,...base];
 }
 
 function getCollegeShort(){
@@ -2910,7 +3112,7 @@ function renderHome(){
     <main class="page">
 
       <div class="brand">
-        <div class="made">
+        <div class="made" onclick="handleSecretBadgeTap(event)" title="Tap 5 times for a secret">
           MADE BY KUSH KUMAR
         </div>
 
@@ -2920,8 +3122,7 @@ function renderHome(){
         </div>
 
         <div class="tagline">
-          Class can wait.
-          The gang can't. 😂
+          Class can wait. The gang can't. 😂
         </div>
 
         <div class="userBadge" onclick="openEditName()" title="Click to edit name">
@@ -2940,7 +3141,7 @@ function renderHome(){
           <small>${escapeHtml(vibe.desc)}</small>
         </div>
         <button class="timeVibeBtn" onclick="openExplorePrime()">
-          Best Right Now →
+          Best Now →
         </button>
       </div>
 
@@ -2957,12 +3158,20 @@ function renderHome(){
           🎯 Where Should We Go?
         </button>
 
-        <button class="mainBtn light" onclick="openComboGenerator()">
-          ⚡ 3-Stop Auto-Combo
+        <button class="mainBtn light" onclick="openVibeSwipe()">
+          🔥 Vibe Swipe Decider
         </button>
 
-        <button class="mainBtn" onclick="openSpinWheel()">
+        <button class="mainBtn" onclick="openComboGenerator()">
+          ⚡ 3-Stop Auto-Combo & Receipt
+        </button>
+
+        <button class="mainBtn light" onclick="openSpinWheel()">
           🎡 Who Pays? Spin & Split
+        </button>
+
+        <button class="mainBtn" onclick="openTruthDareDeck()">
+          🃏 Truth, Dare, or Pay Deck
         </button>
 
         <button class="mainBtn" onclick="openBucketList()">
@@ -2987,19 +3196,232 @@ function renderHome(){
             : "Aps is locked to N.R. Colony / Basavanagudi. No Jayanagar places are used in this planner."
           }
         </p>
-        <button class="specialBtn" onclick="openChangeCollege()">
-          Change College
-        </button>
+        <div class="modalActions" style="margin-top:0;">
+          <button class="secondary" onclick="openAddSecretAddaModal()">+ Secret Adda 📌</button>
+          <button class="primary" onclick="openChangeCollege()">Change College</button>
+        </div>
       </div>
 
       <div class="footer">
         ${APP_VERSION} • LOCATION-LOCKED BUILD
         <br><br>
-        <span class="kushGlow">MADE BY KUSH KUMAR</span>
+        <span class="kushGlow" onclick="handleSecretBadgeTap(event)">MADE BY KUSH KUMAR</span>
       </div>
 
     </main>
   `;
+}
+
+
+/* =========================================================
+   TINDER-STYLE "VIBE SWIPE" DECIDER
+========================================================= */
+
+function openVibeSwipe(){
+  currentPage="swipe";
+  const planner=getPlannerData();
+  const pool=[];
+  const seen=new Set();
+
+  Object.keys(planner).forEach(cat=>{
+    planner[cat].forEach(item=>{
+      if(!seen.has(item[0])){
+        seen.add(item[0]);
+        pool.push({cat,item});
+      }
+    });
+  });
+
+  // Shuffle & pick 6 cards
+  for(let i=pool.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [pool[i],pool[j]]=[pool[j],pool[i]];
+  }
+  swipeDeck=pool.slice(0,6);
+  swipeKept=[];
+  renderVibeSwipe();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderVibeSwipe(){
+  if(!swipeDeck.length){
+    const winner=swipeKept.length
+      ? swipeKept[Math.floor(Math.random()*swipeKept.length)]
+      : null;
+
+    document.getElementById("app").innerHTML=`
+      <main class="page">
+        ${header("Vibe Swipe Winner","Your rapid-fire squad swipe narrowed it down to one spot!")}
+        ${winner ? `
+          <div class="winnerCelebrationCard">
+            <div style="font-size:46px;margin-bottom:8px;">🏆🔥</div>
+            <div style="font-size:11px;font-weight:900;letter-spacing:2px;color:#00ffa3;margin-bottom:6px;">FINAL SURVIVOR (${swipeKept.length} KEPT)</div>
+            <h2 style="margin:0 0 8px;font-size:26px;">${escapeHtml(winner.item[0])}</h2>
+            <p style="color:#d6d2e8;margin:0 0 16px;font-size:14px;">${escapeHtml(winner.item[2])}</p>
+            <div class="placeBtns" style="justify-content:center;">
+              <a class="mapBtn" href="${mapLink(winner.item[0],winner.item[1])}" target="_blank" rel="noopener noreferrer">📍 Open Maps</a>
+              <button class="actionChip" onclick="togglePollItem('${escapeHtml(winner.item[0])}','${escapeHtml(winner.item[1])}')">+ Poll</button>
+              <button class="actionChip" onclick="openVibeSwipe()">Swipe Again 🔄</button>
+            </div>
+          </div>
+        ` : `
+          <div class="empty">
+            You ditched every single card 💀 Let's try 6 fresh spots!
+            <br><br>
+            <button class="primary" style="padding:12px 20px;border-radius:14px;font-weight:900;" onclick="openVibeSwipe()">Reload Deck 🔄</button>
+          </div>
+        `}
+        <div class="footer"><span class="kushGlow">MADE BY KUSH KUMAR</span></div>
+      </main>
+    `;
+    return;
+  }
+
+  const current=swipeDeck[0];
+  const def=categories.find(c=>c[0]===current.cat);
+
+  document.getElementById("app").innerHTML=`
+    <main class="page">
+      ${header("Vibe Swipe Decider","Swipe right (or tap ♥) to keep, swipe left (or tap ✕) to ditch.")}
+
+      <div style="text-align:center;font-size:12px;font-weight:900;color:#b6b2c8;">
+        Card ${7-swipeDeck.length} of 6 • Kept: ${swipeKept.length}
+      </div>
+
+      <div id="activeSwipeCard" class="swipeDeckCard">
+        <div class="swipeStamp">${def ? def[1]+" "+escapeHtml(def[2]) : "📍 SPOT"}</div>
+        <h2 style="margin:0 0 8px;font-size:25px;">${escapeHtml(current.item[0])}</h2>
+        <div style="color:#cbbfff;font-size:12px;font-weight:900;margin-bottom:10px;">📍 ${escapeHtml(current.item[1])}</div>
+        <p style="color:#b6b2c8;font-size:14px;line-height:1.45;margin:0 0 14px;">${escapeHtml(current.item[2])}</p>
+        <span class="tag">${escapeHtml(current.item[3])}</span>
+      </div>
+
+      <div class="swipeControls">
+        <button class="swipeCircleBtn ditch" onclick="decideSwipe(false)" title="Ditch">✕</button>
+        <button class="swipeCircleBtn keep" onclick="decideSwipe(true)" title="Keep">♥</button>
+      </div>
+
+      <div class="footer"><span class="kushGlow">MADE BY KUSH KUMAR</span></div>
+    </main>
+  `;
+
+  attachSwipeDrag();
+}
+
+function attachSwipeDrag(){
+  const card=document.getElementById("activeSwipeCard");
+  if(!card) return;
+  let startX=0, currentX=0, dragging=false;
+
+  card.onpointerdown=(e)=>{
+    dragging=true;
+    startX=e.clientX;
+    card.style.transition="none";
+  };
+  window.onpointermove=(e)=>{
+    if(!dragging) return;
+    currentX=e.clientX-startX;
+    card.style.transform=`translateX(${currentX}px) rotate(${currentX*0.05}deg)`;
+  };
+  window.onpointerup=()=>{
+    if(!dragging) return;
+    dragging=false;
+    card.style.transition="transform .28s ease, opacity .28s ease";
+    if(currentX>85) decideSwipe(true);
+    else if(currentX<-85) decideSwipe(false);
+    else card.style.transform="translateX(0) rotate(0deg)";
+  };
+}
+
+function decideSwipe(keep){
+  const card=document.getElementById("activeSwipeCard");
+  const top=swipeDeck.shift();
+  if(keep && top){
+    swipeKept.push(top);
+    showToast(`Kept ${top.item[0]} ♥`);
+  }
+  if(card){
+    card.style.transform=`translateX(${keep?260:-260}px) rotate(${keep?18:-18}deg)`;
+    card.style.opacity="0";
+  }
+  setTimeout(renderVibeSwipe,220);
+}
+
+
+/* =========================================================
+   "TRUTH, DARE, OR PAY" TABLE DECK
+========================================================= */
+
+const TABLE_CARDS=[
+  {type:"TRUTH 🤫",text:"Show the last 3 photos in your phone gallery to everyone at the table right now."},
+  {type:"DARE 🔥",text:"Order the next drink or snack from the counter using a dramatic movie trailer voice."},
+  {type:"TRUTH 🤫",text:"Who at this table takes the longest to reply in the group chat—and why?"},
+  {type:"DARE 🔥",text:"Let the person sitting to your right send one single emoji to your top recent chat."},
+  {type:"TRUTH 🤫",text:"What's the weakest excuse you've ever used to bunk class and hang out?"},
+  {type:"DARE 🔥",text:"Post a 5-second boomerang of the table's snacks with the caption 'Class can wait 😂'."},
+  {type:"TRUTH 🤫",text:"Rate everyone at the table's outfit today out of 10—no ties allowed!"},
+  {type:"DARE 🔥",text:"Do a 10-second slow-motion walk to the water counter and back without laughing."}
+];
+
+function openTruthDareDeck(){
+  currentPage="deck";
+  renderTruthDareDeck();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderTruthDareDeck(){
+  const card=TABLE_CARDS[truthDareIdx % TABLE_CARDS.length];
+
+  document.getElementById("app").innerHTML=`
+    <main class="page">
+      ${header("Truth, Dare, or Pay","Table game while waiting for food. Chicken out? Get an extra slice on the Who Pays? Wheel!")}
+
+      <div class="swipeDeckCard" style="max-width:500px;">
+        <div class="swipeStamp" style="color:#ffb3ee;border-color:rgba(255,79,216,.45);">${card.type}</div>
+        <h2 style="font-size:22px;line-height:1.35;margin:8px 0 18px;">"${escapeHtml(card.text)}"</h2>
+
+        <div class="modalActions">
+          <button class="secondary" onclick="chickenOutPenalty()">😈 Chicken Out (+Wheel Slice)</button>
+          <button class="primary" onclick="nextTableCard()">Done • Next Card →</button>
+        </div>
+      </div>
+
+      <div class="footer"><span class="kushGlow">MADE BY KUSH KUMAR</span></div>
+    </main>
+  `;
+}
+
+function nextTableCard(){
+  truthDareIdx=(truthDareIdx+1)%TABLE_CARDS.length;
+  renderTruthDareDeck();
+}
+
+function chickenOutPenalty(){
+  const box=document.getElementById("customModalBox");
+  box.innerHTML=`
+    <h2>😈 Chicken Out Penalty!</h2>
+    <p>Who skipped the card? They get an extra slice on the <strong>Who Pays? Spin Wheel</strong> 🎡</p>
+
+    <input id="penaltyNameInput" class="input centerInput" maxlength="24" placeholder="☆☆☆☆☆☆☆☆" value="${escapeHtml(selectedName)}">
+
+    <div class="modalActions">
+      <button class="secondary" onclick="closeCustomModal()">Cancel</button>
+      <button class="primary" onclick="confirmChickenPenalty()">Add Slice 🎡</button>
+    </div>
+  `;
+  document.getElementById("customModal").classList.add("show");
+}
+
+function confirmChickenPenalty(){
+  const name=(document.getElementById("penaltyNameInput")?.value||"").trim();
+  if(!name){
+    showToast("Enter the chicken's name first 👀");
+    return;
+  }
+  wheelMembers.push(name+" 🐔");
+  closeCustomModal();
+  showToast(`Added penalty slice for ${name} on the Spin Wheel! 🎡`);
+  nextTableCard();
 }
 
 
@@ -3042,7 +3464,7 @@ function renderNexora(){
       <div class="nexoraHero">
         <div class="nexoraOrb"></div>
         <div>
-          <strong style="font-size:16px;display:block;margin-bottom:4px;">Nexora AI • Location-Locked Concierge</strong>
+          <strong style="font-size:15px;display:block;margin-bottom:3px;">Nexora AI • Location-Locked Concierge</strong>
           <span style="font-size:12px;color:#b8b3cc;">Locked to ${escapeHtml(getArea())} • Instant local suggestions</span>
         </div>
       </div>
@@ -3058,11 +3480,11 @@ function renderNexora(){
           <div class="chatMsg ${m.role}">
             <div>${escapeHtml(m.text)}</div>
             ${m.picks && m.picks.length ? `
-              <div style="display:grid;gap:8px;margin-top:12px;">
+              <div style="display:grid;gap:8px;margin-top:10px;">
                 ${m.picks.map(pk=>`
-                  <div style="padding:11px 13px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);">
+                  <div style="padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);">
                     <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;">
-                      <strong style="font-size:14px;color:#fff;">${escapeHtml(pk[0])}</strong>
+                      <strong style="font-size:13.5px;color:#fff;">${escapeHtml(pk[0])}</strong>
                       <span style="font-size:10px;color:#cbbfff;">${escapeHtml(pk[1])}</span>
                     </div>
                     <div style="font-size:12px;color:#a9a4bd;margin:4px 0 8px;">${escapeHtml(pk[2])}</div>
@@ -3168,13 +3590,12 @@ function generateNexoraReply(query){
     `Got the vibe ✨ Staying 100% inside ${zoneName}, these 3 picks fit best right now:`,
     `Say less, ${displayName()}—here's your curated ${zoneName} shortlist:`
   ];
-  const text=intros[Math.floor(Math.random()*intros.length)];
-  return {text,picks};
+  return {text:intros[Math.floor(Math.random()*intros.length)],picks};
 }
 
 
 /* =========================================================
-   3-STOP AUTO-COMBO GENERATOR
+   3-STOP AUTO-COMBO GENERATOR + RECEIPT EXPORTER
 ========================================================= */
 
 function openComboGenerator(){
@@ -3225,11 +3646,6 @@ function renderComboPage(){
     ["action","🎮 Gaming & Food"],
     ["heritage","🛕 Street & Heritage Walk"]
   ];
-  const budgets=[
-    ["any","💸 Any Budget"],
-    ["low","🪙 Under ₹200 / head"],
-    ["mid","💳 ₹200–₹500 / head"]
-  ];
 
   document.getElementById("app").innerHTML=`
     <main class="page">
@@ -3238,25 +3654,14 @@ function renderComboPage(){
         "One complete bunk route chaining 3 nearby spots inside your locked campus zone."
       )}
 
-      <div style="display:grid;gap:10px;margin-bottom:18px;">
-        <div class="placeBtns">
-          ${vibes.map(v=>`
-            <button
-              class="tag"
-              onclick="setComboFilter('vibe','${v[0]}')"
-              style="${comboState.vibe===v[0]?'background:#fff;color:#111;':''}"
-            >${escapeHtml(v[1])}</button>
-          `).join("")}
-        </div>
-        <div class="placeBtns">
-          ${budgets.map(b=>`
-            <button
-              class="tag"
-              onclick="setComboFilter('budget','${b[0]}')"
-              style="${comboState.budget===b[0]?'background:#fff;color:#111;':''}"
-            >${escapeHtml(b[1])}</button>
-          `).join("")}
-        </div>
+      <div class="placeBtns" style="margin-bottom:14px;">
+        ${vibes.map(v=>`
+          <button
+            class="tag"
+            onclick="setComboFilter('vibe','${v[0]}')"
+            style="${comboState.vibe===v[0]?'background:#fff;color:#111;':''}"
+          >${escapeHtml(v[1])}</button>
+        `).join("")}
       </div>
 
       <div class="cards">
@@ -3276,9 +3681,10 @@ function renderComboPage(){
         `).join("")}
       </div>
 
-      <div class="modalActions" style="margin-top:20px;">
-        <button class="secondary" onclick="buildNewCombo();renderComboPage();">🔀 Shuffle Route</button>
-        <button class="primary" onclick="shareComboWhatsApp()">Share Plan 📲</button>
+      <div class="modalActions" style="margin-top:16px;">
+        <button class="secondary" onclick="buildNewCombo();renderComboPage();">🔀 Shuffle</button>
+        <button class="secondary" onclick="openReceiptStoryExporter('combo')">🧾 Receipt PNG</button>
+        <button class="primary" onclick="shareComboWhatsApp()">WhatsApp 📲</button>
       </div>
 
       <div class="footer">
@@ -3307,7 +3713,7 @@ function shareComboWhatsApp(){
 
 
 /* =========================================================
-   "WHO PAYS?" SPIN WHEEL & BILL SPLITTER
+   "WHO PAYS?" SPIN WHEEL (WITH WINNER CELEBRATION) & SPLITTER
 ========================================================= */
 
 function openSpinWheel(){
@@ -3327,23 +3733,23 @@ function renderSpinWheelPage(){
         "Add the squad names below and spin the neon wheel to pick who treats everyone."
       )}
 
-      <div class="specialCard" style="margin-top:0;margin-bottom:20px;">
+      <div class="specialCard" style="margin-top:0;margin-bottom:16px;">
         <h3>🎡 Spin the Squad Wheel</h3>
         <p>Add 2 or more gang members below, then spin!</p>
 
-        <div style="display:flex;gap:10px;margin-bottom:12px;">
+        <div style="display:flex;gap:8px;margin-bottom:10px;">
           <input
             id="wheelNameInput"
-            class="input"
+            class="input centerInput"
             style="margin:0;"
             maxlength="24"
-            placeholder="☆☆☆☆"
+            placeholder="☆☆☆☆☆☆☆☆"
             onkeydown="if(event.key==='Enter') addWheelMember()"
           >
-          <button class="primary" style="padding:0 18px;border-radius:16px;font-weight:900;" onclick="addWheelMember()">+ Add</button>
+          <button class="primary" style="padding:0 16px;border-radius:14px;font-weight:900;" onclick="addWheelMember()">+ Add</button>
         </div>
 
-        <div class="placeBtns" style="margin-bottom:14px;">
+        <div class="placeBtns" style="margin-bottom:10px;">
           ${wheelMembers.length ? wheelMembers.map((m,i)=>`
             <button class="tag" onclick="removeWheelMember(${i})">👤 ${escapeHtml(m)} ✕</button>
           `).join("") : `<span style="font-size:12px;color:#9f9cad;">No names added yet — enter names above.</span>`}
@@ -3354,7 +3760,7 @@ function renderSpinWheelPage(){
           <canvas id="wheelCanvas" width="320" height="320"></canvas>
         </div>
 
-        <div id="wheelWinnerBox" style="text-align:center;font-weight:1000;font-size:18px;min-height:28px;margin-bottom:14px;color:#00ffa3;"></div>
+        <div id="wheelWinnerBox" style="margin-bottom:12px;"></div>
 
         <button class="specialBtn" onclick="spinSquadWheel()">
           🎡 Spin Wheel
@@ -3365,18 +3771,18 @@ function renderSpinWheelPage(){
         <h3>💸 Instant Gang Bill Splitter</h3>
         <p>Split gaming café, dosa, or dessert bills cleanly per head.</p>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
           <div>
             <label style="font-size:11px;color:#b6b2c8;font-weight:900;">TOTAL BILL (₹)</label>
-            <input id="splitTotal" class="input" style="margin:6px 0 0;" type="number" min="0" placeholder="0" oninput="calcBillSplit()">
+            <input id="splitTotal" class="input centerInput" style="margin:5px 0 0;" type="number" min="0" placeholder="0" oninput="calcBillSplit()">
           </div>
           <div>
             <label style="font-size:11px;color:#b6b2c8;font-weight:900;">GANG COUNT</label>
-            <input id="splitCount" class="input" style="margin:6px 0 0;" type="number" min="1" value="${Math.max(2,wheelMembers.length||2)}" oninput="calcBillSplit()">
+            <input id="splitCount" class="input centerInput" style="margin:5px 0 0;" type="number" min="1" value="${Math.max(2,wheelMembers.length||2)}" oninput="calcBillSplit()">
           </div>
         </div>
 
-        <div id="splitResult" style="padding:14px;border-radius:16px;background:rgba(255,255,255,.06);text-align:center;font-size:16px;font-weight:1000;margin-bottom:12px;">
+        <div id="splitResult" style="padding:12px;border-radius:14px;background:rgba(255,255,255,.06);text-align:center;font-size:16px;font-weight:1000;margin-bottom:10px;">
           ₹0 per person
         </div>
 
@@ -3407,7 +3813,6 @@ function addWheelMember(){
   }
   wheelMembers.push(val);
   inp.value="";
-  drawWheelCanvas();
   renderSpinWheelPage();
 }
 
@@ -3423,7 +3828,7 @@ function drawWheelCanvas(){
   const cx=160, cy=160, r=152;
   ctx.clearRect(0,0,320,320);
 
-  const items=wheelMembers.length ? wheelMembers : ["☆☆☆☆","☆☆☆☆"];
+  const items=wheelMembers.length ? wheelMembers : ["☆☆☆☆☆☆☆☆","☆☆☆☆☆☆☆☆"];
   const palette=["#8b5cff","#ff4fd8","#42b9ff","#00c98d","#f59e0b","#ec4899"];
   const arc=(Math.PI*2)/items.length;
 
@@ -3481,9 +3886,32 @@ function spinSquadWheel(){
     wheelSpinning=false;
     const winner=wheelMembers[winnerIdx];
     const box=document.getElementById("wheelWinnerBox");
-    if(box) box.textContent=`🎉 ${winner} pays for the gang!`;
-    spawnSparks(window.innerWidth/2,window.innerHeight/2,26);
+    if(box){
+      box.innerHTML=`
+        <div class="winnerCelebrationCard">
+          <div style="font-size:44px;margin-bottom:6px;">🎊👑💸</div>
+          <div style="font-size:11px;font-weight:1000;letter-spacing:2px;color:#00ffa3;margin-bottom:4px;">CONGRATULATIONS • OFFICIAL GANG SPONSOR</div>
+          <div style="font-size:24px;font-weight:1000;color:#fff;margin-bottom:6px;">${escapeHtml(winner)}!</div>
+          <div style="font-size:13px;color:#e6e1f7;line-height:1.4;margin-bottom:12px;">
+            Massive respect! The squad's bill is officially sponsored by <strong>${escapeHtml(winner)}</strong> today 🔥
+          </div>
+          <button class="primary" style="padding:10px 18px;border-radius:12px;font-weight:900;font-size:12.5px;" onclick="flexWinnerWhatsApp('${escapeHtml(winner)}')">
+            Announce Winner on WhatsApp 📲
+          </button>
+        </div>
+      `;
+    }
+    spawnSparks(window.innerWidth*0.25,window.innerHeight*0.4,24);
+    spawnSparks(window.innerWidth*0.75,window.innerHeight*0.4,24);
+    spawnSparks(window.innerWidth*0.5,window.innerHeight*0.3,28);
   },4250);
+}
+
+function flexWinnerWhatsApp(winner){
+  const text=encodeURIComponent(
+    `🎊 *CONGRATULATIONS ${winner.toUpperCase()}!* 👑💸\n\nThe *WHERE'S THE GANG?* Spin Wheel has officially crowned *${winner}* as today's Gang Sponsor!\n\nThank you for treating the squad! 😂🔥`
+  );
+  window.open("https://wa.me/?text="+text,"_blank","noopener,noreferrer");
 }
 
 function calcBillSplit(){
@@ -3543,7 +3971,7 @@ function renderBucketList(){
         </div>
       </div>
 
-      <div class="placeBtns" style="margin-bottom:18px;">
+      <div class="placeBtns" style="margin-bottom:14px;">
         <button
           class="tag"
           onclick="bucketTab='saved';renderBucketList();"
@@ -3554,6 +3982,9 @@ function renderBucketList(){
           onclick="bucketTab='visited';renderBucketList();"
           style="${bucketTab==='visited'?'background:#fff;color:#111;':''}"
         >✅ Conquered (${visitedList.length})</button>
+        ${allEntries.length ? `
+          <button class="tag" onclick="openReceiptStoryExporter('bucket')">🧾 Story Receipt PNG</button>
+        ` : ""}
       </div>
 
       <div class="cards">
@@ -3595,7 +4026,7 @@ function renderBucketList(){
 
 
 /* =========================================================
-   MANAGEMENT & LOGIN RECORDS
+   MANAGEMENT & LOGIN RECORDS (CENTERED DASHBOARD)
 ========================================================= */
 
 function openManagementAuth(){
@@ -3631,12 +4062,14 @@ function verifyMgmtPassword(){
 function openManagementDashboard(){
   currentPage="management";
   mgmtCollegeFilter="all";
+  mgmtTab="records";
   renderManagementDashboard();
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function renderManagementDashboard(){
   const records=getLoginRecords();
+  const customSpots=getCustomSpots();
   const totalLogins=records.length;
 
   const uniqueUsers=new Set(
@@ -3654,70 +4087,105 @@ function renderManagementDashboard(){
 
   document.getElementById("app").innerHTML=`
     <main class="page">
-      <div class="sectionTop">
-        <button class="backBtn" onclick="goHome()">← Home</button>
-        <button class="changeBtn" onclick="goHome()">Exit Admin</button>
-      </div>
-
-      <div class="userBadge">
-        <span class="liveDot"></span>
-        ⚙️ <strong>Management Panel</strong>
-        <span>•</span>
-        <span>Admin Unlocked</span>
-      </div>
-
-      <h1 class="pageTitle">Login Dashboard</h1>
-      <div class="pageSub">Monitor user logins, college distribution, timestamps, and device details.</div>
-
-      <div class="statsGrid">
-        <div class="statCard">
-          <b>${totalLogins}</b>
-          <small>Total Logins</small>
+      <div class="mgmtCenteredWrap">
+        <div class="sectionTop">
+          <button class="backBtn" onclick="goHome()">← Home</button>
+          <button class="changeBtn" onclick="goHome()">Exit Admin</button>
         </div>
-        <div class="statCard">
-          <b>${uniqueUsers}</b>
-          <small>Unique Users</small>
-        </div>
-        <div class="statCard">
-          <b>${todayLogins}</b>
-          <small>Today</small>
-        </div>
-      </div>
 
-      <div class="mgmtControls">
-        <input
-          id="mgmtSearch"
-          class="search"
-          placeholder="Search name, college, date, device..."
-          oninput="drawManagementRecords()"
-        >
-        <button class="mgmtBtn export" onclick="exportRecordsCSV()">📥 Export CSV</button>
-        <button class="mgmtBtn danger" onclick="confirmClearLoginRecords()">🗑️ Clear Records</button>
-      </div>
+        <div class="userBadge">
+          <span class="liveDot"></span>
+          ⚙️ <strong>Management Panel</strong>
+          <span>•</span>
+          <span>Admin Unlocked</span>
+        </div>
 
-      <div class="placeBtns" style="margin-bottom:18px;">
-        ${filterOptions.map(opt=>`
+        <h1 class="pageTitle">Login Dashboard</h1>
+        <div class="pageSub">Monitor user logins, timestamps, devices, and user-pinned secret addas.</div>
+
+        <div class="statsGrid">
+          <div class="statCard">
+            <b>${totalLogins}</b>
+            <small>Total Logins</small>
+          </div>
+          <div class="statCard">
+            <b>${uniqueUsers}</b>
+            <small>Unique Users</small>
+          </div>
+          <div class="statCard">
+            <b>${todayLogins}</b>
+            <small>Today</small>
+          </div>
+        </div>
+
+        <div class="placeBtns" style="justify-content:center;margin-bottom:14px;">
           <button
             class="tag"
-            onclick="setMgmtCollegeFilter('${escapeHtml(opt)}')"
-            style="${mgmtCollegeFilter===opt ? "background:#fff;color:#111;" : ""}"
-          >
-            ${escapeHtml(opt==="all" ? "All Colleges" : opt)}
-          </button>
-        `).join("")}
-      </div>
+            onclick="mgmtTab='records';renderManagementDashboard();"
+            style="${mgmtTab==='records' ? "background:#fff;color:#111;" : ""}"
+          >📋 Login Records (${records.length})</button>
+          <button
+            class="tag"
+            onclick="mgmtTab='spots';renderManagementDashboard();"
+            style="${mgmtTab==='spots' ? "background:#fff;color:#111;" : ""}"
+          >📌 Secret Addas (${customSpots.length})</button>
+        </div>
 
-      <div id="mgmtRecordsList" class="cards"></div>
+        ${mgmtTab==="records" ? `
+          <div class="mgmtControls">
+            <input
+              id="mgmtSearch"
+              class="search"
+              placeholder="Search name, college, date, device..."
+              oninput="drawManagementRecords()"
+            >
+            <button class="mgmtBtn export" onclick="exportRecordsCSV()">📥 Export CSV</button>
+            <button class="mgmtBtn danger" onclick="confirmClearLoginRecords()">🗑️ Clear Records</button>
+          </div>
 
-      <div class="footer">
-        ${APP_VERSION} • MANAGEMENT DASHBOARD
-        <br><br>
-        <span class="kushGlow">MADE BY KUSH KUMAR</span>
+          <div class="placeBtns" style="justify-content:center;margin-bottom:14px;">
+            ${filterOptions.map(opt=>`
+              <button
+                class="tag"
+                onclick="setMgmtCollegeFilter('${escapeHtml(opt)}')"
+                style="${mgmtCollegeFilter===opt ? "background:#fff;color:#111;" : ""}"
+              >
+                ${escapeHtml(opt==="all" ? "All Colleges" : opt)}
+              </button>
+            `).join("")}
+          </div>
+
+          <div id="mgmtRecordsList" class="cards"></div>
+        ` : `
+          <div class="cards">
+            ${customSpots.length ? customSpots.map(s=>`
+              <article class="placeCard" style="text-align:left;">
+                <div class="placeHead">
+                  <div class="placeName">📌 ${escapeHtml(s.name)}</div>
+                  <div class="placeType">🎓 ${escapeHtml(s.college)} • ${escapeHtml(s.area)}</div>
+                </div>
+                <div class="placeDesc">
+                  ${escapeHtml(s.desc)}<br>
+                  <small>Added by <strong>${escapeHtml(s.addedBy)}</strong> on ${escapeHtml(s.createdAt)}</small>
+                </div>
+                <div class="placeBtns">
+                  <button class="mgmtBtn danger" style="padding:8px 12px;font-size:12px;" onclick="deleteCustomSpot('${escapeHtml(s.id)}')">🗑️ Delete Spot</button>
+                </div>
+              </article>
+            `).join("") : `<div class="empty">No custom secret addas added yet 📌</div>`}
+          </div>
+        `}
+
+        <div class="footer">
+          ${APP_VERSION} • MANAGEMENT DASHBOARD
+          <br><br>
+          <span class="kushGlow">MADE BY KUSH KUMAR</span>
+        </div>
       </div>
     </main>
   `;
 
-  drawManagementRecords();
+  if(mgmtTab==="records") drawManagementRecords();
 }
 
 function setMgmtCollegeFilter(filter){
@@ -3778,10 +4246,8 @@ function exportRecordsCSV(){
     ].join(","))
   ];
 
-  const csvContent=csvRows.join("\n");
-  const blob=new Blob([csvContent],{type:"text/csv;charset=utf-8;"});
+  const blob=new Blob([csvRows.join("\n")],{type:"text/csv;charset=utf-8;"});
   const url=URL.createObjectURL(blob);
-
   const link=document.createElement("a");
   link.href=url;
   link.download="wheres_the_gang_login_records.csv";
@@ -3849,13 +4315,12 @@ function renderExplore(){
         "Everything shown below belongs to your selected college's location."
       )}
 
-      <div class="notice">
-        🔒 <b>Location lock:</b>
-        ${
-          selectedCollege==="NMKRV"
-          ? "Every card below is Jayanagar-focused."
-          : "Every card below is Basavanagudi / N.R. Colony-focused."
-        }
+      <div class="notice" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+        <span>
+          🔒 <b>Location lock:</b>
+          ${selectedCollege==="NMKRV" ? "Every card below is Jayanagar-focused." : "Every card below is Basavanagudi / N.R. Colony-focused."}
+        </span>
+        <button class="tag" onclick="openAddSecretAddaModal()">+ Secret Adda 📌</button>
       </div>
 
       <input
@@ -3865,7 +4330,7 @@ function renderExplore(){
         oninput="filterExplore()"
       >
 
-      <div id="exploreFilters" class="placeBtns" style="margin-bottom:18px;">
+      <div id="exploreFilters" class="placeBtns" style="margin-bottom:14px;">
         <button
           class="tag"
           onclick="toggleExplorePrime()"
@@ -4008,13 +4473,12 @@ function renderCategories(){
         "Pick a category. The planner automatically uses only your selected college's area."
       )}
 
-      <div class="notice">
-        🔐 <b>${escapeHtml(getCollegeShort())} mode:</b>
-        ${
-          selectedCollege==="NMKRV"
-          ? "Jayanagar-only places."
-          : "N.R. Colony / Basavanagudi-only places."
-        }
+      <div class="notice" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+        <span>
+          🔐 <b>${escapeHtml(getCollegeShort())} mode:</b>
+          ${selectedCollege==="NMKRV" ? "Jayanagar-only places." : "N.R. Colony / Basavanagudi-only places."}
+        </span>
+        <button class="tag" onclick="openAddSecretAddaModal()">+ Secret Adda 📌</button>
       </div>
 
       <div class="categoryGrid">
@@ -4196,10 +4660,10 @@ function surpriseMe(){
         📍 ${escapeHtml(getArea())}
       </div>
 
-      <div style="text-align:center;padding:50px 10px;">
+      <div style="text-align:center;padding:28px 10px;">
         <div id="rollingDice" class="diceSpin">🎲</div>
 
-        <div style="color:#9f9cb0;font-weight:900;letter-spacing:3px;font-size:12px;margin-bottom:10px;">
+        <div style="color:#9f9cb0;font-weight:900;letter-spacing:3px;font-size:12px;margin-bottom:8px;">
           RANDOM PICK
         </div>
 
@@ -4211,7 +4675,7 @@ function surpriseMe(){
           ${definition ? definition[2] : ""}
         </div>
 
-        <div class="placeBtns" style="justify-content:center;margin-top:20px;">
+        <div class="placeBtns" style="justify-content:center;margin-top:16px;">
           <a
             class="mapBtn"
             href="${mapLink(random.item[0],random.item[1])}"
@@ -4296,7 +4760,7 @@ function renderBeauty(){
         ← Back
       </button>
 
-      <div class="footer" style="margin-top:60px;">
+      <div class="footer" style="margin-top:42px;">
         <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
 
@@ -4306,7 +4770,7 @@ function renderBeauty(){
   const next=document.getElementById("beautyNext");
   if(next){
     next.style.left="50%";
-    next.style.bottom=window.innerWidth<=520 ? "82px" : "88px";
+    next.style.bottom="82px";
   }
 }
 
@@ -4332,7 +4796,7 @@ function nextBeauty(){
   if(next){
     if(beautyStep<beautyMessages.length-1){
       const positions=[
-        {left:"50%",bottom:"88px"},
+        {left:"50%",bottom:"82px"},
         {left:"19%",bottom:"23%"},
         {left:"79%",bottom:"28%"},
         {left:"29%",bottom:"48%"},
@@ -4445,6 +4909,8 @@ function saveCollege(){
   else if(returnPage==="combo") openComboGenerator();
   else if(returnPage==="wheel") openSpinWheel();
   else if(returnPage==="bucket") openBucketList();
+  else if(returnPage==="swipe") openVibeSwipe();
+  else if(returnPage==="deck") openTruthDareDeck();
   else renderHome();
 
   window.scrollTo({top:0,behavior:"smooth"});
@@ -4542,6 +5008,9 @@ document.addEventListener("keydown",function(e){
 ========================================================= */
 
 (function start(){
+  const savedTheme=localStorage.getItem(THEME_STORAGE_KEY);
+  if(savedTheme) applyTheme(savedTheme);
+
   if(loadData()){
     if(selectedCollege!=="NMKRV" && selectedCollege!=="Aps"){
       selectedCollege="NMKRV";
