@@ -2353,8 +2353,8 @@ const CUSTOM_SPOTS_KEY="wheres_the_gang_custom_spots_v8";
 const THEME_STORAGE_KEY="wheres_the_gang_theme_v8";
 const STUDENT_ACCESS_KEY="wheres_the_gang_student_verified_v89";
 
-/* SHA-256 hash of normalized student code */
-const STUDENT_CODE_SHA256="65c025d241ed1846df405e9ed3f86bc7057a1ebcb93038148d7269f5b42a9d22";
+/* Encoded token for normalized student access code */
+const STUDENT_ACCESS_TOKEN="MktFWTgxTkFDTEc=";
 
 const MGMT_PASSWORD="1234";
 
@@ -2494,19 +2494,11 @@ function closeStudentAccessModal(){
   }
 }
 
-async function computeSha256Hex(text){
-  const encoder=new TextEncoder();
-  const data=encoder.encode(text);
-  const hashBuffer=await crypto.subtle.digest("SHA-256",data);
-  const hashArray=Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b=>b.toString(16).padStart(2,"0")).join("");
-}
-
-async function verifyStudentAccessCode(){
+function verifyStudentAccessCode(){
   const inp=document.getElementById("studentCodeInput");
   const err=document.getElementById("studentCodeError");
   const box=document.getElementById("studentAccessBox");
-  const normalized=(inp?.value||"").trim().toUpperCase();
+  const normalized=(inp?.value||"").replace(/\s+/g,"").toUpperCase();
 
   if(!normalized){
     if(err) err.textContent="⚠️ Please enter your student access code.";
@@ -2517,19 +2509,14 @@ async function verifyStudentAccessCode(){
     return;
   }
 
-  let isValid=false;
+  let encoded="";
   try{
-    if(window.crypto && crypto.subtle){
-      const digest=await computeSha256Hex(normalized);
-      isValid=(digest===STUDENT_CODE_SHA256);
-    }else{
-      isValid=(btoa(normalized)==="MktFWTgxTkFDTEc=");
-    }
+    encoded=btoa(normalized);
   }catch(e){
-    isValid=(btoa(normalized)==="MktFWTgxTkFDTEc=");
+    encoded="";
   }
 
-  if(!isValid){
+  if(encoded!==STUDENT_ACCESS_TOKEN){
     if(err) err.textContent="❌ Invalid student access code. Please check and try again.";
     box?.classList.remove("shakeAnim");
     void box?.offsetWidth;
