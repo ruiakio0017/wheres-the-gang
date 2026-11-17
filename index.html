@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#070611">
-<title>WHERE'S THE GANG? — V8 HORIZON ULTRA</title>
+<title>WHERE'S THE GANG? — V8.6 HORIZON ULTRA</title>
 
 <style>
 *{
@@ -77,29 +77,11 @@ body::before{
   inset:-40%;
   z-index:-10;
   pointer-events:none;
-
   background:
-    radial-gradient(
-      circle at 18% 18%,
-      rgba(133,77,255,.34),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 82% 25%,
-      rgba(255,65,206,.28),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 50% 92%,
-      rgba(40,166,255,.24),
-      transparent 32%
-    ),
-    radial-gradient(
-      circle at 20% 75%,
-      rgba(0,255,195,.12),
-      transparent 26%
-    );
-
+    radial-gradient(circle at 18% 18%, rgba(133,77,255,.34), transparent 28%),
+    radial-gradient(circle at 82% 25%, rgba(255,65,206,.28), transparent 28%),
+    radial-gradient(circle at 50% 92%, rgba(40,166,255,.24), transparent 32%),
+    radial-gradient(circle at 20% 75%, rgba(0,255,195,.12), transparent 26%);
   animation:horizonMove 14s ease-in-out infinite alternate;
 }
 
@@ -109,31 +91,16 @@ body::after{
   inset:0;
   z-index:-9;
   pointer-events:none;
-
   background:
-    linear-gradient(
-      120deg,
-      transparent 0%,
-      rgba(255,255,255,.025) 45%,
-      transparent 55%
-    );
-
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,.025) 45%, transparent 55%);
   background-size:250% 250%;
   animation:lightSweep 11s linear infinite;
 }
 
 @keyframes horizonMove{
-  0%{
-    transform:translate(-5%,-3%) scale(1) rotate(0deg);
-  }
-
-  50%{
-    transform:translate(5%,4%) scale(1.1) rotate(3deg);
-  }
-
-  100%{
-    transform:translate(-3%,7%) scale(1.18) rotate(-2deg);
-  }
+  0%{ transform:translate(-5%,-3%) scale(1) rotate(0deg); }
+  50%{ transform:translate(5%,4%) scale(1.1) rotate(3deg); }
+  100%{ transform:translate(-3%,7%) scale(1.18) rotate(-2deg); }
 }
 
 @keyframes lightSweep{
@@ -142,7 +109,7 @@ body::after{
 }
 
 /* =========================================================
-   PARTICLES & SHOOTING STARS
+   PARTICLES
 ========================================================= */
 
 .horizonParticles{
@@ -160,13 +127,10 @@ body::after{
   border-radius:50%;
   background:#fff;
   opacity:.35;
-
   box-shadow:
     0 0 12px rgba(255,255,255,.9),
     0 0 24px rgba(139,92,255,.7);
-
-  animation:
-    particleFloat linear infinite;
+  animation:particleFloat linear infinite;
 }
 
 .horizonParticles i:nth-child(1){ left:6%; top:80%; animation-duration:13s; }
@@ -183,27 +147,14 @@ body::after{
 .horizonParticles i:nth-child(12){ left:82%; top:62%; animation-duration:13s; }
 
 @keyframes particleFloat{
-  0%{
-    transform:translateY(50px) scale(.6);
-    opacity:0;
-  }
-
-  20%{
-    opacity:.65;
-  }
-
-  75%{
-    opacity:.35;
-  }
-
-  100%{
-    transform:translateY(-110vh) scale(1.2);
-    opacity:0;
-  }
+  0%{ transform:translateY(50px) scale(.6); opacity:0; }
+  20%{ opacity:.65; }
+  75%{ opacity:.35; }
+  100%{ transform:translateY(-110vh) scale(1.2); opacity:0; }
 }
 
 /* =========================================================
-   CLICK RIPPLE & CONFETTI BURST
+   CLICK SPARKS & TOAST
 ========================================================= */
 
 .clickSpark{
@@ -217,14 +168,32 @@ body::after{
 }
 
 @keyframes sparkFly{
-  0%{
-    transform:translate(0,0) scale(1);
-    opacity:1;
-  }
-  100%{
-    transform:translate(var(--tx), var(--ty)) scale(0);
-    opacity:0;
-  }
+  0%{ transform:translate(0,0) scale(1); opacity:1; }
+  100%{ transform:translate(var(--tx), var(--ty)) scale(0); opacity:0; }
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:90px;
+  transform:translateX(-50%) translateY(20px);
+  background:rgba(24,20,38,.96);
+  border:1px solid rgba(168,125,255,.45);
+  color:#fff;
+  padding:12px 20px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:900;
+  z-index:9500;
+  opacity:0;
+  pointer-events:none;
+  box-shadow:0 12px 35px rgba(0,0,0,.6), 0 0 24px rgba(139,92,255,.35);
+  transition:.28s cubic-bezier(.16,1,.3,1);
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
 }
 
 /* =========================================================
@@ -245,7 +214,8 @@ body::after{
 
 button,
 input,
-select{
+select,
+textarea{
   font:inherit;
 }
 
@@ -259,19 +229,13 @@ button{
   position:relative;
 }
 
-/* =========================================================
-   PAGE TRANSITION
-========================================================= */
-
 .page{
   width:100%;
   max-width:940px;
   margin:auto;
   min-height:100vh;
-  padding:32px 18px 100px;
-
-  animation:
-    pageIn .65s cubic-bezier(.16,1,.3,1);
+  padding:32px 18px 120px;
+  animation:pageIn .65s cubic-bezier(.16,1,.3,1);
 }
 
 @keyframes pageIn{
@@ -280,7 +244,6 @@ button{
     transform:translateY(30px) scale(.97);
     filter:blur(8px);
   }
-
   to{
     opacity:1;
     transform:translateY(0) scale(1);
@@ -289,7 +252,7 @@ button{
 }
 
 /* =========================================================
-   BRAND & GLOWING GRADIENT LOGO
+   BRAND & GLOWING MADE BY KUSH KUMAR
 ========================================================= */
 
 .brand{
@@ -298,36 +261,81 @@ button{
 }
 
 .made{
-  color:#9c96ad;
+  color:#f6e8ff;
   font-size:11px;
   font-weight:900;
   letter-spacing:6px;
   margin-bottom:36px;
   display:inline-block;
-  padding:6px 14px;
+  padding:8px 18px;
   border-radius:999px;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.06);
+  background:linear-gradient(135deg, rgba(139,92,255,.22), rgba(255,79,216,.18));
+  border:1px solid rgba(255,79,216,.52);
+  text-shadow:
+    0 0 8px rgba(255,255,255,.85),
+    0 0 18px rgba(255,79,216,.9),
+    0 0 32px rgba(139,92,255,.85);
+  box-shadow:
+    0 0 22px rgba(139,92,255,.35),
+    0 0 42px rgba(255,79,216,.24),
+    inset 0 0 14px rgba(255,255,255,.15);
   animation:
     fadeDown .7s ease both,
-    badgePulse 4s ease-in-out infinite;
+    kushGlowPulse 2.8s ease-in-out infinite;
+}
+
+.kushGlow{
+  display:inline-block;
+  color:#f5e6ff;
+  font-weight:900;
+  letter-spacing:3.5px;
+  text-shadow:
+    0 0 8px rgba(255,255,255,.8),
+    0 0 18px rgba(255,79,216,.95),
+    0 0 32px rgba(139,92,255,.85),
+    0 0 46px rgba(66,185,255,.65);
+  animation:kushTextPulse 2.8s ease-in-out infinite;
 }
 
 @keyframes fadeDown{
-  from{
-    opacity:0;
-    transform:translateY(-20px);
-  }
+  from{ opacity:0; transform:translateY(-20px); }
+  to{ opacity:1; transform:translateY(0); }
+}
 
-  to{
-    opacity:1;
-    transform:translateY(0);
+@keyframes kushGlowPulse{
+  0%,100%{
+    border-color:rgba(255,79,216,.48);
+    box-shadow:
+      0 0 18px rgba(139,92,255,.3),
+      0 0 36px rgba(255,79,216,.2),
+      inset 0 0 10px rgba(255,255,255,.12);
+    transform:scale(1);
+  }
+  50%{
+    border-color:rgba(255,140,230,.9);
+    box-shadow:
+      0 0 28px rgba(139,92,255,.6),
+      0 0 56px rgba(255,79,216,.45),
+      0 0 75px rgba(66,185,255,.25),
+      inset 0 0 16px rgba(255,255,255,.25);
+    transform:scale(1.03);
   }
 }
 
-@keyframes badgePulse{
-  0%,100%{ box-shadow:0 0 0 rgba(139,92,255,0); }
-  50%{ box-shadow:0 0 22px rgba(139,92,255,.22); }
+@keyframes kushTextPulse{
+  0%,100%{
+    text-shadow:
+      0 0 6px rgba(255,255,255,.7),
+      0 0 16px rgba(255,79,216,.85),
+      0 0 28px rgba(139,92,255,.75);
+  }
+  50%{
+    text-shadow:
+      0 0 10px rgba(255,255,255,.95),
+      0 0 24px rgba(255,79,216,1),
+      0 0 40px rgba(139,92,255,.95),
+      0 0 55px rgba(66,185,255,.8);
+  }
 }
 
 .logo{
@@ -370,14 +378,7 @@ button{
   height:4px;
   margin:25px auto 0;
   border-radius:999px;
-  background:
-    linear-gradient(
-      90deg,
-      #8b5cff,
-      #ff4fd8,
-      #42b9ff,
-      #8b5cff
-    );
+  background:linear-gradient(90deg,#8b5cff,#ff4fd8,#42b9ff,#8b5cff);
   background-size:200% 100%;
   box-shadow:
     0 0 22px rgba(255,79,216,.8),
@@ -393,29 +394,13 @@ button{
 }
 
 @keyframes logoIn{
-  from{
-    opacity:0;
-    transform:scale(.85) rotateX(15deg);
-    filter:blur(12px);
-  }
-
-  to{
-    opacity:1;
-    transform:scale(1) rotateX(0deg);
-    filter:blur(0);
-  }
+  from{ opacity:0; transform:scale(.85) rotateX(15deg); filter:blur(12px); }
+  to{ opacity:1; transform:scale(1) rotateX(0deg); filter:blur(0); }
 }
 
 @keyframes horizonLine{
-  0%,100%{
-    width:75px;
-    opacity:.7;
-  }
-
-  50%{
-    width:185px;
-    opacity:1;
-  }
+  0%,100%{ width:75px; opacity:.7; }
+  50%{ width:185px; opacity:1; }
 }
 
 .tagline{
@@ -448,7 +433,14 @@ button{
   border-radius:999px;
   backdrop-filter:blur(14px);
   box-shadow:0 8px 25px rgba(0,0,0,.25);
+  cursor:pointer;
+  transition:.25s ease;
   animation:fadeUp .7s .2s ease both;
+}
+
+.userBadge:hover{
+  border-color:rgba(168,125,255,.45);
+  transform:translateY(-2px);
 }
 
 .userBadge strong{
@@ -470,7 +462,58 @@ button{
 }
 
 /* =========================================================
-   MAIN BUTTONS (3D TILT + NEON BORDER + SHINE)
+   LIVE TIME-OF-DAY BANNER
+========================================================= */
+
+.timeVibeBanner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin:0 auto 22px;
+  padding:15px 18px;
+  border-radius:22px;
+  background:linear-gradient(135deg, rgba(139,92,255,.14), rgba(66,185,255,.08));
+  border:1px solid rgba(168,125,255,.26);
+  backdrop-filter:blur(16px);
+  text-align:left;
+  animation:fadeUp .75s .22s ease both;
+}
+
+.timeVibeBanner b{
+  display:block;
+  font-size:14px;
+  color:#fff;
+  margin-bottom:3px;
+}
+
+.timeVibeBanner small{
+  display:block;
+  color:#b6b2c8;
+  font-size:12px;
+  line-height:1.4;
+}
+
+.timeVibeBtn{
+  white-space:nowrap;
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.18);
+  padding:10px 14px;
+  border-radius:14px;
+  font-size:12px;
+  font-weight:900;
+  transition:.25s ease;
+}
+
+.timeVibeBtn:hover{
+  background:#fff;
+  color:#111;
+  transform:translateY(-2px);
+}
+
+/* =========================================================
+   MAIN BUTTONS (SPACIOUS FULL-WIDTH STACKED)
 ========================================================= */
 
 .actions{
@@ -488,44 +531,30 @@ button{
   font-weight:900;
   font-size:19px;
   letter-spacing:-.2px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.11),
-      rgba(255,255,255,.03)
-    );
-
+  background:linear-gradient(135deg, rgba(255,255,255,.11), rgba(255,255,255,.03));
   border:1px solid rgba(255,255,255,.12);
   backdrop-filter:blur(20px);
-
   box-shadow:
     0 15px 40px rgba(0,0,0,.25),
     inset 0 1px 0 rgba(255,255,255,.15);
-
   transition:
     transform .28s cubic-bezier(.16,1,.3,1),
     border-color .3s,
     box-shadow .3s;
-
-  animation:
-    buttonIn .65s cubic-bezier(.16,1,.3,1) both;
+  animation:buttonIn .65s cubic-bezier(.16,1,.3,1) both;
 }
 
-.mainBtn:nth-child(2){ animation-delay:.08s; }
-.mainBtn:nth-child(3){ animation-delay:.16s; }
-.mainBtn:nth-child(4){ animation-delay:.24s; }
+.mainBtn:nth-child(2){ animation-delay:.06s; }
+.mainBtn:nth-child(3){ animation-delay:.12s; }
+.mainBtn:nth-child(4){ animation-delay:.18s; }
+.mainBtn:nth-child(5){ animation-delay:.24s; }
+.mainBtn:nth-child(6){ animation-delay:.30s; }
+.mainBtn:nth-child(7){ animation-delay:.36s; }
+.mainBtn:nth-child(8){ animation-delay:.42s; }
 
 @keyframes buttonIn{
-  from{
-    opacity:0;
-    transform:translateY(26px) scale(.94);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
+  from{ opacity:0; transform:translateY(26px) scale(.94); }
+  to{ opacity:1; transform:translateY(0) scale(1); }
 }
 
 .mainBtn::before{
@@ -536,13 +565,7 @@ button{
   width:75%;
   height:100%;
   transform:skewX(-22deg);
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,.28),
-      transparent
-    );
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
   transition:.65s ease;
 }
 
@@ -551,12 +574,8 @@ button{
 }
 
 .mainBtn:hover{
-  transform:
-    translateY(-6px)
-    scale(1.02);
-
+  transform:translateY(-6px) scale(1.02);
   border-color:rgba(255,79,216,.45);
-
   box-shadow:
     0 24px 60px rgba(0,0,0,.4),
     0 0 40px rgba(139,92,255,.25),
@@ -568,12 +587,7 @@ button{
 }
 
 .mainBtn.light{
-  background:
-    linear-gradient(
-      135deg,
-      #ffffff,
-      #ebe4ff
-    );
+  background:linear-gradient(135deg, #ffffff, #ebe4ff);
   color:#0e0d15;
   box-shadow:
     0 16px 42px rgba(139,92,255,.18),
@@ -584,6 +598,11 @@ button{
   box-shadow:
     0 24px 60px rgba(255,255,255,.25),
     0 0 45px rgba(139,92,255,.35);
+}
+
+.mainBtn.nexoraBtn{
+  background:linear-gradient(135deg, rgba(139,92,255,.28), rgba(255,79,216,.18));
+  border-color:rgba(168,125,255,.42);
 }
 
 /* =========================================================
@@ -630,7 +649,7 @@ button{
 }
 
 /* =========================================================
-   TITLES
+   TITLES & LOCATION PILL
 ========================================================= */
 
 .pageTitle{
@@ -649,10 +668,6 @@ button{
   line-height:1.55;
   margin-bottom:25px;
 }
-
-/* =========================================================
-   LOCATION PILL
-========================================================= */
 
 .locationPill{
   display:inline-flex;
@@ -675,7 +690,8 @@ button{
 ========================================================= */
 
 .search,
-.input{
+.input,
+.selectInput{
   width:100%;
   background:rgba(12,11,20,.78);
   border:1px solid rgba(255,255,255,.12);
@@ -691,7 +707,8 @@ button{
 }
 
 .search:focus,
-.input:focus{
+.input:focus,
+.selectInput:focus{
   border-color:#a87dff;
   transform:translateY(-2px);
   box-shadow:
@@ -700,7 +717,7 @@ button{
 }
 
 /* =========================================================
-   CATEGORY GRID (HOLOGRAPHIC 3D CARDS)
+   CATEGORY GRID
 ========================================================= */
 
 .categoryGrid{
@@ -718,40 +735,19 @@ button{
   text-align:left;
   color:#fff;
   transform-style:preserve-3d;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(38,33,58,.82),
-      rgba(16,15,25,.85)
-    );
-
+  background:linear-gradient(145deg, rgba(38,33,58,.82), rgba(16,15,25,.85));
   border:1px solid rgba(255,255,255,.09);
   backdrop-filter:blur(16px);
-
   transition:
     transform .28s cubic-bezier(.16,1,.3,1),
     border-color .3s,
     box-shadow .3s;
-
-  animation:
-    cardIn .55s cubic-bezier(.16,1,.3,1) both;
+  animation:cardIn .55s cubic-bezier(.16,1,.3,1) both;
 }
 
 @keyframes cardIn{
-  from{
-    opacity:0;
-    transform:
-      translateY(24px)
-      scale(.93);
-  }
-
-  to{
-    opacity:1;
-    transform:
-      translateY(0)
-      scale(1);
-  }
+  from{ opacity:0; transform:translateY(24px) scale(.93); }
+  to{ opacity:1; transform:translateY(0) scale(1); }
 }
 
 .category::before{
@@ -786,12 +782,8 @@ button{
 }
 
 .category:hover{
-  transform:
-    translateY(-8px)
-    scale(1.025);
-
+  transform:translateY(-8px) scale(1.025);
   border-color:rgba(168,125,255,.45);
-
   box-shadow:
     0 22px 50px rgba(0,0,0,.38),
     0 0 38px rgba(139,92,255,.22);
@@ -813,10 +805,7 @@ button{
 }
 
 .category:hover .emoji{
-  transform:
-    scale(1.26)
-    rotate(-8deg)
-    translateY(-2px);
+  transform:scale(1.26) rotate(-8deg) translateY(-2px);
 }
 
 .category b{
@@ -830,39 +819,41 @@ button{
   margin-top:5px;
 }
 
+.primeTag{
+  position:absolute;
+  top:12px;
+  right:12px;
+  font-size:10px;
+  font-weight:900;
+  padding:4px 8px;
+  border-radius:999px;
+  background:rgba(0,255,163,.16);
+  border:1px solid rgba(0,255,163,.4);
+  color:#80ffd1;
+}
+
 /* =========================================================
-   SPECIAL CARD (ANIMATED BORDER & FLOAT)
+   SPECIAL CARD
 ========================================================= */
 
 .specialCard{
   position:relative;
   margin-top:20px;
   border:1px solid rgba(168,125,255,.28);
-  background:
-    linear-gradient(
-      135deg,
-      rgba(48,38,76,.82),
-      rgba(16,14,26,.86)
-    );
+  background:linear-gradient(135deg, rgba(48,38,76,.82), rgba(16,14,26,.86));
   border-radius:28px;
   padding:22px;
   backdrop-filter:blur(20px);
   overflow:hidden;
-  animation:
-    specialGlow 3.5s ease-in-out infinite;
+  animation:specialGlow 3.5s ease-in-out infinite;
 }
 
 @keyframes specialGlow{
   0%,100%{
-    box-shadow:
-      0 20px 55px rgba(0,0,0,.25),
-      0 0 25px rgba(139,92,255,.1);
+    box-shadow:0 20px 55px rgba(0,0,0,.25), 0 0 25px rgba(139,92,255,.1);
   }
-
   50%{
-    box-shadow:
-      0 24px 65px rgba(0,0,0,.32),
-      0 0 48px rgba(255,79,216,.22);
+    box-shadow:0 24px 65px rgba(0,0,0,.32), 0 0 48px rgba(255,79,216,.22);
   }
 }
 
@@ -897,7 +888,7 @@ button{
 }
 
 /* =========================================================
-   PLACE CARDS
+   PLACE CARDS & INTERACTIVE ACTION CHIPS
 ========================================================= */
 
 .cards{
@@ -908,19 +899,13 @@ button{
 .placeCard{
   position:relative;
   overflow:hidden;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(28,25,42,.82),
-      rgba(13,13,20,.85)
-    );
+  background:linear-gradient(145deg, rgba(28,25,42,.82), rgba(13,13,20,.85));
   border:1px solid rgba(255,255,255,.09);
   border-radius:24px;
   padding:19px;
   backdrop-filter:blur(16px);
   transition:.3s cubic-bezier(.16,1,.3,1);
-  animation:
-    cardIn .5s cubic-bezier(.16,1,.3,1) both;
+  animation:cardIn .5s cubic-bezier(.16,1,.3,1) both;
 }
 
 .placeCard:hover{
@@ -965,10 +950,12 @@ button{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
+  align-items:center;
 }
 
 .mapBtn,
-.tag{
+.tag,
+.actionChip{
   transition:.25s cubic-bezier(.16,1,.3,1);
 }
 
@@ -1003,6 +990,243 @@ button{
   transform:translateY(-2px);
 }
 
+.actionChip{
+  background:rgba(255,255,255,.06);
+  color:#d9d5e8;
+  padding:9px 12px;
+  border-radius:13px;
+  font-size:12px;
+  font-weight:900;
+  border:1px solid rgba(255,255,255,.1);
+}
+
+.actionChip:hover{
+  background:rgba(255,255,255,.14);
+  transform:translateY(-2px);
+}
+
+.actionChip.activePoll{
+  background:rgba(66,185,255,.22);
+  border-color:rgba(66,185,255,.55);
+  color:#9ae0ff;
+}
+
+.actionChip.activeSaved{
+  background:rgba(255,79,216,.22);
+  border-color:rgba(255,79,216,.55);
+  color:#ffb3ee;
+}
+
+.actionChip.activeVisited{
+  background:rgba(0,255,163,.2);
+  border-color:rgba(0,255,163,.55);
+  color:#8affd4;
+}
+
+/* =========================================================
+   SQUAD POLL FLOATING DOCK
+========================================================= */
+
+.pollDock{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  width:min(620px, calc(100% - 28px));
+  background:linear-gradient(135deg, rgba(28,22,48,.96), rgba(14,13,24,.97));
+  border:1px solid rgba(168,125,255,.45);
+  border-radius:22px;
+  padding:13px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  z-index:90;
+  backdrop-filter:blur(20px);
+  box-shadow:0 18px 50px rgba(0,0,0,.65), 0 0 35px rgba(139,92,255,.28);
+}
+
+.pollDockInfo b{
+  display:block;
+  font-size:13px;
+  color:#fff;
+}
+
+.pollDockInfo small{
+  display:block;
+  font-size:11px;
+  color:#b6b2c8;
+  margin-top:2px;
+}
+
+.pollDockBtns{
+  display:flex;
+  gap:8px;
+  flex-shrink:0;
+}
+
+.pollDockShare{
+  background:linear-gradient(135deg,#00ffa3,#38ef7d);
+  color:#071911;
+  padding:10px 14px;
+  border-radius:13px;
+  font-size:12px;
+  font-weight:1000;
+}
+
+.pollDockClear{
+  background:rgba(255,255,255,.1);
+  color:#fff;
+  padding:10px 12px;
+  border-radius:13px;
+  font-size:12px;
+  font-weight:900;
+}
+
+/* =========================================================
+   NEXORA AI CHAT INTERFACE
+========================================================= */
+
+.nexoraHero{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:20px;
+  border-radius:26px;
+  background:linear-gradient(135deg, rgba(139,92,255,.22), rgba(255,79,216,.12));
+  border:1px solid rgba(168,125,255,.35);
+  margin-bottom:18px;
+  backdrop-filter:blur(18px);
+}
+
+.nexoraOrb{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  flex-shrink:0;
+  background:radial-gradient(circle at 30% 30%, #ffffff, #ff4fd8 45%, #8b5cff 80%, #1d1242 100%);
+  box-shadow:0 0 25px rgba(255,79,216,.65), 0 0 45px rgba(139,92,255,.45);
+  animation:orbPulse 3s ease-in-out infinite;
+}
+
+@keyframes orbPulse{
+  0%,100%{ transform:scale(1) rotate(0deg); }
+  50%{ transform:scale(1.08) rotate(12deg); }
+}
+
+.nexoraChips{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+
+.nexoraChatBox{
+  display:grid;
+  gap:12px;
+  max-height:430px;
+  overflow-y:auto;
+  padding:16px;
+  border-radius:24px;
+  background:rgba(12,11,20,.72);
+  border:1px solid rgba(255,255,255,.09);
+  margin-bottom:14px;
+}
+
+.chatMsg{
+  padding:14px 16px;
+  border-radius:20px;
+  line-height:1.5;
+  font-size:14px;
+  animation:fadeUp .3s ease both;
+}
+
+.chatMsg.ai{
+  background:linear-gradient(145deg, rgba(38,33,62,.9), rgba(20,18,34,.92));
+  border:1px solid rgba(168,125,255,.25);
+  color:#f3f0ff;
+}
+
+.chatMsg.user{
+  background:#fff;
+  color:#111;
+  font-weight:700;
+  margin-left:auto;
+  max-width:85%;
+}
+
+.nexoraInputBar{
+  display:flex;
+  gap:10px;
+}
+
+.nexoraInputBar .input{
+  margin:0;
+}
+
+.nexoraSendBtn{
+  background:linear-gradient(135deg,#fff,#ece4ff);
+  color:#111;
+  padding:0 22px;
+  border-radius:18px;
+  font-weight:1000;
+  white-space:nowrap;
+}
+
+/* =========================================================
+   3-STOP COMBO GENERATOR & SPIN WHEEL
+========================================================= */
+
+.comboStepCard{
+  position:relative;
+  background:linear-gradient(145deg, rgba(32,28,52,.88), rgba(14,13,24,.9));
+  border:1px solid rgba(168,125,255,.25);
+  border-radius:24px;
+  padding:18px;
+  backdrop-filter:blur(16px);
+}
+
+.comboStepBadge{
+  display:inline-block;
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:1.5px;
+  padding:5px 11px;
+  border-radius:999px;
+  background:rgba(255,79,216,.18);
+  border:1px solid rgba(255,79,216,.4);
+  color:#ffb3ee;
+  margin-bottom:10px;
+}
+
+.wheelWrap{
+  position:relative;
+  width:min(310px, 84vw);
+  height:min(310px, 84vw);
+  margin:22px auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.wheelPointer{
+  position:absolute;
+  top:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:28px;
+  z-index:5;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.8));
+}
+
+#wheelCanvas{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  box-shadow:0 0 40px rgba(139,92,255,.35), 0 18px 45px rgba(0,0,0,.6);
+  transition:transform 4.2s cubic-bezier(.14,.85,.22,1);
+}
+
 /* =========================================================
    MANAGEMENT DASHBOARD
 ========================================================= */
@@ -1015,12 +1239,7 @@ button{
 }
 
 .statCard{
-  background:
-    linear-gradient(
-      145deg,
-      rgba(38,33,58,.82),
-      rgba(16,15,25,.85)
-    );
+  background:linear-gradient(145deg, rgba(38,33,58,.82), rgba(16,15,25,.85));
   border:1px solid rgba(255,255,255,.1);
   border-radius:20px;
   padding:16px;
@@ -1141,10 +1360,10 @@ button{
 .floating{
   position:fixed;
   right:18px;
-  bottom:20px;
+  bottom:86px;
   z-index:50;
-  width:52px;
-  height:52px;
+  width:48px;
+  height:48px;
   border-radius:50%;
   background:rgba(255,255,255,.94);
   color:#111;
@@ -1157,10 +1376,7 @@ button{
 }
 
 .floating:hover{
-  transform:
-    translateY(-6px)
-    scale(1.1)
-    rotate(-8deg);
+  transform:translateY(-6px) scale(1.1) rotate(-8deg);
 }
 
 /* =========================================================
@@ -1191,12 +1407,7 @@ button{
 
 .modalBox{
   width:min(520px,100%);
-  background:
-    linear-gradient(
-      145deg,
-      rgba(34,30,52,.97),
-      rgba(13,13,20,.98)
-    );
+  background:linear-gradient(145deg, rgba(34,30,52,.97), rgba(13,13,20,.98));
   border:1px solid rgba(168,125,255,.22);
   border-radius:30px;
   padding:26px;
@@ -1207,15 +1418,8 @@ button{
 }
 
 @keyframes modalBoxIn{
-  from{
-    transform:translateY(30px) scale(.92);
-    opacity:0;
-  }
-
-  to{
-    transform:translateY(0) scale(1);
-    opacity:1;
-  }
+  from{ transform:translateY(30px) scale(.92); opacity:0; }
+  to{ transform:translateY(0) scale(1); opacity:1; }
 }
 
 .modalBox h2{
@@ -1313,12 +1517,12 @@ button{
 }
 
 /* =========================================================
-   BEAUTY MODE V8 ULTRA
+   BEAUTY MODE (CORNER USER BADGE + CENTER STAGE)
 ========================================================= */
 
 .beauty{
   text-align:center;
-  padding-top:8vh;
+  padding-top:24px;
   min-height:100vh;
   position:relative;
 }
@@ -1331,47 +1535,58 @@ button{
   top:16%;
   left:50%;
   transform:translateX(-50%);
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,79,216,.26),
-      rgba(139,92,255,.15) 45%,
-      transparent 70%
-    );
+  background:radial-gradient(
+    circle,
+    rgba(255,79,216,.26),
+    rgba(139,92,255,.15) 45%,
+    transparent 70%
+  );
   filter:blur(28px);
   pointer-events:none;
   animation:beautyGlow 4.5s ease-in-out infinite;
 }
 
 @keyframes beautyGlow{
-  0%,100%{
-    transform:translateX(-50%) scale(.9);
-    opacity:.65;
-  }
+  0%,100%{ transform:translateX(-50%) scale(.9); opacity:.65; }
+  50%{ transform:translateX(-50%) scale(1.32); opacity:1; }
+}
 
-  50%{
-    transform:translateX(-50%) scale(1.32);
-    opacity:1;
-  }
+.beautyTopBar{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:24px;
+  text-align:left;
+}
+
+.beautyCornerGroup{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-left:auto;
+}
+
+.beautyCornerBadge{
+  margin-bottom:0 !important;
+  padding:8px 13px;
+  font-size:12px;
 }
 
 .beautyIcon{
   position:relative;
   font-size:76px;
-  margin:40px 0 30px;
+  margin:36px 0 28px;
   display:inline-block;
   filter:drop-shadow(0 0 25px rgba(255,79,216,.45));
   animation:beautyFloat 2.6s ease-in-out infinite;
 }
 
 @keyframes beautyFloat{
-  0%,100%{
-    transform:translateY(0) rotate(-4deg) scale(1);
-  }
-
-  50%{
-    transform:translateY(-16px) rotate(5deg) scale(1.08);
-  }
+  0%,100%{ transform:translateY(0) rotate(-4deg) scale(1); }
+  50%{ transform:translateY(-16px) rotate(5deg) scale(1.08); }
 }
 
 .beautyText{
@@ -1439,26 +1654,18 @@ button{
 
 .diceSpin{
   display:inline-block;
-  font-size:72px;
+  font-size:76px;
   margin-bottom:18px;
-  filter:drop-shadow(0 0 28px rgba(139,92,255,.5));
+  filter:drop-shadow(0 0 28px rgba(139,92,255,.55));
   animation:
     diceTumble .85s cubic-bezier(.34,1.56,.64,1),
     beautyFloat 2.4s .85s ease-in-out infinite;
 }
 
 @keyframes diceTumble{
-  0%{
-    transform:scale(.3) rotate(-360deg) translateY(-40px);
-    opacity:0;
-  }
-  70%{
-    transform:scale(1.18) rotate(18deg) translateY(4px);
-    opacity:1;
-  }
-  100%{
-    transform:scale(1) rotate(0deg) translateY(0);
-  }
+  0%{ transform:scale(.3) rotate(-360deg) translateY(-40px); opacity:0; }
+  70%{ transform:scale(1.18) rotate(18deg) translateY(4px); opacity:1; }
+  100%{ transform:scale(1) rotate(0deg) translateY(0); }
 }
 
 /* =========================================================
@@ -1478,7 +1685,6 @@ button{
 ========================================================= */
 
 @media(max-width:520px){
-
   .page{
     padding-left:14px;
     padding-right:14px;
@@ -1510,25 +1716,30 @@ button{
   }
 
   .sectionTop .changeBtn,
-  .sectionTop .backBtn{
+  .sectionTop .backBtn,
+  .beautyTopBar .changeBtn,
+  .beautyTopBar .backBtn{
     padding:9px 11px;
     font-size:12px;
+  }
+
+  .beautyCornerGroup{
+    flex-direction:column;
+    align-items:flex-end;
   }
 
   .beautyBtn{
     bottom:82px;
   }
+
+  .timeVibeBanner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
 }
 
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
 @media(prefers-reduced-motion:reduce){
-
-  *,
-  *::before,
-  *::after{
+  *, *::before, *::after{
     animation-duration:.01ms !important;
     animation-iteration-count:1 !important;
     transition-duration:.01ms !important;
@@ -1545,25 +1756,18 @@ button{
 
 <!-- HORIZON PARTICLES -->
 <div class="horizonParticles">
-  <i></i>
-  <i></i>
-  <i></i>
-  <i></i>
-  <i></i>
-  <i></i>
-  <i></i>
-  <i></i>
-  <i></i>
-  <i></i>
-  <i></i>
-  <i></i>
+  <i></i><i></i><i></i><i></i><i></i><i></i>
+  <i></i><i></i><i></i><i></i><i></i><i></i>
 </div>
 
 <div id="app" class="app"></div>
+<div id="pollDockWrap"></div>
+<div id="toast" class="toast"></div>
 
 <button
   class="floating"
   onclick="window.scrollTo({top:0,behavior:'smooth'})"
+  title="Back to top"
 >
   ↑
 </button>
@@ -1574,13 +1778,10 @@ button{
 ========================================================= -->
 
 <div id="modal" class="modal">
-
   <div class="modalBox">
 
     <div id="nameStep" class="setupStep active">
-
       <h2>Who's joining the gang? 👀</h2>
-
       <p>
         First tell us your name.
         You'll see it throughout the website.
@@ -1590,47 +1791,29 @@ button{
         id="nameInput"
         class="input"
         maxlength="30"
-        placeholder="Your name"
+        placeholder="☆☆☆☆"
       >
 
       <div class="modalActions">
-
-        <button
-          class="primary"
-          onclick="goToCollegeStep()"
-        >
+        <button class="primary" onclick="goToCollegeStep()">
           Continue →
         </button>
-
       </div>
-
     </div>
 
-
     <div id="collegeStep" class="setupStep">
-
-      <h2 id="collegeModalTitle">
-        Pick your college 📍
-      </h2>
-
-      <p id="collegeModalSub">
-        We'll keep your places completely separated.
-      </p>
+      <h2 id="collegeModalTitle">Pick your college 📍</h2>
+      <p id="collegeModalSub">We'll keep your places completely separated.</p>
 
       <div class="collegeOptions">
-
         <button
           id="nmkrvOption"
           class="collegeOption"
           onclick="chooseCollege('NMKRV')"
         >
           <b>🎓 NMKRV</b>
-
-          <small>
-            Jayanagar • Jayanagar-only planner
-          </small>
+          <small>Jayanagar • Jayanagar-only planner</small>
         </button>
-
 
         <button
           id="apsOption"
@@ -1638,37 +1821,21 @@ button{
           onclick="chooseCollege('Aps')"
         >
           <b>🎓 Aps</b>
-
-          <small>
-            N.R. Colony • Basavanagudi-only planner
-          </small>
+          <small>N.R. Colony • Basavanagudi-only planner</small>
         </button>
-
       </div>
-
 
       <div class="modalActions">
-
-        <button
-          class="secondary"
-          onclick="cancelCollegeChange()"
-        >
+        <button class="secondary" onclick="cancelCollegeChange()">
           Cancel
         </button>
-
-        <button
-          class="primary"
-          onclick="saveCollege()"
-        >
+        <button class="primary" onclick="saveCollege()">
           Let's Go 🚀
         </button>
-
       </div>
-
     </div>
 
   </div>
-
 </div>
 
 
@@ -1677,14 +1844,9 @@ button{
 ========================================================= -->
 
 <div id="mgmtModal" class="modal">
-
   <div class="modalBox">
-
     <h2>⚙️ Management Access</h2>
-
-    <p>
-      Enter the admin password to view login records and analytics.
-    </p>
+    <p>Enter the admin password to view login records and analytics.</p>
 
     <input
       id="mgmtPassInput"
@@ -1697,25 +1859,19 @@ button{
     <div id="mgmtPassError" class="errorMsg"></div>
 
     <div class="modalActions">
-
-      <button
-        class="secondary"
-        onclick="closeMgmtModal()"
-      >
-        Cancel
-      </button>
-
-      <button
-        class="primary"
-        onclick="verifyMgmtPassword()"
-      >
-        Unlock →
-      </button>
-
+      <button class="secondary" onclick="closeMgmtModal()">Cancel</button>
+      <button class="primary" onclick="verifyMgmtPassword()">Unlock →</button>
     </div>
-
   </div>
+</div>
 
+
+<!-- =========================================================
+     GENERIC ACTION MODAL (POLL / BUCKET RATING / CONFIRM)
+========================================================= -->
+
+<div id="customModal" class="modal">
+  <div class="modalBox" id="customModalBox"></div>
 </div>
 
 
@@ -1723,22 +1879,20 @@ button{
 
 /* =========================================================
    WHERE'S THE GANG?
-   V8 • HORIZON ULTRA
+   V8.6 • HORIZON ULTRA
 ========================================================= */
 
-const APP_VERSION="V8 • HORIZON";
+const APP_VERSION="V8.6 • HORIZON ULTRA";
 
-const STORAGE_KEY=
-  "wheres_the_gang_final_v8";
-
-const RECORDS_STORAGE_KEY=
-  "wheres_the_gang_login_records_v8";
+const STORAGE_KEY="wheres_the_gang_final_v8";
+const RECORDS_STORAGE_KEY="wheres_the_gang_login_records_v8";
+const BUCKET_STORAGE_KEY="wheres_the_gang_bucket_v8";
 
 const MGMT_PASSWORD="1234";
 
 
 /* =========================================================
-   INTERACTIVE FX: CURSOR SPOTLIGHT, SCROLL BAR & SPARKS
+   INTERACTIVE FX: CURSOR SPOTLIGHT, SCROLL BAR, SPARKS & TOAST
 ========================================================= */
 
 document.addEventListener("mousemove",function(e){
@@ -1788,44 +1942,58 @@ document.addEventListener("click",function(e){
   }
 });
 
+let toastTimer=null;
+function showToast(msg){
+  const el=document.getElementById("toast");
+  if(!el) return;
+  el.textContent=msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>el.classList.remove("show"),2600);
+}
+
 
 /* =========================================================
    STATE
 ========================================================= */
 
 let selectedName="";
-let selectedCollege="";
-
+let selectedCollege="NMKRV";
 let temporaryCollege="";
-
 let collegeChangeMode=false;
-
 let returnPage="home";
-
 let currentPage="home";
-
 let currentCategory="";
-
 let beautyStep=0;
-
 let exploreFilter="all";
-
+let explorePrimeOnly=false;
 let mgmtCollegeFilter="all";
+
+let squadPoll=[];
+let nexoraHistory=[];
+let comboState={ budget:"any", vibe:"chill", stops:[] };
+let wheelMembers=[];
+let wheelRotation=0;
+let wheelSpinning=false;
+let bucketTab="saved";
 
 
 /* =========================================================
-   SAFE HTML
+   SAFE HTML & EMPTY NAME PLACEHOLDER ("☆☆☆☆")
 ========================================================= */
 
 function escapeHtml(value){
-
   return String(value ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+}
 
+function displayName(){
+  const clean=(selectedName||"").trim();
+  return clean ? clean : "☆☆☆☆";
 }
 
 
@@ -1834,7 +2002,6 @@ function escapeHtml(value){
 ========================================================= */
 
 function getDeviceBrowserInfo(){
-
   const ua=navigator.userAgent||"Unknown";
   let device="Desktop";
 
@@ -1847,7 +2014,6 @@ function getDeviceBrowserInfo(){
   else if(/Linux/i.test(ua)) device="Linux PC";
 
   let browser="Unknown Browser";
-
   if(/Edg\//i.test(ua)) browser="Edge";
   else if(/OPR\/|Opera/i.test(ua)) browser="Opera";
   else if(/SamsungBrowser/i.test(ua)) browser="Samsung Internet";
@@ -1856,29 +2022,18 @@ function getDeviceBrowserInfo(){
   else if(/Safari\//i.test(ua)) browser="Safari";
 
   return `${device} • ${browser}`;
-
 }
 
 function getLoginRecords(){
-
   try{
-
-    const list=JSON.parse(
-      localStorage.getItem(RECORDS_STORAGE_KEY)||"[]"
-    );
-
+    const list=JSON.parse(localStorage.getItem(RECORDS_STORAGE_KEY)||"[]");
     return Array.isArray(list) ? list : [];
-
   }catch(e){
-
     return [];
-
   }
-
 }
 
 function recordLoginEvent(name,college){
-
   if(!name || !college) return;
 
   const now=new Date();
@@ -1911,16 +2066,12 @@ function recordLoginEvent(name,college){
     deviceBrowser:getDeviceBrowserInfo()
   });
 
-  localStorage.setItem(
-    RECORDS_STORAGE_KEY,
-    JSON.stringify(records)
-  );
-
+  localStorage.setItem(RECORDS_STORAGE_KEY,JSON.stringify(records));
 }
 
 
 /* =========================================================
-   LOCATION LOCKED DATA
+   LOCATION LOCKED DATA (EXACT ORIGINAL DATASETS)
 ========================================================= */
 
 const nmkrvPlanner={
@@ -2102,11 +2253,6 @@ nearby:[
 
 };
 
-
-/* =========================================================
-   APS / BASAVANAGUDI
-========================================================= */
-
 const apsPlanner={
 
 gaming:[
@@ -2275,11 +2421,6 @@ nearby:[
 
 };
 
-
-/* =========================================================
-   EXPLORE
-========================================================= */
-
 const nmkrvExplore=[
 ["The G.O.A.T Gaming Cafe","Gaming","Jayanagar","PC/esports-style gaming hangout"],
 ["1vX Gaming | Jayanagar","Gaming","Jayanagar 9th Block","PC + console + simulator-style gaming"],
@@ -2334,11 +2475,6 @@ const apsExplore=[
 ["National College Metro Station","Metro","Basavanagudi","Green Line access"]
 ];
 
-
-/* =========================================================
-   EXACTLY 21 CATEGORIES
-========================================================= */
-
 const categories=[
 ["gaming","🎮","Gaming","PC, console & group gaming"],
 ["cinema","🎬","Cinema","Movie plans"],
@@ -2365,11 +2501,57 @@ const categories=[
 
 
 /* =========================================================
-   STORAGE
+   SMART TIME-OF-DAY ENGINE
+========================================================= */
+
+function getTimeVibeInfo(){
+  const hr=new Date().getHours();
+  if(hr>=6 && hr<12){
+    return {
+      id:"morning",
+      badge:"☀️ Morning Bunk Mode",
+      title:"Breakfast, Filter Kaapi & Morning Walks",
+      desc:"Prime hours for dosa runs, lakes, parks, and temple heritage walks.",
+      primeCats:["food","cafes","parks","lakes","temples","walk"],
+      exploreTypes:["Food","Cafe","Park","Nature","Temple"]
+    };
+  }
+  if(hr>=12 && hr<16){
+    return {
+      id:"afternoon",
+      badge:"🔥 Afternoon Heat Dodge",
+      title:"AC Gaming Cafés, Board Games & Indoor Hangouts",
+      desc:"Beat the afternoon sun inside gaming zones, specialty cafés, and science galleries.",
+      primeCats:["gaming","cafes","activities","science","books","shopping"],
+      exploreTypes:["Gaming","Cafe","Activities","Science","Books","Shopping"]
+    };
+  }
+  if(hr>=16 && hr<20){
+    return {
+      id:"evening",
+      badge:"🌇 Golden Hour & Sunset",
+      title:"Lakes, Viewpoints, Street Snacks & Sunset Walks",
+      desc:"Best window for sunset spots, chaats, desserts, and evening street walks.",
+      primeCats:["sunset","lakes","hills","desserts","food","photos","walk"],
+      exploreTypes:["Nature","Dessert","Food","Park","Shopping"]
+    };
+  }
+  return {
+    id:"night",
+    badge:"🌙 Night Squad Vibe",
+    title:"Late Desserts, Gaming Sessions & Chill Cafés",
+    desc:"Wind down with sundaes, waffles, esports sessions, or a quick food street run.",
+    primeCats:["desserts","gaming","cafes","food","cinema"],
+    exploreTypes:["Dessert","Gaming","Cafe","Food"]
+  };
+}
+
+
+/* =========================================================
+   STORAGE & BUCKET LIST
 ========================================================= */
 
 function saveData(){
-
   localStorage.setItem(
     STORAGE_KEY,
     JSON.stringify({
@@ -2378,100 +2560,308 @@ function saveData(){
       college:selectedCollege
     })
   );
-
 }
 
 function loadData(){
-
   try{
-
-    const data=
-      JSON.parse(
-        localStorage.getItem(STORAGE_KEY)||"null"
-      );
-
-    if(
-      data &&
-      data.name &&
-      data.college
-    ){
-
-      selectedName=data.name;
-      selectedCollege=data.college;
-
-      return true;
+    const data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null");
+    if(data && data.college){
+      selectedName=data.name||"";
+      selectedCollege=data.college==="Aps" ? "Aps" : "NMKRV";
+      return Boolean(data.name && data.college);
     }
-
   }catch(e){
-
-    console.warn(
-      "Storage reset:",
-      e
-    );
-
+    console.warn("Storage reset:",e);
   }
-
   return false;
+}
+
+function getBucketMap(){
+  try{
+    const obj=JSON.parse(localStorage.getItem(BUCKET_STORAGE_KEY)||"{}");
+    return obj && typeof obj==="object" ? obj : {};
+  }catch(e){
+    return {};
+  }
+}
+
+function saveBucketMap(map){
+  localStorage.setItem(BUCKET_STORAGE_KEY,JSON.stringify(map));
+}
+
+function placeKey(name){
+  return selectedCollege+"::"+String(name||"").trim();
+}
+
+function toggleBucketSave(name,area,desc){
+  const map=getBucketMap();
+  const key=placeKey(name);
+  if(map[key]?.saved){
+    delete map[key].saved;
+    if(!map[key].visited) delete map[key];
+    showToast("Removed from Bucket List");
+  }else{
+    map[key]={ ...(map[key]||{}), name, area, desc, college:selectedCollege, saved:true };
+    showToast("Saved to Squad Bucket List ⭐");
+  }
+  saveBucketMap(map);
+  refreshCurrentView();
+}
+
+function openVisitStampModal(name,area,desc){
+  const map=getBucketMap();
+  const key=placeKey(name);
+  const existing=map[key]||{};
+  let chosenRating=existing.rating||5;
+
+  const box=document.getElementById("customModalBox");
+  box.innerHTML=`
+    <h2>✅ Stamp Visited</h2>
+    <p>Rate <strong>${escapeHtml(name)}</strong> for the ${escapeHtml(getCollegeShort())} squad log.</p>
+
+    <div style="display:flex;gap:8px;margin:16px 0;" id="ratingRow">
+      ${[1,2,3,4,5].map(n=>`
+        <button
+          type="button"
+          class="tag"
+          data-star="${n}"
+          onclick="selectStampStar(${n})"
+          style="flex:1;text-align:center;font-size:15px;${n<=chosenRating?'background:#fff;color:#111;':''}"
+        >${n} ★</button>
+      `).join("")}
+    </div>
+
+    <input
+      id="visitNoteInput"
+      class="input"
+      maxlength="80"
+      placeholder="Quick squad memory (optional)"
+      value="${escapeHtml(existing.note||"")}"
+    >
+
+    <div class="modalActions">
+      ${existing.visited ? `
+        <button class="secondary" onclick="removeVisitStamp('${escapeHtml(name)}')">Unmark</button>
+      ` : `
+        <button class="secondary" onclick="closeCustomModal()">Cancel</button>
+      `}
+      <button class="primary" onclick="confirmVisitStamp('${escapeHtml(name)}','${escapeHtml(area)}','${escapeHtml(desc)}')">
+        Save Stamp ✅
+      </button>
+    </div>
+  `;
+  box.dataset.rating=String(chosenRating);
+  document.getElementById("customModal").classList.add("show");
+}
+
+function selectStampStar(n){
+  const box=document.getElementById("customModalBox");
+  box.dataset.rating=String(n);
+  box.querySelectorAll("[data-star]").forEach(btn=>{
+    const val=Number(btn.dataset.star);
+    if(val<=n){
+      btn.style.background="#fff";
+      btn.style.color="#111";
+    }else{
+      btn.style.background="";
+      btn.style.color="";
+    }
+  });
+}
+
+function confirmVisitStamp(name,area,desc){
+  const box=document.getElementById("customModalBox");
+  const rating=Number(box.dataset.rating||5);
+  const note=(document.getElementById("visitNoteInput")?.value||"").trim();
+  const map=getBucketMap();
+  const key=placeKey(name);
+  map[key]={
+    ...(map[key]||{}),
+    name,
+    area,
+    desc,
+    college:selectedCollege,
+    visited:true,
+    rating,
+    note,
+    visitedDate:new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short"})
+  };
+  saveBucketMap(map);
+  closeCustomModal();
+  showToast(`Stamped ${name} (${rating}★) ✅`);
+  refreshCurrentView();
+}
+
+function removeVisitStamp(name){
+  const map=getBucketMap();
+  const key=placeKey(name);
+  if(map[key]){
+    delete map[key].visited;
+    delete map[key].rating;
+    delete map[key].note;
+    if(!map[key].saved) delete map[key];
+    saveBucketMap(map);
+  }
+  closeCustomModal();
+  showToast("Visited stamp removed");
+  refreshCurrentView();
+}
+
+function closeCustomModal(){
+  document.getElementById("customModal").classList.remove("show");
 }
 
 
 /* =========================================================
-   LOCATION HELPERS
+   SQUAD POLL BUILDER
+========================================================= */
+
+function togglePollItem(name,area){
+  const idx=squadPoll.findIndex(p=>p.name===name);
+  if(idx>=0){
+    squadPoll.splice(idx,1);
+    showToast("Removed from Squad Poll");
+  }else{
+    if(squadPoll.length>=3){
+      showToast("Max 3 spots per Squad Poll!");
+      return;
+    }
+    squadPoll.push({name,area});
+    showToast(`Added to Poll (${squadPoll.length}/3) 🗳️`);
+  }
+  renderPollDock();
+  refreshCurrentView();
+}
+
+function clearSquadPoll(){
+  squadPoll=[];
+  renderPollDock();
+  refreshCurrentView();
+}
+
+function renderPollDock(){
+  const wrap=document.getElementById("pollDockWrap");
+  if(!wrap) return;
+  if(!squadPoll.length){
+    wrap.innerHTML="";
+    return;
+  }
+  wrap.innerHTML=`
+    <div class="pollDock">
+      <div class="pollDockInfo">
+        <b>🗳️ Squad Poll (${squadPoll.length}/3 spots)</b>
+        <small>${escapeHtml(squadPoll.map(p=>p.name).join(" • "))}</small>
+      </div>
+      <div class="pollDockBtns">
+        <button class="pollDockShare" onclick="openPollShareModal()">Share Poll 📲</button>
+        <button class="pollDockClear" onclick="clearSquadPoll()">✕</button>
+      </div>
+    </div>
+  `;
+}
+
+function openPollShareModal(){
+  if(!squadPoll.length) return;
+  const msg=buildPollMessage("Right after class");
+  const box=document.getElementById("customModalBox");
+  box.innerHTML=`
+    <h2>🗳️ WhatsApp Squad Poll</h2>
+    <p>Pick a meetup time and blast this poll into your group chat.</p>
+
+    <input
+      id="pollTimeInput"
+      class="input"
+      maxlength="40"
+      value="Right after class"
+      oninput="updatePollPreview()"
+    >
+
+    <pre id="pollPreview" style="white-space:pre-wrap;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.1);padding:14px;border-radius:16px;font-size:12px;color:#e5e1f5;line-height:1.45;margin:10px 0;">${escapeHtml(msg)}</pre>
+
+    <div class="modalActions">
+      <button class="secondary" onclick="copyPollText()">📋 Copy</button>
+      <button class="primary" onclick="sendPollWhatsApp()">WhatsApp 📲</button>
+    </div>
+    <div class="modalActions" style="margin-top:8px;">
+      <button class="secondary" onclick="closeCustomModal()">Close</button>
+    </div>
+  `;
+  document.getElementById("customModal").classList.add("show");
+}
+
+function buildPollMessage(timeLabel){
+  const lines=[
+    `🔥 *WHERE'S THE GANG?* (${getCollegeShort()} Squad Poll)`,
+    `⏰ *When:* ${timeLabel || "Right after class"}`,
+    `📍 *Zone:* ${getArea()}`,
+    ``,
+    `Vote your pick 👇`
+  ];
+  const nums=["1️⃣","2️⃣","3️⃣"];
+  squadPoll.forEach((p,i)=>{
+    lines.push(`${nums[i]} *${p.name}* (${p.area})`);
+    lines.push(`   🗺️ ${mapLink(p.name,p.area)}`);
+  });
+  lines.push(``,`Reply 1, 2, or 3 fast! 🚀`);
+  return lines.join("\n");
+}
+
+function updatePollPreview(){
+  const timeVal=document.getElementById("pollTimeInput")?.value||"Right after class";
+  const pre=document.getElementById("pollPreview");
+  if(pre) pre.textContent=buildPollMessage(timeVal);
+}
+
+function copyPollText(){
+  const timeVal=document.getElementById("pollTimeInput")?.value||"Right after class";
+  const text=buildPollMessage(timeVal);
+  navigator.clipboard?.writeText(text);
+  showToast("Poll copied to clipboard 📋");
+}
+
+function sendPollWhatsApp(){
+  const timeVal=document.getElementById("pollTimeInput")?.value||"Right after class";
+  const text=encodeURIComponent(buildPollMessage(timeVal));
+  window.open("https://wa.me/?text="+text,"_blank","noopener,noreferrer");
+}
+
+
+/* =========================================================
+   LOCATION HELPERS & MAPS
 ========================================================= */
 
 function getArea(){
-
   if(selectedCollege==="Aps"){
     return "Aps • N.R. Colony • Basavanagudi";
   }
-
   return "NMKRV • Jayanagar";
 }
 
 function getPlannerData(){
-
-  return selectedCollege==="Aps"
-    ? apsPlanner
-    : nmkrvPlanner;
-
+  return selectedCollege==="Aps" ? apsPlanner : nmkrvPlanner;
 }
 
 function getExploreData(){
-
-  return selectedCollege==="Aps"
-    ? apsExplore
-    : nmkrvExplore;
-
+  return selectedCollege==="Aps" ? apsExplore : nmkrvExplore;
 }
 
 function getCollegeShort(){
-
-  return selectedCollege==="Aps"
-    ? "Aps"
-    : "NMKRV";
-
+  return selectedCollege==="Aps" ? "Aps" : "NMKRV";
 }
 
-
-/* =========================================================
-   MAPS
-========================================================= */
-
 function mapLink(place,area){
+  const query=encodeURIComponent(place+", "+area+", Bengaluru, Karnataka");
+  return "https://www.google.com/maps/search/?api=1&query="+query;
+}
 
-  const query=
-    encodeURIComponent(
-      place+
-      ", "+
-      area+
-      ", Bengaluru, Karnataka"
-    );
-
-  return(
-    "https://www.google.com/maps/search/?api=1&query="+
-    query
-  );
-
+function openEditName(){
+  collegeChangeMode=false;
+  document.getElementById("nameStep").classList.add("active");
+  document.getElementById("collegeStep").classList.remove("active");
+  const inp=document.getElementById("nameInput");
+  if(inp) inp.value=selectedName;
+  document.getElementById("modal").classList.add("show");
+  setTimeout(()=>inp?.focus(),100);
 }
 
 
@@ -2480,74 +2870,28 @@ function mapLink(place,area){
 ========================================================= */
 
 function header(title,subtitle=""){
-
   return`
-
     <div class="sectionTop">
-
-      <button
-        class="backBtn"
-        onclick="goHome()"
-      >
-        ← Home
-      </button>
-
-      <button
-        class="changeBtn"
-        onclick="openChangeCollege()"
-      >
-        Change College
-      </button>
-
+      <button class="backBtn" onclick="goHome()">← Home</button>
+      <button class="changeBtn" onclick="openChangeCollege()">Change College</button>
     </div>
 
-
-    <div class="userBadge">
-
+    <div class="userBadge" onclick="openEditName()" title="Click to edit name">
       <span class="liveDot"></span>
-
       👋
-
-      <strong>
-        ${escapeHtml(selectedName)}
-      </strong>
-
+      <strong>${escapeHtml(displayName())}</strong>
       <span>•</span>
-
-      <span>
-        ${escapeHtml(getCollegeShort())}
-      </span>
-
+      <span>${escapeHtml(getCollegeShort())}</span>
     </div>
-
 
     <div class="locationPill">
-
-      📍
-      ${escapeHtml(getArea())}
-
+      📍 ${escapeHtml(getArea())}
     </div>
 
+    <h1 class="pageTitle">${escapeHtml(title)}</h1>
 
-    <h1 class="pageTitle">
-
-      ${escapeHtml(title)}
-
-    </h1>
-
-
-    ${
-      subtitle
-      ?
-      `<div class="pageSub">
-        ${escapeHtml(subtitle)}
-      </div>`
-      :
-      ""
-    }
-
+    ${subtitle ? `<div class="pageSub">${escapeHtml(subtitle)}</div>` : ""}
   `;
-
 }
 
 
@@ -2556,152 +2900,697 @@ function header(title,subtitle=""){
 ========================================================= */
 
 function renderHome(){
-
   currentPage="home";
+  const vibe=getTimeVibeInfo();
+  const bucketMap=getBucketMap();
+  const collegeEntries=Object.values(bucketMap).filter(x=>x.college===selectedCollege);
+  const visitedCount=collegeEntries.filter(x=>x.visited).length;
 
   document.getElementById("app").innerHTML=`
-
     <main class="page">
 
       <div class="brand">
-
         <div class="made">
           MADE BY KUSH KUMAR
         </div>
 
-
         <div class="logo">
-
-          <span>
-            WHERE'S THE
-          </span>
-
-          <span>
-            GANG?
-          </span>
-
+          <span>WHERE'S THE</span>
+          <span>GANG?</span>
         </div>
-
 
         <div class="tagline">
-
           Class can wait.
           The gang can't. 😂
-
         </div>
 
-
-        <div class="userBadge">
-
+        <div class="userBadge" onclick="openEditName()" title="Click to edit name">
           <span class="liveDot"></span>
-
           Hey
-
-          <strong>
-            ${escapeHtml(selectedName)}
-          </strong>
-
+          <strong>${escapeHtml(displayName())}</strong>
           👋
-
           <span>•</span>
-
-          <span>
-            ${escapeHtml(selectedCollege)}
-          </span>
-
+          <span>${escapeHtml(selectedCollege)}</span>
         </div>
-
       </div>
 
+      <div class="timeVibeBanner">
+        <div>
+          <b>${escapeHtml(vibe.badge)} • ${escapeHtml(vibe.title)}</b>
+          <small>${escapeHtml(vibe.desc)}</small>
+        </div>
+        <button class="timeVibeBtn" onclick="openExplorePrime()">
+          Best Right Now →
+        </button>
+      </div>
 
       <div class="actions">
-
-        <button
-          class="mainBtn light"
-          onclick="openExplore()"
-        >
+        <button class="mainBtn light" onclick="openExplore()">
           📍 Explore Places
         </button>
 
+        <button class="mainBtn nexoraBtn" onclick="openNexora()">
+          ✨ Nexora AI
+        </button>
 
-        <button
-          class="mainBtn"
-          onclick="openPlanner()"
-        >
+        <button class="mainBtn" onclick="openPlanner()">
           🎯 Where Should We Go?
         </button>
 
+        <button class="mainBtn light" onclick="openComboGenerator()">
+          ⚡ 3-Stop Auto-Combo
+        </button>
 
-        <button
-          class="mainBtn light"
-          onclick="openBeauty()"
-        >
+        <button class="mainBtn" onclick="openSpinWheel()">
+          🎡 Who Pays? Spin & Split
+        </button>
+
+        <button class="mainBtn" onclick="openBucketList()">
+          🏆 Squad Bucket List (${visitedCount} Visited)
+        </button>
+
+        <button class="mainBtn light" onclick="openBeauty()">
           💅 Beauty Mode
         </button>
 
-
-        <button
-          class="mainBtn"
-          onclick="openManagementAuth()"
-        >
+        <button class="mainBtn" onclick="openManagementAuth()">
           ⚙️ Management
         </button>
-
       </div>
-
 
       <div class="specialCard">
-
-        <h3>
-          📌 Your location lock
-        </h3>
-
+        <h3>📌 Your location lock</h3>
         <p>
-
           ${
             selectedCollege==="NMKRV"
-
-            ?
-
-            "NMKRV is locked to Jayanagar. No Basavanagudi places are used in this planner."
-
-            :
-
-            "Aps is locked to N.R. Colony / Basavanagudi. No Jayanagar places are used in this planner."
-
+            ? "NMKRV is locked to Jayanagar. No Basavanagudi places are used in this planner."
+            : "Aps is locked to N.R. Colony / Basavanagudi. No Jayanagar places are used in this planner."
           }
-
         </p>
-
-
-        <button
-          class="specialBtn"
-          onclick="openChangeCollege()"
-        >
+        <button class="specialBtn" onclick="openChangeCollege()">
           Change College
         </button>
-
       </div>
 
-
       <div class="footer">
-
-        ${APP_VERSION}
-
-        •
-
-        LOCATION-LOCKED BUILD
-
+        ${APP_VERSION} • LOCATION-LOCKED BUILD
         <br><br>
-
-        MADE BY KUSH KUMAR
-
+        <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
 
     </main>
+  `;
+}
 
+
+/* =========================================================
+   NEXORA AI HANGOUT CONCIERGE
+========================================================= */
+
+function openNexora(){
+  currentPage="nexora";
+
+  if(!nexoraHistory.length || nexoraHistory[0].college!==selectedCollege){
+    nexoraHistory=[{
+      role:"ai",
+      college:selectedCollege,
+      text:`Hey ${displayName()}! I'm Nexora AI ✨ Tell me your squad's vibe, budget, or mood—and I'll pick the sharpest spots locked strictly to ${getArea()}.`,
+      picks:[]
+    }];
+  }
+
+  renderNexora();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderNexora(){
+  const prompts=[
+    "Cheap snacks under ₹150",
+    "Chill café to talk for hours",
+    "Gaming & competitive squad",
+    "Golden hour sunset & photos",
+    "Ice cream & waffles run"
+  ];
+
+  document.getElementById("app").innerHTML=`
+    <main class="page">
+      ${header(
+        "Nexora AI",
+        "Describe your mood, budget, or time—Nexora matches real spots inside your campus lock."
+      )}
+
+      <div class="nexoraHero">
+        <div class="nexoraOrb"></div>
+        <div>
+          <strong style="font-size:16px;display:block;margin-bottom:4px;">Nexora AI • Location-Locked Concierge</strong>
+          <span style="font-size:12px;color:#b8b3cc;">Locked to ${escapeHtml(getArea())} • Instant local suggestions</span>
+        </div>
+      </div>
+
+      <div class="nexoraChips">
+        ${prompts.map(p=>`
+          <button class="tag" onclick="askNexoraQuick('${escapeHtml(p)}')">✨ ${escapeHtml(p)}</button>
+        `).join("")}
+      </div>
+
+      <div id="nexoraChatBox" class="nexoraChatBox">
+        ${nexoraHistory.map(m=>`
+          <div class="chatMsg ${m.role}">
+            <div>${escapeHtml(m.text)}</div>
+            ${m.picks && m.picks.length ? `
+              <div style="display:grid;gap:8px;margin-top:12px;">
+                ${m.picks.map(pk=>`
+                  <div style="padding:11px 13px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);">
+                    <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;">
+                      <strong style="font-size:14px;color:#fff;">${escapeHtml(pk[0])}</strong>
+                      <span style="font-size:10px;color:#cbbfff;">${escapeHtml(pk[1])}</span>
+                    </div>
+                    <div style="font-size:12px;color:#a9a4bd;margin:4px 0 8px;">${escapeHtml(pk[2])}</div>
+                    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                      <a class="mapBtn" style="padding:6px 10px;font-size:11px;" href="${mapLink(pk[0],pk[1])}" target="_blank" rel="noopener noreferrer">📍 Maps</a>
+                      <button class="actionChip" style="padding:6px 10px;font-size:11px;" onclick="togglePollItem('${escapeHtml(pk[0])}','${escapeHtml(pk[1])}')">+ Poll</button>
+                    </div>
+                  </div>
+                `).join("")}
+              </div>
+            ` : ""}
+          </div>
+        `).join("")}
+      </div>
+
+      <div class="nexoraInputBar">
+        <input
+          id="nexoraInput"
+          class="input"
+          placeholder="Ask Nexora (e.g., 'bored after class, want gaming + cold coffee')..."
+          onkeydown="if(event.key==='Enter') sendNexoraMessage()"
+        >
+        <button class="nexoraSendBtn" onclick="sendNexoraMessage()">Ask ✨</button>
+      </div>
+
+      <div class="footer">
+        NEXORA AI • ${escapeHtml(getCollegeShort())} ENGINE
+        <br><br>
+        <span class="kushGlow">MADE BY KUSH KUMAR</span>
+      </div>
+    </main>
   `;
 
+  const box=document.getElementById("nexoraChatBox");
+  if(box) box.scrollTop=box.scrollHeight;
+}
+
+function askNexoraQuick(text){
+  const inp=document.getElementById("nexoraInput");
+  if(inp) inp.value=text;
+  sendNexoraMessage();
+}
+
+function sendNexoraMessage(){
+  const inp=document.getElementById("nexoraInput");
+  const query=(inp?.value||"").trim();
+  if(!query) return;
+
+  nexoraHistory.push({role:"user",college:selectedCollege,text:query,picks:[]});
+  const reply=generateNexoraReply(query);
+  nexoraHistory.push({role:"ai",college:selectedCollege,text:reply.text,picks:reply.picks});
+  renderNexora();
+}
+
+function generateNexoraReply(query){
+  const q=query.toLowerCase();
+  const planner=getPlannerData();
+  const keywordMap=[
+    {keys:["game","gaming","pc","ps5","esport","board","arcade","bowl"],cat:"gaming"},
+    {keys:["movie","cinema","film","theatre"],cat:"cinema"},
+    {keys:["shop","market","clothes","complex","bazaar"],cat:"shopping"},
+    {keys:["food","eat","hungry","dosa","sandwich","snack","cheap","budget","lunch","breakfast","chaat"],cat:"food"},
+    {keys:["cafe","café","coffee","kaapi","talk","study","chill"],cat:"cafes"},
+    {keys:["dessert","sweet","ice cream","gelato","waffle","chocolate","sundae"],cat:"desserts"},
+    {keys:["park","green","grass","trees","sit"],cat:"parks"},
+    {keys:["nature","forest","bird","fresh"],cat:"nature"},
+    {keys:["lake","boat","boating","water"],cat:"lakes"},
+    {keys:["hill","view","climb","rock"],cat:"hills"},
+    {keys:["temple","peace","quiet","heritage"],cat:"temples"},
+    {keys:["science","museum","gallery","learn"],cat:"science"},
+    {keys:["photo","pic","instagram","aesthetic","camera"],cat:"photos"},
+    {keys:["walk","stroll","roam"],cat:"walk"},
+    {keys:["sport","cricket","basketball","active"],cat:"sports"},
+    {keys:["book","read","library"],cat:"books"},
+    {keys:["art","paint","craft","pottery","theatre","play"],cat:"art"},
+    {keys:["sunset","evening","golden"],cat:"sunset"},
+    {keys:["metro","train","station"],cat:"metro"}
+  ];
+
+  let matchedCats=[];
+  keywordMap.forEach(entry=>{
+    if(entry.keys.some(k=>q.includes(k))) matchedCats.push(entry.cat);
+  });
+
+  if(!matchedCats.length){
+    matchedCats=getTimeVibeInfo().primeCats.slice(0,2);
+  }
+
+  const seen=new Set();
+  const picks=[];
+  matchedCats.forEach(cat=>{
+    (planner[cat]||[]).forEach(item=>{
+      if(!seen.has(item[0]) && picks.length<3){
+        seen.add(item[0]);
+        picks.push(item);
+      }
+    });
+  });
+
+  const zoneName=selectedCollege==="Aps" ? "Basavanagudi / N.R. Colony" : "Jayanagar";
+  const intros=[
+    `Locked into ${zoneName} for ${displayName()}! Here are 3 top spots matching "${query}":`,
+    `Got the vibe ✨ Staying 100% inside ${zoneName}, these 3 picks fit best right now:`,
+    `Say less, ${displayName()}—here's your curated ${zoneName} shortlist:`
+  ];
+  const text=intros[Math.floor(Math.random()*intros.length)];
+  return {text,picks};
+}
+
+
+/* =========================================================
+   3-STOP AUTO-COMBO GENERATOR
+========================================================= */
+
+function openComboGenerator(){
+  currentPage="combo";
+  if(!comboState.stops.length || comboState.college!==selectedCollege){
+    buildNewCombo();
+  }
+  renderComboPage();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function setComboFilter(key,val){
+  comboState[key]=val;
+  buildNewCombo();
+  renderComboPage();
+}
+
+function buildNewCombo(){
+  const p=getPlannerData();
+  const pickOne=(arr)=>arr && arr.length ? arr[Math.floor(Math.random()*arr.length)] : null;
+
+  let stop1=null, stop2=null, stop3=null;
+  if(comboState.vibe==="chill"){
+    stop1=pickOne(p.cafes);
+    stop2=pickOne([...(p.parks||[]),...(p.lakes||[])]);
+    stop3=pickOne(p.desserts);
+  }else if(comboState.vibe==="action"){
+    stop1=pickOne(p.food);
+    stop2=pickOne([...(p.gaming||[]),...(p.activities||[])]);
+    stop3=pickOne(p.desserts);
+  }else{
+    stop1=pickOne(p.temples);
+    stop2=pickOne([...(p.walk||[]),...(p.shopping||[])]);
+    stop3=pickOne(p.food);
+  }
+
+  comboState.college=selectedCollege;
+  comboState.stops=[
+    {role:"STOP 1 • KICKOFF (0:00)",item:stop1},
+    {role:"STOP 2 • MAIN VIBE (+45 MIN)",item:stop2},
+    {role:"STOP 3 • FINALE (+1 HR 45 MIN)",item:stop3}
+  ].filter(s=>s.item);
+}
+
+function renderComboPage(){
+  const vibes=[
+    ["chill","☕ Chill & Aesthetic"],
+    ["action","🎮 Gaming & Food"],
+    ["heritage","🛕 Street & Heritage Walk"]
+  ];
+  const budgets=[
+    ["any","💸 Any Budget"],
+    ["low","🪙 Under ₹200 / head"],
+    ["mid","💳 ₹200–₹500 / head"]
+  ];
+
+  document.getElementById("app").innerHTML=`
+    <main class="page">
+      ${header(
+        "3-Stop Auto-Combo",
+        "One complete bunk route chaining 3 nearby spots inside your locked campus zone."
+      )}
+
+      <div style="display:grid;gap:10px;margin-bottom:18px;">
+        <div class="placeBtns">
+          ${vibes.map(v=>`
+            <button
+              class="tag"
+              onclick="setComboFilter('vibe','${v[0]}')"
+              style="${comboState.vibe===v[0]?'background:#fff;color:#111;':''}"
+            >${escapeHtml(v[1])}</button>
+          `).join("")}
+        </div>
+        <div class="placeBtns">
+          ${budgets.map(b=>`
+            <button
+              class="tag"
+              onclick="setComboFilter('budget','${b[0]}')"
+              style="${comboState.budget===b[0]?'background:#fff;color:#111;':''}"
+            >${escapeHtml(b[1])}</button>
+          `).join("")}
+        </div>
+      </div>
+
+      <div class="cards">
+        ${comboState.stops.map((s,idx)=>`
+          <article class="comboStepCard" style="animation-delay:${idx*60}ms">
+            <div class="comboStepBadge">${escapeHtml(s.role)}</div>
+            <div class="placeHead">
+              <div class="placeName">${escapeHtml(s.item[0])}</div>
+              <div class="placeType">${escapeHtml(s.item[1])}</div>
+            </div>
+            <div class="placeDesc">${escapeHtml(s.item[2])}</div>
+            <div class="placeBtns">
+              <a class="mapBtn" href="${mapLink(s.item[0],s.item[1])}" target="_blank" rel="noopener noreferrer">📍 Maps</a>
+              <span class="tag">${escapeHtml(s.item[3])}</span>
+            </div>
+          </article>
+        `).join("")}
+      </div>
+
+      <div class="modalActions" style="margin-top:20px;">
+        <button class="secondary" onclick="buildNewCombo();renderComboPage();">🔀 Shuffle Route</button>
+        <button class="primary" onclick="shareComboWhatsApp()">Share Plan 📲</button>
+      </div>
+
+      <div class="footer">
+        3-STOP ROUTE ENGINE • ${escapeHtml(getCollegeShort())}
+        <br><br>
+        <span class="kushGlow">MADE BY KUSH KUMAR</span>
+      </div>
+    </main>
+  `;
+}
+
+function shareComboWhatsApp(){
+  const lines=[
+    `⚡ *WHERE'S THE GANG? — 3-STOP AUTO-COMBO*`,
+    `🎓 *College:* ${getCollegeShort()} (${getArea()})`,
+    ``
+  ];
+  comboState.stops.forEach((s,i)=>{
+    lines.push(`*${i+1}. ${s.item[0]}* (${s.item[1]})`);
+    lines.push(`   ${s.item[2]}`);
+    lines.push(`   🗺️ ${mapLink(s.item[0],s.item[1])}`);
+  });
+  lines.push(``,`Who's in? 🚀`);
+  window.open("https://wa.me/?text="+encodeURIComponent(lines.join("\n")),"_blank","noopener,noreferrer");
+}
+
+
+/* =========================================================
+   "WHO PAYS?" SPIN WHEEL & BILL SPLITTER
+========================================================= */
+
+function openSpinWheel(){
+  currentPage="wheel";
+  if(!wheelMembers.length && selectedName.trim()){
+    wheelMembers=[selectedName.trim()];
+  }
+  renderSpinWheelPage();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderSpinWheelPage(){
+  document.getElementById("app").innerHTML=`
+    <main class="page">
+      ${header(
+        "Who Pays? Spin & Split",
+        "Add the squad names below and spin the neon wheel to pick who treats everyone."
+      )}
+
+      <div class="specialCard" style="margin-top:0;margin-bottom:20px;">
+        <h3>🎡 Spin the Squad Wheel</h3>
+        <p>Add 2 or more gang members below, then spin!</p>
+
+        <div style="display:flex;gap:10px;margin-bottom:12px;">
+          <input
+            id="wheelNameInput"
+            class="input"
+            style="margin:0;"
+            maxlength="24"
+            placeholder="☆☆☆☆"
+            onkeydown="if(event.key==='Enter') addWheelMember()"
+          >
+          <button class="primary" style="padding:0 18px;border-radius:16px;font-weight:900;" onclick="addWheelMember()">+ Add</button>
+        </div>
+
+        <div class="placeBtns" style="margin-bottom:14px;">
+          ${wheelMembers.length ? wheelMembers.map((m,i)=>`
+            <button class="tag" onclick="removeWheelMember(${i})">👤 ${escapeHtml(m)} ✕</button>
+          `).join("") : `<span style="font-size:12px;color:#9f9cad;">No names added yet — enter names above.</span>`}
+        </div>
+
+        <div class="wheelWrap">
+          <div class="wheelPointer">🔻</div>
+          <canvas id="wheelCanvas" width="320" height="320"></canvas>
+        </div>
+
+        <div id="wheelWinnerBox" style="text-align:center;font-weight:1000;font-size:18px;min-height:28px;margin-bottom:14px;color:#00ffa3;"></div>
+
+        <button class="specialBtn" onclick="spinSquadWheel()">
+          🎡 Spin Wheel
+        </button>
+      </div>
+
+      <div class="specialCard">
+        <h3>💸 Instant Gang Bill Splitter</h3>
+        <p>Split gaming café, dosa, or dessert bills cleanly per head.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+          <div>
+            <label style="font-size:11px;color:#b6b2c8;font-weight:900;">TOTAL BILL (₹)</label>
+            <input id="splitTotal" class="input" style="margin:6px 0 0;" type="number" min="0" placeholder="0" oninput="calcBillSplit()">
+          </div>
+          <div>
+            <label style="font-size:11px;color:#b6b2c8;font-weight:900;">GANG COUNT</label>
+            <input id="splitCount" class="input" style="margin:6px 0 0;" type="number" min="1" value="${Math.max(2,wheelMembers.length||2)}" oninput="calcBillSplit()">
+          </div>
+        </div>
+
+        <div id="splitResult" style="padding:14px;border-radius:16px;background:rgba(255,255,255,.06);text-align:center;font-size:16px;font-weight:1000;margin-bottom:12px;">
+          ₹0 per person
+        </div>
+
+        <button class="specialBtn" onclick="shareSplitWhatsApp()">
+          Share Split on WhatsApp 📲
+        </button>
+      </div>
+
+      <div class="footer">
+        SQUAD WHEEL & SPLITTER
+        <br><br>
+        <span class="kushGlow">MADE BY KUSH KUMAR</span>
+      </div>
+    </main>
+  `;
+
+  drawWheelCanvas();
+  calcBillSplit();
+}
+
+function addWheelMember(){
+  const inp=document.getElementById("wheelNameInput");
+  const val=(inp?.value||"").trim();
+  if(!val) return;
+  if(wheelMembers.length>=12){
+    showToast("Max 12 squad members on the wheel!");
+    return;
+  }
+  wheelMembers.push(val);
+  inp.value="";
+  drawWheelCanvas();
+  renderSpinWheelPage();
+}
+
+function removeWheelMember(idx){
+  wheelMembers.splice(idx,1);
+  renderSpinWheelPage();
+}
+
+function drawWheelCanvas(){
+  const canvas=document.getElementById("wheelCanvas");
+  if(!canvas) return;
+  const ctx=canvas.getContext("2d");
+  const cx=160, cy=160, r=152;
+  ctx.clearRect(0,0,320,320);
+
+  const items=wheelMembers.length ? wheelMembers : ["☆☆☆☆","☆☆☆☆"];
+  const palette=["#8b5cff","#ff4fd8","#42b9ff","#00c98d","#f59e0b","#ec4899"];
+  const arc=(Math.PI*2)/items.length;
+
+  items.forEach((label,i)=>{
+    const start=i*arc - Math.PI/2;
+    const end=start+arc;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,start,end);
+    ctx.closePath();
+    ctx.fillStyle=palette[i%palette.length];
+    ctx.fill();
+    ctx.lineWidth=2;
+    ctx.strokeStyle="#070611";
+    ctx.stroke();
+
+    ctx.save();
+    ctx.translate(cx,cy);
+    ctx.rotate(start+arc/2);
+    ctx.textAlign="right";
+    ctx.fillStyle="#fff";
+    ctx.font="bold 14px Arial";
+    ctx.fillText(label.slice(0,14),r-18,5);
+    ctx.restore();
+  });
+
+  ctx.beginPath();
+  ctx.arc(cx,cy,22,0,Math.PI*2);
+  ctx.fillStyle="#0d0b18";
+  ctx.fill();
+  ctx.lineWidth=3;
+  ctx.strokeStyle="#fff";
+  ctx.stroke();
+}
+
+function spinSquadWheel(){
+  if(wheelSpinning) return;
+  if(wheelMembers.length<2){
+    showToast("Add at least 2 names first!");
+    return;
+  }
+  wheelSpinning=true;
+  const winnerIdx=Math.floor(Math.random()*wheelMembers.length);
+  const segDeg=360/wheelMembers.length;
+  const targetOffset=360 - (winnerIdx*segDeg + segDeg/2);
+  const extraSpins=360*6;
+  wheelRotation += extraSpins + ((targetOffset - (wheelRotation%360) + 360)%360);
+
+  const canvas=document.getElementById("wheelCanvas");
+  if(canvas){
+    canvas.style.transform=`rotate(${wheelRotation}deg)`;
+  }
+
+  setTimeout(()=>{
+    wheelSpinning=false;
+    const winner=wheelMembers[winnerIdx];
+    const box=document.getElementById("wheelWinnerBox");
+    if(box) box.textContent=`🎉 ${winner} pays for the gang!`;
+    spawnSparks(window.innerWidth/2,window.innerHeight/2,26);
+  },4250);
+}
+
+function calcBillSplit(){
+  const total=Math.max(0,Number(document.getElementById("splitTotal")?.value||0));
+  const count=Math.max(1,Number(document.getElementById("splitCount")?.value||1));
+  const perHead=Math.ceil(total/count);
+  const res=document.getElementById("splitResult");
+  if(res) res.textContent=`₹${perHead} per person (${count} people)`;
+}
+
+function shareSplitWhatsApp(){
+  const total=Math.max(0,Number(document.getElementById("splitTotal")?.value||0));
+  const count=Math.max(1,Number(document.getElementById("splitCount")?.value||1));
+  const perHead=Math.ceil(total/count);
+  const text=encodeURIComponent(
+    `💸 *WHERE'S THE GANG? — BILL SPLIT*\nTotal: ₹${total}\nSquad Size: ${count}\n*Per Person: ₹${perHead}*\n\nPay up fast! 😂`
+  );
+  window.open("https://wa.me/?text="+text,"_blank","noopener,noreferrer");
+}
+
+
+/* =========================================================
+   GANG BUCKET LIST & CONQUERED TRACKER
+========================================================= */
+
+function openBucketList(){
+  currentPage="bucket";
+  renderBucketList();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderBucketList(){
+  const allEntries=Object.values(getBucketMap()).filter(x=>x.college===selectedCollege);
+  const savedList=allEntries.filter(x=>x.saved);
+  const visitedList=allEntries.filter(x=>x.visited);
+  const activeList=bucketTab==="visited" ? visitedList : savedList;
+
+  document.getElementById("app").innerHTML=`
+    <main class="page">
+      ${header(
+        "Squad Bucket List",
+        "Track your saved wishlist spots and conquered places with ratings."
+      )}
+
+      <div class="statsGrid">
+        <div class="statCard">
+          <b>${savedList.length}</b>
+          <small>Wishlist</small>
+        </div>
+        <div class="statCard">
+          <b>${visitedList.length}</b>
+          <small>Visited ✅</small>
+        </div>
+        <div class="statCard">
+          <b>${visitedList.length>=10 ? "Legend" : visitedList.length>=5 ? "Explorer" : "Rookie"}</b>
+          <small>Gang Rank</small>
+        </div>
+      </div>
+
+      <div class="placeBtns" style="margin-bottom:18px;">
+        <button
+          class="tag"
+          onclick="bucketTab='saved';renderBucketList();"
+          style="${bucketTab==='saved'?'background:#fff;color:#111;':''}"
+        >⭐ Wishlist (${savedList.length})</button>
+        <button
+          class="tag"
+          onclick="bucketTab='visited';renderBucketList();"
+          style="${bucketTab==='visited'?'background:#fff;color:#111;':''}"
+        >✅ Conquered (${visitedList.length})</button>
+      </div>
+
+      <div class="cards">
+        ${activeList.length ? activeList.map((item,idx)=>`
+          <article class="placeCard" style="animation-delay:${idx*40}ms">
+            <div class="placeHead">
+              <div class="placeName">${escapeHtml(item.name)}</div>
+              <div class="placeType">${escapeHtml(item.area)}</div>
+            </div>
+            <div class="placeDesc">
+              ${escapeHtml(item.desc||"")}
+              ${item.visited ? `<br><strong style="color:#00ffa3;">Stamped ${item.rating||5}★</strong> ${item.note ? "• "+escapeHtml(item.note) : ""}` : ""}
+            </div>
+            <div class="placeBtns">
+              <a class="mapBtn" href="${mapLink(item.name,item.area)}" target="_blank" rel="noopener noreferrer">📍 Maps</a>
+              <button class="actionChip ${item.saved?'activeSaved':''}" onclick="toggleBucketSave('${escapeHtml(item.name)}','${escapeHtml(item.area)}','${escapeHtml(item.desc||"")}')">
+                ${item.saved ? "★ Saved" : "☆ Save"}
+              </button>
+              <button class="actionChip ${item.visited?'activeVisited':''}" onclick="openVisitStampModal('${escapeHtml(item.name)}','${escapeHtml(item.area)}','${escapeHtml(item.desc||"")}')">
+                ${item.visited ? "✅ Visited" : "Mark Visited"}
+              </button>
+            </div>
+          </article>
+        `).join("") : `
+          <div class="empty">
+            Nothing here yet! Tap <strong>☆ Save</strong> or <strong>Mark Visited</strong> on any place card 👀
+          </div>
+        `}
+      </div>
+
+      <div class="footer">
+        SQUAD BUCKET LIST • ${escapeHtml(getCollegeShort())}
+        <br><br>
+        <span class="kushGlow">MADE BY KUSH KUMAR</span>
+      </div>
+    </main>
+  `;
 }
 
 
@@ -2710,29 +3599,19 @@ function renderHome(){
 ========================================================= */
 
 function openManagementAuth(){
-
   const input=document.getElementById("mgmtPassInput");
   const err=document.getElementById("mgmtPassError");
-
   if(input) input.value="";
   if(err) err.textContent="";
-
   document.getElementById("mgmtModal").classList.add("show");
-
-  setTimeout(()=>{
-    if(input) input.focus();
-  },100);
-
+  setTimeout(()=>{ if(input) input.focus(); },100);
 }
 
 function closeMgmtModal(){
-
   document.getElementById("mgmtModal").classList.remove("show");
-
 }
 
 function verifyMgmtPassword(){
-
   const input=document.getElementById("mgmtPassInput");
   const err=document.getElementById("mgmtPassError");
   const val=(input?.value||"").trim();
@@ -2747,32 +3626,21 @@ function verifyMgmtPassword(){
       input.focus();
     }
   }
-
 }
 
 function openManagementDashboard(){
-
   currentPage="management";
   mgmtCollegeFilter="all";
   renderManagementDashboard();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function renderManagementDashboard(){
-
   const records=getLoginRecords();
-
   const totalLogins=records.length;
 
   const uniqueUsers=new Set(
-    records.map(r=>
-      (r.name||"").trim().toLowerCase()+"|"+(r.college||"").trim().toLowerCase()
-    )
+    records.map(r=>(r.name||"").trim().toLowerCase()+"|"+(r.college||"").trim().toLowerCase())
   ).size;
 
   const now=new Date();
@@ -2782,267 +3650,124 @@ function renderManagementDashboard(){
     String(now.getDate()).padStart(2,"0");
 
   const todayLogins=records.filter(r=>r.dayKey===todayKey).length;
-
   const filterOptions=["all","NMKRV","Aps"];
 
   document.getElementById("app").innerHTML=`
-
     <main class="page">
-
       <div class="sectionTop">
-
-        <button
-          class="backBtn"
-          onclick="goHome()"
-        >
-          ← Home
-        </button>
-
-        <button
-          class="changeBtn"
-          onclick="goHome()"
-        >
-          Exit Admin
-        </button>
-
+        <button class="backBtn" onclick="goHome()">← Home</button>
+        <button class="changeBtn" onclick="goHome()">Exit Admin</button>
       </div>
-
 
       <div class="userBadge">
-
         <span class="liveDot"></span>
-
-        ⚙️
-
-        <strong>
-          Management Panel
-        </strong>
-
+        ⚙️ <strong>Management Panel</strong>
         <span>•</span>
-
-        <span>
-          Admin Unlocked
-        </span>
-
+        <span>Admin Unlocked</span>
       </div>
 
-
-      <h1 class="pageTitle">
-        Login Dashboard
-      </h1>
-
-
-      <div class="pageSub">
-        Monitor user logins, college distribution, timestamps, and device details.
-      </div>
-
+      <h1 class="pageTitle">Login Dashboard</h1>
+      <div class="pageSub">Monitor user logins, college distribution, timestamps, and device details.</div>
 
       <div class="statsGrid">
-
         <div class="statCard">
           <b>${totalLogins}</b>
           <small>Total Logins</small>
         </div>
-
         <div class="statCard">
           <b>${uniqueUsers}</b>
           <small>Unique Users</small>
         </div>
-
         <div class="statCard">
           <b>${todayLogins}</b>
           <small>Today</small>
         </div>
-
       </div>
 
-
       <div class="mgmtControls">
-
         <input
           id="mgmtSearch"
           class="search"
           placeholder="Search name, college, date, device..."
           oninput="drawManagementRecords()"
         >
-
-        <button
-          class="mgmtBtn export"
-          onclick="exportRecordsCSV()"
-        >
-          📥 Export CSV
-        </button>
-
-        <button
-          class="mgmtBtn danger"
-          onclick="clearLoginRecords()"
-        >
-          🗑️ Clear Records
-        </button>
-
+        <button class="mgmtBtn export" onclick="exportRecordsCSV()">📥 Export CSV</button>
+        <button class="mgmtBtn danger" onclick="confirmClearLoginRecords()">🗑️ Clear Records</button>
       </div>
 
-
-      <div
-        class="placeBtns"
-        style="margin-bottom:18px;"
-      >
-
+      <div class="placeBtns" style="margin-bottom:18px;">
         ${filterOptions.map(opt=>`
-
           <button
             class="tag"
             onclick="setMgmtCollegeFilter('${escapeHtml(opt)}')"
-            style="${
-              mgmtCollegeFilter===opt
-              ?
-              "background:#fff;color:#111;"
-              :
-              ""
-            }"
+            style="${mgmtCollegeFilter===opt ? "background:#fff;color:#111;" : ""}"
           >
-            ${
-              escapeHtml(
-                opt==="all"
-                ?
-                "All Colleges"
-                :
-                opt
-              )
-            }
+            ${escapeHtml(opt==="all" ? "All Colleges" : opt)}
           </button>
-
         `).join("")}
-
       </div>
 
-
-      <div
-        id="mgmtRecordsList"
-        class="cards"
-      ></div>
-
+      <div id="mgmtRecordsList" class="cards"></div>
 
       <div class="footer">
-
-        ${APP_VERSION}
-
-        •
-
-        MANAGEMENT DASHBOARD
-
+        ${APP_VERSION} • MANAGEMENT DASHBOARD
         <br><br>
-
-        MADE BY KUSH KUMAR
-
+        <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
-
     </main>
-
   `;
 
   drawManagementRecords();
-
 }
 
 function setMgmtCollegeFilter(filter){
-
   mgmtCollegeFilter=filter;
   renderManagementDashboard();
-
 }
 
 function getFilteredManagementRecords(){
-
   const records=getLoginRecords();
-  const search=(
-    document.getElementById("mgmtSearch")?.value||""
-  ).toLowerCase().trim();
+  const search=(document.getElementById("mgmtSearch")?.value||"").toLowerCase().trim();
 
   return records.filter(rec=>{
-
-    const matchesCollege=
-      mgmtCollegeFilter==="all" ||
-      rec.college===mgmtCollegeFilter;
-
-    const searchable=[
-      rec.name,
-      rec.college,
-      rec.dateTime,
-      rec.deviceBrowser
-    ].join(" ").toLowerCase();
-
+    const matchesCollege=mgmtCollegeFilter==="all" || rec.college===mgmtCollegeFilter;
+    const searchable=[rec.name,rec.college,rec.dateTime,rec.deviceBrowser].join(" ").toLowerCase();
     return matchesCollege && searchable.includes(search);
-
   });
-
 }
 
 function drawManagementRecords(){
-
   const box=document.getElementById("mgmtRecordsList");
   if(!box) return;
 
   const filtered=getFilteredManagementRecords();
-
   if(!filtered.length){
-
-    box.innerHTML=`
-
-      <div class="empty">
-        No login records found 👀
-      </div>
-
-    `;
+    box.innerHTML=`<div class="empty">No login records found 👀</div>`;
     return;
-
   }
 
   box.innerHTML=filtered.map((rec,idx)=>`
-
     <article class="placeCard" style="animation-delay:${Math.min(idx*40,400)}ms">
-
       <div class="placeHead">
-
-        <div class="placeName">
-          👤 ${escapeHtml(rec.name)}
-        </div>
-
-        <div class="placeType">
-          🎓 ${escapeHtml(rec.college)}
-        </div>
-
+        <div class="placeName">👤 ${escapeHtml(rec.name)}</div>
+        <div class="placeType">🎓 ${escapeHtml(rec.college)}</div>
       </div>
-
       <div class="recordMeta">
-
-        <span>
-          🕒 <b>Date/Time:</b> ${escapeHtml(rec.dateTime)}
-        </span>
-
-        <span>
-          💻 <b>Device/Browser:</b> ${escapeHtml(rec.deviceBrowser)}
-        </span>
-
+        <span>🕒 <b>Date/Time:</b> ${escapeHtml(rec.dateTime)}</span>
+        <span>💻 <b>Device/Browser:</b> ${escapeHtml(rec.deviceBrowser)}</span>
       </div>
-
     </article>
-
   `).join("");
-
 }
 
 function exportRecordsCSV(){
-
   const records=getFilteredManagementRecords();
-
   if(!records.length){
-    alert("No records available to export.");
+    showToast("No records available to export");
     return;
   }
 
   const headers=["Name","College","Date/Time","Device/Browser"];
-
   const csvRows=[
     headers.join(","),
     ...records.map(r=>[
@@ -3064,23 +3789,32 @@ function exportRecordsCSV(){
   link.click();
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
-
+  showToast("CSV exported 📥");
 }
 
-function clearLoginRecords(){
-
+function confirmClearLoginRecords(){
   const records=getLoginRecords();
-
   if(!records.length){
-    alert("Records are already empty.");
+    showToast("Records are already empty");
     return;
   }
+  const box=document.getElementById("customModalBox");
+  box.innerHTML=`
+    <h2>🗑️ Clear Login Records?</h2>
+    <p>This will permanently wipe all ${records.length} stored login entries on this device.</p>
+    <div class="modalActions">
+      <button class="secondary" onclick="closeCustomModal()">Cancel</button>
+      <button class="primary" style="background:#ff4d6d;color:#fff;" onclick="executeClearRecords()">Delete All</button>
+    </div>
+  `;
+  document.getElementById("customModal").classList.add("show");
+}
 
-  if(confirm("Are you sure you want to delete all login records? This cannot be undone.")){
-    localStorage.removeItem(RECORDS_STORAGE_KEY);
-    renderManagementDashboard();
-  }
-
+function executeClearRecords(){
+  localStorage.removeItem(RECORDS_STORAGE_KEY);
+  closeCustomModal();
+  renderManagementDashboard();
+  showToast("All login records cleared");
 }
 
 
@@ -3089,68 +3823,40 @@ function clearLoginRecords(){
 ========================================================= */
 
 function openExplore(){
-
   currentPage="explore";
-
   exploreFilter="all";
-
+  explorePrimeOnly=false;
   renderExplore();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+function openExplorePrime(){
+  currentPage="explore";
+  exploreFilter="all";
+  explorePrimeOnly=true;
+  renderExplore();
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function renderExplore(){
-
-  const data=
-    getExploreData();
-
-  const filters=[
-    "all",
-    ...Array.from(
-      new Set(
-        data.map(x=>x[1])
-      )
-    )
-  ];
-
+  const data=getExploreData();
+  const filters=["all",...Array.from(new Set(data.map(x=>x[1])))];
 
   document.getElementById("app").innerHTML=`
-
     <main class="page">
-
       ${header(
         "Explore Places",
         "Everything shown below belongs to your selected college's location."
       )}
 
-
       <div class="notice">
-
-        🔒
-
-        <b>
-          Location lock:
-        </b>
-
+        🔒 <b>Location lock:</b>
         ${
           selectedCollege==="NMKRV"
-
-          ?
-
-          "Every card below is Jayanagar-focused."
-
-          :
-
-          "Every card below is Basavanagudi / N.R. Colony-focused."
-
+          ? "Every card below is Jayanagar-focused."
+          : "Every card below is Basavanagudi / N.R. Colony-focused."
         }
-
       </div>
-
 
       <input
         id="exploreSearch"
@@ -3159,1547 +3865,676 @@ function renderExplore(){
         oninput="filterExplore()"
       >
 
-
-      <div
-        id="exploreFilters"
-        class="placeBtns"
-        style="margin-bottom:18px;"
-      >
+      <div id="exploreFilters" class="placeBtns" style="margin-bottom:18px;">
+        <button
+          class="tag"
+          onclick="toggleExplorePrime()"
+          style="${explorePrimeOnly ? "background:#00ffa3;color:#061a11;" : ""}"
+        >
+          ⏰ Best Right Now
+        </button>
 
         ${filters.map(f=>`
-
           <button
             class="tag"
             onclick="setExploreFilter('${escapeHtml(f)}')"
-
-            style="${
-              exploreFilter===f
-              ?
-              "background:#fff;color:#111;"
-              :
-              ""
-            }"
+            style="${exploreFilter===f && !explorePrimeOnly ? "background:#fff;color:#111;" : ""}"
           >
-
-            ${
-              escapeHtml(
-                f==="all"
-                ?
-                "All"
-                :
-                f
-              )
-            }
-
+            ${escapeHtml(f==="all" ? "All" : f)}
           </button>
-
         `).join("")}
-
       </div>
 
-
-      <div
-        id="exploreCards"
-        class="cards"
-      ></div>
-
+      <div id="exploreCards" class="cards"></div>
 
       <div class="footer">
-
-        Always check current hours/status
-        before travelling.
-
+        Always check current hours/status before travelling.
         <br><br>
-
-        MADE BY KUSH KUMAR
-
+        <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
-
     </main>
-
   `;
 
-
   drawExploreCards(data);
-
 }
 
+function toggleExplorePrime(){
+  explorePrimeOnly=!explorePrimeOnly;
+  renderExplore();
+}
 
 function setExploreFilter(filter){
-
   exploreFilter=filter;
-
+  explorePrimeOnly=false;
   renderExplore();
-
 }
-
 
 function filterExplore(){
-
-  const data=
-    getExploreData();
-
-  drawExploreCards(data);
-
+  drawExploreCards(getExploreData());
 }
 
-
 function drawExploreCards(data){
+  const search=(document.getElementById("exploreSearch")?.value||"").toLowerCase();
+  const vibe=getTimeVibeInfo();
+  const bucketMap=getBucketMap();
 
-  const search=
-    (
-      document.getElementById(
-        "exploreSearch"
-      )?.value||""
-    ).toLowerCase();
+  const filtered=data.filter(item=>{
+    const matchesFilter=exploreFilter==="all" || item[1]===exploreFilter;
+    const matchesPrime=!explorePrimeOnly || vibe.exploreTypes.includes(item[1]);
+    const text=item.join(" ").toLowerCase();
+    return matchesFilter && matchesPrime && text.includes(search);
+  });
 
-
-  const filtered=
-    data.filter(item=>{
-
-      const matchesFilter=
-        exploreFilter==="all" ||
-        item[1]===exploreFilter;
-
-      const text=
-        item.join(" ").toLowerCase();
-
-      return(
-        matchesFilter &&
-        text.includes(search)
-      );
-
-    });
-
-
-  const box=
-    document.getElementById(
-      "exploreCards"
-    );
-
-  if(!box)return;
-
+  const box=document.getElementById("exploreCards");
+  if(!box) return;
 
   if(!filtered.length){
-
-    box.innerHTML=`
-
-      <div class="empty">
-
-        No matching place found 😭
-
-      </div>
-
-    `;
-
+    box.innerHTML=`<div class="empty">No matching place found 😭</div>`;
     return;
-
   }
 
+  box.innerHTML=filtered.map((item,idx)=>{
+    const [name,type,area,desc]=item;
+    const inPoll=squadPoll.some(p=>p.name===name);
+    const bState=bucketMap[placeKey(name)]||{};
 
-  box.innerHTML=
-    filtered.map((item,idx)=>{
+    return`
+      <article class="placeCard" style="animation-delay:${Math.min(idx*35,420)}ms">
+        <div class="placeHead">
+          <div class="placeName">${escapeHtml(name)}</div>
+          <div class="placeType">${escapeHtml(type)}</div>
+        </div>
 
-      const [
-        name,
-        type,
-        area,
-        desc
-      ]=item;
+        <div class="placeDesc">
+          ${escapeHtml(desc)}
+          <br>
+          <span style="color:#666670">${escapeHtml(area)}</span>
+        </div>
 
+        <div class="placeBtns">
+          <a
+            class="mapBtn"
+            href="${mapLink(name,area)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📍 Maps
+          </a>
 
-      return`
+          <button
+            class="actionChip ${inPoll?'activePoll':''}"
+            onclick="togglePollItem('${escapeHtml(name)}','${escapeHtml(area)}')"
+          >
+            ${inPoll ? "✓ In Poll" : "+ Poll"}
+          </button>
 
-        <article class="placeCard" style="animation-delay:${Math.min(idx*35,420)}ms">
+          <button
+            class="actionChip ${bState.saved?'activeSaved':''}"
+            onclick="toggleBucketSave('${escapeHtml(name)}','${escapeHtml(area)}','${escapeHtml(desc)}')"
+          >
+            ${bState.saved ? "★ Saved" : "☆ Save"}
+          </button>
 
-          <div class="placeHead">
-
-            <div class="placeName">
-
-              ${escapeHtml(name)}
-
-            </div>
-
-
-            <div class="placeType">
-
-              ${escapeHtml(type)}
-
-            </div>
-
-          </div>
-
-
-          <div class="placeDesc">
-
-            ${escapeHtml(desc)}
-
-            <br>
-
-            <span
-              style="color:#666670"
-            >
-              ${escapeHtml(area)}
-            </span>
-
-          </div>
-
-
-          <div class="placeBtns">
-
-            <a
-              class="mapBtn"
-              href="${mapLink(name,area)}"
-              target="_blank"
-              rel="noopener"
-            >
-              📍 Maps
-            </a>
-
-
-            <span class="tag">
-
-              ${escapeHtml(
-                getCollegeShort()
-              )}
-
-            </span>
-
-          </div>
-
-        </article>
-
-      `;
-
-    }).join("");
-
+          <button
+            class="actionChip ${bState.visited?'activeVisited':''}"
+            onclick="openVisitStampModal('${escapeHtml(name)}','${escapeHtml(area)}','${escapeHtml(desc)}')"
+          >
+            ${bState.visited ? "✅ Visited" : "Mark Visited"}
+          </button>
+        </div>
+      </article>
+    `;
+  }).join("");
 }
 
 
 /* =========================================================
-   PLANNER
+   PLANNER (21 CATEGORIES)
 ========================================================= */
 
 function openPlanner(){
-
   currentPage="planner";
-
   renderCategories();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-
 function renderCategories(){
+  const vibe=getTimeVibeInfo();
 
   document.getElementById("app").innerHTML=`
-
     <main class="page">
-
       ${header(
         "Where Should We Go?",
         "Pick a category. The planner automatically uses only your selected college's area."
       )}
 
-
       <div class="notice">
-
-        🔐
-
-        <b>
-          ${escapeHtml(
-            getCollegeShort()
-          )}
-          mode:
-        </b>
-
+        🔐 <b>${escapeHtml(getCollegeShort())} mode:</b>
         ${
           selectedCollege==="NMKRV"
-
-          ?
-
-          "Jayanagar-only places."
-
-          :
-
-          "N.R. Colony / Basavanagudi-only places."
-
+          ? "Jayanagar-only places."
+          : "N.R. Colony / Basavanagudi-only places."
         }
-
       </div>
-
 
       <div class="categoryGrid">
-
-        ${categories.map(
-          (c,index)=>`
-
+        ${categories.map((c,index)=>{
+          const isPrime=vibe.primeCats.includes(c[0]);
+          return`
             <button
               class="category"
-
-              style="
-                animation-delay:
-                ${Math.min(index*25,500)}ms
-              "
-
-              onclick="
-                openCategory('${c[0]}')
-              "
+              style="animation-delay:${Math.min(index*25,500)}ms"
+              onclick="openCategory('${c[0]}')"
             >
-
-              <span class="emoji">
-
-                ${c[1]}
-
-              </span>
-
-
-              <b>
-
-                ${escapeHtml(c[2])}
-
-              </b>
-
-
-              <small>
-
-                ${escapeHtml(c[3])}
-
-              </small>
-
+              ${isPrime ? `<span class="primeTag">⏰ Prime</span>` : ""}
+              <span class="emoji">${c[1]}</span>
+              <b>${escapeHtml(c[2])}</b>
+              <small>${escapeHtml(c[3])}</small>
             </button>
-
-          `
-        ).join("")}
-
+          `;
+        }).join("")}
       </div>
-
 
       <div class="specialCard">
-
-        <h3>
-          🎲 Can't decide?
-        </h3>
-
-
+        <h3>🎲 Can't decide?</h3>
         <p>
-
-          Let the gang planner randomly
-          pick something from
-
-          ${
-            selectedCollege==="NMKRV"
-            ?
-            "Jayanagar"
-            :
-            "Basavanagudi"
-          }.
-
+          Let the gang planner randomly pick something from
+          ${selectedCollege==="NMKRV" ? "Jayanagar" : "Basavanagudi"}.
         </p>
-
-
-        <button
-          class="specialBtn"
-          onclick="surpriseMe()"
-        >
+        <button class="specialBtn" onclick="surpriseMe()">
           Surprise Me 🎲
         </button>
-
       </div>
-
 
       <div class="footer">
-
-        21 categories
-
-        •
-
-        Beauty Mode stays separate
-
+        21 categories • Beauty Mode stays separate
         <br><br>
-
-        MADE BY KUSH KUMAR
-
+        <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
-
     </main>
-
   `;
-
 }
-
 
 function openCategory(category){
-
   currentPage="category";
-
   currentCategory=category;
 
-
-  const definition=
-    categories.find(
-      c=>c[0]===category
-    );
-
-
-  const data=
-    getPlannerData()[category]||[];
-
+  const definition=categories.find(c=>c[0]===category);
+  const data=getPlannerData()[category]||[];
 
   document.getElementById("app").innerHTML=`
-
     <main class="page">
-
       <div class="sectionTop">
-
-        <button
-          class="backBtn"
-          onclick="openPlanner()"
-        >
-          ← Categories
-        </button>
-
-
-        <button
-          class="changeBtn"
-          onclick="openChangeCollege()"
-        >
-          Change College
-        </button>
-
+        <button class="backBtn" onclick="openPlanner()">← Categories</button>
+        <button class="changeBtn" onclick="openChangeCollege()">Change College</button>
       </div>
 
-
-      <div class="userBadge">
-
+      <div class="userBadge" onclick="openEditName()" title="Click to edit name">
         <span class="liveDot"></span>
-
-        👋
-
-        <strong>
-          ${escapeHtml(selectedName)}
-        </strong>
-
+        👋 <strong>${escapeHtml(displayName())}</strong>
         <span>•</span>
-
-        <span>
-          ${escapeHtml(getCollegeShort())}
-        </span>
-
+        <span>${escapeHtml(getCollegeShort())}</span>
       </div>
-
 
       <div class="locationPill">
-
-        📍
-        ${escapeHtml(getArea())}
-
+        📍 ${escapeHtml(getArea())}
       </div>
-
 
       <h1 class="pageTitle">
-
-        ${
-          definition
-          ?
-          definition[1]
-          :
-          ""
-        }
-
-        ${
-          definition
-          ?
-          definition[2]
-          :
-          ""
-        }
-
+        ${definition ? definition[1] : ""}
+        ${definition ? definition[2] : ""}
       </h1>
 
-
       <div class="pageSub">
-
-        ${escapeHtml(
-          definition
-          ?
-          definition[3]
-          :
-          ""
-        )}
-
+        ${escapeHtml(definition ? definition[3] : "")}
       </div>
-
 
       <div class="cards">
-
         ${
           data.length
-
-          ?
-
-          data
-            .map((item,idx)=>placeCard(item,idx))
-            .join("")
-
-          :
-
-          `
-          <div class="empty">
-            Nothing listed yet.
-            Pick another category 👀
-          </div>
-          `
+          ? data.map((item,idx)=>placeCard(item,idx)).join("")
+          : `<div class="empty">Nothing listed yet. Pick another category 👀</div>`
         }
-
       </div>
-
 
       <div class="footer">
-
-        MADE BY KUSH KUMAR
-
+        <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
-
     </main>
-
   `;
 
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-
 function placeCard(item,idx=0){
-
-  const [
-    name,
-    area,
-    desc,
-    tags
-  ]=item;
-
+  const [name,area,desc,tags]=item;
+  const inPoll=squadPoll.some(p=>p.name===name);
+  const bState=getBucketMap()[placeKey(name)]||{};
 
   return`
-
     <article class="placeCard" style="animation-delay:${Math.min(idx*45,450)}ms">
-
       <div class="placeHead">
-
-        <div class="placeName">
-
-          ${escapeHtml(name)}
-
-        </div>
-
-
-        <div class="placeType">
-
-          ${escapeHtml(area)}
-
-        </div>
-
+        <div class="placeName">${escapeHtml(name)}</div>
+        <div class="placeType">${escapeHtml(area)}</div>
       </div>
 
-
-      <div class="placeDesc">
-
-        ${escapeHtml(desc)}
-
-      </div>
-
+      <div class="placeDesc">${escapeHtml(desc)}</div>
 
       <div class="placeBtns">
-
         <a
           class="mapBtn"
           href="${mapLink(name,area)}"
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
         >
           📍 Open Maps
         </a>
 
+        <button
+          class="actionChip ${inPoll?'activePoll':''}"
+          onclick="togglePollItem('${escapeHtml(name)}','${escapeHtml(area)}')"
+        >
+          ${inPoll ? "✓ In Poll" : "+ Poll"}
+        </button>
 
-        <span class="tag">
+        <button
+          class="actionChip ${bState.saved?'activeSaved':''}"
+          onclick="toggleBucketSave('${escapeHtml(name)}','${escapeHtml(area)}','${escapeHtml(desc)}')"
+        >
+          ${bState.saved ? "★ Saved" : "☆ Save"}
+        </button>
 
-          ${escapeHtml(tags)}
+        <button
+          class="actionChip ${bState.visited?'activeVisited':''}"
+          onclick="openVisitStampModal('${escapeHtml(name)}','${escapeHtml(area)}','${escapeHtml(desc)}')"
+        >
+          ${bState.visited ? "✅ Visited" : "Mark Visited"}
+        </button>
 
-        </span>
-
+        <span class="tag">${escapeHtml(tags)}</span>
       </div>
-
     </article>
-
   `;
-
 }
 
 
 /* =========================================================
-   SURPRISE ME
+   SURPRISE ME (3D TUMBLING DICE ANIMATION)
 ========================================================= */
 
 function surpriseMe(){
-
-  const planner=
-    getPlannerData();
-
+  currentPage="surprise";
+  const planner=getPlannerData();
   const all=[];
 
-
-  Object.keys(planner)
-    .forEach(category=>{
-
-      planner[category]
-        .forEach(item=>{
-
-          all.push({
-            category,
-            item
-          });
-
-        });
-
+  Object.keys(planner).forEach(category=>{
+    planner[category].forEach(item=>{
+      all.push({category,item});
     });
+  });
 
+  if(!all.length) return;
 
-  if(!all.length)return;
+  const random=all[Math.floor(Math.random()*all.length)];
+  const definition=categories.find(c=>c[0]===random.category);
 
-
-  const random=
-    all[
-      Math.floor(
-        Math.random()*all.length
-      )
-    ];
-
-
-  const definition=
-    categories.find(
-      c=>c[0]===random.category
-    );
-
-
-  spawnSparks(window.innerWidth/2,window.innerHeight/3,22);
-
+  spawnSparks(window.innerWidth/2,window.innerHeight/3,24);
 
   document.getElementById("app").innerHTML=`
-
     <main class="page">
-
       <div class="sectionTop">
-
-        <button
-          class="backBtn"
-          onclick="openPlanner()"
-        >
-          ← Planner
-        </button>
-
-
-        <button
-          class="changeBtn"
-          onclick="openChangeCollege()"
-        >
-          Change College
-        </button>
-
+        <button class="backBtn" onclick="openPlanner()">← Planner</button>
+        <button class="changeBtn" onclick="openChangeCollege()">Change College</button>
       </div>
 
-
-      <div class="userBadge">
-
+      <div class="userBadge" onclick="openEditName()" title="Click to edit name">
         <span class="liveDot"></span>
-
-        👋
-
-        <strong>
-          ${escapeHtml(selectedName)}
-        </strong>
-
+        👋 <strong>${escapeHtml(displayName())}</strong>
       </div>
-
 
       <div class="locationPill">
-
-        📍
-
-        ${escapeHtml(getArea())}
-
+        📍 ${escapeHtml(getArea())}
       </div>
 
+      <div style="text-align:center;padding:50px 10px;">
+        <div id="rollingDice" class="diceSpin">🎲</div>
 
-      <div
-        style="
-          text-align:center;
-          padding:50px 10px;
-        "
-      >
-
-        <div class="diceSpin">
-          🎲
-        </div>
-
-
-        <div
-          style="
-            color:#9f9cb0;
-            font-weight:900;
-            letter-spacing:3px;
-            font-size:12px;
-            margin-bottom:10px;
-          "
-        >
+        <div style="color:#9f9cb0;font-weight:900;letter-spacing:3px;font-size:12px;margin-bottom:10px;">
           RANDOM PICK
         </div>
 
-
-        <h1 class="pageTitle">
-
-          ${escapeHtml(
-            random.item[0]
-          )}
-
-        </h1>
-
-
-        <p class="pageSub">
-
-          ${escapeHtml(
-            random.item[2]
-          )}
-
-        </p>
-
+        <h1 class="pageTitle">${escapeHtml(random.item[0])}</h1>
+        <p class="pageSub">${escapeHtml(random.item[2])}</p>
 
         <div class="locationPill">
-
-          ${
-            definition
-            ?
-            definition[1]
-            :
-            ""
-          }
-
-          ${
-            definition
-            ?
-            definition[2]
-            :
-            ""
-          }
-
+          ${definition ? definition[1] : ""}
+          ${definition ? definition[2] : ""}
         </div>
 
-
-        <div
-          class="placeBtns"
-          style="
-            justify-content:center;
-            margin-top:20px;
-          "
-        >
-
+        <div class="placeBtns" style="justify-content:center;margin-top:20px;">
           <a
             class="mapBtn"
-            href="${mapLink(
-              random.item[0],
-              random.item[1]
-            )}"
+            href="${mapLink(random.item[0],random.item[1])}"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           >
             📍 Maps
           </a>
 
-
-          <button
-            class="tag"
-            onclick="surpriseMe()"
-          >
-            Again 🎲
-          </button>
-
+          <button class="tag" onclick="surpriseMe()">Again 🎲</button>
         </div>
-
       </div>
-
 
       <div class="footer">
-
-        MADE BY KUSH KUMAR
-
+        <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
-
     </main>
-
   `;
 
+  const faces=["🎲","🎯","⚡","🔥","✨","🎲"];
+  let step=0;
+  const diceEl=document.getElementById("rollingDice");
+  const tumbleTimer=setInterval(()=>{
+    step++;
+    if(diceEl) diceEl.textContent=faces[step%faces.length];
+    if(step>=6) clearInterval(tumbleTimer);
+  },95);
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 
 /* =========================================================
-   BEAUTY MODE
+   BEAUTY MODE (CORNER USER & COLLEGE BADGE)
 ========================================================= */
 
 const beautyMessages=[
-
   "✨ Beauty section? 👀 You're already doing pretty well.",
-
   "😎 Okay okay… someone's clearly here to upgrade the vibe ✨",
-
   "💀 At this point… the website is getting nervous 💀",
-
   "🚨 WAIT 😭 Why are you making the whole page look better just by being here?",
-
   "✨ BADDIE DETECTED 🚨 Certified vibe detected. No further upgrades required."
-
 ];
 
-
 function openBeauty(){
-
   currentPage="beauty";
-
   beautyStep=0;
-
   renderBeauty();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-
-/* =========================================================
-   BEAUTY RENDER
-========================================================= */
-
 function renderBeauty(){
-
   document.getElementById("app").innerHTML=`
-
     <main class="page beauty">
 
-      <div
-        class="sectionTop"
-        style="text-align:left;"
-      >
+      <div class="beautyTopBar">
+        <button class="backBtn" onclick="goHome()">← Home</button>
 
-        <button
-          class="backBtn"
-          onclick="goHome()"
-        >
-          ← Home
-        </button>
+        <div class="beautyCornerGroup">
+          <div class="userBadge beautyCornerBadge" onclick="openEditName()" title="Click to edit name">
+            <span class="liveDot"></span>
+            👋 <strong>${escapeHtml(displayName())}</strong>
+            <span>•</span>
+            <span>${escapeHtml(getCollegeShort())}</span>
+          </div>
 
-
-        <button
-          class="changeBtn"
-          onclick="openChangeCollege()"
-        >
-          Change College
-        </button>
-
+          <button class="changeBtn" onclick="openChangeCollege()">Change College</button>
+        </div>
       </div>
 
+      <div class="beautyIcon">💅</div>
 
-      <div class="userBadge">
-
-        <span class="liveDot"></span>
-
-        👋
-
-        <strong>
-          ${escapeHtml(selectedName)}
-        </strong>
-
-        <span>•</span>
-
-        <span>
-          ${escapeHtml(getCollegeShort())}
-        </span>
-
-      </div>
-
-
-      <div class="beautyIcon">
-        💅
-      </div>
-
-
-      <div
-        id="beautyText"
-        class="beautyText"
-      >
+      <div id="beautyText" class="beautyText">
         ${beautyMessages[0]}
       </div>
 
-
-      <button
-        id="beautyNext"
-        class="beautyBtn"
-        onclick="nextBeauty()"
-      >
+      <button id="beautyNext" class="beautyBtn" onclick="nextBeauty()">
         Next →
       </button>
 
-
-      <button
-        class="beautyBack"
-        onclick="goHome()"
-      >
+      <button class="beautyBack" onclick="goHome()">
         ← Back
       </button>
 
-
-      <div
-        class="footer"
-        style="margin-top:60px;"
-      >
-        MADE BY KUSH KUMAR
+      <div class="footer" style="margin-top:60px;">
+        <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
 
     </main>
-
   `;
 
-
-  const next=
-    document.getElementById(
-      "beautyNext"
-    );
-
-
+  const next=document.getElementById("beautyNext");
   if(next){
-
     next.style.left="50%";
-
-    next.style.bottom=
-      window.innerWidth<=520
-      ?
-      "82px"
-      :
-      "88px";
-
+    next.style.bottom=window.innerWidth<=520 ? "82px" : "88px";
   }
-
 }
 
-
-/* =========================================================
-   BEAUTY NEXT — MOVING BUTTON
-========================================================= */
-
 function nextBeauty(){
-
-  if(
-    beautyStep<
-    beautyMessages.length-1
-  ){
-
+  if(beautyStep<beautyMessages.length-1){
     beautyStep++;
-
   }
 
-
-  const text=
-    document.getElementById(
-      "beautyText"
-    );
-
-
-  const next=
-    document.getElementById(
-      "beautyNext"
-    );
-
-
-  /* TEXT ANIMATION */
+  const text=document.getElementById("beautyText");
+  const next=document.getElementById("beautyNext");
 
   if(text){
-
     text.style.opacity="0";
-
-    text.style.transform=
-      "translateY(15px) scale(.96)";
-
+    text.style.transform="translateY(15px) scale(.96)";
 
     setTimeout(()=>{
-
-      text.textContent=
-        beautyMessages[
-          beautyStep
-        ];
-
-
+      text.textContent=beautyMessages[beautyStep];
       text.style.opacity="1";
-
-      text.style.transform=
-        "translateY(0) scale(1)";
-
+      text.style.transform="translateY(0) scale(1)";
     },180);
-
   }
 
-
-  /* BUTTON MOVEMENT */
-
   if(next){
-
-    if(
-      beautyStep<
-      beautyMessages.length-1
-    ){
-
+    if(beautyStep<beautyMessages.length-1){
       const positions=[
-
-        {
-          left:"50%",
-          bottom:"88px"
-        },
-
-        {
-          left:"19%",
-          bottom:"23%"
-        },
-
-        {
-          left:"79%",
-          bottom:"28%"
-        },
-
-        {
-          left:"29%",
-          bottom:"48%"
-        },
-
-        {
-          left:"73%",
-          bottom:"51%"
-        }
-
+        {left:"50%",bottom:"88px"},
+        {left:"19%",bottom:"23%"},
+        {left:"79%",bottom:"28%"},
+        {left:"29%",bottom:"48%"},
+        {left:"73%",bottom:"51%"}
       ];
 
+      const pos=positions[beautyStep];
+      next.style.left=pos.left;
+      next.style.bottom=pos.bottom;
 
-      const pos=
-        positions[
-          beautyStep
-        ];
-
-
-      next.style.left=
-        pos.left;
-
-      next.style.bottom=
-        pos.bottom;
-
-
-      /*
-        POP + ROTATE
-      */
-
-      const rotation=
-        beautyStep%2===0
-        ?
-        -3
-        :
-        3;
-
+      const rotation=beautyStep%2===0 ? -3 : 3;
 
       next.animate(
-
         [
-
-          {
-            transform:
-              "translateX(-50%) scale(.65) rotate(12deg)",
-            opacity:.25
-          },
-
-          {
-            transform:
-              "translateX(-50%) scale(1.15) rotate(-5deg)",
-            opacity:1
-          },
-
-          {
-            transform:
-              "translateX(-50%) scale(1) rotate("+
-              rotation+
-              "deg)"
-          }
-
+          {transform:"translateX(-50%) scale(.65) rotate(12deg)",opacity:.25},
+          {transform:"translateX(-50%) scale(1.15) rotate(-5deg)",opacity:1},
+          {transform:"translateX(-50%) scale(1) rotate("+rotation+"deg)"}
         ],
-
-        {
-          duration:520,
-          easing:
-            "cubic-bezier(.2,.8,.2,1)"
-        }
-
+        {duration:520,easing:"cubic-bezier(.2,.8,.2,1)"}
       );
-
     }
 
-
-    /* FINAL STEP */
-
-    if(
-      beautyStep===
-      beautyMessages.length-1
-    ){
-
+    if(beautyStep===beautyMessages.length-1){
       spawnSparks(window.innerWidth/2,window.innerHeight/2,28);
 
       next.animate(
-
         [
-
-          {
-            opacity:1,
-
-            transform:
-              "translateX(-50%) scale(1)"
-          },
-
-          {
-            opacity:0,
-
-            transform:
-              "translateX(-50%) scale(.35) rotate(25deg)"
-          }
-
+          {opacity:1,transform:"translateX(-50%) scale(1)"},
+          {opacity:0,transform:"translateX(-50%) scale(.35) rotate(25deg)"}
         ],
-
-        {
-          duration:500,
-          easing:"ease-in"
-        }
-
+        {duration:500,easing:"ease-in"}
       );
 
-
       setTimeout(()=>{
-
         next.style.display="none";
-
       },450);
-
     }
-
   }
-
 }
 
 
 /* =========================================================
-   COLLEGE CHANGE & INITIAL SAVE
+   REFRESH CURRENT VIEW HELPER
+========================================================= */
+
+function refreshCurrentView(){
+  if(currentPage==="explore") drawExploreCards(getExploreData());
+  else if(currentPage==="category") openCategory(currentCategory);
+  else if(currentPage==="bucket") renderBucketList();
+  else if(currentPage==="nexora") renderNexora();
+  else if(currentPage==="home") renderHome();
+}
+
+
+/* =========================================================
+   COLLEGE CHANGE & INITIAL SETUP
 ========================================================= */
 
 function openChangeCollege(){
-
   collegeChangeMode=true;
+  returnPage=currentPage;
+  temporaryCollege=selectedCollege;
 
-  returnPage=
-    currentPage;
+  document.getElementById("collegeModalTitle").textContent="Change College 📍";
+  document.getElementById("collegeModalSub").textContent="Your name stays saved. Only the location data will change.";
 
-  temporaryCollege=
-    selectedCollege;
-
-
-  document.getElementById(
-    "collegeModalTitle"
-  ).textContent=
-    "Change College 📍";
-
-
-  document.getElementById(
-    "collegeModalSub"
-  ).textContent=
-    "Your name stays saved. Only the location data will change.";
-
-
-  document.getElementById(
-    "nameStep"
-  ).classList.remove("active");
-
-
-  document.getElementById(
-    "collegeStep"
-  ).classList.add("active");
-
+  document.getElementById("nameStep").classList.remove("active");
+  document.getElementById("collegeStep").classList.add("active");
 
   updateCollegeSelection();
-
-
-  document.getElementById(
-    "modal"
-  ).classList.add("show");
-
+  document.getElementById("modal").classList.add("show");
 }
-
 
 function chooseCollege(college){
-
-  temporaryCollege=
-    college;
-
+  temporaryCollege=college;
   updateCollegeSelection();
-
 }
-
 
 function updateCollegeSelection(){
-
-  document.getElementById(
-    "nmkrvOption"
-  )
-  .classList.toggle(
-    "selected",
-    temporaryCollege==="NMKRV"
-  );
-
-
-  document.getElementById(
-    "apsOption"
-  )
-  .classList.toggle(
-    "selected",
-    temporaryCollege==="Aps"
-  );
-
+  document.getElementById("nmkrvOption").classList.toggle("selected",temporaryCollege==="NMKRV");
+  document.getElementById("apsOption").classList.toggle("selected",temporaryCollege==="Aps");
 }
-
 
 function saveCollege(){
-
   if(!temporaryCollege){
-
-    alert(
-      "Pick a college first."
-    );
-
+    showToast("Pick a college first 📍");
     return;
-
   }
 
-
-  selectedCollege=
-    temporaryCollege;
-
+  selectedCollege=temporaryCollege;
   saveData();
+  recordLoginEvent(displayName(),selectedCollege);
 
-  recordLoginEvent(selectedName,selectedCollege);
-
-
-  document.getElementById(
-    "modal"
-  ).classList.remove("show");
-
-
+  document.getElementById("modal").classList.remove("show");
   spawnSparks(window.innerWidth/2,window.innerHeight/2,24);
 
-
   if(!collegeChangeMode){
-
     renderHome();
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-
+    window.scrollTo({top:0,behavior:"smooth"});
     return;
-
   }
-
 
   collegeChangeMode=false;
 
+  if(returnPage==="explore") renderExplore();
+  else if(returnPage==="planner") renderCategories();
+  else if(returnPage==="category") openCategory(currentCategory);
+  else if(returnPage==="beauty") renderBeauty();
+  else if(returnPage==="nexora") openNexora();
+  else if(returnPage==="combo") openComboGenerator();
+  else if(returnPage==="wheel") openSpinWheel();
+  else if(returnPage==="bucket") openBucketList();
+  else renderHome();
 
-  if(returnPage==="explore"){
-
-    renderExplore();
-
-  }
-
-  else if(returnPage==="planner"){
-
-    renderCategories();
-
-  }
-
-  else if(returnPage==="category"){
-
-    openCategory(
-      currentCategory
-    );
-
-  }
-
-  else if(returnPage==="beauty"){
-
-    renderBeauty();
-
-  }
-
-  else{
-
-    renderHome();
-
-  }
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+  window.scrollTo({top:0,behavior:"smooth"});
 }
-
 
 function cancelCollegeChange(){
-
   if(collegeChangeMode){
-
-    temporaryCollege=
-      selectedCollege;
-
+    temporaryCollege=selectedCollege;
     collegeChangeMode=false;
-
-
-    document.getElementById(
-      "modal"
-    ).classList.remove("show");
-
+    document.getElementById("modal").classList.remove("show");
     return;
-
   }
-
-
   closeSetup();
-
 }
-
 
 function closeSetup(){
-
-  document.getElementById(
-    "modal"
-  ).classList.remove("show");
-
+  document.getElementById("modal").classList.remove("show");
 }
-
-
-/* =========================================================
-   FIRST SETUP
-========================================================= */
 
 function showFirstSetup(){
-
   collegeChangeMode=false;
-
   temporaryCollege="";
 
+  document.getElementById("collegeModalTitle").textContent="Pick your college 📍";
+  document.getElementById("collegeModalSub").textContent="We'll keep your places completely separated.";
 
-  document.getElementById(
-    "collegeModalTitle"
-  ).textContent=
-    "Pick your college 📍";
+  document.getElementById("nameStep").classList.add("active");
+  document.getElementById("collegeStep").classList.remove("active");
 
-
-  document.getElementById(
-    "collegeModalSub"
-  ).textContent=
-    "We'll keep your places completely separated.";
-
-
-  document.getElementById(
-    "nameStep"
-  ).classList.add("active");
-
-
-  document.getElementById(
-    "collegeStep"
-  ).classList.remove("active");
-
-
-  document.getElementById(
-    "nameInput"
-  ).value="";
-
-
-  document.getElementById(
-    "modal"
-  ).classList.add("show");
-
+  document.getElementById("nameInput").value="";
+  document.getElementById("modal").classList.add("show");
 }
-
 
 function goToCollegeStep(){
-
-  const input=
-    document.getElementById(
-      "nameInput"
-    );
-
-
-  const name=
-    (input.value||"").trim();
-
+  const input=document.getElementById("nameInput");
+  const name=(input.value||"").trim();
 
   if(!name){
-
     input.focus();
-
+    showToast("Enter your name first 👀");
     return;
-
   }
 
+  selectedName=name;
+  temporaryCollege=selectedCollege||"";
 
-  selectedName=
-    name;
-
-  temporaryCollege="";
-
-
-  document.getElementById(
-    "nameStep"
-  ).classList.remove("active");
-
-
-  document.getElementById(
-    "collegeStep"
-  ).classList.add("active");
-
+  document.getElementById("nameStep").classList.remove("active");
+  document.getElementById("collegeStep").classList.add("active");
 
   updateCollegeSelection();
-
 }
-
-
-/* =========================================================
-   HOME
-========================================================= */
 
 function goHome(){
-
   renderHome();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 
 /* =========================================================
-   KEYBOARD
+   KEYBOARD SHORTCUTS
 ========================================================= */
 
-document.addEventListener(
-  "keydown",
-  function(e){
-
-    if(e.key==="Enter"){
-
-      const mgmtModal=
-        document.getElementById(
-          "mgmtModal"
-        );
-
-      if(
-        mgmtModal?.classList.contains("show")
-      ){
-
-        verifyMgmtPassword();
-        return;
-
-      }
-
-
-      const nameStep=
-        document.getElementById(
-          "nameStep"
-        );
-
-
-      if(
-
-        document.getElementById(
-          "modal"
-        )?.classList.contains("show")
-
-        &&
-
-        nameStep?.classList.contains(
-          "active"
-        )
-
-      ){
-
-        goToCollegeStep();
-
-      }
-
+document.addEventListener("keydown",function(e){
+  if(e.key==="Enter"){
+    const mgmtModal=document.getElementById("mgmtModal");
+    if(mgmtModal?.classList.contains("show")){
+      verifyMgmtPassword();
+      return;
     }
 
-
-    if(e.key==="Escape"){
-
-      const mgmtModal=
-        document.getElementById(
-          "mgmtModal"
-        );
-
-      if(
-        mgmtModal?.classList.contains("show")
-      ){
-
-        closeMgmtModal();
-        return;
-
-      }
-
-
-      const modal=
-        document.getElementById(
-          "modal"
-        );
-
-
-      if(
-        modal?.classList.contains("show")
-      ){
-
-        cancelCollegeChange();
-
-      }
-
+    const nameStep=document.getElementById("nameStep");
+    if(document.getElementById("modal")?.classList.contains("show") && nameStep?.classList.contains("active")){
+      goToCollegeStep();
     }
-
   }
-);
+
+  if(e.key==="Escape"){
+    if(document.getElementById("customModal")?.classList.contains("show")){
+      closeCustomModal();
+      return;
+    }
+    if(document.getElementById("mgmtModal")?.classList.contains("show")){
+      closeMgmtModal();
+      return;
+    }
+    if(document.getElementById("modal")?.classList.contains("show")){
+      cancelCollegeChange();
+    }
+  }
+});
 
 
 /* =========================================================
@@ -4707,36 +4542,17 @@ document.addEventListener(
 ========================================================= */
 
 (function start(){
-
   if(loadData()){
-
-    if(
-
-      selectedCollege!=="NMKRV" &&
-
-      selectedCollege!=="Aps"
-
-    ){
-
-      selectedCollege=
-        "NMKRV";
-
+    if(selectedCollege!=="NMKRV" && selectedCollege!=="Aps"){
+      selectedCollege="NMKRV";
       saveData();
-
     }
-
-    recordLoginEvent(selectedName,selectedCollege);
-
+    recordLoginEvent(displayName(),selectedCollege);
     renderHome();
-
-  }
-
-  else{
-
+  }else{
+    renderHome();
     showFirstSetup();
-
   }
-
 })();
 
 </script>
