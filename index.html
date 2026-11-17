@@ -205,7 +205,8 @@ body::after{
 ========================================================= */
 
 button,
-input{
+input,
+select{
   font:inherit;
 }
 
@@ -453,6 +454,10 @@ button{
 
 .mainBtn:nth-child(3){
   animation-delay:.16s;
+}
+
+.mainBtn:nth-child(4){
+  animation-delay:.24s;
 }
 
 @keyframes buttonIn{
@@ -997,6 +1002,106 @@ button{
 }
 
 /* =========================================================
+   MANAGEMENT DASHBOARD
+========================================================= */
+
+.statsGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.statCard{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(35,31,53,.78),
+      rgba(17,16,25,.78)
+    );
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:20px;
+  padding:16px;
+  text-align:center;
+  backdrop-filter:blur(14px);
+}
+
+.statCard b{
+  display:block;
+  font-size:28px;
+  font-weight:1000;
+  color:#fff;
+  margin-bottom:4px;
+}
+
+.statCard small{
+  color:#9996a5;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.mgmtControls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+
+.mgmtControls .search{
+  flex:1;
+  min-width:200px;
+  margin-bottom:0;
+}
+
+.mgmtBtn{
+  padding:14px 16px;
+  border-radius:16px;
+  font-weight:900;
+  font-size:13px;
+  transition:.25s ease;
+  white-space:nowrap;
+}
+
+.mgmtBtn.export{
+  background:#fff;
+  color:#111;
+}
+
+.mgmtBtn.danger{
+  background:rgba(255,65,90,.16);
+  color:#ff6b81;
+  border:1px solid rgba(255,65,90,.3);
+}
+
+.mgmtBtn:hover{
+  transform:translateY(-2px);
+}
+
+.recordMeta{
+  display:grid;
+  gap:6px;
+  margin-top:10px;
+  font-size:13px;
+  color:#aaa7b5;
+}
+
+.recordMeta span{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.errorMsg{
+  color:#ff6b81;
+  font-size:13px;
+  font-weight:800;
+  margin-top:8px;
+  min-height:18px;
+}
+
+/* =========================================================
    NOTICE
 ========================================================= */
 
@@ -1486,6 +1591,18 @@ button{
     border-radius:20px;
   }
 
+  .statsGrid{
+    gap:8px;
+  }
+
+  .statCard{
+    padding:12px 8px;
+  }
+
+  .statCard b{
+    font-size:22px;
+  }
+
   .sectionTop{
     align-items:flex-start;
   }
@@ -1646,6 +1763,53 @@ button{
 </div>
 
 
+<!-- =========================================================
+     MANAGEMENT PASSWORD MODAL
+========================================================= -->
+
+<div id="mgmtModal" class="modal">
+
+  <div class="modalBox">
+
+    <h2>⚙️ Management Access</h2>
+
+    <p>
+      Enter the admin password to view login records and analytics.
+    </p>
+
+    <input
+      id="mgmtPassInput"
+      class="input"
+      type="password"
+      maxlength="20"
+      placeholder="Enter password"
+    >
+
+    <div id="mgmtPassError" class="errorMsg"></div>
+
+    <div class="modalActions">
+
+      <button
+        class="secondary"
+        onclick="closeMgmtModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="primary"
+        onclick="verifyMgmtPassword()"
+      >
+        Unlock →
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script>
 
 /* =========================================================
@@ -1657,6 +1821,11 @@ const APP_VERSION="V8 • HORIZON";
 
 const STORAGE_KEY=
   "wheres_the_gang_final_v8";
+
+const RECORDS_STORAGE_KEY=
+  "wheres_the_gang_login_records_v8";
+
+const MGMT_PASSWORD="1234";
 
 
 /* =========================================================
@@ -1680,6 +1849,8 @@ let beautyStep=0;
 
 let exploreFilter="all";
 
+let mgmtCollegeFilter="all";
+
 
 /* =========================================================
    SAFE HTML
@@ -1693,6 +1864,96 @@ function escapeHtml(value){
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   DEVICE / BROWSER & LOGIN RECORDS
+========================================================= */
+
+function getDeviceBrowserInfo(){
+
+  const ua=navigator.userAgent||"Unknown";
+  let device="Desktop";
+
+  if(/iPhone/i.test(ua)) device="iPhone";
+  else if(/iPad/i.test(ua)) device="iPad";
+  else if(/Android/i.test(ua)){
+    device=/Mobile/i.test(ua) ? "Android Phone" : "Android Tablet";
+  }else if(/Windows/i.test(ua)) device="Windows PC";
+  else if(/Macintosh|Mac OS X/i.test(ua)) device="Mac";
+  else if(/Linux/i.test(ua)) device="Linux PC";
+
+  let browser="Unknown Browser";
+
+  if(/Edg\//i.test(ua)) browser="Edge";
+  else if(/OPR\/|Opera/i.test(ua)) browser="Opera";
+  else if(/SamsungBrowser/i.test(ua)) browser="Samsung Internet";
+  else if(/Firefox\//i.test(ua)) browser="Firefox";
+  else if(/CriOS|Chrome\//i.test(ua)) browser="Chrome";
+  else if(/Safari\//i.test(ua)) browser="Safari";
+
+  return `${device} • ${browser}`;
+
+}
+
+function getLoginRecords(){
+
+  try{
+
+    const list=JSON.parse(
+      localStorage.getItem(RECORDS_STORAGE_KEY)||"[]"
+    );
+
+    return Array.isArray(list) ? list : [];
+
+  }catch(e){
+
+    return [];
+
+  }
+
+}
+
+function recordLoginEvent(name,college){
+
+  if(!name || !college) return;
+
+  const now=new Date();
+  const records=getLoginRecords();
+
+  const dateStr=now.toLocaleDateString("en-IN",{
+    day:"2-digit",
+    month:"short",
+    year:"numeric"
+  });
+
+  const timeStr=now.toLocaleTimeString("en-IN",{
+    hour:"2-digit",
+    minute:"2-digit",
+    second:"2-digit",
+    hour12:true
+  });
+
+  const dayKey=
+    now.getFullYear()+"-"+
+    String(now.getMonth()+1).padStart(2,"0")+"-"+
+    String(now.getDate()).padStart(2,"0");
+
+  records.unshift({
+    id:Date.now()+"_"+Math.random().toString(36).slice(2,7),
+    name:name,
+    college:college,
+    dateTime:`${dateStr}, ${timeStr}`,
+    dayKey:dayKey,
+    deviceBrowser:getDeviceBrowserInfo()
+  });
+
+  localStorage.setItem(
+    RECORDS_STORAGE_KEY,
+    JSON.stringify(records)
+  );
 
 }
 
@@ -2413,6 +2674,14 @@ function renderHome(){
           💅 Beauty Mode
         </button>
 
+
+        <button
+          class="mainBtn"
+          onclick="openManagementAuth()"
+        >
+          ⚙️ Management
+        </button>
+
       </div>
 
 
@@ -2467,6 +2736,383 @@ function renderHome(){
     </main>
 
   `;
+
+}
+
+
+/* =========================================================
+   MANAGEMENT & LOGIN RECORDS
+========================================================= */
+
+function openManagementAuth(){
+
+  const input=document.getElementById("mgmtPassInput");
+  const err=document.getElementById("mgmtPassError");
+
+  if(input) input.value="";
+  if(err) err.textContent="";
+
+  document.getElementById("mgmtModal").classList.add("show");
+
+  setTimeout(()=>{
+    if(input) input.focus();
+  },100);
+
+}
+
+function closeMgmtModal(){
+
+  document.getElementById("mgmtModal").classList.remove("show");
+
+}
+
+function verifyMgmtPassword(){
+
+  const input=document.getElementById("mgmtPassInput");
+  const err=document.getElementById("mgmtPassError");
+  const val=(input?.value||"").trim();
+
+  if(val===MGMT_PASSWORD){
+    closeMgmtModal();
+    openManagementDashboard();
+  }else{
+    if(err) err.textContent="❌ Incorrect password. Try again.";
+    if(input){
+      input.value="";
+      input.focus();
+    }
+  }
+
+}
+
+function openManagementDashboard(){
+
+  currentPage="management";
+  mgmtCollegeFilter="all";
+  renderManagementDashboard();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+function renderManagementDashboard(){
+
+  const records=getLoginRecords();
+
+  const totalLogins=records.length;
+
+  const uniqueUsers=new Set(
+    records.map(r=>
+      (r.name||"").trim().toLowerCase()+"|"+(r.college||"").trim().toLowerCase()
+    )
+  ).size;
+
+  const now=new Date();
+  const todayKey=
+    now.getFullYear()+"-"+
+    String(now.getMonth()+1).padStart(2,"0")+"-"+
+    String(now.getDate()).padStart(2,"0");
+
+  const todayLogins=records.filter(r=>r.dayKey===todayKey).length;
+
+  const filterOptions=["all","NMKRV","Aps"];
+
+  document.getElementById("app").innerHTML=`
+
+    <main class="page">
+
+      <div class="sectionTop">
+
+        <button
+          class="backBtn"
+          onclick="goHome()"
+        >
+          ← Home
+        </button>
+
+        <button
+          class="changeBtn"
+          onclick="goHome()"
+        >
+          Exit Admin
+        </button>
+
+      </div>
+
+
+      <div class="userBadge">
+
+        ⚙️
+
+        <strong>
+          Management Panel
+        </strong>
+
+        <span>•</span>
+
+        <span>
+          Admin Unlocked
+        </span>
+
+      </div>
+
+
+      <h1 class="pageTitle">
+        Login Dashboard
+      </h1>
+
+
+      <div class="pageSub">
+        Monitor user logins, college distribution, timestamps, and device details.
+      </div>
+
+
+      <div class="statsGrid">
+
+        <div class="statCard">
+          <b>${totalLogins}</b>
+          <small>Total Logins</small>
+        </div>
+
+        <div class="statCard">
+          <b>${uniqueUsers}</b>
+          <small>Unique Users</small>
+        </div>
+
+        <div class="statCard">
+          <b>${todayLogins}</b>
+          <small>Today</small>
+        </div>
+
+      </div>
+
+
+      <div class="mgmtControls">
+
+        <input
+          id="mgmtSearch"
+          class="search"
+          placeholder="Search name, college, date, device..."
+          oninput="drawManagementRecords()"
+        >
+
+        <button
+          class="mgmtBtn export"
+          onclick="exportRecordsCSV()"
+        >
+          📥 Export CSV
+        </button>
+
+        <button
+          class="mgmtBtn danger"
+          onclick="clearLoginRecords()"
+        >
+          🗑️ Clear Records
+        </button>
+
+      </div>
+
+
+      <div
+        class="placeBtns"
+        style="margin-bottom:18px;"
+      >
+
+        ${filterOptions.map(opt=>`
+
+          <button
+            class="tag"
+            onclick="setMgmtCollegeFilter('${escapeHtml(opt)}')"
+            style="${
+              mgmtCollegeFilter===opt
+              ?
+              "background:#fff;color:#111;"
+              :
+              ""
+            }"
+          >
+            ${
+              escapeHtml(
+                opt==="all"
+                ?
+                "All Colleges"
+                :
+                opt
+              )
+            }
+          </button>
+
+        `).join("")}
+
+      </div>
+
+
+      <div
+        id="mgmtRecordsList"
+        class="cards"
+      ></div>
+
+
+      <div class="footer">
+
+        ${APP_VERSION}
+
+        •
+
+        MANAGEMENT DASHBOARD
+
+        <br><br>
+
+        MADE BY KUSH KUMAR
+
+      </div>
+
+    </main>
+
+  `;
+
+  drawManagementRecords();
+
+}
+
+function setMgmtCollegeFilter(filter){
+
+  mgmtCollegeFilter=filter;
+  renderManagementDashboard();
+
+}
+
+function getFilteredManagementRecords(){
+
+  const records=getLoginRecords();
+  const search=(
+    document.getElementById("mgmtSearch")?.value||""
+  ).toLowerCase().trim();
+
+  return records.filter(rec=>{
+
+    const matchesCollege=
+      mgmtCollegeFilter==="all" ||
+      rec.college===mgmtCollegeFilter;
+
+    const searchable=[
+      rec.name,
+      rec.college,
+      rec.dateTime,
+      rec.deviceBrowser
+    ].join(" ").toLowerCase();
+
+    return matchesCollege && searchable.includes(search);
+
+  });
+
+}
+
+function drawManagementRecords(){
+
+  const box=document.getElementById("mgmtRecordsList");
+  if(!box) return;
+
+  const filtered=getFilteredManagementRecords();
+
+  if(!filtered.length){
+
+    box.innerHTML=`
+
+      <div class="empty">
+        No login records found 👀
+      </div>
+
+    `;
+    return;
+
+  }
+
+  box.innerHTML=filtered.map((rec,idx)=>`
+
+    <article class="placeCard">
+
+      <div class="placeHead">
+
+        <div class="placeName">
+          👤 ${escapeHtml(rec.name)}
+        </div>
+
+        <div class="placeType">
+          🎓 ${escapeHtml(rec.college)}
+        </div>
+
+      </div>
+
+      <div class="recordMeta">
+
+        <span>
+          🕒 <b>Date/Time:</b> ${escapeHtml(rec.dateTime)}
+        </span>
+
+        <span>
+          💻 <b>Device/Browser:</b> ${escapeHtml(rec.deviceBrowser)}
+        </span>
+
+      </div>
+
+    </article>
+
+  `).join("");
+
+}
+
+function exportRecordsCSV(){
+
+  const records=getFilteredManagementRecords();
+
+  if(!records.length){
+    alert("No records available to export.");
+    return;
+  }
+
+  const headers=["Name","College","Date/Time","Device/Browser"];
+
+  const csvRows=[
+    headers.join(","),
+    ...records.map(r=>[
+      `"${String(r.name||"").replace(/"/g,'""')}"`,
+      `"${String(r.college||"").replace(/"/g,'""')}"`,
+      `"${String(r.dateTime||"").replace(/"/g,'""')}"`,
+      `"${String(r.deviceBrowser||"").replace(/"/g,'""')}"`
+    ].join(","))
+  ];
+
+  const csvContent=csvRows.join("\n");
+  const blob=new Blob([csvContent],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob);
+
+  const link=document.createElement("a");
+  link.href=url;
+  link.download="wheres_the_gang_login_records.csv";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+
+}
+
+function clearLoginRecords(){
+
+  const records=getLoginRecords();
+
+  if(!records.length){
+    alert("Records are already empty.");
+    return;
+  }
+
+  if(confirm("Are you sure you want to delete all login records? This cannot be undone.")){
+    localStorage.removeItem(RECORDS_STORAGE_KEY);
+    renderManagementDashboard();
+  }
 
 }
 
@@ -3693,7 +4339,7 @@ function nextBeauty(){
 
 
 /* =========================================================
-   COLLEGE CHANGE
+   COLLEGE CHANGE & INITIAL SAVE
 ========================================================= */
 
 function openChangeCollege(){
@@ -3789,10 +4435,26 @@ function saveCollege(){
 
   saveData();
 
+  recordLoginEvent(selectedName,selectedCollege);
+
 
   document.getElementById(
     "modal"
   ).classList.remove("show");
+
+
+  if(!collegeChangeMode){
+
+    renderHome();
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+    return;
+
+  }
 
 
   collegeChangeMode=false;
@@ -3959,59 +4621,6 @@ function goToCollegeStep(){
 }
 
 
-function initialCollegeSave(){
-
-  if(!temporaryCollege){
-
-    alert(
-      "Pick a college first."
-    );
-
-    return;
-
-  }
-
-
-  selectedCollege=
-    temporaryCollege;
-
-  saveData();
-
-
-  document.getElementById(
-    "modal"
-  ).classList.remove("show");
-
-
-  renderHome();
-
-}
-
-
-/* =========================================================
-   SAVE COLLEGE WRAPPER
-========================================================= */
-
-const originalSaveCollege=
-  saveCollege;
-
-
-saveCollege=function(){
-
-  if(!collegeChangeMode){
-
-    initialCollegeSave();
-
-    return;
-
-  }
-
-
-  originalSaveCollege();
-
-};
-
-
 /* =========================================================
    HOME
 ========================================================= */
@@ -4037,6 +4646,21 @@ document.addEventListener(
   function(e){
 
     if(e.key==="Enter"){
+
+      const mgmtModal=
+        document.getElementById(
+          "mgmtModal"
+        );
+
+      if(
+        mgmtModal?.classList.contains("show")
+      ){
+
+        verifyMgmtPassword();
+        return;
+
+      }
+
 
       const nameStep=
         document.getElementById(
@@ -4066,6 +4690,21 @@ document.addEventListener(
 
 
     if(e.key==="Escape"){
+
+      const mgmtModal=
+        document.getElementById(
+          "mgmtModal"
+        );
+
+      if(
+        mgmtModal?.classList.contains("show")
+      ){
+
+        closeMgmtModal();
+        return;
+
+      }
+
 
       const modal=
         document.getElementById(
@@ -4110,6 +4749,7 @@ document.addEventListener(
 
     }
 
+    recordLoginEvent(selectedName,selectedCollege);
 
     renderHome();
 
@@ -4126,4 +4766,4 @@ document.addEventListener(
 </script>
 
 </body>
-  </html>
+</html>
