@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#070611">
-<title>WHERE'S THE GANG? — V8.8 HORIZON ULTRA</title>
+<title>WHERE'S THE GANG? — V8.8 LTE HORIZON ULTRA</title>
 
 <style>
 :root{
@@ -126,15 +126,29 @@ body[data-theme="sakura"]{
 
 html{
   scroll-behavior:smooth;
+  margin:0;
+  padding:0;
 }
 
 body{
   margin:0;
+  padding:0;
   color:#fff;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
   background:#05040a;
-  perspective:1200px;
+}
+
+/* Lock background & hide main screen completely when any pop-up window is active */
+body.modalOpen{
+  overflow:hidden !important;
+  height:100dvh;
+}
+
+body.modalOpen #app,
+body.modalOpen #pollDockWrap,
+body.modalOpen .floating{
+  display:none !important;
 }
 
 /* =========================================================
@@ -336,18 +350,20 @@ button{
 
 .app{
   position:relative;
+  margin:0;
+  padding:0;
 }
 
 .page{
   width:100%;
   max-width:860px;
   margin:0 auto;
-  padding:16px 16px 24px;
+  padding:14px 16px 14px;
   animation:pageIn .55s cubic-bezier(.16,1,.3,1);
 }
 
 .page.hasDock{
-  padding-bottom:88px;
+  padding-bottom:84px;
 }
 
 @keyframes pageIn{
@@ -1119,63 +1135,110 @@ button{
 }
 
 /* =========================================================
-   NEXORA AI CHAT INTERFACE
+   UNIFIED FULL-HEIGHT NEXORA AI CHAT INTERFACE
 ========================================================= */
 
-.nexoraHero{
+.nexoraFullPage{
+  width:100%;
+  max-width:860px;
+  margin:0 auto;
+  height:100dvh;
+  max-height:100dvh;
   display:flex;
-  align-items:center;
-  gap:14px;
-  padding:16px;
-  border-radius:22px;
-  background:linear-gradient(135deg, rgba(139,92,255,.22), rgba(255,79,216,.12));
-  border:1px solid rgba(168,125,255,.35);
-  margin-bottom:14px;
+  flex-direction:column;
+  padding:10px 14px 12px;
+  overflow:hidden;
+  animation:pageIn .45s cubic-bezier(.16,1,.3,1);
 }
 
-.nexoraOrb{
-  width:46px;
-  height:46px;
+.nexoraTopBar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:10px;
+  flex-shrink:0;
+}
+
+.nexoraTitlePill{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(168,125,255,.32);
+  backdrop-filter:blur(14px);
+}
+
+.nexoraMiniOrb{
+  width:14px;
+  height:14px;
   border-radius:50%;
   flex-shrink:0;
-  background:radial-gradient(circle at 30% 30%, #ffffff, var(--accent-2) 45%, var(--accent-1) 80%, #1d1242 100%);
-  box-shadow:0 0 22px var(--glow-pink), 0 0 40px var(--glow-main);
+  background:radial-gradient(circle at 30% 30%, #ffffff, var(--accent-2) 55%, var(--accent-1) 100%);
+  box-shadow:0 0 12px var(--glow-pink);
   animation:orbPulse 3s ease-in-out infinite;
 }
 
 @keyframes orbPulse{
   0%,100%{ transform:scale(1) rotate(0deg); }
-  50%{ transform:scale(1.08) rotate(12deg); }
+  50%{ transform:scale(1.12) rotate(12deg); }
 }
 
-.nexoraChips{
+.nexoraUnifiedShell{
+  flex:1;
+  min-height:0;
   display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  margin-bottom:12px;
+  flex-direction:column;
+  background:rgba(10,9,18,.86);
+  border:1px solid rgba(168,125,255,.26);
+  border-radius:24px;
+  backdrop-filter:blur(22px);
+  box-shadow:0 20px 55px rgba(0,0,0,.6), 0 0 36px var(--glow-main);
+  overflow:hidden;
 }
 
 .nexoraChatBox{
-  display:grid;
-  gap:10px;
-  max-height:400px;
+  flex:1;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  gap:11px;
   overflow-y:auto;
   padding:14px;
-  border-radius:20px;
-  background:rgba(12,11,20,.75);
-  border:1px solid rgba(255,255,255,.09);
-  margin-bottom:12px;
+}
+
+.nexoraChipsInside{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  padding:2px 0 4px;
+}
+
+.nexoraChipsInside .tag{
+  background:rgba(139,92,255,.14);
+  border:1px solid rgba(168,125,255,.3);
+  color:#ece6ff;
+  font-size:12px;
+  padding:8px 12px;
+  border-radius:14px;
+}
+
+.nexoraChipsInside .tag:hover{
+  background:rgba(139,92,255,.28);
+  border-color:var(--accent-2);
 }
 
 .chatMsg{
-  padding:12px 14px;
+  padding:13px 15px;
   border-radius:18px;
   line-height:1.45;
   font-size:13.5px;
 }
 
 .chatMsg.ai{
-  background:linear-gradient(145deg, rgba(38,33,62,.9), rgba(20,18,34,.92));
+  background:linear-gradient(145deg, rgba(34,29,56,.92), rgba(18,16,32,.95));
   border:1px solid rgba(168,125,255,.25);
   color:#f3f0ff;
 }
@@ -1191,10 +1254,15 @@ button{
 .nexoraInputBar{
   display:flex;
   gap:8px;
+  padding:10px 12px;
+  background:rgba(7,6,14,.92);
+  border-top:1px solid rgba(255,255,255,.08);
+  flex-shrink:0;
 }
 
 .nexoraInputBar .input{
   margin:0;
+  background:rgba(255,255,255,.06);
 }
 
 .nexoraSendBtn{
@@ -1204,6 +1272,15 @@ button{
   border-radius:16px;
   font-weight:1000;
   white-space:nowrap;
+}
+
+.nexoraMiniFooter{
+  text-align:center;
+  color:#605d6e;
+  font-size:9.5px;
+  padding-top:8px;
+  letter-spacing:2px;
+  flex-shrink:0;
 }
 
 /* =========================================================
@@ -1461,7 +1538,7 @@ button{
 .floating{
   position:fixed;
   right:16px;
-  bottom:20px;
+  bottom:16px;
   z-index:50;
   width:42px;
   height:42px;
@@ -1479,24 +1556,29 @@ button{
 }
 
 /* =========================================================
-   CENTERED MODALS (SETUP, PASSWORD & CUSTOM)
+   EXCLUSIVE FULL-SCREEN CENTERED POP-UP WINDOWS
 ========================================================= */
 
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(2,2,6,.84);
-  backdrop-filter:blur(22px);
-  z-index:100;
+  width:100vw;
+  height:100dvh;
+  background:
+    radial-gradient(circle at 20% 20%, var(--aurora-1), transparent 35%),
+    radial-gradient(circle at 80% 80%, var(--aurora-2), transparent 35%),
+    #05040a;
+  z-index:1000;
   display:none;
   align-items:center;
   justify-content:center;
   padding:16px;
+  overflow-y:auto;
 }
 
 .modal.show{
   display:flex;
-  animation:modalIn .25s ease;
+  animation:modalIn .24s ease;
 }
 
 @keyframes modalIn{
@@ -1505,27 +1587,53 @@ button{
 }
 
 .modalBox{
+  position:relative;
   width:min(460px,100%);
-  max-height:88vh;
+  max-height:88dvh;
   overflow-y:auto;
   margin:auto;
   text-align:center;
   background:linear-gradient(145deg, rgba(34,30,52,.98), rgba(13,13,20,.99));
-  border:1px solid rgba(168,125,255,.28);
+  border:1px solid rgba(168,125,255,.32);
   border-radius:28px;
-  padding:24px 22px;
+  padding:26px 22px 24px;
   box-shadow:0 30px 100px rgba(0,0,0,.85), 0 0 60px var(--glow-main);
-  animation:modalBoxIn .4s cubic-bezier(.16,1,.3,1);
+  animation:modalBoxIn .35s cubic-bezier(.16,1,.3,1);
+}
+
+.modalCloseX{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.16);
+  color:#fff;
+  font-size:15px;
+  font-weight:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.2s ease;
+}
+
+.modalCloseX:hover{
+  background:rgba(255,79,216,.28);
+  border-color:var(--accent-2);
+  transform:scale(1.08);
 }
 
 @keyframes modalBoxIn{
-  from{ transform:translateY(24px) scale(.94); opacity:0; }
+  from{ transform:translateY(18px) scale(.95); opacity:0; }
   to{ transform:translateY(0) scale(1); opacity:1; }
 }
 
 .modalBox h2{
-  margin:0 0 8px;
-  font-size:26px;
+  margin:6px 0 8px;
+  font-size:25px;
+  padding:0 22px;
 }
 
 .modalBox p{
@@ -1615,7 +1723,7 @@ button{
 
 .beauty{
   text-align:center;
-  padding-top:16px;
+  padding-top:14px;
   position:relative;
 }
 
@@ -1736,21 +1844,26 @@ button{
 }
 
 /* =========================================================
-   FOOTER (CLEAN TIGHT SPACING)
+   FOOTER (MINIMAL NATURAL BOTTOM SPACING)
 ========================================================= */
 
 .footer{
   text-align:center;
   color:#605d6e;
   font-size:10px;
-  margin-top:22px;
-  padding-bottom:6px;
+  margin-top:18px;
+  margin-bottom:0;
+  padding-bottom:2px;
   letter-spacing:2.2px;
 }
 
 @media(max-width:520px){
   .page{
-    padding:14px 13px 20px;
+    padding:12px 13px 12px;
+  }
+
+  .nexoraFullPage{
+    padding:8px 10px 10px;
   }
 
   .categoryGrid{
@@ -1791,6 +1904,7 @@ button{
 <div id="toast" class="toast"></div>
 
 <button
+  id="floatingTopBtn"
   class="floating"
   onclick="window.scrollTo({top:0,behavior:'smooth'})"
   title="Back to top"
@@ -1805,6 +1919,7 @@ button{
 
 <div id="modal" class="modal">
   <div class="modalBox">
+    <button class="modalCloseX" onclick="cancelCollegeChange()" title="Close">✕</button>
 
     <div id="nameStep" class="setupStep active">
       <h2>Who's joining the gang? 👀</h2>
@@ -1821,6 +1936,9 @@ button{
       >
 
       <div class="modalActions">
+        <button class="secondary" onclick="cancelCollegeChange()">
+          Close
+        </button>
         <button class="primary" onclick="goToCollegeStep()">
           Continue →
         </button>
@@ -1871,6 +1989,7 @@ button{
 
 <div id="mgmtModal" class="modal">
   <div class="modalBox">
+    <button class="modalCloseX" onclick="closeMgmtModal()" title="Close">✕</button>
     <h2>⚙️ Management Access</h2>
     <p>Enter the admin password to view login records and custom spots.</p>
 
@@ -1905,10 +2024,10 @@ button{
 
 /* =========================================================
    WHERE'S THE GANG?
-   V8.8 • HORIZON ULTRA
+   V8.8 LTE • HORIZON ULTRA
 ========================================================= */
 
-const APP_VERSION="V8.8 • HORIZON ULTRA";
+const APP_VERSION="V8.8 LTE • HORIZON ULTRA";
 
 const STORAGE_KEY="wheres_the_gang_final_v8";
 const RECORDS_STORAGE_KEY="wheres_the_gang_login_records_v8";
@@ -1917,6 +2036,49 @@ const CUSTOM_SPOTS_KEY="wheres_the_gang_custom_spots_v8";
 const THEME_STORAGE_KEY="wheres_the_gang_theme_v8";
 
 const MGMT_PASSWORD="1234";
+
+
+/* =========================================================
+   EXCLUSIVE MODAL CONTROLLER (HIDES PREVIOUS SCREEN COMPLETELY)
+========================================================= */
+
+let savedScrollY=0;
+
+function closeAllModalsOnly(){
+  document.getElementById("modal")?.classList.remove("show");
+  document.getElementById("mgmtModal")?.classList.remove("show");
+  document.getElementById("customModal")?.classList.remove("show");
+}
+
+function openExclusiveModal(modalId){
+  if(!document.body.classList.contains("modalOpen")){
+    savedScrollY=window.scrollY||0;
+  }
+  closeAllModalsOnly();
+  document.body.classList.add("modalOpen");
+  const target=document.getElementById(modalId);
+  if(target){
+    target.classList.add("show");
+    target.scrollTop=0;
+  }
+}
+
+function closeExclusiveModals(){
+  closeAllModalsOnly();
+  document.body.classList.remove("modalOpen");
+  updateFloatingBtnVisibility();
+  window.scrollTo({top:savedScrollY,behavior:"instant"});
+}
+
+function updateFloatingBtnVisibility(){
+  const btn=document.getElementById("floatingTopBtn");
+  if(!btn) return;
+  if(currentPage==="nexora"){
+    btn.style.display="none";
+  }else{
+    btn.style.display="";
+  }
+}
 
 
 /* =========================================================
@@ -1967,6 +2129,7 @@ function handleSecretBadgeTap(e){
 function openThemeSkinsModal(){
   const box=document.getElementById("customModalBox");
   box.innerHTML=`
+    <button class="modalCloseX" onclick="closeCustomModal()" title="Close">✕</button>
     <h2>🎨 Secret Theme Skins</h2>
     <p>Easter egg unlocked! Pick from 8 cosmic aurora themes.</p>
 
@@ -1986,7 +2149,7 @@ function openThemeSkinsModal(){
       <button class="primary" onclick="closeCustomModal()">Done ✨</button>
     </div>
   `;
-  document.getElementById("customModal").classList.add("show");
+  openExclusiveModal("customModal");
 }
 
 function selectSecretTheme(id){
@@ -2123,7 +2286,7 @@ function getDeviceBrowserInfo(){
   else if(/SamsungBrowser/i.test(ua)) browser="Samsung Internet";
   else if(/Firefox\//i.test(ua)) browser="Firefox";
   else if(/CriOS|Chrome\//i.test(ua)) browser="Chrome";
-  else if(/Safari\//i.test(ua)) browser="Safari";
+  else if(/Safari/i.test(ua)) browser="Safari";
 
   return `${device} • ${browser}`;
 }
@@ -2194,6 +2357,7 @@ function saveCustomSpots(list){
 function openAddSecretAddaModal(){
   const box=document.getElementById("customModalBox");
   box.innerHTML=`
+    <button class="modalCloseX" onclick="closeCustomModal()" title="Close">✕</button>
     <h2>📍 Pin Secret Adda</h2>
     <p>Add your hidden <strong>${escapeHtml(getCollegeShort())}</strong> hangout spot to the planner.</p>
 
@@ -2209,7 +2373,7 @@ function openAddSecretAddaModal(){
       <button class="primary" onclick="submitSecretAdda()">Pin Spot 📌</button>
     </div>
   `;
-  document.getElementById("customModal").classList.add("show");
+  openExclusiveModal("customModal");
 }
 
 function submitSecretAdda(){
@@ -2596,7 +2760,7 @@ const apsExplore=[
 ["Gopalan Arcade area","Shopping","Basavanagudi side","Shopping + entertainment"],
 ["Bugle Rock Park","Nature","Basavanagudi","Rock + park + viewpoint"],
 ["M.N. Krishna Rao Park","Park","Basavanagudi","Walking + sports + library"],
-["Madhava Rao Park","Basavanagudi","Green space"],
+["Madhava Rao Park","Park","Basavanagudi","Green space"],
 ["Jayanti Garden","Park","Basavanagudi","Garden"],
 ["Sajjan Rao Park","Park","Basavanagudi","Park + walk"],
 ["Bull Temple","Temple","N.R. Colony","Historic Nandi temple"],
@@ -2744,6 +2908,7 @@ function openVisitStampModal(name,area,desc){
 
   const box=document.getElementById("customModalBox");
   box.innerHTML=`
+    <button class="modalCloseX" onclick="closeCustomModal()" title="Close">✕</button>
     <h2>✅ Stamp Visited</h2>
     <p>Rate <strong>${escapeHtml(name)}</strong> for the ${escapeHtml(getCollegeShort())} squad log.</p>
 
@@ -2779,7 +2944,7 @@ function openVisitStampModal(name,area,desc){
     </div>
   `;
   box.dataset.rating=String(chosenRating);
-  document.getElementById("customModal").classList.add("show");
+  openExclusiveModal("customModal");
 }
 
 function selectStampStar(n){
@@ -2836,7 +3001,7 @@ function removeVisitStamp(name){
 }
 
 function closeCustomModal(){
-  document.getElementById("customModal").classList.remove("show");
+  closeExclusiveModals();
 }
 
 
@@ -2982,11 +3147,12 @@ function openReceiptStoryExporter(mode){
   ctx.textAlign="center";
   ctx.font="bold 14px Courier New";
   ctx.fillStyle="#4a465c";
-  ctx.fillText("MADE BY KUSH KUMAR • V8.8",360,1096);
+  ctx.fillText("MADE BY KUSH KUMAR • V8.8 LTE",360,1096);
 
   const dataUrl=canvas.toDataURL("image/png");
   const box=document.getElementById("customModalBox");
   box.innerHTML=`
+    <button class="modalCloseX" onclick="closeCustomModal()" title="Close">✕</button>
     <h2>🧾 Story Receipt Ready</h2>
     <p>Download this 9:16 receipt and drop it on your Instagram Story or WhatsApp.</p>
     <img src="${dataUrl}" alt="Gang Receipt" style="width:min(240px,65vw);border-radius:18px;border:1px solid rgba(255,255,255,.2);margin:8px auto 12px;display:block;box-shadow:0 14px 35px rgba(0,0,0,.6);">
@@ -2995,7 +3161,7 @@ function openReceiptStoryExporter(mode){
       <a class="primary" href="${dataUrl}" download="wheres-the-gang-receipt.png" style="display:flex;align-items:center;justify-content:center;text-decoration:none;border-radius:14px;font-weight:900;">Download PNG 📥</a>
     </div>
   `;
-  document.getElementById("customModal").classList.add("show");
+  openExclusiveModal("customModal");
 }
 
 
@@ -3055,6 +3221,7 @@ function openPollShareModal(){
   const msg=buildPollMessage("Right after class");
   const box=document.getElementById("customModalBox");
   box.innerHTML=`
+    <button class="modalCloseX" onclick="closeCustomModal()" title="Close">✕</button>
     <h2>🗳️ WhatsApp Squad Poll</h2>
     <p>Pick a meetup time and blast this poll into your group chat.</p>
 
@@ -3076,7 +3243,7 @@ function openPollShareModal(){
       <button class="secondary" onclick="closeCustomModal()">Close</button>
     </div>
   `;
-  document.getElementById("customModal").classList.add("show");
+  openExclusiveModal("customModal");
 }
 
 function buildPollMessage(timeLabel){
@@ -3162,7 +3329,7 @@ function openEditName(){
   document.getElementById("collegeStep").classList.remove("active");
   const inp=document.getElementById("nameInput");
   if(inp) inp.value=selectedName;
-  document.getElementById("modal").classList.add("show");
+  openExclusiveModal("modal");
   setTimeout(()=>inp?.focus(),100);
 }
 
@@ -3203,6 +3370,7 @@ function header(title,subtitle=""){
 
 function renderHome(){
   currentPage="home";
+  updateFloatingBtnVisibility();
   const vibe=getTimeVibeInfo();
   const bucketMap=getBucketMap();
   const collegeEntries=Object.values(bucketMap).filter(x=>x.college===selectedCollege);
@@ -3323,6 +3491,7 @@ function renderHome(){
 
 function openVibeSwipe(){
   currentPage="swipe";
+  updateFloatingBtnVisibility();
   const planner=getPlannerData();
   const pool=[];
   const seen=new Set();
@@ -3374,7 +3543,7 @@ function renderVibeSwipe(){
             <button class="primary" style="padding:12px 20px;border-radius:14px;font-weight:900;" onclick="openVibeSwipe()">Reload Deck 🔄</button>
           </div>
         `}
-        <div class="footer"><span class="kushGlow">MADE BY KUSH KUMAR</span></div>
+        <div class="footer">${APP_VERSION}<br><br><span class="kushGlow">MADE BY KUSH KUMAR</span></div>
       </main>
     `;
     return;
@@ -3404,7 +3573,7 @@ function renderVibeSwipe(){
         <button class="swipeCircleBtn keep" onclick="decideSwipe(true)" title="Keep">♥</button>
       </div>
 
-      <div class="footer"><span class="kushGlow">MADE BY KUSH KUMAR</span></div>
+      <div class="footer">${APP_VERSION}<br><br><span class="kushGlow">MADE BY KUSH KUMAR</span></div>
     </main>
   `;
 
@@ -3468,6 +3637,7 @@ const TABLE_CARDS=[
 
 function openTruthDareDeck(){
   currentPage="deck";
+  updateFloatingBtnVisibility();
   renderTruthDareDeck();
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -3489,7 +3659,7 @@ function renderTruthDareDeck(){
         </div>
       </div>
 
-      <div class="footer"><span class="kushGlow">MADE BY KUSH KUMAR</span></div>
+      <div class="footer">${APP_VERSION}<br><br><span class="kushGlow">MADE BY KUSH KUMAR</span></div>
     </main>
   `;
 }
@@ -3502,6 +3672,7 @@ function nextTableCard(){
 function chickenOutPenalty(){
   const box=document.getElementById("customModalBox");
   box.innerHTML=`
+    <button class="modalCloseX" onclick="closeCustomModal()" title="Close">✕</button>
     <h2>😈 Chicken Out Penalty!</h2>
     <p>Who skipped the card? They get an extra slice on the <strong>Who Pays? Spin Wheel</strong> 🎡</p>
 
@@ -3512,7 +3683,7 @@ function chickenOutPenalty(){
       <button class="primary" onclick="confirmChickenPenalty()">Add Slice 🎡</button>
     </div>
   `;
-  document.getElementById("customModal").classList.add("show");
+  openExclusiveModal("customModal");
 }
 
 function confirmChickenPenalty(){
@@ -3529,11 +3700,12 @@ function confirmChickenPenalty(){
 
 
 /* =========================================================
-   NEXORA AI HANGOUT CONCIERGE
+   NEXORA AI UNIFIED FULL-SCREEN CHAT INTERFACE
 ========================================================= */
 
 function openNexora(){
   currentPage="nexora";
+  updateFloatingBtnVisibility();
 
   if(!nexoraHistory.length || nexoraHistory[0].college!==selectedCollege){
     nexoraHistory=[{
@@ -3558,65 +3730,66 @@ function renderNexora(){
   ];
 
   document.getElementById("app").innerHTML=`
-    <main class="page">
-      ${header(
-        "Nexora AI",
-        "Describe your mood, budget, or time—Nexora matches real spots inside your campus lock."
-      )}
+    <main class="nexoraFullPage">
+      <div class="nexoraTopBar">
+        <button class="backBtn" onclick="goHome()">← Home</button>
 
-      <div class="nexoraHero">
-        <div class="nexoraOrb"></div>
-        <div>
-          <strong style="font-size:15px;display:block;margin-bottom:3px;">Nexora AI • Location-Locked Concierge</strong>
-          <span style="font-size:12px;color:#b8b3cc;">Locked to ${escapeHtml(getArea())} • Instant local suggestions</span>
+        <div class="nexoraTitlePill" onclick="openEditName()" title="Click to rename">
+          <span class="nexoraMiniOrb"></span>
+          <strong style="font-size:13.5px;color:#fff;">Nexora AI</strong>
+          <span style="color:#8b86a3;">•</span>
+          <span style="font-size:11.5px;color:#cbbfff;font-weight:800;">${escapeHtml(getCollegeShort())}</span>
         </div>
+
+        <button class="changeBtn" onclick="openChangeCollege()">Change College</button>
       </div>
 
-      <div class="nexoraChips">
-        ${prompts.map(p=>`
-          <button class="tag" onclick="askNexoraQuick('${escapeHtml(p)}')">✨ ${escapeHtml(p)}</button>
-        `).join("")}
-      </div>
-
-      <div id="nexoraChatBox" class="nexoraChatBox">
-        ${nexoraHistory.map(m=>`
-          <div class="chatMsg ${m.role}">
-            <div>${escapeHtml(m.text)}</div>
-            ${m.picks && m.picks.length ? `
-              <div style="display:grid;gap:8px;margin-top:10px;">
-                ${m.picks.map(pk=>`
-                  <div style="padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);">
-                    <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;">
-                      <strong style="font-size:13.5px;color:#fff;">${escapeHtml(pk[0])}</strong>
-                      <span style="font-size:10px;color:#cbbfff;">${escapeHtml(pk[1])}</span>
+      <div class="nexoraUnifiedShell">
+        <div id="nexoraChatBox" class="nexoraChatBox">
+          ${nexoraHistory.map((m,idx)=>`
+            <div class="chatMsg ${m.role}">
+              <div>${escapeHtml(m.text)}</div>
+              ${m.picks && m.picks.length ? `
+                <div style="display:grid;gap:8px;margin-top:10px;">
+                  ${m.picks.map(pk=>`
+                    <div style="padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);">
+                      <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;">
+                        <strong style="font-size:13.5px;color:#fff;">${escapeHtml(pk[0])}</strong>
+                        <span style="font-size:10px;color:#cbbfff;">${escapeHtml(pk[1])}</span>
+                      </div>
+                      <div style="font-size:12px;color:#a9a4bd;margin:4px 0 8px;">${escapeHtml(pk[2])}</div>
+                      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                        <a class="mapBtn" style="padding:6px 10px;font-size:11px;" href="${mapLink(pk[0],pk[1])}" target="_blank" rel="noopener noreferrer">📍 Maps</a>
+                        <button class="actionChip" style="padding:6px 10px;font-size:11px;" onclick="togglePollItem('${escapeHtml(pk[0])}','${escapeHtml(pk[1])}')">+ Poll</button>
+                      </div>
                     </div>
-                    <div style="font-size:12px;color:#a9a4bd;margin:4px 0 8px;">${escapeHtml(pk[2])}</div>
-                    <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                      <a class="mapBtn" style="padding:6px 10px;font-size:11px;" href="${mapLink(pk[0],pk[1])}" target="_blank" rel="noopener noreferrer">📍 Maps</a>
-                      <button class="actionChip" style="padding:6px 10px;font-size:11px;" onclick="togglePollItem('${escapeHtml(pk[0])}','${escapeHtml(pk[1])}')">+ Poll</button>
-                    </div>
-                  </div>
+                  `).join("")}
+                </div>
+              ` : ""}
+            </div>
+            ${idx===0 ? `
+              <div class="nexoraChipsInside">
+                ${prompts.map(p=>`
+                  <button class="tag" onclick="askNexoraQuick('${escapeHtml(p)}')">✨ ${escapeHtml(p)}</button>
                 `).join("")}
               </div>
             ` : ""}
-          </div>
-        `).join("")}
+          `).join("")}
+        </div>
+
+        <div class="nexoraInputBar">
+          <input
+            id="nexoraInput"
+            class="input"
+            placeholder="Ask Nexora (e.g., 'bored after class, want gaming + cold coffee')..."
+            onkeydown="if(event.key==='Enter') sendNexoraMessage()"
+          >
+          <button class="nexoraSendBtn" onclick="sendNexoraMessage()">Ask ✨</button>
+        </div>
       </div>
 
-      <div class="nexoraInputBar">
-        <input
-          id="nexoraInput"
-          class="input"
-          placeholder="Ask Nexora (e.g., 'bored after class, want gaming + cold coffee')..."
-          onkeydown="if(event.key==='Enter') sendNexoraMessage()"
-        >
-        <button class="nexoraSendBtn" onclick="sendNexoraMessage()">Ask ✨</button>
-      </div>
-
-      <div class="footer">
-        NEXORA AI • ${escapeHtml(getCollegeShort())} ENGINE
-        <br><br>
-        <span class="kushGlow">MADE BY KUSH KUMAR</span>
+      <div class="nexoraMiniFooter">
+        ${APP_VERSION} • ${escapeHtml(getCollegeShort())} ENGINE • <span class="kushGlow" onclick="handleSecretBadgeTap(event)">MADE BY KUSH KUMAR</span>
       </div>
     </main>
   `;
@@ -3703,6 +3876,7 @@ function generateNexoraReply(query){
 
 function openComboGenerator(){
   currentPage="combo";
+  updateFloatingBtnVisibility();
   if(!comboState.stops.length || comboState.college!==selectedCollege){
     buildNewCombo();
   }
@@ -3791,7 +3965,7 @@ function renderComboPage(){
       </div>
 
       <div class="footer">
-        3-STOP ROUTE ENGINE • ${escapeHtml(getCollegeShort())}
+        ${APP_VERSION} • 3-STOP ROUTE ENGINE
         <br><br>
         <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
@@ -3821,6 +3995,7 @@ function shareComboWhatsApp(){
 
 function openSpinWheel(){
   currentPage="wheel";
+  updateFloatingBtnVisibility();
   if(!wheelMembers.length && selectedName.trim()){
     wheelMembers=[selectedName.trim()];
   }
@@ -3895,7 +4070,7 @@ function renderSpinWheelPage(){
       </div>
 
       <div class="footer">
-        SQUAD WHEEL & SPLITTER
+        ${APP_VERSION} • SQUAD WHEEL & SPLITTER
         <br><br>
         <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
@@ -4042,6 +4217,7 @@ function shareSplitWhatsApp(){
 
 function openBucketList(){
   currentPage="bucket";
+  updateFloatingBtnVisibility();
   renderBucketList();
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -4119,7 +4295,7 @@ function renderBucketList(){
       </div>
 
       <div class="footer">
-        SQUAD BUCKET LIST • ${escapeHtml(getCollegeShort())}
+        ${APP_VERSION} • SQUAD BUCKET LIST
         <br><br>
         <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
@@ -4137,12 +4313,12 @@ function openManagementAuth(){
   const err=document.getElementById("mgmtPassError");
   if(input) input.value="";
   if(err) err.textContent="";
-  document.getElementById("mgmtModal").classList.add("show");
+  openExclusiveModal("mgmtModal");
   setTimeout(()=>{ if(input) input.focus(); },100);
 }
 
 function closeMgmtModal(){
-  document.getElementById("mgmtModal").classList.remove("show");
+  closeExclusiveModals();
 }
 
 function verifyMgmtPassword(){
@@ -4151,7 +4327,7 @@ function verifyMgmtPassword(){
   const val=(input?.value||"").trim();
 
   if(val===MGMT_PASSWORD){
-    closeMgmtModal();
+    closeExclusiveModals();
     openManagementDashboard();
   }else{
     if(err) err.textContent="❌ Incorrect password. Try again.";
@@ -4164,6 +4340,7 @@ function verifyMgmtPassword(){
 
 function openManagementDashboard(){
   currentPage="management";
+  updateFloatingBtnVisibility();
   mgmtCollegeFilter="all";
   mgmtTab="records";
   renderManagementDashboard();
@@ -4369,6 +4546,7 @@ function confirmClearLoginRecords(){
   }
   const box=document.getElementById("customModalBox");
   box.innerHTML=`
+    <button class="modalCloseX" onclick="closeCustomModal()" title="Close">✕</button>
     <h2>🗑️ Clear Login Records?</h2>
     <p>This will permanently wipe all ${records.length} stored login entries on this device.</p>
     <div class="modalActions">
@@ -4376,7 +4554,7 @@ function confirmClearLoginRecords(){
       <button class="primary" style="background:#ff4d6d;color:#fff;" onclick="executeClearRecords()">Delete All</button>
     </div>
   `;
-  document.getElementById("customModal").classList.add("show");
+  openExclusiveModal("customModal");
 }
 
 function executeClearRecords(){
@@ -4393,6 +4571,7 @@ function executeClearRecords(){
 
 function openExplore(){
   currentPage="explore";
+  updateFloatingBtnVisibility();
   exploreFilter="all";
   explorePrimeOnly=false;
   renderExplore();
@@ -4401,6 +4580,7 @@ function openExplore(){
 
 function openExplorePrime(){
   currentPage="explore";
+  updateFloatingBtnVisibility();
   exploreFilter="all";
   explorePrimeOnly=true;
   renderExplore();
@@ -4454,7 +4634,7 @@ function renderExplore(){
       <div id="exploreCards" class="cards"></div>
 
       <div class="footer">
-        Always check current hours/status before travelling.
+        ${APP_VERSION} • Always check current hours/status before travelling.
         <br><br>
         <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
@@ -4562,6 +4742,7 @@ function drawExploreCards(data){
 
 function openPlanner(){
   currentPage="planner";
+  updateFloatingBtnVisibility();
   renderCategories();
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -4611,7 +4792,7 @@ function renderCategories(){
       </div>
 
       <div class="footer">
-        21 categories • Beauty Mode stays separate
+        ${APP_VERSION} • 21 categories • Beauty Mode stays separate
         <br><br>
         <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
@@ -4621,6 +4802,7 @@ function renderCategories(){
 
 function openCategory(category){
   currentPage="category";
+  updateFloatingBtnVisibility();
   currentCategory=category;
 
   const definition=categories.find(c=>c[0]===category);
@@ -4662,6 +4844,8 @@ function openCategory(category){
       </div>
 
       <div class="footer">
+        ${APP_VERSION}
+        <br><br>
         <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
     </main>
@@ -4728,6 +4912,7 @@ function placeCard(item,idx=0){
 
 function surpriseMe(){
   currentPage="surprise";
+  updateFloatingBtnVisibility();
   const planner=getPlannerData();
   const all=[];
 
@@ -4790,6 +4975,8 @@ function surpriseMe(){
       </div>
 
       <div class="footer">
+        ${APP_VERSION}
+        <br><br>
         <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
     </main>
@@ -4822,6 +5009,7 @@ const beautyMessages=[
 
 function openBeauty(){
   currentPage="beauty";
+  updateFloatingBtnVisibility();
   beautyStep=0;
   renderBeauty();
   window.scrollTo({top:0,behavior:"smooth"});
@@ -4860,7 +5048,9 @@ function renderBeauty(){
         ← Back
       </button>
 
-      <div class="footer" style="margin-top:36px;">
+      <div class="footer" style="margin-top:26px;">
+        ${APP_VERSION}
+        <br><br>
         <span class="kushGlow">MADE BY KUSH KUMAR</span>
       </div>
 
@@ -4952,7 +5142,7 @@ function refreshCurrentView(){
 
 
 /* =========================================================
-   COLLEGE CHANGE & INITIAL SETUP
+   COLLEGE CHANGE & INITIAL SETUP (EXCLUSIVE POP-UP WINDOWS)
 ========================================================= */
 
 function openChangeCollege(){
@@ -4967,7 +5157,7 @@ function openChangeCollege(){
   document.getElementById("collegeStep").classList.add("active");
 
   updateCollegeSelection();
-  document.getElementById("modal").classList.add("show");
+  openExclusiveModal("modal");
 }
 
 function chooseCollege(college){
@@ -4990,7 +5180,7 @@ function saveCollege(){
   saveData();
   recordLoginEvent(displayName(),selectedCollege);
 
-  document.getElementById("modal").classList.remove("show");
+  closeExclusiveModals();
   spawnSparks(window.innerWidth/2,window.innerHeight/2,24);
 
   if(!collegeChangeMode){
@@ -5020,14 +5210,12 @@ function cancelCollegeChange(){
   if(collegeChangeMode){
     temporaryCollege=selectedCollege;
     collegeChangeMode=false;
-    document.getElementById("modal").classList.remove("show");
-    return;
   }
-  closeSetup();
+  closeExclusiveModals();
 }
 
 function closeSetup(){
-  document.getElementById("modal").classList.remove("show");
+  closeExclusiveModals();
 }
 
 function showFirstSetup(){
@@ -5041,7 +5229,7 @@ function showFirstSetup(){
   document.getElementById("collegeStep").classList.remove("active");
 
   document.getElementById("nameInput").value="";
-  document.getElementById("modal").classList.add("show");
+  openExclusiveModal("modal");
 }
 
 function goToCollegeStep(){
