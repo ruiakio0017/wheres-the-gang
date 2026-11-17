@@ -2353,8 +2353,8 @@ const CUSTOM_SPOTS_KEY="wheres_the_gang_custom_spots_v8";
 const THEME_STORAGE_KEY="wheres_the_gang_theme_v8";
 const STUDENT_ACCESS_KEY="wheres_the_gang_student_verified_v89";
 
-/* Encoded token for normalized student access code */
-const STUDENT_ACCESS_TOKEN="MktFWTgxTkFDTEc=";
+/* Student Access Code */
+const STUDENT_ACCESS_CODE="277102BUNK";
 
 const MGMT_PASSWORD="1234";
 
@@ -2509,14 +2509,7 @@ function verifyStudentAccessCode(){
     return;
   }
 
-  let encoded="";
-  try{
-    encoded=btoa(normalized);
-  }catch(e){
-    encoded="";
-  }
-
-  if(encoded!==STUDENT_ACCESS_TOKEN){
+  if(normalized!==STUDENT_ACCESS_CODE){
     if(err) err.textContent="❌ Invalid student access code. Please check and try again.";
     box?.classList.remove("shakeAnim");
     void box?.offsetWidth;
@@ -3298,7 +3291,7 @@ const apsExplore=[
 ["Gopalan Arcade area","Shopping","Basavanagudi side","Shopping + entertainment"],
 ["Bugle Rock Park","Nature","Basavanagudi","Rock + park + viewpoint"],
 ["M.N. Krishna Rao Park","Park","Basavanagudi","Walking + sports + library"],
-["Madhava Rao Park","Park","Basavanagudi","Green space"],
+["Madhava Rao Park","Basavanagudi","Green space"],
 ["Jayanti Garden","Park","Basavanagudi","Garden"],
 ["Sajjan Rao Park","Park","Basavanagudi","Park + walk"],
 ["Bull Temple","Temple","N.R. Colony","Historic Nandi temple"],
