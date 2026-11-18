@@ -3307,7 +3307,7 @@ button:disabled{
       maxlength="24"
       autocomplete="off"
       autocapitalize="characters"
-      placeholder="☆☆☆☆☆☆☆☆"
+      placeholder="☆☆☆☆☆☆☆☆☆☆"
       onkeydown="if(event.key==='Enter') verifyStudentAccessCode()"
     >
 
@@ -3478,7 +3478,7 @@ button:disabled{
    ACCESS CODES, 48H TEACHER LOCKOUT & STATE
 ========================================================= */
 
-const STUDENT_ACCESS_CODE = "NEXORA99";
+const STUDENT_ACCESS_CODE = "277102BUNK";
 const MGMT_PASSWORD = "KUSH<3PRANAVI";
 const TEACHER_LOCK_DURATION_MS = 48 * 60 * 60 * 1000;
 
@@ -3525,7 +3525,7 @@ function syncTeacherLockUI() {
     if (countdown) countdown.textContent = formatRemainingLock(rem);
   } else {
     input.disabled = false;
-    input.placeholder = "☆☆☆☆☆☆☆☆";
+    input.placeholder = "☆☆☆☆☆☆☆☆☆☆";
     if (verifyBtn) verifyBtn.disabled = false;
     banner.style.display = "none";
   }
@@ -6429,29 +6429,28 @@ function downloadCustomReceiptPng() {
 
     ctx.fillStyle = "#111019";
     ctx.font = "bold 25px Courier New";
-    ctx.fillText(`0${idx + 1}. ${it.name.slice(0, 28)}`, 120, y + 36);
-    y += 125;
+    ctx.fillText(`0${idx + 1}. ${it.name.slice(0, 26)}`, 120, y + 36);
+    y += 145;
   });
 
   ctx.beginPath();
-  ctx.moveTo(115, 860);
-  ctx.lineTo(605, 860);
+  ctx.moveTo(115, 920);
+  ctx.lineTo(605, 920);
   ctx.stroke();
 
   ctx.textAlign = "center";
   ctx.fillStyle = "#111019";
-  ctx.font = "bold 22px Courier New";
-  ctx.fillText(r.footerNote || "100% CORE MEMORY • ZERO BOREDOM", 360, 930);
-
-  ctx.fillStyle = "#6c6782";
+  ctx.font = "bold 20px Courier New";
+  ctx.fillText(r.footerNote || "100% CORE MEMORY • ZERO BOREDOM", 360, 985);
   ctx.font = "16px Courier New";
-  ctx.fillText("MADE BY KUSH KUMAR • NEXORA V9.21", 360, 1020);
+  ctx.fillStyle = "#524e66";
+  ctx.fillText("NEXORA V9.21 • MADE BY KUSH KUMAR", 360, 1025);
 
   const link = document.createElement("a");
   link.download = "NEXORA-CUSTOM-RECEIPT.png";
   link.href = canvas.toDataURL("image/png");
   link.click();
-  showToast("Custom Receipt PNG downloaded 🧾");
+  showToast("Custom Receipt Story PNG downloaded 🧾");
 }
 
 function renderFrameStudioPage() {
@@ -6462,86 +6461,113 @@ function renderFrameStudioPage() {
   return `
     <div class="page">
       <div class="sectionTop">
-        <button class="backBtn" onclick="openMemoriesPage()">← Memories Vault</button>
+        <button class="backBtn" onclick="openMemoriesPage()">← Memory Vault</button>
         <button class="changeBtn" onclick="openSocialHub()">Social Hub</button>
       </div>
 
       <h1 class="pageTitle">Frame & Receipt Studio</h1>
-      <p class="pageSub">Craft custom 35mm Filmstrip frames, Vinyl Polaroid cards, or Thermal Story Receipts—save to Vault or export PNG.</p>
+      <p class="pageSub">Craft aesthetic 35mm Filmstrip frames, Vinyl Polaroid cards, or custom Thermal Receipts.</p>
 
       <div style="display:flex;gap:8px;margin-bottom:14px;">
         <button class="personaChip ${tab === "frame" ? "active" : ""}" style="flex:1;padding:11px;" onclick="state.builderTab='frame';render();">
-          🎞️ Custom Film / Vinyl Frame
+          🎞️ Custom Frame Studio
         </button>
         <button class="personaChip ${tab === "receipt" ? "active" : ""}" style="flex:1;padding:11px;" onclick="state.builderTab='receipt';render();">
-          🧾 Custom Receipt Builder
+          🧾 Custom Receipt Maker
         </button>
       </div>
 
       ${tab === "frame" ? `
         <div class="specialCard" style="margin-top:0;">
           <div style="display:flex;gap:8px;margin-bottom:12px;">
-            <button class="personaChip ${d.style === "film" ? "active" : ""}" onclick="state.frameDraft.style='film';render();">🎞️ 35mm Filmstrip</button>
-            <button class="personaChip ${d.style === "vinyl" ? "active" : ""}" onclick="state.frameDraft.style='vinyl';render();">💿 Vinyl Polaroid</button>
+            <button class="personaChip ${d.style === "film" ? "active" : ""}" style="flex:1;" onclick="state.frameDraft.style='film';render();">
+              🎞️ 35mm Filmstrip Frame
+            </button>
+            <button class="personaChip ${d.style === "vinyl" ? "active" : ""}" style="flex:1;" onclick="state.frameDraft.style='vinyl';render();">
+              💿 Vinyl + Polaroid Frame
+            </button>
           </div>
 
-          <!-- LIVE PREVIEW -->
-          <div style="margin:12px auto 16px;max-width:300px;">
-            ${d.style === "vinyl" ? `
-              <div class="vinylPolaroidWall" style="padding:16px 10px 18px;">
-                <div class="vinylRecordBackdrop" style="width:170px;height:170px;margin-bottom:-75px;">
-                  <div class="vinylCenterLabel"><span>NEXORA</span><div class="vinylCenterSpindle"></div></div>
-                </div>
-                <div class="polaroidSheet" style="max-width:215px;margin:0 auto;transform:rotate(-2deg);">
-                  <div class="polaroidImgFrame" style="height:145px;">
-                    ${d.photoData ? `<img src="${d.photoData}" alt="Preview">` : `<div style="font-size:40px;">💿📸</div>`}
+          <!-- LIVE FRAME PREVIEW -->
+          <div style="margin-bottom:14px;">
+            ${d.style === "film" ? `
+              <div class="filmStripHangItem" style="margin:0 auto;transform:rotate(-2deg);">
+                <div class="binderClipTop"></div>
+                <div class="filmStripCard">
+                  <div class="filmStripPhotoBox">
+                    ${d.photoData
+                      ? `<img src="${d.photoData}" alt="Preview">`
+                      : `<div style="width:100%;height:100%;background:linear-gradient(135deg,#8b5cff,#ff4fd8);display:flex;align-items:center;justify-content:center;font-size:44px;">📸</div>`
+                    }
                   </div>
-                  <div class="polaroidFooterText"><span>${esc(d.title || "GANG HANGOUT")}</span></div>
-                  <div class="polaroidSubNote">${esc(d.caption || "Core memory")}</div>
+                  <div class="filmStripCaption">
+                    <span>${esc(d.title || "GANG HANGOUT")}</span>
+                    <span>35MM</span>
+                  </div>
+                  <div style="font-size:11px;color:#cbbfff;margin-top:4px;text-align:left;">
+                    ${esc(d.caption)} • 📍 ${esc(d.spotName)}
+                  </div>
                 </div>
               </div>
             ` : `
-              <div class="filmStripCard">
-                <div class="filmStripPhotoBox" style="height:165px;">
-                  ${d.photoData ? `<img src="${d.photoData}" alt="Preview">` : `<div style="font-size:42px;">🎞️✨</div>`}
+              <div class="vinylPolaroidWall" style="padding:16px 12px;">
+                <div class="vinylRecordBackdrop" style="width:180px;height:180px;margin-bottom:-85px;">
+                  <div class="vinylCenterLabel">
+                    <span>NEXORA</span>
+                    <div class="vinylCenterSpindle"></div>
+                  </div>
                 </div>
-                <div class="filmStripCaption">
-                  <span>${esc(d.title || "GANG HANGOUT")}</span>
-                  <span>35MM</span>
+                <div class="polaroidSheet" style="max-width:240px;margin:0 auto;position:relative;z-index:3;">
+                  <div class="polaroidImgFrame">
+                    ${d.photoData
+                      ? `<img src="${d.photoData}" alt="Preview">`
+                      : `<div style="width:100%;height:100%;background:linear-gradient(135deg,#ff9a00,#ff3d77);display:flex;align-items:center;justify-content:center;font-size:44px;">💿</div>`
+                    }
+                  </div>
+                  <div class="polaroidFooterText">
+                    <span>${esc(d.title || "GANG HANGOUT")}</span>
+                  </div>
+                  <div class="polaroidSubNote">${esc(d.caption)} • 📍 ${esc(d.spotName)}</div>
                 </div>
-                <div style="font-size:11px;color:#cbbfff;margin-top:4px;text-align:left;">${esc(d.caption || "Core memory")}</div>
               </div>
             `}
           </div>
 
           <div style="display:grid;gap:9px;">
-            <label class="actionChip" style="text-align:center;padding:12px;cursor:pointer;border-color:var(--accent-3);">
+            <label class="mainBtn nexoraBtn" style="min-height:48px;font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;">
               📸 Upload Photo from Device
               <input type="file" accept="image/*" style="display:none;" onchange="handleStudioPhotoUpload(event)">
             </label>
 
-            <input class="input" maxlength="28" value="${esc(d.title)}" placeholder="Frame Title (e.g. FRIDAY NIGHT RUN)" oninput="state.frameDraft.title=this.value">
-            <input class="input" maxlength="55" value="${esc(d.caption)}" placeholder="Caption / Quote" oninput="state.frameDraft.caption=this.value">
-            <input class="input" maxlength="32" value="${esc(d.spotName)}" placeholder="Spot Location" oninput="state.frameDraft.spotName=this.value">
+            <input class="input" maxlength="28" value="${esc(d.title)}" placeholder="Frame Title..." oninput="state.frameDraft.title=this.value">
+            <input class="input" maxlength="60" value="${esc(d.caption)}" placeholder="Memory Caption..." oninput="state.frameDraft.caption=this.value">
+            <input class="input" maxlength="32" value="${esc(d.spotName)}" placeholder="Hangout Spot..." oninput="state.frameDraft.spotName=this.value">
 
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
-              <button class="specialBtn" style="flex:1;" onclick="saveCustomFrameToVault()">Post to Vault (+35 XP) 🚀</button>
-              <button class="secondary" style="flex:1;border-radius:15px;padding:13px;font-weight:900;" onclick="downloadCustomFramePng()">Download PNG 📥</button>
+              <button class="specialBtn" style="flex:1;min-width:170px;" onclick="saveCustomFrameToVault()">Post to Vault (+35 XP) 🚀</button>
+              <button class="actionChip" style="flex:1;min-width:170px;padding:13px;" onclick="downloadCustomFramePng()">Download Frame PNG ⬇️</button>
             </div>
           </div>
         </div>
       ` : `
         <div class="specialCard" style="margin-top:0;">
-          <!-- LIVE THERMAL RECEIPT PREVIEW -->
-          <div class="thermalReceiptCard" style="max-width:320px;margin:6px auto 18px;">
+          <!-- LIVE RECEIPT PREVIEW -->
+          <div class="thermalReceiptCard" style="max-width:340px;margin:0 auto 16px;">
             <div style="text-align:center;border-bottom:1.5px dashed #aaa;padding-bottom:8px;margin-bottom:10px;">
               <div style="font-weight:1000;font-size:15px;">${esc(r.header || "WHERE'S THE GANG?")}</div>
               <div style="font-size:10px;color:#555;">${esc(r.subtitle || "NEXORA STORY RECEIPT")}</div>
             </div>
             <div style="display:grid;gap:7px;font-size:11.5px;margin-bottom:10px;">
-              <div><span style="background:#111;color:#fff;padding:1px 5px;border-radius:3px;font-size:9px;">${esc(r.badge1 || "STOP 1")}</span> <b>01. ${esc(r.stop1)}</b></div>
-              <div><span style="background:#111;color:#fff;padding:1px 5px;border-radius:3px;font-size:9px;">${esc(r.badge2 || "STOP 2")}</span> <b>02. ${esc(r.stop2)}</b></div>
-              <div><span style="background:#111;color:#fff;padding:1px 5px;border-radius:3px;font-size:9px;">${esc(r.badge3 || "STOP 3")}</span> <b>03. ${esc(r.stop3)}</b></div>
+              ${[
+                { b: r.badge1, s: r.stop1 },
+                { b: r.badge2, s: r.stop2 },
+                { b: r.badge3, s: r.stop3 }
+              ].filter(x => (x.s || "").trim()).map((x, i) => `
+                <div>
+                  <span style="background:#111;color:#fff;padding:1px 5px;border-radius:3px;font-size:9.5px;font-weight:1000;">${esc(x.b || "STOP")}</span>
+                  <div style="font-weight:900;margin-top:2px;">0${i + 1}. ${esc(x.s)}</div>
+                </div>
+              `).join("")}
             </div>
             <div style="border-top:1.5px dashed #aaa;padding-top:8px;text-align:center;font-size:10px;color:#444;">
               ${esc(r.footerNote || "100% CORE MEMORY")}
@@ -6549,35 +6575,35 @@ function renderFrameStudioPage() {
           </div>
 
           <div style="display:grid;gap:9px;">
-            <input class="input" maxlength="26" value="${esc(r.header)}" placeholder="Receipt Title" oninput="state.receiptDraft.header=this.value">
-            <input class="input" maxlength="34" value="${esc(r.subtitle)}" placeholder="Subtitle" oninput="state.receiptDraft.subtitle=this.value">
+            <input class="input" maxlength="28" value="${esc(r.header)}" placeholder="Receipt Header..." oninput="state.receiptDraft.header=this.value">
+            <input class="input" maxlength="36" value="${esc(r.subtitle)}" placeholder="Subtitle..." oninput="state.receiptDraft.subtitle=this.value">
 
             <div style="display:grid;grid-template-columns:95px 1fr;gap:7px;">
               <input class="input" maxlength="10" value="${esc(r.badge1)}" placeholder="Tag 1" oninput="state.receiptDraft.badge1=this.value">
-              <input class="input" maxlength="34" value="${esc(r.stop1)}" placeholder="Stop 1 Name" oninput="state.receiptDraft.stop1=this.value">
+              <input class="input" maxlength="38" value="${esc(r.stop1)}" placeholder="Stop 1..." oninput="state.receiptDraft.stop1=this.value">
             </div>
 
             <div style="display:grid;grid-template-columns:95px 1fr;gap:7px;">
               <input class="input" maxlength="10" value="${esc(r.badge2)}" placeholder="Tag 2" oninput="state.receiptDraft.badge2=this.value">
-              <input class="input" maxlength="34" value="${esc(r.stop2)}" placeholder="Stop 2 Name" oninput="state.receiptDraft.stop2=this.value">
+              <input class="input" maxlength="38" value="${esc(r.stop2)}" placeholder="Stop 2..." oninput="state.receiptDraft.stop2=this.value">
             </div>
 
             <div style="display:grid;grid-template-columns:95px 1fr;gap:7px;">
               <input class="input" maxlength="10" value="${esc(r.badge3)}" placeholder="Tag 3" oninput="state.receiptDraft.badge3=this.value">
-              <input class="input" maxlength="34" value="${esc(r.stop3)}" placeholder="Stop 3 Name" oninput="state.receiptDraft.stop3=this.value">
+              <input class="input" maxlength="38" value="${esc(r.stop3)}" placeholder="Stop 3..." oninput="state.receiptDraft.stop3=this.value">
             </div>
 
-            <input class="input" maxlength="40" value="${esc(r.footerNote)}" placeholder="Bottom Stamp Note" oninput="state.receiptDraft.footerNote=this.value">
+            <input class="input" maxlength="40" value="${esc(r.footerNote)}" placeholder="Footer note..." oninput="state.receiptDraft.footerNote=this.value">
 
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
-              <button class="specialBtn" style="flex:1;" onclick="saveCustomReceiptToVault()">Save to Vault (+30 XP) 🧾</button>
-              <button class="secondary" style="flex:1;border-radius:15px;padding:13px;font-weight:900;" onclick="downloadCustomReceiptPng()">Download Story PNG 📥</button>
+              <button class="specialBtn" style="flex:1;min-width:170px;" onclick="saveCustomReceiptToVault()">Save Receipt to Vault (+30 XP) 🧾</button>
+              <button class="actionChip" style="flex:1;min-width:170px;padding:13px;" onclick="downloadCustomReceiptPng()">Download Story PNG ⬇️</button>
             </div>
           </div>
         </div>
       `}
 
-      <div class="footer">NEXORA CREATIVE STUDIO • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
+      <div class="footer">NEXORA STUDIO • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
     </div>
   `;
 }
@@ -6586,31 +6612,32 @@ function renderFrameStudioPage() {
    DAILY VIBE STREAKS & CAMPUS LEADERBOARD
 ========================================================= */
 
-function claimDailyCheckIn() {
+function claimDailyStreakCheckIn() {
   const me = getActiveAccount();
   if (!me) return;
 
-  const todayStr = new Date().toDateString();
+  const todayStr = new Date().toISOString().slice(0, 10);
   if (me.lastCheckInDate === todayStr) {
-    showToast("You already claimed today's streak bonus! 🔥");
+    showToast("You already claimed today's streak! Come back tomorrow 🔥");
     return;
   }
 
   updateActiveAccount(acc => {
     acc.streak = (acc.streak || 0) + 1;
-    acc.xp = (acc.xp || 0) + 50;
     acc.lastCheckInDate = todayStr;
+    acc.xp = (acc.xp || 0) + 50;
   });
 
+  launchConfettiBurst();
   render();
-  showToast("Daily Check-In Claimed! +1 Streak 🔥 & +50 XP ⚡");
+  showToast("Daily Vibe Streak +1 & +50 XP claimed! 🔥");
 }
 
 function renderLeaderboardPage() {
   const me = getActiveAccount();
   const accounts = [...getAllAccounts()].sort((a, b) => (b.xp || 0) - (a.xp || 0));
-  const todayStr = new Date().toDateString();
-  const checkedInToday = me && me.lastCheckInDate === todayStr;
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const claimedToday = me && me.lastCheckInDate === todayStr;
 
   return `
     <div class="page">
@@ -6622,41 +6649,42 @@ function renderLeaderboardPage() {
       <h1 class="pageTitle">Streaks & Leaderboard</h1>
       <p class="pageSub">Check in daily, add spots, post memories, and vote in polls to climb the campus ranks.</p>
 
-      <div class="specialCard" style="margin-top:0;margin-bottom:16px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-          <div>
-            <h3 style="margin:0;">🔥 Your Streak: ${me ? me.streak : 1} Days • ⚡ ${me ? me.xp : 50} XP</h3>
-            <p style="margin:4px 0 0;">Claim your daily campus check-in for +50 XP & +1 Streak.</p>
-          </div>
-          <button
-            class="specialBtn"
-            style="width:auto;padding:12px 18px;${checkedInToday ? "opacity:.6;" : ""}"
-            onclick="claimDailyCheckIn()"
-          >
-            ${checkedInToday ? "Checked In Today ✅" : "Claim +50 XP 🔥"}
-          </button>
+      <div class="specialCard" style="margin-top:0;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+        <div>
+          <h3 style="margin:0 0 4px;">🔥 Your Streak: ${me ? me.streak : 1} Days • ⚡ ${me ? me.xp : 0} XP</h3>
+          <small style="color:#b6b2c8;">Daily check-in awards +1 Streak and +50 XP!</small>
         </div>
+        <button
+          class="specialBtn"
+          style="width:auto;padding:12px 18px;"
+          onclick="claimDailyStreakCheckIn()"
+        >
+          ${claimedToday ? "✅ Checked In Today" : "Claim +50 XP Check-In 🔥"}
+        </button>
       </div>
 
       <div class="cards">
         ${accounts.map((acc, idx) => {
-          const rankClass = idx === 0 ? "rankCardTop1" : idx === 1 ? "rankCardTop2" : idx === 2 ? "rankCardTop3" : "";
-          const crown = idx === 0 ? "👑 #1" : idx === 1 ? "🥈 #2" : idx === 2 ? "🥉 #3" : `#${idx + 1}`;
+          const rank = idx + 1;
+          const rankClass = rank === 1 ? "rankCardTop1" : rank === 2 ? "rankCardTop2" : rank === 3 ? "rankCardTop3" : "";
+          const crown = rank === 1 ? "👑 #1" : rank === 2 ? "🥈 #2" : rank === 3 ? "🥉 #3" : `#${rank}`;
           const isMe = me && acc.id === me.id;
           return `
             <div class="placeCard ${rankClass}">
               <div class="placeHead">
                 <div class="placeName">
-                  ${crown} • ${acc.avatarEmoji} ${esc(acc.name)} ${isMe ? `<span style="font-size:11px;color:#00ffa3;">(YOU)</span>` : ""}
+                  ${crown} • ${acc.avatarEmoji} ${esc(acc.name)} ${isMe ? `<span style="color:#00ffa3;font-size:12px;">(You)</span>` : ""}
                 </div>
                 <span class="placeType">⚡ ${acc.xp || 0} XP</span>
               </div>
               <div style="font-size:12px;color:#b6b2c8;margin-top:6px;">
-                <span style="font-family:'Courier New',monospace;color:#8fe8ff;font-weight:900;">${esc(acc.studentId)}</span> • 🎓 ${esc(acc.college)} • 🔥 ${acc.streak || 1}d streak
+                <span style="color:#8fe8ff;font-family:'Courier New',monospace;font-weight:900;">${esc(acc.studentId)}</span> • 🎓 ${esc(acc.college)} • 🔥 ${acc.streak || 1}d streak
               </div>
-              <div style="font-size:11.5px;color:#9c96b8;margin-top:4px;">
-                Spots: <b>${acc.spotsAdded || 0}</b> • Memories: <b>${acc.memoriesPosted || 0}</b> • Votes: <b>${acc.votesCast || 0}</b>
-              </div>
+              ${!isMe ? `
+                <div class="placeBtns" style="margin-top:10px;">
+                  <button class="actionChip" onclick="openMessagesPage('${acc.id}')">Message Student 💬</button>
+                </div>
+              ` : ""}
             </div>
           `;
         }).join("")}
@@ -6671,12 +6699,11 @@ function renderLeaderboardPage() {
    NEXORA SOCIAL HUB PAGE
 ========================================================= */
 
-function renderSocialHubPage() {
-  const acc = getActiveAccount();
-  const zone = getZone();
-  const unreadDmCount = getIncomingDmCount();
+function renderSocialHub() {
+  const me = getActiveAccount();
+  const unreadCount = getIncomingDmCount();
   const pollsCount = getSquadPolls().length;
-  const memoriesCount = getSquadMemories().length;
+  const memCount = getSquadMemories().length;
 
   return `
     <div class="page">
@@ -6685,50 +6712,50 @@ function renderSocialHubPage() {
         <button class="changeBtn" onclick="openCollegeChanger()">Switch Account</button>
       </div>
 
-      <h1 class="pageTitle">NEXORA Social Hub</h1>
-      <p class="pageSub">Your Holographic Student ID, Filmstrip & Vinyl Memory Vault, Custom Frame Studio, Private DMs, and Squad Polls.</p>
+      <h1 class="pageTitle">NEXORA Social</h1>
+      <p class="pageSub">Your Holographic Student ID, Private DMs, Squad Voting, Memory Vault & Campus Streaks.</p>
 
       <div class="socialHubGrid">
         <button class="socialHubCard featuredIdCard" onclick="openStudentIdPage()">
-          <span class="notifPill" style="background:linear-gradient(135deg,#00e5ff,#8b5cff);color:#05040a;">${esc(acc ? acc.studentId : "NEX-ID")}</span>
+          <span class="notifPill">3D HOLOGRAPHIC</span>
           <span class="sIcon">🪪</span>
-          <b>3D Holographic NEXORA Student ID</b>
-          <small>Interactive tilting & flipping digital pass for ${esc(acc ? acc.name : state.userName)} • ${esc(acc ? acc.college : state.college)} (${esc(zone.areaName)}). Tap to inspect & download PNG.</small>
+          <b>NEXORA Digital Student ID — ${esc(me ? me.studentId : "PASS")}</b>
+          <small>Interactive 3D holographic card with photo upload, QR code back & PNG export.</small>
         </button>
 
         <button class="socialHubCard" onclick="openMemoriesPage()">
-          <span class="notifPill" style="background:linear-gradient(135deg,#ff9a00,#ff3d77);">${memoriesCount} Vault</span>
+          <span class="notifPill">${memCount} VAULT</span>
           <span class="sIcon">🎞️</span>
           <b>Memories Vault</b>
-          <small>Hanging 35mm Filmstrip Rope, Spinning Vinyl Polaroid Collage & Receipts.</small>
+          <small>Filmstrip rope, spinning vinyl Polaroids & receipts.</small>
         </button>
 
         <button class="socialHubCard" onclick="openFrameStudioPage('frame')">
-          <span class="notifPill" style="background:linear-gradient(135deg,#00ffa3,#00d2ff);color:#05040a;">STUDIO</span>
+          <span class="notifPill">STUDIO</span>
           <span class="sIcon">🎨</span>
-          <b>Frame & Receipt Studio</b>
-          <small>Design custom Filmstrips, Vinyl Polaroids & Story Receipts.</small>
+          <b>Frame & Receipt Maker</b>
+          <small>Create custom 35mm frames, Polaroids & receipts.</small>
         </button>
 
         <button class="socialHubCard" onclick="openMessagesPage()">
-          ${unreadDmCount > 0 ? `<span class="notifPill">${unreadDmCount} New</span>` : ""}
+          ${unreadCount > 0 ? `<span class="notifPill">${unreadCount} NEW</span>` : ""}
           <span class="sIcon">💬</span>
-          <b>Private Student DMs</b>
-          <small>Direct student-to-student messaging by username or NEX-ID.</small>
+          <b>Private DMs</b>
+          <small>Message classmates directly by name or NEX-ID.</small>
         </button>
 
         <button class="socialHubCard" onclick="openVotingPage()">
-          <span class="notifPill" style="background:linear-gradient(135deg,#8b5cff,#ff4fd8);">${pollsCount} Live</span>
+          <span class="notifPill">${pollsCount} LIVE</span>
           <span class="sIcon">🗳️</span>
-          <b>Squad Voting Polls</b>
-          <small>Create polls & vote on next hangout spots.</small>
+          <b>Squad Voting</b>
+          <small>Create polls & vote with live percentage bars.</small>
         </button>
 
         <button class="socialHubCard" style="grid-column:1 / -1;" onclick="openLeaderboardPage()">
-          <span class="notifPill" style="background:linear-gradient(135deg,#ffd700,#ff9100);color:#111;">🔥 ${acc ? acc.streak : 1}d • ⚡ ${acc ? acc.xp : 50} XP</span>
+          <span class="notifPill">🔥 ${me ? me.streak : 1}D STREAK</span>
           <span class="sIcon">🏆</span>
-          <b>Daily Streaks & Campus Leaderboard</b>
-          <small>Claim your daily +50 XP streak bonus & view top ranked students.</small>
+          <b>Daily Vibe Streaks & Campus Leaderboard</b>
+          <small>Claim your +50 XP daily check-in and compete for the #1 Gold Crown.</small>
         </button>
       </div>
 
@@ -6738,42 +6765,43 @@ function renderSocialHubPage() {
 }
 
 /* =========================================================
-   SQUAD DECISION MASTER & SPINNING WHEEL
+   3-STOP COMBO + SPIN WHEEL + CONFETTI
 ========================================================= */
 
 function buildThreeStopCombo(shouldRender = true) {
   const zonePlaces = getZonePlaces();
-  const foodPool = zonePlaces.filter(p => ["breakfast", "burgers", "street"].includes(p.cat));
-  const drinkPool = zonePlaces.filter(p => ["tea", "cafes", "icecream"].includes(p.cat));
-  const chillPool = zonePlaces.filter(p => ["parks", "shopping", "movies", "temples"].includes(p.cat));
+  const foodPool = zonePlaces.filter(p => ["breakfast", "burgers", "street", "cafes"].includes(p.cat));
+  const chillPool = zonePlaces.filter(p => ["parks", "shopping", "movies", "temples", "metro"].includes(p.cat));
+  const sweetPool = zonePlaces.filter(p => ["icecream", "tea", "cafes"].includes(p.cat));
 
-  const pick = arr => arr.length ? arr[Math.floor(Math.random() * arr.length)] : zonePlaces[Math.floor(Math.random() * zonePlaces.length)];
-  state.comboItems = [pick(foodPool), pick(drinkPool), pick(chillPool)].filter(Boolean);
+  const pick = arr => arr[Math.floor(Math.random() * arr.length)] || zonePlaces[0];
 
+  const stop1 = pick(foodPool);
+  let stop2 = pick(chillPool.filter(p => p.name !== stop1.name));
+  if (!stop2) stop2 = pick(zonePlaces);
+  let stop3 = pick(sweetPool.filter(p => p.name !== stop1.name && p.name !== stop2.name));
+  if (!stop3) stop3 = pick(zonePlaces);
+
+  state.comboItems = [stop1, stop2, stop3];
   if (shouldRender) {
     render();
-    showToast("Generated fresh 3-Stop Hangout Combo ⚡");
+    showToast("Fresh 3-Stop Hangout Combo rolled! 🎲");
   }
 }
 
 function shareThreeStopCombo() {
   if (!state.comboItems.length) return;
   const zone = getZone();
-  const lines = state.comboItems
-    .map((p, idx) => `Stop ${idx + 1}: *${p.name}* (${p.cat.toUpperCase()})`)
-    .join("\n");
-  const msg = `🔥 *3-STOP SQUAD HANGOUT PLAN*\n📍 ${zone.areaName} (${state.college})\n\n${lines}\n\nWho's in? 🚀`;
+  const [s1, s2, s3] = state.comboItems;
+  const msg = `🔥 *WHERE'S THE GANG? — 3-STOP HANGOUT COMBO*\n📍 ${zone.areaName} (${state.college})\n\n1️⃣ *Food / Bite:* ${s1.name}\n2️⃣ *Chill / Walk:* ${s2.name}\n3️⃣ *Dessert / Chai:* ${s3.name}\n\nWho's in?! 🚀`;
   window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
 }
 
 function buildSpinCandidates(shouldRender = true) {
-  const pool = [...getZonePlaces()];
-  for (let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
-  }
+  const pool = [...getZonePlaces()].sort(() => Math.random() - 0.5);
   state.spinCandidates = pool.slice(0, 6);
   state.spinWinner = null;
+  state.isSpinning = false;
   if (shouldRender) {
     render();
     setTimeout(drawWheelCanvas, 30);
@@ -6784,141 +6812,92 @@ function drawWheelCanvas() {
   const canvas = document.getElementById("wheelCanvas");
   if (!canvas || !state.spinCandidates.length) return;
   const ctx = canvas.getContext("2d");
-  const size = canvas.width;
-  const center = size / 2;
-  const radius = center - 6;
-  const count = state.spinCandidates.length;
-  const slice = (Math.PI * 2) / count;
-  const colors = ["#8b5cff", "#ff4fd8", "#42b9ff", "#00ffa3", "#ff9a00", "#d500f9"];
+  const size = 320;
+  canvas.width = size;
+  canvas.height = size;
+  const cx = size / 2;
+  const cy = size / 2;
+  const radius = size / 2 - 6;
+  const items = state.spinCandidates;
+  const sliceAngle = (2 * Math.PI) / items.length;
+  const sliceColors = ["#8b5cff", "#ff4fd8", "#42b9ff", "#00ffa3", "#ff9a00", "#d500f9"];
 
   ctx.clearRect(0, 0, size, size);
 
-  state.spinCandidates.forEach((item, i) => {
-    const start = i * slice - Math.PI / 2;
-    const end = start + slice;
+  items.forEach((item, i) => {
+    const start = i * sliceAngle - Math.PI / 2;
+    const end = start + sliceAngle;
 
     ctx.beginPath();
-    ctx.moveTo(center, center);
-    ctx.arc(center, center, radius, start, end);
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, radius, start, end);
     ctx.closePath();
-    ctx.fillStyle = colors[i % colors.length];
+    ctx.fillStyle = sliceColors[i % sliceColors.length];
     ctx.fill();
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = "#080711";
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "#08070f";
     ctx.stroke();
 
     ctx.save();
-    ctx.translate(center, center);
-    ctx.rotate(start + slice / 2);
+    ctx.translate(cx, cy);
+    ctx.rotate(start + sliceAngle / 2);
     ctx.textAlign = "right";
     ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 15px Arial";
+    ctx.font = "bold 12px Arial";
     const label = item.name.length > 16 ? item.name.slice(0, 15) + "…" : item.name;
-    ctx.fillText(label, radius - 16, 5);
+    ctx.fillText(label, radius - 14, 4);
     ctx.restore();
   });
 
   ctx.beginPath();
-  ctx.arc(center, center, 24, 0, Math.PI * 2);
-  ctx.fillStyle = "#0d0c16";
+  ctx.arc(cx, cy, 24, 0, 2 * Math.PI);
+  ctx.fillStyle = "#0d0b18";
   ctx.fill();
   ctx.lineWidth = 3;
   ctx.strokeStyle = "#ffffff";
   ctx.stroke();
 }
 
-function triggerWheelSpin() {
+function spinDecisionWheel() {
   if (state.isSpinning || !state.spinCandidates.length) return;
   state.isSpinning = true;
   state.spinWinner = null;
 
-  const canvas = document.getElementById("wheelCanvas");
-  const count = state.spinCandidates.length;
-  const winnerIdx = Math.floor(Math.random() * count);
-  const sliceDeg = 360 / count;
-  const targetAngle = 360 * 6 + (360 - (winnerIdx * sliceDeg + sliceDeg / 2));
+  const winnerIndex = Math.floor(Math.random() * state.spinCandidates.length);
+  const sliceDeg = 360 / state.spinCandidates.length;
+  const targetDeg = 360 * 6 + (360 - (winnerIndex * sliceDeg + sliceDeg / 2));
 
+  const canvas = document.getElementById("wheelCanvas");
   if (canvas) {
-    canvas.style.transform = `rotate(${targetAngle}deg)`;
+    canvas.style.transform = `rotate(${targetDeg}deg)`;
   }
 
   setTimeout(() => {
     state.isSpinning = false;
-    state.spinWinner = state.spinCandidates[winnerIdx];
+    state.spinWinner = state.spinCandidates[winnerIndex];
+    launchConfettiBurst();
     render();
-    setTimeout(drawWheelCanvas, 20);
-    showToast(`🎉 Winner: ${state.spinWinner.name}!`);
-  }, 4250);
+    setTimeout(drawWheelCanvas, 30);
+  }, 4300);
 }
 
-function renderDecisionMasterPage() {
-  const zone = getZone();
-  const stopLabels = ["1️⃣ FOOD / BITE", "2️⃣ DRINK / COFFEE", "3️⃣ CHILL / WALK"];
-
-  return `
-    <div class="page">
-      <div class="sectionTop">
-        <button class="backBtn" onclick="goHome()">← Home</button>
-        <button class="changeBtn" onclick="openCollegeChanger()">Change</button>
-      </div>
-
-      <h1 class="pageTitle">Squad Decision Master</h1>
-      <p class="pageSub">Locked to <b>${esc(zone.areaName)}</b> (${esc(state.college)}). Build an instant 3-stop itinerary or spin the wheel!</p>
-
-      <div class="specialCard" style="margin-top:0;margin-bottom:16px;">
-        <h3>⚡ 3-Stop Hangout Combo</h3>
-        <p>Auto-paired Food + Drink + Chill route in ${esc(zone.areaName)}.</p>
-
-        <div class="cards" style="margin-bottom:12px;">
-          ${state.comboItems.map((p, idx) => `
-            <div class="comboStepCard">
-              <span class="comboStepBadge">${stopLabels[idx] || "STOP"}</span>
-              <div class="placeHead">
-                <div class="placeName">${esc(p.name)}</div>
-                <span class="placeType">${esc(p.area)}</span>
-              </div>
-              <div class="placeDesc" style="margin-bottom:8px;">${esc(p.desc)}</div>
-              <a class="mapBtn" href="${mapLink(p)}" target="_blank" rel="noopener noreferrer">Open Map ↗</a>
-            </div>
-          `).join("")}
-        </div>
-
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <button class="specialBtn" style="flex:1;" onclick="buildThreeStopCombo(true)">Shuffle 3-Stop Combo 🎲</button>
-          <button class="secondary" style="flex:1;border-radius:15px;padding:13px;font-weight:900;" onclick="shareThreeStopCombo()">Share Combo 💬</button>
-        </div>
-      </div>
-
-      <div class="specialCard">
-        <h3>🎡 Spin-The-Wheel Tiebreaker</h3>
-        <p>Can't agree? Let the wheel pick your exact ${esc(zone.areaName)} hangout spot.</p>
-
-        <div class="wheelWrap">
-          <div class="wheelPointer">🔻</div>
-          <canvas id="wheelCanvas" width="320" height="320"></canvas>
-        </div>
-
-        ${state.spinWinner ? `
-          <div class="winnerCelebrationCard" style="margin-bottom:14px;">
-            <div style="font-size:12px;font-weight:1000;letter-spacing:2px;color:#00ffa3;">🏆 WHEEL HAS SPOKEN</div>
-            <h2 style="margin:6px 0;font-size:26px;">${esc(state.spinWinner.name)}</h2>
-            <p style="margin:0 0 12px;color:#dfd9f2;font-size:13.5px;">${esc(state.spinWinner.desc)}</p>
-            <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-              <a class="mapBtn" href="${mapLink(state.spinWinner)}" target="_blank" rel="noopener noreferrer">Open Map ↗</a>
-              <button class="actionChip" onclick="shareSingleSpot('${esc(state.spinWinner.name)}')">Share to Gang 💬</button>
-            </div>
-          </div>
-        ` : ""}
-
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <button class="specialBtn" style="flex:2;" onclick="triggerWheelSpin()">SPIN THE WHEEL 🎡</button>
-          <button class="secondary" style="flex:1;border-radius:15px;padding:13px;font-weight:900;" onclick="buildSpinCandidates(true)">New Slices 🔄</button>
-        </div>
-      </div>
-
-      <div class="footer">DECISION MASTER • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
-    </div>
-  `;
+function launchConfettiBurst() {
+  const colors = ["#00ffa3", "#ff4fd8", "#8b5cff", "#42b9ff", "#ffd60a", "#ffffff"];
+  for (let i = 0; i < 42; i++) {
+    const piece = document.createElement("span");
+    piece.className = "clickSpark";
+    piece.style.width = "10px";
+    piece.style.height = "10px";
+    piece.style.left = "50vw";
+    piece.style.top = "45vh";
+    piece.style.background = colors[i % colors.length];
+    const angle = Math.random() * Math.PI * 2;
+    const dist = 90 + Math.random() * 240;
+    piece.style.setProperty("--tx", `${Math.cos(angle) * dist}px`);
+    piece.style.setProperty("--ty", `${Math.sin(angle) * dist}px`);
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 750);
+  }
 }
 
 /* =========================================================
@@ -6926,12 +6905,8 @@ function renderDecisionMasterPage() {
 ========================================================= */
 
 function resetSwipeDeck(shouldRender = true) {
-  const pool = [...getZonePlaces()];
-  for (let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
-  }
-  state.swipeDeck = pool.slice(0, 7);
+  const pool = [...getZonePlaces()].sort(() => Math.random() - 0.5).slice(0, 8);
+  state.swipeDeck = pool;
   state.swipeKept = [];
   state.swipeWinner = null;
   if (shouldRender) render();
@@ -6942,100 +6917,49 @@ function handleSwipeChoice(keep) {
   const current = state.swipeDeck.shift();
   if (keep) {
     state.swipeKept.push(current);
-    showToast(`Liked ${current.name} 💚`);
+    showToast(`Kept ${current.name} ❤️`);
   } else {
-    showToast(`Ditched ${current.name} ❌`);
+    showToast(`Skipped ${current.name} ✖️`);
   }
 
-  if (!state.swipeDeck.length) {
+  if (state.swipeDeck.length === 0) {
     if (state.swipeKept.length === 1) {
       state.swipeWinner = state.swipeKept[0];
+      launchConfettiBurst();
     } else if (state.swipeKept.length > 1) {
       state.swipeDeck = [...state.swipeKept];
       state.swipeKept = [];
-      showToast("Finalist Round! Narrow down your top picks 🔥");
+      showToast("Finalist Round! Narrowing down your kept spots 🔥");
     } else {
       resetSwipeDeck(false);
-      showToast("You ditched everything! Reloaded fresh deck 😅");
+      showToast("You skipped everything! Fresh deck loaded 🎲");
     }
   }
   render();
-}
-
-function renderVibeSwipePage() {
-  const zone = getZone();
-  const topCard = state.swipeDeck[0];
-
-  return `
-    <div class="page">
-      <div class="sectionTop">
-        <button class="backBtn" onclick="goHome()">← Home</button>
-        <button class="changeBtn" onclick="resetSwipeDeck(true)">Reset Deck</button>
-      </div>
-
-      <h1 class="pageTitle">Vibe Swipe Decider</h1>
-      <p class="pageSub">Tap ❌ to ditch or 💚 to keep spots in <b>${esc(zone.areaName)}</b> until only 1 winner remains.</p>
-
-      ${state.swipeWinner ? `
-        <div class="winnerCelebrationCard">
-          <div style="font-size:44px;margin-bottom:6px;">🎉👑</div>
-          <div style="font-size:12px;font-weight:1000;letter-spacing:2px;color:#00ffa3;">ULTIMATE SQUAD MATCH</div>
-          <h2 style="margin:6px 0 8px;font-size:28px;">${esc(state.swipeWinner.name)}</h2>
-          <p style="margin:0 0 16px;color:#e3ddf5;font-size:14px;">${esc(state.swipeWinner.desc)}</p>
-          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-            <a class="mapBtn" href="${mapLink(state.swipeWinner)}" target="_blank" rel="noopener noreferrer">Open Map ↗</a>
-            <button class="actionChip" onclick="shareSingleSpot('${esc(state.swipeWinner.name)}')">Share Winner 💬</button>
-            <button class="actionChip" onclick="resetSwipeDeck(true)">Play Again 🔄</button>
-          </div>
-        </div>
-      ` : topCard ? `
-        <div class="swipeDeckCard">
-          <div class="swipeStamp">${state.swipeDeck.length} LEFT IN ROUND • ${state.swipeKept.length} KEPT</div>
-          <div style="font-size:46px;margin-bottom:10px;">📍</div>
-          <h2 style="margin:0 0 8px;font-size:26px;">${esc(topCard.name)}</h2>
-          <p style="color:#b6b2c8;font-size:14px;line-height:1.45;margin:0 0 14px;">${esc(topCard.desc)}</p>
-          <a class="tag" href="${mapLink(topCard)}" target="_blank" rel="noopener noreferrer">Preview on Map ↗</a>
-
-          <div class="swipeControls">
-            <button class="swipeCircleBtn ditch" onclick="handleSwipeChoice(false)" title="Ditch">❌</button>
-            <button class="swipeCircleBtn keep" onclick="handleSwipeChoice(true)" title="Keep">💚</button>
-          </div>
-        </div>
-      ` : ""}
-
-      <div class="footer">VIBE SWIPE ENGINE • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
-    </div>
-  `;
 }
 
 /* =========================================================
    TRUTH / DARE / NEVER HAVE I EVER DECK
 ========================================================= */
 
-function drawPromptCard(type, shouldRender = true) {
+function drawPromptCard(type = state.truthDeckType, shouldRender = true) {
   state.truthDeckType = type;
-  const customDares = JSON.parse(localStorage.getItem("gang_custom_dares") || "[]");
-  const pool =
-    type === "truth"
-      ? TRUTH_CARDS
-      : type === "dare"
-      ? [...DARE_CARDS, ...customDares]
-      : NEVER_CARDS;
-
+  const customPrompts = JSON.parse(localStorage.getItem("gang_custom_prompts") || "[]");
+  let pool = type === "truth" ? TRUTH_CARDS : type === "dare" ? [...DARE_CARDS, ...customPrompts] : NEVER_CARDS;
   state.currentPromptCard = pool[Math.floor(Math.random() * pool.length)];
   if (shouldRender) render();
 }
 
-function openAddCustomDareModal() {
+function openAddDareModal() {
   const box = document.getElementById("customModalBox");
   box.innerHTML = `
     <button class="modalCloseX" onclick="closeCustomModal()" title="Close">✕</button>
-    <h2>🎭 Add Gang Dare</h2>
-    <p>Add a custom inside-joke dare to your device's hangout deck.</p>
-    <textarea id="customDareText" class="textareaInput" rows="3" placeholder="e.g. Whoever blinks first buys everyone samosas!"></textarea>
+    <h2>🔥 Add Custom Gang Dare</h2>
+    <p>Add your own inside-joke dare to the hangout deck!</p>
+    <textarea id="customDareText" class="textareaInput" rows="3" placeholder="e.g. Whoever blinks first buys everyone masala puri!"></textarea>
     <div class="modalActions">
       <button class="secondary" onclick="closeCustomModal()">Cancel</button>
-      <button class="primary" onclick="saveCustomDare()">Add Dare 🔥</button>
+      <button class="primary" onclick="saveCustomDare()">Add Dare 🎭</button>
     </div>
   `;
   document.getElementById("customModal").classList.add("show");
@@ -7043,74 +6967,21 @@ function openAddCustomDareModal() {
 }
 
 function saveCustomDare() {
-  const txt = document.getElementById("customDareText").value.trim();
-  if (!txt) return;
-  const list = JSON.parse(localStorage.getItem("gang_custom_dares") || "[]");
-  list.push(txt);
-  localStorage.setItem("gang_custom_dares", JSON.stringify(list));
+  const val = document.getElementById("customDareText").value.trim();
+  if (!val) return;
+  const list = JSON.parse(localStorage.getItem("gang_custom_prompts") || "[]");
+  list.unshift(val);
+  localStorage.setItem("gang_custom_prompts", JSON.stringify(list));
   closeCustomModal();
   drawPromptCard("dare", true);
-  showToast("Custom dare added to deck 🎭");
-}
-
-function renderTruthDarePage() {
-  const typeLabel =
-    state.truthDeckType === "truth"
-      ? "🤫 TRUTH"
-      : state.truthDeckType === "dare"
-      ? "🔥 DARE"
-      : "🙈 NEVER HAVE I EVER";
-
-  return `
-    <div class="page">
-      <div class="sectionTop">
-        <button class="backBtn" onclick="goHome()">← Home</button>
-        <button class="changeBtn" onclick="openAddCustomDareModal()">+ Add Dare</button>
-      </div>
-
-      <h1 class="pageTitle">Hangout Card Deck</h1>
-      <p class="pageSub">Pass the phone around the canteen table, park bench, or cafe booth.</p>
-
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
-        <button class="personaChip ${state.truthDeckType === "truth" ? "active" : ""}" onclick="drawPromptCard('truth', true)">🤫 Truth</button>
-        <button class="personaChip ${state.truthDeckType === "dare" ? "active" : ""}" onclick="drawPromptCard('dare', true)">🔥 Dare</button>
-        <button class="personaChip ${state.truthDeckType === "never" ? "active" : ""}" onclick="drawPromptCard('never', true)">🙈 Never Have I Ever</button>
-      </div>
-
-      <div class="swipeDeckCard">
-        <div class="swipeStamp">${typeLabel}</div>
-        <h2 style="font-size:23px;line-height:1.35;margin:10px 0 22px;">
-          "${esc(state.currentPromptCard || TRUTH_CARDS[0])}"
-        </h2>
-        <button class="specialBtn" onclick="drawPromptCard('${state.truthDeckType}', true)">
-          Next Card 🃏
-        </button>
-      </div>
-
-      <div class="footer">HANGOUT PARTY DECK • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
-    </div>
-  `;
+  showToast("Custom Dare added to the deck! 🔥");
 }
 
 /* =========================================================
-   UNIFIED NEXORA AI ENGINE (5 SWITCHABLE PERSONALITIES)
+   NEXORA AI WITH 5 PERSONALITY MODES
 ========================================================= */
 
-function openNexora() {
-  if (!state.college) {
-    handleJoinTheGangClick();
-    return;
-  }
-  state.page = "nexora";
-  render();
-  renderPollDock();
-  setTimeout(() => {
-    const box = document.getElementById("nexoraChatBox");
-    if (box) box.scrollTop = box.scrollHeight;
-  }, 30);
-}
-
-function switchNexoraPersona(personaKey) {
+function setAiPersona(personaKey) {
   if (!AI_PERSONALITIES[personaKey]) return;
   state.activePersona = personaKey;
   localStorage.setItem("nexora_persona", personaKey);
@@ -7120,197 +6991,101 @@ function switchNexoraPersona(personaKey) {
   });
   render();
   setTimeout(() => {
-    const box = document.getElementById("nexoraChatBox");
+    const box = document.getElementById("chatBox");
     if (box) box.scrollTop = box.scrollHeight;
-  }, 30);
+  }, 40);
 }
 
-function askNexoraPreset(promptText) {
-  const input = document.getElementById("nexoraInput");
-  if (input) input.value = promptText;
-  sendNexoraMessage();
-}
+function openNexora() {
+  if (!state.college) {
+    handleJoinTheGangClick();
+    return;
+  }
 
-function sendNexoraMessage() {
-  const input = document.getElementById("nexoraInput");
-  if (!input) return;
-
-  const text = input.value.trim();
-  if (!text) return;
-
-  state.chatHistory.push({ role: "user", text });
-  input.value = "";
-
-  const replyHtml = generateNexoraReply(text);
-  state.chatHistory.push({ role: "ai", html: replyHtml });
+  state.page = "nexora";
   render();
-
+  renderPollDock();
   setTimeout(() => {
-    const box = document.getElementById("nexoraChatBox");
+    const box = document.getElementById("chatBox");
     if (box) box.scrollTop = box.scrollHeight;
-  }, 30);
+  }, 40);
 }
 
-function generateNexoraReply(query) {
-  const q = query.toLowerCase();
+function askNexora(presetPrompt) {
+  const input = document.getElementById("nexoraInput");
+  const promptText = (presetPrompt || (input ? input.value : "")).trim();
+  if (!promptText) return;
+
+  if (input && !presetPrompt) input.value = "";
+
+  state.chatHistory.push({
+    role: "user",
+    html: esc(promptText)
+  });
+
   const zone = getZone();
   const zonePlaces = getZonePlaces();
-  const persona = state.activePersona || "bestie";
+  const q = promptText.toLowerCase();
+  const pMode = state.activePersona || "bestie";
+
+  let reply = "";
 
   const personaPrefix = {
     bestie: "Bestie pick ✨ ",
     hype: "MAIN CHARACTER MOVE 🔥 ",
-    roast: "Finally making a decision? 💀 ",
-    budget: "Wallet-safe math 💸 ",
-    study: "Smart focus + chill plan 📚 "
-  }[persona] || "";
+    roast: "Fine, since y'all can't decide 💀 ",
+    budget: "Wallet-safe play 💸 ",
+    study: "Smart balance 📚 "
+  }[pMode] || "";
 
-  let chosen = [];
-
-  if (q.includes("combo") || q.includes("3-stop") || q.includes("plan") || q.includes("itinerary")) {
+  if (q.includes("combo") || q.includes("itinerary") || q.includes("plan")) {
     const food = zonePlaces.find(p => ["breakfast", "burgers", "street"].includes(p.cat)) || zonePlaces[0];
-    const drink = zonePlaces.find(p => ["tea", "cafes", "icecream"].includes(p.cat)) || zonePlaces[1];
-    const chill = zonePlaces.find(p => ["parks", "shopping", "movies", "temples"].includes(p.cat)) || zonePlaces[2];
-    chosen = [food, drink, chill].filter(Boolean);
+    const park = zonePlaces.find(p => p.cat === "parks") || zonePlaces[1];
+    const sweet = zonePlaces.find(p => ["icecream", "tea", "cafes"].includes(p.cat)) || zonePlaces[2];
 
-    const shareTxt = encodeURIComponent(`🔥 *NEXORA 3-STOP PLAN (${zone.areaName})*\n1. ${chosen[0]?.name}\n2. ${chosen[1]?.name}\n3. ${chosen[2]?.name}`);
-    return `
-      ${personaPrefix}Here is your <b>3-Stop ${esc(zone.areaName)} Hangout Circuit</b>:<br><br>
-      ${chosen.map((p, i) => `• <b>Stop ${i + 1}: ${esc(p.name)}</b> — ${esc(p.desc)} <a href="${mapLink(p)}" target="_blank" style="color:#a87dff;font-weight:900;">[Map ↗]</a>`).join("<br><br>")}
-      <br><br><a href="https://wa.me/?text=${shareTxt}" target="_blank" style="color:#00ffa3;font-weight:900;">📲 Share 3-Stop Plan to WhatsApp ↗</a>
-    `;
-  } else if (q.includes("budget") || q.includes("cheap") || q.includes("broke") || q.includes("under")) {
-    chosen = zonePlaces.filter(p => ["breakfast", "tea", "street"].includes(p.cat));
-  } else if (q.includes("cafe") || q.includes("coffee") || q.includes("aesthetic") || q.includes("study")) {
-    chosen = zonePlaces.filter(p => ["cafes", "tea"].includes(p.cat));
+    window._nexoraWhatsAppPlan = `🔥 *NEXORA AI GANG PLAN*\n📍 ${zone.areaName} (${state.college})\n\n1️⃣ ${food.name}\n2️⃣ ${park.name}\n3️⃣ ${sweet.name}\n\nReady?! 🚀`;
+
+    reply = `${personaPrefix}Here's your custom <b>3-Stop ${esc(zone.areaName)} Hangout Plan</b>:<br><br>
+      1️⃣ <b>Start with food:</b> ${esc(food.name)}<br>
+      2️⃣ <b>Walk & talk:</b> ${esc(park.name)}<br>
+      3️⃣ <b>Sweet finish:</b> ${esc(sweet.name)}<br><br>
+      <button class="tag" onclick="window.open('https://wa.me/?text=' + encodeURIComponent(window._nexoraWhatsAppPlan), '_blank')">📲 Send Plan to WhatsApp</button>`;
+  } else if (q.includes("budget") || q.includes("cheap") || q.includes("broke")) {
+    const picks = zonePlaces.filter(p => ["breakfast", "tea", "street"].includes(p.cat)).slice(0, 3);
+    reply = `${personaPrefix}Best pocket-friendly spots in <b>${esc(zone.areaName)}</b>:<br><br>` +
+      picks.map(p => `• <b>${esc(p.name)}</b> — ${esc(p.desc)}`).join("<br>");
+  } else if (q.includes("cafe") || q.includes("coffee") || q.includes("aesthetic")) {
+    const picks = zonePlaces.filter(p => ["cafes", "tea"].includes(p.cat)).slice(0, 3);
+    reply = `${personaPrefix}Top aesthetic cafe & coffee hangouts in <b>${esc(zone.areaName)}</b>:<br><br>` +
+      picks.map(p => `• <b>${esc(p.name)}</b> — ${esc(p.desc)}`).join("<br>");
   } else if (q.includes("dessert") || q.includes("ice cream") || q.includes("sweet")) {
-    chosen = zonePlaces.filter(p => p.cat === "icecream");
-  } else if (q.includes("park") || q.includes("walk") || q.includes("peace") || q.includes("chill")) {
-    chosen = zonePlaces.filter(p => ["parks", "shopping", "temples"].includes(p.cat));
-  } else if (q.includes("eat") || q.includes("food") || q.includes("hungry") || q.includes("dosa") || q.includes("burger")) {
-    chosen = zonePlaces.filter(p => ["breakfast", "burgers", "street"].includes(p.cat));
+    const picks = zonePlaces.filter(p => p.cat === "icecream").slice(0, 3);
+    reply = picks.length
+      ? `${personaPrefix}Sweetest dessert runs in <b>${esc(zone.areaName)}</b>:<br><br>` +
+        picks.map(p => `• <b>${esc(p.name)}</b> — ${esc(p.desc)}`).join("<br>")
+      : `${personaPrefix}In <b>${esc(zone.areaName)}</b>, hit <b>VV Puram Food Street</b> or <b>Gandhi Bazaar</b> for classic sweets & ice gola!`;
   } else {
-    chosen = [...zonePlaces].sort(() => 0.5 - Math.random());
+    const matches = zonePlaces.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.desc.toLowerCase().includes(q) ||
+      p.cat.toLowerCase().includes(q)
+    ).slice(0, 3);
+
+    const finalPicks = matches.length ? matches : [...zonePlaces].sort(() => Math.random() - 0.5).slice(0, 3);
+    reply = `${personaPrefix}Top <b>${esc(zone.areaName)}</b> recommendations for <b>${esc(state.college)}</b>:<br><br>` +
+      finalPicks.map(p => `• <b>${esc(p.name)}</b> — ${esc(p.desc)}`).join("<br>");
   }
 
-  const top3 = chosen.slice(0, 3);
+  state.chatHistory.push({
+    role: "ai",
+    html: reply
+  });
 
-  return `
-    ${personaPrefix}For <b>${esc(state.college)} (${esc(zone.areaName)})</b>, lock in these spots:<br><br>
-    ${top3
-      .map(
-        (p, idx) =>
-          `<b>${idx + 1}. ${esc(p.name)}</b> — ${esc(p.desc)} <a href="${mapLink(p)}" target="_blank" style="color:#a87dff;font-weight:900;">[Map ↗]</a>`
-      )
-      .join("<br><br>")}
-  `;
-}
-
-function renderNexoraPage() {
-  const zone = getZone();
-
-  return `
-    <div class="nexoraFullPage">
-      <div class="nexoraTopBar">
-        <button class="backBtn" onclick="goHome()">← Home</button>
-
-        <div class="nexoraTitlePill">
-          <span class="nexoraMiniOrb"></span>
-          <b style="font-size:13px;letter-spacing:.4px;">NEXORA AI</b>
-          <span style="font-size:11px;color:#b8b2d0;">• ${esc(zone.areaName)}</span>
-        </div>
-
-        <button class="changeBtn" onclick="openCollegeChanger()">Change</button>
-      </div>
-
-      <div class="nexoraPersonalityBar">
-        ${Object.entries(AI_PERSONALITIES).map(([key, obj]) => `
-          <button
-            class="personaChip ${state.activePersona === key ? "active" : ""}"
-            onclick="switchNexoraPersona('${key}')"
-          >
-            ${obj.label}
-          </button>
-        `).join("")}
-      </div>
-
-      <div class="nexoraUnifiedShell">
-        <div id="nexoraChatBox" class="nexoraChatBox">
-          ${state.chatHistory
-            .map(
-              msg => `
-                <div class="chatMsg ${msg.role === "user" ? "user" : "ai"}">
-                  ${msg.role === "user" ? esc(msg.text) : msg.html}
-                </div>
-              `
-            )
-            .join("")}
-
-          <div class="nexoraChipsInside">
-            <button class="tag" onclick="askNexoraPreset('Build a 3-stop hangout combo')">⚡ 3-Stop Combo</button>
-            <button class="tag" onclick="askNexoraPreset('Budget friendly spots')">💸 Budget spots</button>
-            <button class="tag" onclick="askNexoraPreset('Best aesthetic cafes to talk')">☕ Aesthetic cafes</button>
-            <button class="tag" onclick="askNexoraPreset('Evening street food & snacks')">🌮 Street food</button>
-          </div>
-        </div>
-
-        <div class="nexoraInputBar">
-          <input
-            id="nexoraInput"
-            class="input"
-            placeholder="Ask NEXORA (${AI_PERSONALITIES[state.activePersona]?.label || "AI"})..."
-            onkeydown="if(event.key==='Enter') sendNexoraMessage()"
-          >
-          <button class="nexoraSendBtn" onclick="sendNexoraMessage()">Send</button>
-        </div>
-      </div>
-
-      <div class="nexoraMiniFooter">NEXORA AI • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
-    </div>
-  `;
-}
-
-/* =========================================================
-   THEMES PAGE
-========================================================= */
-
-function renderThemesPage() {
-  return `
-    <div class="page">
-      <div class="sectionTop">
-        <button class="backBtn" onclick="goHome()">← Home</button>
-        <span class="locationPill" style="margin:0;">🎨 ${THEMES.length} Horizon Themes</span>
-      </div>
-
-      <h1 class="pageTitle">Horizon Themes</h1>
-      <p class="pageSub">Tap any theme to instantly transform the live aura, glow, and buttons across the entire app.</p>
-
-      <div class="categoryGrid">
-        ${THEMES.map(
-          t => `
-            <button
-              class="category"
-              style="${state.theme === t.id ? "border-color:#fff;box-shadow:0 0 28px var(--glow-pink);" : ""}"
-              onclick="applyTheme('${t.id}', true)"
-            >
-              <div style="display:flex;gap:6px;margin-bottom:10px;">
-                ${t.colors
-                  .map(
-                    c =>
-                      `<span style="width:18px;height:18px;border-radius:50%;background:${c};box-shadow:0 0 10px ${c};display:inline-block;"></span>`
-                  )
-                  .join("")}
-              </div>
-              <b>${esc(t.name)} ${state.theme === t.id ? "✓" : ""}</b>
-              <small>${esc(t.desc)}</small>
-            </button>
-          `
-        ).join("")}
-      </div>
-
-      <div class="footer">HORIZON ULTRA ENGINE • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
-    </div>
-  `;
+  render();
+  setTimeout(() => {
+    const box = document.getElementById("chatBox");
+    if (box) box.scrollTop = box.scrollHeight;
+  }, 40);
 }
 
 /* =========================================================
@@ -7318,123 +7093,137 @@ function renderThemesPage() {
 ========================================================= */
 
 function openBeauty() {
-  state.page = "beauty";
   state.beautyIndex = 0;
+  state.page = "beauty";
   render();
   renderPollDock();
   window.scrollTo(0, 0);
 }
 
-function nextBeauty() {
+function nextBeauty(buttonEl) {
   state.beautyIndex = (state.beautyIndex + 1) % BEAUTY_LINES.length;
 
   const item = BEAUTY_LINES[state.beautyIndex];
-  const icon = document.getElementById("beautyIcon");
-  const text = document.getElementById("beautyText");
-  const btn = document.getElementById("beautyBtn");
+  const iconEl = document.getElementById("beautyIcon");
+  const textEl = document.getElementById("beautyText");
 
-  if (icon && text) {
-    icon.textContent = item.icon;
-    text.textContent = item.text;
-  }
+  if (iconEl) iconEl.textContent = item.icon;
+  if (textEl) textEl.textContent = item.text;
 
-  if (btn) {
-    const pad = 20;
-    const btnWidth = btn.offsetWidth || 160;
-    const btnHeight = btn.offsetHeight || 52;
-    const maxLeft = Math.max(pad, window.innerWidth - btnWidth - pad);
-    const maxBottom = Math.max(70, window.innerHeight - btnHeight - 90);
+  if (!buttonEl) return;
 
-    const randomLeft = Math.floor(pad + Math.random() * (maxLeft - pad));
-    const randomBottom = Math.floor(70 + Math.random() * (maxBottom - 70));
+  const btnWidth = buttonEl.offsetWidth || 160;
+  const btnHeight = buttonEl.offsetHeight || 52;
+  const pad = 18;
+  const topSafeZone = 110;
+  const bottomSafeZone = 95;
 
-    btn.style.left = randomLeft + "px";
-    btn.style.bottom = randomBottom + "px";
-    btn.style.transform = "none";
-  }
+  const minX = pad;
+  const maxX = Math.max(minX + 10, window.innerWidth - btnWidth - pad);
+  const minBottom = bottomSafeZone;
+  const maxBottom = Math.max(minBottom + 10, window.innerHeight - topSafeZone - btnHeight);
+
+  const randomX = Math.floor(minX + Math.random() * (maxX - minX));
+  const randomBottom = Math.floor(minBottom + Math.random() * (maxBottom - minBottom));
+  const randomTilt = Math.floor(-8 + Math.random() * 16);
+
+  buttonEl.style.left = `${randomX}px`;
+  buttonEl.style.bottom = `${randomBottom}px`;
+  buttonEl.style.transform = `rotate(${randomTilt}deg) scale(1.05)`;
 }
 
 /* =========================================================
-   EASTER EGG CELEBRATION POPUP
+   PLACE CARD TEMPLATE HELPER
 ========================================================= */
 
-let kushTapCount = 0;
-let kushTapTimer = null;
+function renderPlaceCardHTML(p) {
+  const inPoll = state.pollList.includes(p.name);
+  const saved = isSpotSaved(p.name);
+  const visited = isSpotVisited(p.name);
+  const catName = (CATEGORIES.find(c => c.id === p.cat) || {}).name || p.cat;
 
-function handleKushSecretTap() {
-  kushTapCount++;
-  clearTimeout(kushTapTimer);
-
-  if (kushTapCount >= 5) {
-    kushTapCount = 0;
-    openKushCelebrationPopup();
-    return;
-  }
-
-  kushTapTimer = setTimeout(() => {
-    kushTapCount = 0;
-  }, 1600);
-}
-
-function openKushCelebrationPopup() {
-  const box = document.getElementById("customModalBox");
-  box.innerHTML = `
-    <button class="modalCloseX" onclick="closeCustomModal()" title="Close">✕</button>
-    <div style="font-size:64px;margin-bottom:8px;">👑🎉🚀</div>
-    <h2>KUSH KUMAR UNLOCKED</h2>
-    <p style="font-size:15px;color:#e7e1ff;line-height:1.5;">
-      You found the creator easter egg!<br>
-      Built with pure squad energy, late-night ideas, and Horizon Ultra motion.
-    </p>
-    <div class="modalActions">
-      <button class="primary" onclick="closeCustomModal()">Legend Status 🔥</button>
+  return `
+    <div class="placeCard">
+      <div class="placeHead">
+        <div class="placeName">${esc(p.name)}</div>
+        <span class="placeType">${esc(catName)}</span>
+      </div>
+      <div class="placeDesc">${esc(p.desc)}</div>
+      <div class="placeBtns">
+        <a class="mapBtn" href="${mapLink(p)}" target="_blank" rel="noopener">Open Maps 📍</a>
+        <button class="actionChip ${inPoll ? "activePoll" : ""}" onclick="togglePollSpot('${esc(p.name).replaceAll("'", "\\'")}')">
+          ${inPoll ? "✓ In Poll" : "+ Poll 📋"}
+        </button>
+        <button class="actionChip ${saved ? "activeSaved" : ""}" onclick="toggleSaveSpot('${esc(p.name).replaceAll("'", "\\'")}')">
+          ${saved ? "❤️ Saved" : "🤍 Save"}
+        </button>
+        <button class="actionChip ${visited ? "activeVisited" : ""}" onclick="toggleVisitedSpot('${esc(p.name).replaceAll("'", "\\'")}')">
+          ${visited ? "✅ Visited" : "👣 Check-In"}
+        </button>
+        <button class="tag" onclick="shareSingleSpot('${esc(p.name).replaceAll("'", "\\'")}')">Share 💬</button>
+      </div>
     </div>
   `;
-  document.getElementById("customModal").classList.add("show");
-  syncModalBodyLock();
 }
 
 /* =========================================================
    RENDER PAGES
 ========================================================= */
 
-function renderHome() {
-  const zone = state.college ? getZone() : null;
-  const vibe = getTimeOfDayVibe();
-  const acc = getActiveAccount();
+function render() {
+  const app = document.getElementById("app");
+  const floatingBtn = document.getElementById("floatingTopBtn");
+  const dockActive = state.pollList.length > 0 && state.page !== "nexora" && state.page !== "beauty";
+  const pageExtraClass = dockActive ? "hasDock" : "";
 
-  return `
-    <div class="page">
-      <div class="brand">
-        <div class="made" onclick="handleKushSecretTap()" title="Tap 5 times for a secret">MADE BY KUSH KUMAR</div>
-        <div class="logo">
-          <span>WHERE'S</span>
-          <span>THE GANG?</span>
-        </div>
+  if (floatingBtn) {
+    floatingBtn.style.display = state.page === "nexora" ? "none" : "block";
+  }
 
-        <div class="tagline">
-          One tap. Zero overthinking. Instant hangout plans.
-        </div>
+  renderNavDrawerItems();
 
+  /* ---------------- HOME ---------------- */
+  if (state.page === "home") {
+    const zone = state.college ? getZone() : null;
+    const vibe = getTimeOfDayVibe();
+    const acc = getActiveAccount();
+
+    const userPillHtml = (state.userName && state.college)
+      ? `
         <div class="userBadgeRow">
-          ${state.college ? `
-            <div class="userBadge" onclick="openCollegeChanger()" title="Tap to edit name or switch college">
-              <span class="liveDot"></span>
-              <span>
-                ${esc(state.userName || "Gang Member")} • 🎓 <strong>${esc(state.college)}</strong> (${esc(zone.areaName)})
-                ${acc ? ` • <span style="color:#8fe8ff;font-family:'Courier New',monospace;font-weight:1000;">${esc(acc.studentId)}</span>` : ""}
-              </span>
-            </div>
-          ` : `
-            <div class="userBadge" onclick="handleJoinTheGangClick()">
-              <span class="liveDot"></span>
-              <span>Tap <strong>Join the Gang</strong> to verify & pick your college</span>
-            </div>
-          `}
-
+          <div class="userBadge" onclick="openCollegeChanger()" title="Tap to edit profile or switch account">
+            <span class="liveDot"></span>
+            <span>
+              <strong>${esc(state.userName)}</strong> (${esc(acc ? acc.studentId : "")}) • ${esc(state.college)} (${esc(zone.areaName)}) • Edit ✏️
+            </span>
+          </div>
           <button class="joinGangPillBtn" onclick="handleJoinTheGangClick()">
-            🚀 Join the Gang
+            JOIN THE GANG 👀
           </button>
+        </div>
+      `
+      : `
+        <div class="userBadgeRow">
+          <button class="joinGangPillBtn" onclick="handleJoinTheGangClick()">
+            JOIN THE GANG 👀
+          </button>
+        </div>
+      `;
+
+    app.innerHTML = `
+      <div class="page ${pageExtraClass}">
+        <div class="brand">
+          <div class="made" onclick="openMgmtModal()" title="Management Access">MADE BY KUSH KUMAR</div>
+
+          <h1 class="logo">
+            <span>WHERE'S</span>
+            <span>THE</span>
+            <span>GANG?</span>
+          </h1>
+
+          <p class="tagline">Skip the lectures. Find the vibe.</p>
+
+          ${userPillHtml}
         </div>
 
         <div class="timeVibeBanner">
@@ -7444,386 +7233,637 @@ function renderHome() {
           </div>
           <button class="timeVibeBtn" onclick="openTimeVibeCategories()">${vibe.cta}</button>
         </div>
-      </div>
 
-      <div class="actions">
-        <button class="mainBtn light" onclick="openPlanner()">
-          🚀 Plan Hangout
-        </button>
+        <div class="actions">
+          <button class="mainBtn light" onclick="openPlanner()">
+            Plan Hangout 🚀
+          </button>
 
-        <button class="mainBtn socialCyberBtn" onclick="openSocialHub()">
-          🪪 NEXORA Social & Holographic ID
-        </button>
+          <button class="mainBtn socialCyberBtn" onclick="openSocialHub()">
+            NEXORA Social & Holographic ID 🪪
+          </button>
 
-        <button class="mainBtn nexoraBtn" onclick="openNexora()">
-          ✨ Ask NEXORA AI (5 Modes)
-        </button>
+          <button class="mainBtn nexoraBtn" onclick="openNexora()">
+            Ask NEXORA AI ✨
+          </button>
 
-        <button class="mainBtn" onclick="openDecisionMaster()">
-          🎲 Decision Master & Spin Wheel
-        </button>
+          <button class="mainBtn" onclick="openDecisionMaster()">
+            Decision Master & Spin Wheel 🎲
+          </button>
 
-        <button class="mainBtn" onclick="openVibeSwipe()">
-          💘 Vibe Swipe Decider
-        </button>
+          <button class="mainBtn" onclick="openVibeSwipe()">
+            Vibe Swipe Decider 💘
+          </button>
 
-        <button class="mainBtn" onclick="openTruthDare()">
-          🎭 Truth / Dare Hangout Deck
-        </button>
+          <button class="mainBtn" onclick="openTruthDare()">
+            Truth / Dare Deck 🎭
+          </button>
 
-        <button class="mainBtn" onclick="openSplitModal()">
-          💸 Gang Bill Splitter
-        </button>
+          <button class="mainBtn" onclick="openSplitModal()">
+            Bill Splitter 💸
+          </button>
 
-        <button class="mainBtn" onclick="openThemesPage()">
-          🎨 Horizon Themes
-        </button>
+          <button class="mainBtn" onclick="openThemesPage()">
+            Themes 🎨
+          </button>
 
-        <button class="mainBtn" onclick="openBeauty()">
-          ❤️ Beauty Mode
-        </button>
-      </div>
-
-      <div class="footer">NEXORA V9.21 • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
-    </div>
-  `;
-}
-
-function renderCategories() {
-  const zone = getZone();
-  const vibe = getTimeOfDayVibe();
-  const q = state.search.trim().toLowerCase();
-  const savedCount = getSavedSpots().length;
-  const visitedCount = getVisitedSpots().length;
-
-  const filteredCats = CATEGORIES.filter(c => {
-    if (!q) return true;
-    const placesInCat = getCategoryPlaces(c.id);
-    return (
-      c.name.toLowerCase().includes(q) ||
-      c.sub.toLowerCase().includes(q) ||
-      placesInCat.some(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))
-    );
-  });
-
-  const sortedCats = [...filteredCats].sort((a, b) => {
-    const aPrime = vibe.cats.includes(a.id) ? 1 : 0;
-    const bPrime = vibe.cats.includes(b.id) ? 1 : 0;
-    return bPrime - aPrime;
-  });
-
-  return `
-    <div class="page ${state.pollList.length ? "hasDock" : ""}">
-      <div class="sectionTop">
-        <button class="backBtn" onclick="goHome()">← Home</button>
-        <button class="changeBtn" onclick="openCollegeChanger()">Change</button>
-      </div>
-
-      <div class="locationPill">
-        📍 ${esc(zone.campusNote)} • ${esc(zone.areaName)} Only
-      </div>
-
-      <h1 class="pageTitle">Pick a vibe</h1>
-      <p class="pageSub">
-        Showing verified <b>${esc(zone.areaName)}</b> hangout categories for <b>${esc(state.college)}</b>.
-      </p>
-
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-        <button class="actionChip" onclick="openAddSpotModal()">➕ Add Spot (+30 XP)</button>
-        <button class="actionChip" onclick="openCategory('saved')">❤️ Saved (${savedCount})</button>
-        <button class="actionChip" onclick="openCategory('visited')">✅ Visited (${visitedCount})</button>
-        <button class="actionChip" onclick="openCategory('all')">🗺️ All Spots (${getZonePlaces().length})</button>
-      </div>
-
-      <input
-        class="search"
-        value="${esc(state.search)}"
-        placeholder="Search ${esc(zone.areaName)} places or categories..."
-        oninput="state.search=this.value;render();"
-      >
-
-      <div class="categoryGrid">
-        ${sortedCats.map(c => {
-          const isPrime = vibe.cats.includes(c.id);
-          return `
-            <button class="category ${isPrime ? "primeGlowCard" : ""}" onclick="openCategory('${c.id}')">
-              ${isPrime ? `<span class="primeBadgePill">⚡ PRIME NOW</span>` : ""}
-              <div class="emoji">${c.emoji}</div>
-              <b>${esc(c.name)}</b>
-              <small>${esc(c.sub)}</small>
-            </button>
-          `;
-        }).join("")}
-      </div>
-
-      <div class="specialCard">
-        <h3>✨ Ask NEXORA AI</h3>
-        <p>Get an instant 3-stop combo or smart hangout suggestion inside ${esc(zone.areaName)}.</p>
-        <button class="specialBtn" onclick="openNexora()">Open NEXORA AI →</button>
-      </div>
-
-      <div class="footer">LOCKED TO ${esc(zone.areaName.toUpperCase())} • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
-    </div>
-  `;
-}
-
-function renderPlaces() {
-  const zone = getZone();
-  const isSavedView = state.category === "saved";
-  const isVisitedView = state.category === "visited";
-  const isAllView = state.category === "all";
-  const cat = CATEGORIES.find(c => c.id === state.category) || {
-    emoji: isSavedView ? "❤️" : isVisitedView ? "✅" : "🗺️",
-    name: isSavedView ? "Saved Favorites" : isVisitedView ? "Visited Passport" : `All ${zone.areaName} Spots`
-  };
-
-  let baseList = [];
-  if (isSavedView) {
-    const savedNames = getSavedSpots();
-    baseList = getZonePlaces().filter(p => savedNames.includes(p.name));
-  } else if (isVisitedView) {
-    const visitedNames = getVisitedSpots();
-    baseList = getZonePlaces().filter(p => visitedNames.includes(p.name));
-  } else if (isAllView) {
-    baseList = getZonePlaces();
-  } else {
-    baseList = getCategoryPlaces(state.category);
-  }
-
-  const list = baseList.filter(p =>
-    (p.name + " " + p.desc).toLowerCase().includes(state.search.toLowerCase())
-  );
-
-  return `
-    <div class="page ${state.pollList.length ? "hasDock" : ""}">
-      <div class="sectionTop">
-        <button class="backBtn" onclick="openPlanner()">← Categories</button>
-        <button class="changeBtn" onclick="openCollegeChanger()">Change</button>
-      </div>
-
-      <div class="locationPill">
-        📍 ${esc(zone.areaName)} Only • ${esc(state.college)}
-      </div>
-
-      <h1 class="pageTitle">${cat.emoji} ${esc(cat.name)}</h1>
-      <p class="pageSub">Tap "+ Poll" to build a WhatsApp group vote, save favorites, or check in.</p>
-
-      <input
-        class="search"
-        value="${esc(state.search)}"
-        placeholder="Filter ${esc(zone.areaName)} spots..."
-        oninput="state.search=this.value;render();"
-      >
-
-      <div class="cards">
-        ${list.length ? list.map(p => {
-          const inPoll = state.pollList.includes(p.name);
-          const saved = isSpotSaved(p.name);
-          const visited = isSpotVisited(p.name);
-          return `
-            <div class="placeCard">
-              <div class="placeHead">
-                <div class="placeName">${esc(p.name)}</div>
-                <span class="placeType">${esc(p.area)}</span>
-              </div>
-              <div class="placeDesc">${esc(p.desc)}</div>
-              <div class="placeBtns">
-                <a class="mapBtn" href="${mapLink(p)}" target="_blank" rel="noopener noreferrer">Open Map ↗</a>
-                <button class="actionChip ${inPoll ? "activePoll" : ""}" onclick="togglePollSpot('${esc(p.name)}')">
-                  ${inPoll ? "✓ In Poll" : "+ Poll"}
-                </button>
-                <button class="actionChip ${saved ? "activeSaved" : ""}" onclick="toggleSaveSpot('${esc(p.name)}')">
-                  ${saved ? "❤️ Saved" : "🤍 Save"}
-                </button>
-                <button class="actionChip ${visited ? "activeVisited" : ""}" onclick="toggleVisitedSpot('${esc(p.name)}')">
-                  ${visited ? "✅ Visited" : "📍 Check In"}
-                </button>
-                <button class="actionChip" onclick="shareSingleSpot('${esc(p.name)}')">Share 💬</button>
-              </div>
-            </div>
-          `;
-        }).join("") : `<div class="empty">No spots found in this list yet.</div>`}
-      </div>
-
-      <div class="footer">${esc(zone.areaName.toUpperCase())} DATABASE • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
-    </div>
-  `;
-}
-
-function renderBeauty() {
-  const item = BEAUTY_LINES[state.beautyIndex];
-  const zone = state.college ? getZone() : null;
-
-  return `
-    <div class="page beauty">
-      <div class="beautyTopBar">
-        <button class="beautyBack" onclick="goHome()">← Home</button>
-
-        <div class="beautyCornerGroup">
-          ${state.college ? `
-            <div class="userBadge beautyCornerBadge" onclick="openCollegeChanger()" title="Tap to edit name or switch college">
-              <span class="liveDot"></span>
-              <span>
-                ${esc(state.userName || "Gang Member")} • 🎓 <strong>${esc(state.college)}</strong> (${esc(zone.areaName)})
-              </span>
-            </div>
-          ` : `
-            <div class="userBadge beautyCornerBadge" onclick="handleJoinTheGangClick()">
-              <span class="liveDot"></span>
-              <span>Tap <strong>Join the Gang</strong></span>
-            </div>
-          `}
-
-          <button class="joinGangPillBtn" onclick="handleJoinTheGangClick()">
-            🚀 Join the Gang
+          <button class="mainBtn" onclick="openBeauty()">
+            Beauty Mode ❤️
           </button>
         </div>
+
+        <div class="footer">NEXORA V9.21 • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
       </div>
-
-      <div id="beautyIcon" class="beautyIcon">${item.icon}</div>
-
-      <div id="beautyText" class="beautyText">
-        ${esc(item.text)}
-      </div>
-
-      <button id="beautyBtn" class="beautyBtn" onclick="nextBeauty()">
-        Next ❤️
-      </button>
-    </div>
-  `;
-}
-
-function renderManagement() {
-  const records = getLoginRecords();
-  const accounts = getAllAccounts();
-  const q = state.mgmtSearch.trim().toLowerCase();
-
-  const filtered = records.filter(r =>
-    !q ||
-    (r.name || "").toLowerCase().includes(q) ||
-    (r.studentId || "").toLowerCase().includes(q) ||
-    (r.college || "").toLowerCase().includes(q) ||
-    (r.area || "").toLowerCase().includes(q)
-  );
-
-  const nmkrvCount = records.filter(r => r.college === "NMKRV").length;
-  const rvpuCount = records.filter(r => r.college === "RV PU College").length;
-  const apsCount = records.filter(r => r.college === "Aps").length;
-
-  return `
-    <div class="page">
-      <div class="mgmtCenteredWrap">
-        <div class="sectionTop">
-          <button class="backBtn" onclick="goHome()">← Home</button>
-          <span class="locationPill" style="margin:0;">🔒 Admin Verified</span>
-        </div>
-
-        <h1 class="pageTitle">Management Portal</h1>
-        <p class="pageSub">Student accounts, NEX-IDs, XP rankings, and login records.</p>
-
-        <div class="statsGrid">
-          <div class="statCard">
-            <b>${accounts.length}</b>
-            <small>Student IDs</small>
-          </div>
-          <div class="statCard">
-            <b>${nmkrvCount + rvpuCount}</b>
-            <small>Jayanagar Logs</small>
-          </div>
-          <div class="statCard">
-            <b>${apsCount}</b>
-            <small>Basavanagudi</small>
-          </div>
-        </div>
-
-        <div class="mgmtControls">
-          <input
-            class="search"
-            value="${esc(state.mgmtSearch)}"
-            placeholder="Search by student name, NEX-ID, college or area..."
-            oninput="state.mgmtSearch=this.value;render();"
-          >
-          <button class="mgmtBtn export" onclick="exportRecordsCSV()">Export CSV 📥</button>
-          <button class="mgmtBtn danger" onclick="clearAllRecords()">Clear All 🗑️</button>
-        </div>
-
-        <div class="cards">
-          ${filtered.length ? filtered.map(r => `
-            <div class="placeCard">
-              <div class="placeHead">
-                <div class="placeName">👤 ${esc(r.name)} <span style="font-size:11px;color:#8fe8ff;font-family:'Courier New',monospace;">(${esc(r.studentId || "NEX-ID")})</span></div>
-                <span class="placeType">${esc(r.action || "Joined")}</span>
-              </div>
-              <div class="recordMeta">
-                <div>🎓 <b>College:</b> ${esc(r.college)}</div>
-                <div>📍 <b>Assigned Area:</b> ${esc(r.area)}</div>
-                <div>🕒 <b>Timestamp:</b> ${esc(r.time)}</div>
-              </div>
-            </div>
-          `).join("") : `<div class="empty">No student login records recorded yet.</div>`}
-        </div>
-
-        <div class="footer">MANAGEMENT PORTAL • <span class="kushGlow" onclick="handleKushSecretTap()">MADE BY KUSH KUMAR</span></div>
-      </div>
-    </div>
-  `;
-}
-
-function render() {
-  const app = document.getElementById("app");
-  const topBtn = document.getElementById("floatingTopBtn");
-
-  if (topBtn) {
-    topBtn.style.display = state.page === "nexora" ? "none" : "block";
+    `;
+    return;
   }
 
-  if (state.page === "home") app.innerHTML = renderHome();
-  else if (state.page === "categories") app.innerHTML = renderCategories();
-  else if (state.page === "places") app.innerHTML = renderPlaces();
-  else if (state.page === "socialHub") app.innerHTML = renderSocialHubPage();
-  else if (state.page === "studentId") {
+  /* ---------------- NEXORA SOCIAL HUB ---------------- */
+  if (state.page === "socialHub") {
+    app.innerHTML = renderSocialHub();
+    return;
+  }
+
+  /* ---------------- 3D HOLOGRAPHIC STUDENT ID ---------------- */
+  if (state.page === "studentId") {
     app.innerHTML = renderStudentIdPage();
     setTimeout(initHoloCardTilt, 20);
+    return;
   }
-  else if (state.page === "messages") app.innerHTML = renderMessagesPage();
-  else if (state.page === "voting") app.innerHTML = renderVotingPage();
-  else if (state.page === "memories") app.innerHTML = renderMemoriesPage();
-  else if (state.page === "frameStudio") app.innerHTML = renderFrameStudioPage();
-  else if (state.page === "leaderboard") app.innerHTML = renderLeaderboardPage();
-  else if (state.page === "nexora") app.innerHTML = renderNexoraPage();
-  else if (state.page === "decisionMaster") {
-    app.innerHTML = renderDecisionMasterPage();
-    setTimeout(drawWheelCanvas, 20);
-  }
-  else if (state.page === "vibeSwipe") app.innerHTML = renderVibeSwipePage();
-  else if (state.page === "truthDare") app.innerHTML = renderTruthDarePage();
-  else if (state.page === "themes") app.innerHTML = renderThemesPage();
-  else if (state.page === "beauty") app.innerHTML = renderBeauty();
-  else if (state.page === "management") app.innerHTML = renderManagement();
 
-  renderNavDrawerItems();
+  /* ---------------- PRIVATE MESSAGING ---------------- */
+  if (state.page === "messages") {
+    app.innerHTML = renderMessagesPage();
+    return;
+  }
+
+  /* ---------------- VOTING POLLS ---------------- */
+  if (state.page === "voting") {
+    app.innerHTML = renderVotingPage();
+    return;
+  }
+
+  /* ---------------- SQUAD MEMORIES VAULT ---------------- */
+  if (state.page === "memories") {
+    app.innerHTML = renderMemoriesPage();
+    return;
+  }
+
+  /* ---------------- FRAME & RECEIPT STUDIO ---------------- */
+  if (state.page === "frameStudio") {
+    app.innerHTML = renderFrameStudioPage();
+    return;
+  }
+
+  /* ---------------- DAILY STREAKS & LEADERBOARD ---------------- */
+  if (state.page === "leaderboard") {
+    app.innerHTML = renderLeaderboardPage();
+    return;
+  }
+
+  /* ---------------- THEMES PAGE ---------------- */
+  if (state.page === "themes") {
+    app.innerHTML = `
+      <div class="page ${pageExtraClass}">
+        <div class="sectionTop">
+          <button class="backBtn" onclick="goHome()">← Home</button>
+          <button class="changeBtn" onclick="applyTheme('horizon', true)">Reset Default</button>
+        </div>
+
+        <h1 class="pageTitle">Horizon Themes</h1>
+        <p class="pageSub">Tap any theme below to instantly transform the aurora, glow & accents across the entire app.</p>
+
+        <div class="categoryGrid">
+          ${THEMES.map(t => {
+            const isActive = state.theme === t.id;
+            return `
+              <button
+                class="category"
+                style="${isActive ? `border-color:${t.colors[0]};box-shadow:0 0 28px ${t.colors[0]}55;` : ""}"
+                onclick="applyTheme('${t.id}', true)"
+              >
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;">
+                  ${t.colors.map(c => `<span style="width:16px;height:16px;border-radius:50%;background:${c};box-shadow:0 0 10px ${c};display:inline-block;"></span>`).join("")}
+                </div>
+                <b>${esc(t.name)} ${isActive ? "✓" : ""}</b>
+                <small>${esc(t.desc)}</small>
+              </button>
+            `;
+          }).join("")}
+        </div>
+
+        <div class="footer">NEXORA THEME ENGINE • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
+      </div>
+    `;
+    return;
+  }
+
+  /* ---------------- CATEGORIES ---------------- */
+  if (state.page === "categories") {
+    const zone = getZone();
+    const zonePlaces = getZonePlaces();
+    const vibe = getTimeOfDayVibe();
+    const q = state.search.trim().toLowerCase();
+
+    const filteredCats = CATEGORIES.filter(c => {
+      const catPlaces = getCategoryPlaces(c.id);
+      if (!catPlaces.length) return false;
+      if (!q) return true;
+      return (
+        c.name.toLowerCase().includes(q) ||
+        c.sub.toLowerCase().includes(q) ||
+        catPlaces.some(p => p.name.toLowerCase().includes(q))
+      );
+    });
+
+    const directMatches = q
+      ? zonePlaces.filter(
+          p =>
+            p.name.toLowerCase().includes(q) ||
+            p.desc.toLowerCase().includes(q)
+        )
+      : [];
+
+    app.innerHTML = `
+      <div class="page ${pageExtraClass}">
+        <div class="sectionTop">
+          <button class="backBtn" onclick="goHome()">← Home</button>
+          <div style="display:flex;gap:7px;">
+            <button class="changeBtn" onclick="openAddSpotModal()">+ Add Spot</button>
+            <button class="changeBtn" onclick="openCollegeChanger()">Change College</button>
+          </div>
+        </div>
+
+        <div class="locationPill">
+          🔒 ${esc(state.userName || "Gang")} • ${esc(state.college)} (${esc(zone.areaName)} ONLY)
+        </div>
+
+        <h1 class="pageTitle">Pick the vibe</h1>
+        <p class="pageSub">
+          Only verified <strong>${esc(zone.areaName)}</strong> hangouts are shown for <strong>${esc(state.college)}</strong>.
+        </p>
+
+        <input
+          class="search"
+          value="${esc(state.search)}"
+          placeholder="Search ${esc(zone.areaName)} spots or categories..."
+          oninput="state.search=this.value;render();"
+        >
+
+        ${
+          q && directMatches.length
+            ? `
+              <h3 style="margin:6px 0 10px;font-size:15px;color:#d6ccff;">⚡ Matching Spots in ${esc(zone.areaName)} (${directMatches.length})</h3>
+              <div class="cards" style="margin-bottom:18px;">
+                ${directMatches.map(p => renderPlaceCardHTML(p)).join("")}
+              </div>
+            `
+            : ""
+        }
+
+        <div class="categoryGrid">
+          ${filteredCats.map(c => {
+            const count = getCategoryPlaces(c.id).length;
+            const isPrime = vibe.cats.includes(c.id);
+            return `
+              <button class="category ${isPrime ? "primeGlowCard" : ""}" onclick="openCategory('${c.id}')">
+                ${isPrime ? `<span class="primeTag">⚡ PRIME NOW</span>` : ""}
+                <span class="emoji">${c.emoji}</span>
+                <b>${esc(c.name)}</b>
+                <small>${count} ${esc(zone.areaName)} spots</small>
+              </button>
+            `;
+          }).join("")}
+        </div>
+
+        <div class="specialCard">
+          <h3>Still can't decide?</h3>
+          <p>Roll a 3-Stop Hangout Combo or spin the gang decision wheel for ${esc(zone.areaName)}.</p>
+          <button class="specialBtn" onclick="openDecisionMaster()">
+            Open Decision Master & Spin Wheel 🎲
+          </button>
+        </div>
+
+        <div class="footer">${esc(zone.campusNote)} • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
+      </div>
+    `;
+    return;
+  }
+
+  /* ---------------- PLACES ---------------- */
+  if (state.page === "places") {
+    const zone = getZone();
+    const cat = CATEGORIES.find(c => c.id === state.category) || CATEGORIES[0];
+    const vibe = getTimeOfDayVibe();
+    const isPrimeCategory = vibe.cats.includes(cat.id);
+    const q = state.search.trim().toLowerCase();
+
+    const list = getCategoryPlaces(cat.id).filter(
+      p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
+    );
+
+    app.innerHTML = `
+      <div class="page ${pageExtraClass}">
+        <div class="sectionTop">
+          <button class="backBtn" onclick="openPlanner()">← Categories</button>
+          <div style="display:flex;gap:7px;">
+            <button class="changeBtn" onclick="openAddSpotModal()">+ Add Spot</button>
+            <button class="changeBtn" onclick="openCollegeChanger()">Change College</button>
+          </div>
+        </div>
+
+        <div class="locationPill">
+          📍 ${esc(zone.areaName)} Only • ${esc(state.college)}
+        </div>
+
+        ${isPrimeCategory ? `<div class="primeBadgePill">⚡ PRIME RIGHT NOW • ${esc(vibe.label)}</div>` : ""}
+
+        <h1 class="pageTitle">${cat.emoji} ${esc(cat.name)}</h1>
+        <p class="pageSub">Tap "+ Poll" on up to 5 spots to send a live vote to your gang WhatsApp group.</p>
+
+        <input
+          class="search"
+          value="${esc(state.search)}"
+          placeholder="Search inside ${esc(cat.name)}..."
+          oninput="state.search=this.value;render();"
+        >
+
+        ${
+          list.length
+            ? `
+              <div class="cards">
+                ${list.map(p => renderPlaceCardHTML(p)).join("")}
+              </div>
+            `
+            : `<div class="empty">No matching ${esc(zone.areaName)} spots found.</div>`
+        }
+
+        <div class="footer">${esc(zone.campusNote)} • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
+      </div>
+    `;
+    return;
+  }
+
+  /* ---------------- DECISION MASTER & SPIN WHEEL ---------------- */
+  if (state.page === "decisionMaster") {
+    const zone = getZone();
+    const [s1, s2, s3] = state.comboItems;
+
+    app.innerHTML = `
+      <div class="page ${pageExtraClass}">
+        <div class="sectionTop">
+          <button class="backBtn" onclick="goHome()">← Home</button>
+          <button class="changeBtn" onclick="buildThreeStopCombo(true)">Re-Roll Combo 🎲</button>
+        </div>
+
+        <div class="locationPill">🎲 ${esc(zone.areaName)} Decision Engine</div>
+        <h1 class="pageTitle">3-Stop Combo & Wheel</h1>
+        <p class="pageSub">Complete hangout itinerary or spin the wheel to settle arguments in seconds.</p>
+
+        ${s1 && s2 && s3 ? `
+          <div class="cards" style="margin-bottom:18px;">
+            <div class="comboStepCard">
+              <span class="comboStepBadge">STOP 1 • FOOD / BITE</span>
+              <div class="placeName">${esc(s1.name)}</div>
+              <div class="placeDesc">${esc(s1.desc)}</div>
+              <a class="mapBtn" href="${mapLink(s1)}" target="_blank" rel="noopener">Open Maps 📍</a>
+            </div>
+
+            <div class="comboStepCard">
+              <span class="comboStepBadge">STOP 2 • CHILL / WALK</span>
+              <div class="placeName">${esc(s2.name)}</div>
+              <div class="placeDesc">${esc(s2.desc)}</div>
+              <a class="mapBtn" href="${mapLink(s2)}" target="_blank" rel="noopener">Open Maps 📍</a>
+            </div>
+
+            <div class="comboStepCard">
+              <span class="comboStepBadge">STOP 3 • SWEET / CHAI</span>
+              <div class="placeName">${esc(s3.name)}</div>
+              <div class="placeDesc">${esc(s3.desc)}</div>
+              <a class="mapBtn" href="${mapLink(s3)}" target="_blank" rel="noopener">Open Maps 📍</a>
+            </div>
+
+            <button class="mainBtn light" onclick="shareThreeStopCombo()">
+              Share 3-Stop Combo on WhatsApp 💬
+            </button>
+          </div>
+        ` : ""}
+
+        <div class="specialCard" style="text-align:center;">
+          <h3>🎡 Squad Spin-the-Wheel</h3>
+          <p>6 random ${esc(zone.areaName)} spots loaded on the wheel. Tap spin to lock the winner!</p>
+
+          <div class="wheelWrap">
+            <div class="wheelPointer">🔻</div>
+            <canvas id="wheelCanvas"></canvas>
+          </div>
+
+          ${state.spinWinner ? `
+            <div class="winnerCelebrationCard" style="margin:14px 0;">
+              <div style="font-size:12px;font-weight:1000;letter-spacing:2px;color:#8affdf;">🎉 WHEEL WINNER 🎉</div>
+              <h2 style="margin:6px 0;font-size:26px;">${esc(state.spinWinner.name)}</h2>
+              <p style="margin:0 0 12px;color:#e5e0ff;">${esc(state.spinWinner.desc)}</p>
+              <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+                <a class="mapBtn" href="${mapLink(state.spinWinner)}" target="_blank" rel="noopener">Open Maps 📍</a>
+                <button class="tag" onclick="shareSingleSpot('${esc(state.spinWinner.name).replaceAll("'", "\\'")}')">Share Winner 💬</button>
+              </div>
+            </div>
+          ` : ""}
+
+          <div style="display:flex;gap:8px;margin-top:12px;">
+            <button class="secondary" style="flex:1;padding:13px;border-radius:14px;font-weight:900;" onclick="buildSpinCandidates(true)">
+              Shuffle Wheel 🔄
+            </button>
+            <button class="primary" style="flex:2;padding:13px;border-radius:14px;font-weight:1000;" onclick="spinDecisionWheel()">
+              ${state.isSpinning ? "Spinning..." : "SPIN WHEEL 🎯"}
+            </button>
+          </div>
+        </div>
+
+        <div class="footer">${esc(zone.campusNote)} • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
+      </div>
+    `;
+    setTimeout(drawWheelCanvas, 30);
+    return;
+  }
+
+  /* ---------------- TINDER-STYLE VIBE SWIPE DECIDER ---------------- */
+  if (state.page === "vibeSwipe") {
+    const zone = getZone();
+    const currentCard = state.swipeDeck[0];
+
+    app.innerHTML = `
+      <div class="page ${pageExtraClass}">
+        <div class="sectionTop">
+          <button class="backBtn" onclick="goHome()">← Home</button>
+          <button class="changeBtn" onclick="resetSwipeDeck(true)">New Deck 🔄</button>
+        </div>
+
+        <div class="locationPill">💘 ${esc(zone.areaName)} Vibe Swipe</div>
+        <h1 class="pageTitle">Keep or Ditch?</h1>
+        <p class="pageSub">Tap ❤️ to keep a spot in the running, or ✖️ to ditch it until 1 ultimate winner remains!</p>
+
+        ${
+          state.swipeWinner
+            ? `
+              <div class="winnerCelebrationCard">
+                <div style="font-size:44px;margin-bottom:6px;">🏆</div>
+                <div style="font-size:12px;font-weight:1000;letter-spacing:2px;color:#8affdf;">ULTIMATE GANG WINNER</div>
+                <h2 style="font-size:30px;margin:8px 0;">${esc(state.swipeWinner.name)}</h2>
+                <p style="color:#e6e1ff;margin-bottom:16px;">${esc(state.swipeWinner.desc)}</p>
+                <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+                  <a class="mapBtn" href="${mapLink(state.swipeWinner)}" target="_blank" rel="noopener">Open Maps 📍</a>
+                  <button class="tag" onclick="shareSingleSpot('${esc(state.swipeWinner.name).replaceAll("'", "\\'")}')">Share Winner 💬</button>
+                  <button class="tag" onclick="resetSwipeDeck(true)">Play Again 🔄</button>
+                </div>
+              </div>
+            `
+            : currentCard
+              ? `
+                <div class="swipeDeckCard">
+                  <div class="swipeStamp">${state.swipeDeck.length} LEFT IN ROUND • ${state.swipeKept.length} KEPT</div>
+                  <h2 style="font-size:28px;margin:4px 0 10px;">${esc(currentCard.name)}</h2>
+                  <p style="color:#c4bfd6;font-size:15px;line-height:1.5;margin-bottom:14px;">${esc(currentCard.desc)}</p>
+                  <span class="placeType">${esc(zone.areaName)}</span>
+
+                  <div class="swipeControls">
+                    <button class="swipeCircleBtn ditch" onclick="handleSwipeChoice(false)" title="Ditch">✖</button>
+                    <button class="swipeCircleBtn keep" onclick="handleSwipeChoice(true)" title="Keep">❤</button>
+                  </div>
+                </div>
+              `
+              : ""
+        }
+
+        <div class="footer">${esc(zone.campusNote)} • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
+      </div>
+    `;
+    return;
+  }
+
+  /* ---------------- TRUTH OR DARE DECK ---------------- */
+  if (state.page === "truthDare") {
+    app.innerHTML = `
+      <div class="page ${pageExtraClass}">
+        <div class="sectionTop">
+          <button class="backBtn" onclick="goHome()">← Home</button>
+          <button class="changeBtn" onclick="openAddDareModal()">+ Add Dare</button>
+        </div>
+
+        <h1 class="pageTitle">Gang Hangout Deck</h1>
+        <p class="pageSub">Pass the phone around at the cafe table, park bench, or metro ride!</p>
+
+        <div style="display:flex;gap:8px;justify-content:center;margin-bottom:14px;">
+          <button class="personaChip ${state.truthDeckType === "truth" ? "active" : ""}" onclick="drawPromptCard('truth', true)">🤫 Truth</button>
+          <button class="personaChip ${state.truthDeckType === "dare" ? "active" : ""}" onclick="drawPromptCard('dare', true)">🔥 Dare</button>
+          <button class="personaChip ${state.truthDeckType === "never" ? "active" : ""}" onclick="drawPromptCard('never', true)">👀 Never Have I Ever</button>
+        </div>
+
+        <div class="swipeDeckCard">
+          <div class="swipeStamp">${state.truthDeckType.toUpperCase()} CARD</div>
+          <h2 style="font-size:23px;line-height:1.35;margin:8px 0 18px;">
+            "${esc(state.currentPromptCard || TRUTH_CARDS[0])}"
+          </h2>
+          <button class="specialBtn" onclick="drawPromptCard(state.truthDeckType, true)">
+            Next Card 🎴
+          </button>
+        </div>
+
+        <div class="footer">NEXORA PARTY DECK • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
+      </div>
+    `;
+    return;
+  }
+
+  /* ---------------- NEXORA AI (UNIFIED CHAT + 5 PERSONALITIES) ---------------- */
+  if (state.page === "nexora") {
+    const zone = getZone();
+
+    app.innerHTML = `
+      <div class="nexoraFullPage">
+        <div class="nexoraTopBar">
+          <button class="backBtn" onclick="goHome()">← Home</button>
+          <div class="nexoraTitlePill">
+            <span class="nexoraMiniOrb"></span>
+            <strong style="font-size:13px;letter-spacing:.4px;">NEXORA AI</strong>
+            <span style="font-size:11px;color:#b8b2d0;">• ${esc(zone.areaName)}</span>
+          </div>
+          <button class="changeBtn" onclick="openCollegeChanger()">College</button>
+        </div>
+
+        <div class="nexoraPersonalityBar">
+          ${Object.keys(AI_PERSONALITIES).map(key => `
+            <button
+              class="personaChip ${state.activePersona === key ? "active" : ""}"
+              onclick="setAiPersona('${key}')"
+            >
+              ${AI_PERSONALITIES[key].label}
+            </button>
+          `).join("")}
+        </div>
+
+        <div class="nexoraUnifiedShell">
+          <div id="chatBox" class="nexoraChatBox">
+            ${state.chatHistory.map(m => `
+              <div class="chatMsg ${m.role}">${m.html}</div>
+            `).join("")}
+
+            <div class="nexoraChipsInside">
+              <button class="tag" onclick="askNexora('Build a 3-stop hangout combo')">🗺️ 3-Stop Plan</button>
+              <button class="tag" onclick="askNexora('Best budget food spots')">💸 Budget Food</button>
+              <button class="tag" onclick="askNexora('Best aesthetic cafes')">☕ Aesthetic Cafes</button>
+              <button class="tag" onclick="askNexora('Sweet dessert spots')">🍨 Desserts</button>
+            </div>
+          </div>
+
+          <div class="nexoraInputBar">
+            <input
+              id="nexoraInput"
+              class="input"
+              placeholder="Ask NEXORA (${AI_PERSONALITIES[state.activePersona].label})..."
+              onkeydown="if(event.key==='Enter') askNexora()"
+            >
+            <button class="nexoraSendBtn" onclick="askNexora()">Ask</button>
+          </div>
+        </div>
+
+        <div class="nexoraMiniFooter">NEXORA AI • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
+      </div>
+    `;
+    return;
+  }
+
+  /* ---------------- MANAGEMENT PAGE ---------------- */
+  if (state.page === "management") {
+    const records = getLoginRecords();
+    const accounts = getAllAccounts();
+    const q = state.mgmtSearch.trim().toLowerCase();
+
+    const filtered = records.filter(r =>
+      (r.name || "").toLowerCase().includes(q) ||
+      (r.studentId || "").toLowerCase().includes(q) ||
+      (r.college || "").toLowerCase().includes(q) ||
+      (r.area || "").toLowerCase().includes(q) ||
+      (r.time || "").toLowerCase().includes(q)
+    );
+
+    const jayanagarCount = records.filter(r => r.area === "Jayanagar").length;
+    const basavanagudiCount = records.filter(r => r.area === "Basavanagudi").length;
+
+    app.innerHTML = `
+      <div class="page ${pageExtraClass}">
+        <div class="mgmtCenteredWrap">
+          <div class="sectionTop">
+            <button class="backBtn" onclick="goHome()">← Home</button>
+            <button class="changeBtn" onclick="goHome()">Lock Admin 🔒</button>
+          </div>
+
+          <div class="locationPill">⚙️ Admin & Login Audit</div>
+
+          <h1 class="pageTitle">Management</h1>
+          <p class="pageSub">
+            Registered student IDs, login history & leaderboard audit.
+          </p>
+
+          <div class="statsGrid">
+            <div class="statCard">
+              <b>${accounts.length}</b>
+              <small>Student IDs</small>
+            </div>
+            <div class="statCard">
+              <b>${jayanagarCount}</b>
+              <small>Jayanagar</small>
+            </div>
+            <div class="statCard">
+              <b>${basavanagudiCount}</b>
+              <small>Basavanagudi</small>
+            </div>
+          </div>
+
+          <div class="mgmtControls">
+            <input
+              class="search"
+              value="${esc(state.mgmtSearch)}"
+              placeholder="Search name, NEX-ID, college, area..."
+              oninput="state.mgmtSearch=this.value;render();"
+            >
+            <button class="mgmtBtn export" onclick="exportRecordsCSV()">Export CSV 📥</button>
+            <button class="mgmtBtn danger" onclick="clearAllRecords()">Clear All 🗑️</button>
+          </div>
+
+          ${
+            filtered.length
+              ? `
+                <div class="cards">
+                  ${filtered.map((r, idx) => `
+                    <div class="placeCard" style="text-align:left;">
+                      <div class="placeHead">
+                        <div class="placeName">#${filtered.length - idx} • ${esc(r.name)} (${esc(r.studentId || "NEX-ID")})</div>
+                        <span class="placeType">${esc(r.action)}</span>
+                      </div>
+                      <div class="recordMeta">
+                        <div>🎓 <strong>College:</strong> ${esc(r.college)}</div>
+                        <div>📍 <strong>Locked Area:</strong> ${esc(r.area)}</div>
+                        <div>🕒 <strong>Logged At:</strong> ${esc(r.time)}</div>
+                      </div>
+                    </div>
+                  `).join("")}
+                </div>
+              `
+              : `<div class="empty">No login records found yet.</div>`
+          }
+
+          <div class="footer">NEXORA MANAGEMENT PANEL • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  /* ---------------- BEAUTY MODE ---------------- */
+  if (state.page === "beauty") {
+    const item = BEAUTY_LINES[state.beautyIndex];
+
+    app.innerHTML = `
+      <div class="page beauty ${pageExtraClass}">
+        <div class="beautyTopBar">
+          <button class="beautyBack" onclick="goHome()">← Back Home</button>
+
+          <div class="beautyCornerGroup">
+            <div class="userBadge beautyCornerBadge" onclick="openCollegeChanger()" title="Tap to edit profile">
+              <span class="liveDot"></span>
+              <span><strong>${esc(state.userName || "Guest")}</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div id="beautyIcon" class="beautyIcon">${item.icon}</div>
+
+        <h1 id="beautyText" class="beautyText">${esc(item.text)}</h1>
+
+        <button
+          id="beautyNextBtn"
+          class="beautyBtn"
+          onclick="nextBeauty(this)"
+        >
+          Next ✨
+        </button>
+      </div>
+    `;
+  }
 }
 
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") {
-    closeNavDrawer();
-    if (document.getElementById("studentAccessModal").classList.contains("show")) {
-      closeStudentAccessModal();
-      return;
-    }
-    closeGangBriefingModal();
-    cancelCollegeChange();
-    closeMgmtModal();
-    closeCustomModal();
-  }
-  if (e.key === "Enter" && document.getElementById("mgmtModal").classList.contains("show")) {
-    verifyMgmtPassword();
-  }
+/* =========================================================
+   BOOT INITIALIZATION
+========================================================= */
+
+document.getElementById("nameInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") goToCollegeStep();
 });
 
-/* =========================================================
-   INIT
-========================================================= */
+document.getElementById("mgmtPassInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") verifyMgmtPassword();
+});
 
 seedCommunityDemoData();
 applyTheme(state.theme, false);
@@ -7834,12 +7874,6 @@ if (state.userName && state.college) {
 
 render();
 renderPollDock();
-
-if (!isStudentVerified()) {
-  openStudentAccessModal();
-} else if (!state.college) {
-  openSetup();
-}
 </script>
 
 </body>
