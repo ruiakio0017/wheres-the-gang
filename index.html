@@ -2086,6 +2086,19 @@ button:disabled{
   white-space:nowrap;
 }
 
+
+.nexoraMicBtn{
+  min-width:42px;height:42px;border-radius:14px;
+  color:#fff;background:rgba(139,92,255,.18);
+  border:1px solid rgba(168,125,255,.38);font-size:18px;
+}
+.nexoraMicBtn.listening{background:rgba(255,79,216,.28);border-color:#ff70d9;box-shadow:0 0 0 5px rgba(255,79,216,.12);animation:micPulse .9s ease-in-out infinite alternate;}
+@keyframes micPulse{to{transform:scale(1.07);box-shadow:0 0 20px rgba(255,79,216,.55);}}
+.nexoraTyping{display:flex;align-items:center;gap:5px;color:#c9c1e7;font-size:12px;}
+.nexoraTyping i{width:5px;height:5px;border-radius:50%;background:#d9a7ff;animation:typingBounce .7s infinite alternate;}
+.nexoraTyping i:nth-child(2){animation-delay:.15s}.nexoraTyping i:nth-child(3){animation-delay:.3s}
+@keyframes typingBounce{to{opacity:.35;transform:translateY(-4px)}}
+
 .nexoraMiniFooter{
   text-align:center;
   color:#605d6e;
@@ -3283,12 +3296,20 @@ button:disabled{
   transition:.35s cubic-bezier(.16,1,.3,1);
 }
 
+.beautyPlayArea{
+  position:relative;
+  width:min(100%,680px);
+  height:148px;
+  margin:8px auto 24px;
+}
 .beautyBtn{
-  position:fixed;
-  z-index:120;
+  position:absolute;
+  z-index:2;
+  display:block;
   left:50%;
-  bottom:76px;
-  transform:translateX(-50%);
+  top:50%;
+  transform:translate(-50%,-50%);
+  margin:0;
   background:linear-gradient(135deg,#fff,#f5d9ff);
   color:#111;
   padding:15px 28px;
@@ -3296,10 +3317,7 @@ button:disabled{
   font-weight:1000;
   min-width:150px;
   box-shadow:0 14px 36px rgba(0,0,0,.45), 0 0 30px var(--glow-pink);
-  transition:
-    left .55s cubic-bezier(.16,1,.3,1),
-    bottom .55s cubic-bezier(.16,1,.3,1),
-    transform .35s ease;
+  transition:left .28s cubic-bezier(.16,1,.3,1),top .28s cubic-bezier(.16,1,.3,1),transform .28s cubic-bezier(.16,1,.3,1);
 }
 
 .beautyBack{
@@ -3384,6 +3402,83 @@ button:disabled{
     height:62px;
   }
 }
+
+/* NEXORA IN-APP LOCATION DETAILS */
+.locationDetailOverlay{position:fixed;inset:0;z-index:99999;background:rgba(4,6,18,.78);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:18px;}
+.locationDetailBox{width:min(520px,100%);max-height:82vh;overflow:auto;border:1px solid rgba(143,232,255,.28);border-radius:22px;padding:20px;background:linear-gradient(145deg,rgba(22,26,52,.98),rgba(10,13,29,.98));box-shadow:0 20px 70px rgba(0,0,0,.55);color:#fff;}
+.locationDetailBox h2{margin:4px 0 10px;font-size:22px;}
+.locationDetailAddress{padding:12px;border-radius:13px;background:rgba(255,255,255,.07);color:#c9eaff;font-size:13px;line-height:1.55;margin:12px 0;}
+.locationDetailClose{float:right;border:0;border-radius:10px;padding:7px 11px;background:rgba(255,255,255,.12);color:#fff;font-weight:900;}
+.locationDetailTag{display:inline-block;border-radius:99px;padding:5px 9px;background:rgba(143,232,255,.12);color:#8fe8ff;font-size:10px;font-weight:900;letter-spacing:.6px;}
+.discoveryGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:16px;}
+.discoveryCard{padding:15px;border:1px solid rgba(143,232,255,.18);border-radius:17px;background:rgba(255,255,255,.055);}
+.discoveryCard h3{font-size:15px;margin:0 0 7px;}
+.discoveryCard p{font-size:12px;line-height:1.5;color:#b8b4c9;margin:0 0 10px;}
+.discoveryCard small{display:block;color:#8fe8ff;font-size:11px;line-height:1.45;margin-bottom:10px;}
+
+
+
+/* NEXORA FUN ZONE */
+.funZoneWrap{max-width:720px;margin:0 auto;padding:18px 14px 34px}
+.funZoneHero{text-align:center;padding:22px 16px 18px;border:1px solid rgba(168,120,255,.28);border-radius:24px;background:linear-gradient(135deg,rgba(120,75,255,.16),rgba(255,79,216,.09));box-shadow:0 12px 36px rgba(0,0,0,.18);margin-bottom:16px}
+.funZoneHero .funZoneEmoji{font-size:36px;display:block;margin-bottom:7px}
+.funZoneHero h1{font-size:clamp(25px,7vw,34px);margin:0 0 6px;letter-spacing:.4px}
+.funZoneHero p{margin:0;color:var(--muted,#aaa);font-size:13px}
+.funZoneCards{display:grid;grid-template-columns:1fr;gap:13px}
+.funZoneCard{border:1px solid rgba(255,255,255,.12);border-radius:21px;padding:18px;background:linear-gradient(145deg,rgba(35,30,55,.96),rgba(18,17,29,.98));box-shadow:0 10px 28px rgba(0,0,0,.18)}
+.funZoneCard h2{margin:0 0 6px;font-size:20px}.funZoneSub{font-size:12px;color:#aaa;margin-bottom:15px}
+.funZonePrimary{width:100%;border:0;border-radius:14px;padding:13px 14px;color:#fff;font-weight:800;font-size:14px;background:linear-gradient(100deg,#8658ff,#e34fc7);cursor:pointer;min-height:46px}
+.funZoneChoices{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
+.funZoneChoice{min-height:82px;border:1px solid rgba(177,137,255,.35);border-radius:15px;padding:12px 10px;background:rgba(137,94,255,.11);color:inherit;font-weight:700;font-size:13px;line-height:1.4;cursor:pointer;transition:transform .16s,border-color .16s,background .16s}
+.funZoneChoice:active{transform:scale(.97)}.funZoneChoice.selected{border-color:#d18cff;background:rgba(177,110,255,.25);box-shadow:0 0 0 2px rgba(177,110,255,.12)}
+.funZoneResult{min-height:36px;margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.055);color:#ddd;font-size:13px;line-height:1.5}
+.funZoneRoast{font-size:17px;line-height:1.55;font-weight:750;text-align:center;padding:20px 12px;min-height:88px;display:flex;align-items:center;justify-content:center}
+.funZoneModes{display:flex;gap:8px;margin:8px 0 13px}.funZoneMode{flex:1;border:1px solid rgba(255,255,255,.15);border-radius:999px;background:rgba(255,255,255,.05);color:inherit;padding:9px 6px;font-size:12px;font-weight:700;cursor:pointer}.funZoneMode.active{border-color:#c28aff;background:rgba(150,92,255,.22)}
+.funZoneBack{margin-bottom:14px}.funZoneFoot{text-align:center;color:#858095;font-size:11px;margin-top:17px}
+@media(min-width:620px){.funZoneCards{grid-template-columns:1fr 1fr}.funZoneCard{min-height:300px}}
+
+
+/* FUN ZONE DROP ANIMATIONS + MINI GAMES */
+.funDrop{animation:funDropIn .72s cubic-bezier(.18,.78,.28,1.18) both}
+.funDrop.roastDrop{animation:roastDropIn .82s cubic-bezier(.2,.9,.25,1.2) both}
+.funDrop.sadDrop{animation:sadDropIn 1s cubic-bezier(.16,.72,.28,1) both}
+@keyframes funDropIn{0%{transform:translateY(-90px) rotate(-12deg);opacity:0}65%{transform:translateY(9px) rotate(5deg);opacity:1}82%{transform:translateY(-5px) rotate(-3deg)}100%{transform:translateY(0) rotate(0);opacity:1}}
+@keyframes roastDropIn{0%{transform:translateY(-120px) rotate(18deg) scale(.7);opacity:0}55%{transform:translateY(8px) rotate(-8deg) scale(1.08);opacity:1}75%{transform:translateY(-4px) rotate(4deg)}100%{transform:translateY(0) rotate(0) scale(1)}}
+@keyframes sadDropIn{0%{transform:translateY(-100px);opacity:0}70%{transform:translateY(5px);opacity:1}82%{transform:translateY(0)}100%{transform:translateY(0);opacity:1}}
+.funMiniGrid{display:grid;grid-template-columns:1fr;gap:13px;margin-top:13px}
+.funMiniChoices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.funMiniChoices button{border:1px solid rgba(177,137,255,.35);border-radius:13px;padding:12px 8px;background:rgba(137,94,255,.12);color:inherit;font-weight:750;min-height:48px}
+.funPopup{position:fixed;inset:0;z-index:100100;background:rgba(3,5,18,.78);backdrop-filter:blur(16px) saturate(135%);display:none;align-items:center;justify-content:center;padding:22px;animation:funVeilIn .22s ease both}
+.funPopupBox{position:relative;overflow:hidden;width:min(390px,100%);padding:30px 23px 23px;border-radius:25px;text-align:center;background:linear-gradient(155deg,rgba(27,31,63,.98),rgba(10,14,31,.99) 70%);border:1px solid rgba(143,123,255,.48);box-shadow:0 0 0 1px rgba(255,255,255,.035) inset,0 24px 80px rgba(0,0,0,.62),0 0 42px rgba(117,83,255,.18);animation:funCardIn .38s cubic-bezier(.18,.85,.25,1.15) both}
+.funPopupBox:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,#8d79ff,#ed65d5,#8d79ff,transparent);box-shadow:0 0 18px #a879ff}
+.funPopupBox:after{content:"";position:absolute;width:190px;height:190px;right:-115px;top:-125px;border-radius:50%;background:rgba(142,111,255,.18);filter:blur(8px);pointer-events:none}
+.funPopupMark{width:54px;height:54px;margin:0 auto 15px;display:grid;place-items:center;border-radius:17px;color:#e8dcff;font-size:25px;background:linear-gradient(145deg,rgba(139,111,255,.28),rgba(224,88,206,.12));border:1px solid rgba(184,154,255,.38);box-shadow:0 0 25px rgba(143,105,255,.2)}
+.funPopupKicker{margin:0 0 7px;color:#a99bff;font-size:10px;letter-spacing:3px;font-weight:900}
+.funPopupBox h2{position:relative;margin:0 0 8px;color:#fff;font-size:26px;letter-spacing:-.6px;font-weight:900}
+.funPopupHint{margin:0 0 21px;color:rgba(221,224,255,.66);font-size:12px;line-height:1.5}
+.funPopupBtns{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.funPopupBtns button{min-height:48px;padding:12px;border:1px solid rgba(173,151,255,.38);border-radius:14px;font-weight:900;font-size:13px;letter-spacing:1.2px;color:white;background:rgba(139,112,255,.13);cursor:pointer;transition:transform .18s,box-shadow .18s,background .18s}
+.funPopupBtns button:first-child{background:linear-gradient(105deg,#795cff,#b65ce9);border-color:transparent;box-shadow:0 7px 22px rgba(130,88,255,.25)}
+.funPopupBtns button:last-child{background:rgba(255,255,255,.055)}
+.funPopupBtns button:active{transform:scale(.96)}
+.funPopupBtns button:hover{box-shadow:0 0 22px rgba(160,119,255,.28)}
+.funPopupBox #fgBejarAnswer{margin-top:17px;padding:14px 12px;border:1px solid rgba(166,137,255,.28);border-radius:14px;background:linear-gradient(110deg,rgba(120,91,255,.14),rgba(222,87,203,.09));color:#f4efff;font-size:14px;font-weight:800}
+.funPopupExit{margin-top:13px!important;border:1px solid rgba(173,151,255,.38)!important;background:rgba(255,255,255,.06)!important;box-shadow:none!important}
+.funPopupExit{
+  display:block!important;width:100%!important;min-height:48px!important;
+  padding:13px 16px!important;border-radius:14px!important;
+  color:#fff!important;font-size:13px!important;font-weight:900!important;
+  letter-spacing:1px!important;text-transform:uppercase!important;
+  cursor:pointer!important;opacity:1!important;visibility:visible!important;
+  background:linear-gradient(105deg,#795cff,#b65ce9)!important;
+  box-shadow:0 8px 24px rgba(130,88,255,.25)!important;
+}
+.funZoneBack{margin-left:58px!important;margin-top:2px!important}
+
+@keyframes funVeilIn{from{opacity:0}to{opacity:1}}
+@keyframes funCardIn{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(min-width:620px){.funMiniGrid{grid-template-columns:1fr 1fr}}
+
 </style>
 </head>
 
@@ -3555,7 +3650,7 @@ button:disabled{
           onclick="chooseCollege('NMKRV')"
         >
           <b>🎓 NMKRV</b>
-          <small>Jayanagar • Jayanagar-only planner</small>
+          <small>Jayanagar 3rd/4th Block • shared NMKRV + RV PU zone</small>
         </button>
 
         <button
@@ -3564,7 +3659,7 @@ button:disabled{
           onclick="chooseCollege('RV PU College')"
         >
           <b>🎓 RV PU College</b>
-          <small>Jayanagar 3rd Block • Jayanagar-only planner</small>
+          <small>Jayanagar 3rd/4th Block • shared NMKRV + RV PU zone</small>
         </button>
 
         <button
@@ -3574,6 +3669,23 @@ button:disabled{
         >
           <b>🎓 Aps</b>
           <small>N.R. Colony • Basavanagudi-only planner</small>
+        </button>
+
+        <button class="collegeOption" onclick="chooseCollege('Surana College')">
+          <b>🎓 Surana College</b>
+          <small>South End Road • Basavanagudi places</small>
+        </button>
+        <button class="collegeOption" onclick="chooseCollege('JAIN College - VV Puram')">
+          <b>🎓 JAIN College – VV Puram</b>
+          <small>VV Puram • Food Street &amp; Gandhi Bazaar</small>
+        </button>
+        <button class="collegeOption" onclick="chooseCollege('JAIN College - Jayanagar')">
+          <b>🎓 JAIN College – Jayanagar</b>
+          <small>Jayanagar 9th Block • Markets &amp; cafes</small>
+        </button>
+        <button class="collegeOption" onclick="chooseCollege('RV PU College - Konanakunte Area')">
+          <b>🎓 RV PU College – Konanakunte Area</b>
+          <small>Konanakunte / Forum South area option</small>
         </button>
       </div>
 
@@ -3819,6 +3931,21 @@ function getAllAccounts() {
 function saveAllAccounts(list) {
   localStorage.setItem("gang_accounts_v2", JSON.stringify(list));
 }
+function openAccountSwitcher() {
+  const accounts=getAllAccounts();
+  if(!accounts.length){ showToast("Create an account first."); return; }
+  const options=accounts.map((a,i)=>`${i+1}. ${a.name} — ${a.college}`).join("\n");
+  const choice=prompt("Switch to account number:\n"+options);
+  const idx=Number(choice)-1;
+  if(!Number.isInteger(idx)||idx<0||idx>=accounts.length) return;
+  const acc=accounts[idx];
+  localStorage.setItem("gang_active_account_id",acc.id);
+  localStorage.setItem("gang_user_name",acc.name);
+  localStorage.setItem("gang_user_college",acc.college);
+  state.userName=acc.name; state.college=acc.college; state.activeGamePlayer=acc.name;
+  renderNavDrawerItems(); render(); showToast(`Switched to ${acc.name}`);
+}
+
 
 function generateStudentId(username) {
   const clean = (username || "GANG").replace(/[^a-zA-Z0-9]/g, "").toUpperCase().slice(0, 3).padEnd(3, "X");
@@ -4127,19 +4254,21 @@ function renderNavDrawerItems() {
       items: [
         { icon: "🏠", title: "Home Hub", active: state.page === "home", run: () => goHome() },
         { icon: "🚀", title: "Plan Hangout", active: state.page === "categories" || state.page === "places", run: () => openPlanner() },
+        { icon: "🏎️", title: "HOT WHEELS NEAR ME", active: state.page === "hotWheels", run: () => openHotWheelsPage() },
+        { icon: "🎮", title: "PLAYSTATION NEAR ME", active: state.page === "playStation", run: () => openPlayStationPage() },
         { icon: "🧾", title: "Bunk & Hangout Receipt", badge: "NEW", active: state.page === "bunkReceipt", run: () => openBunkReceiptPage() },
         { icon: "✨", title: "NEXORA AI Co-Pilot", active: state.page === "nexora", run: () => openNexora() },
         { icon: "🎨", title: "Themes (Animated & Static)", badge: "LTE", active: state.page === "themes", run: () => openThemesPage() }
       ]
     },
     {
-      label: "NEXORA Social & Vault",
+      label: "NEXORA VAULT",
       items: [
-        { icon: "🌐", title: "NEXORA Social Hub", active: state.page === "socialHub", run: () => openSocialHub() },
+        { icon: "🌐", title: "NEXORA VAULT", active: state.page === "socialHub", run: () => openSocialHub() },
         { icon: "🪪", title: "3D Holographic Student ID", active: state.page === "studentId", run: () => openStudentIdPage() },
         { icon: "🎞️", title: "Memories Vault (Film & Vinyl)", active: state.page === "memories", run: () => openMemoriesPage() },
         { icon: "🎨", title: "Custom Frame & Receipt Studio", badge: "STUDIO", active: state.page === "frameStudio", run: () => openFrameStudioPage() },
-        { icon: "💬", title: "Private Student DMs", badge: unreadDmCount > 0 ? String(unreadDmCount) : "", active: state.page === "messages", run: () => openMessagesPage() },
+        { icon: "📝", title: "Private Notes", active: state.page === "privateNotes", run: () => openPrivateNotesPage() },
         { icon: "🗳️", title: "Squad Voting Polls", active: state.page === "voting", run: () => openVotingPage() },
         { icon: "🏆", title: "Daily Streaks & Leaderboard", active: state.page === "leaderboard", run: () => openLeaderboardPage() }
       ]
@@ -4151,6 +4280,7 @@ function renderNavDrawerItems() {
         { icon: "🐔", title: "Truth / Dare / Chicken Out", active: state.page === "truthDare", run: () => openTruthDare() },
         { icon: "💸", title: "Bill Splitter & Split Receipt", active: false, run: () => openSplitModal() },
         { icon: "💘", title: "Vibe Swipe Decider", active: state.page === "vibeSwipe", run: () => openVibeSwipe() },
+        { icon: "🎉", title: "NEXORA FUN ZONE", active: state.page === "funZone", run: () => openFunZone() },
         { icon: "❤️", title: "Beauty Mode", active: state.page === "beauty", run: () => openBeauty() }
       ]
     }
@@ -4198,12 +4328,10 @@ function renderNavDrawerItems() {
         </div>
       </div>
     </div>
-    <button
-      style="padding:7px 11px;border-radius:10px;background:rgba(255,255,255,.1);color:#fff;font-size:11px;font-weight:900;"
-      onclick="drawerNavigate(() => openCollegeChanger())"
-    >
-      ${acc ? "Edit" : "Create"}
-    </button>
+    <div style="display:flex;gap:6px;">
+      <button style="padding:7px 10px;border-radius:10px;background:rgba(143,232,255,.14);color:#8fe8ff;font-size:10px;font-weight:900;" onclick="drawerNavigate(() => openAccountSwitcher())">Switch Account</button>
+      <button style="padding:7px 11px;border-radius:10px;background:rgba(255,255,255,.1);color:#fff;font-size:11px;font-weight:900;" onclick="drawerNavigate(() => openCollegeChanger())">${acc ? "Edit" : "Create"}</button>
+    </div>
   `;
 }
 
@@ -4283,8 +4411,8 @@ function showToast(message) {
 
 const COLLEGE_ZONES = {
   "NMKRV": {
-    areaName: "Jayanagar",
-    campusNote: "NMKRV Campus • Jayanagar 3rd Block",
+    areaName: "Jayanagar 3rd / 4th Block Cluster",
+    campusNote: "NMKRV + RV PU Jayanagar Cluster • 3rd / 4th Block",
     allowedPlaces: [
       "Taaza Thindi",
       "Brahmin's Thatte Idli",
@@ -4322,12 +4450,19 @@ const COLLEGE_ZONES = {
       "Jayanagar Metro Station",
       "South End Circle Metro",
       "Lalbagh Metro (Nearby)"
-    ]
+    ,
+      "Block Two Coffee",
+      "Isobel Coffee House",
+      "The Studio Cafe",
+      "Chai Culture",
+      "Jayanagar 9th Block Market",
+      "Croma - Jayanagar",
+      "Pai International - Jayanagar"]
   },
 
   "RV PU College": {
-    areaName: "Jayanagar",
-    campusNote: "RV PU College • Jayanagar 3rd Block",
+    areaName: "Jayanagar 3rd / 4th Block Cluster",
+    campusNote: "NMKRV + RV PU Jayanagar Cluster • 3rd / 4th Block",
     allowedPlaces: [
       "Taaza Thindi",
       "Brahmin's Thatte Idli",
@@ -4365,7 +4500,14 @@ const COLLEGE_ZONES = {
       "Jayanagar Metro Station",
       "South End Circle Metro",
       "Lalbagh Metro (Nearby)"
-    ]
+    ,
+      "Block Two Coffee",
+      "Isobel Coffee House",
+      "The Studio Cafe",
+      "Chai Culture",
+      "Jayanagar 9th Block Market",
+      "Croma - Jayanagar",
+      "Pai International - Jayanagar"]
   },
 
   "Aps": {
@@ -4405,7 +4547,39 @@ const COLLEGE_ZONES = {
       "National College Metro",
       "Lalbagh Metro",
       "Bull Temple Road"
-    ]
+    ,
+      "THE CHAI WALAH",
+      "TEA TIME - VV Puram",
+      "Friends Adda - Sri Manjunatha Condiments",
+      "The Coffee San"]
+  },
+
+  "Surana College": {
+    areaName: "Surana South End / Basavanagudi",
+    campusNote: "Surana College • 16, South End Road, Basavanagudi",
+    allowedPlaces: ["The 11th Bean Cafe","The Studio Cafe","Vidyarthi Bhavan","CTR (Shri Sagar)","Brahmin's Coffee Bar","Hatti Kaapi","THE CHAI WALAH","South End Circle Market","Gandhi Bazaar","DVG Road","VV Puram Food Street","Jayanagar Shopping Complex","Bugle Rock Park","MN Krishna Rao Park","Lalbagh Botanical Garden","South End Circle Metro","National College Metro","Bull Temple","Dodda Ganapathi Temple","Brahmin's Thatte Idli",
+      "Friends Adda - Sri Manjunatha Condiments",
+      "The Coffee San",
+      "Kesarii Cafe"]
+  },
+  "JAIN College - VV Puram": {
+    areaName: "JAIN VV Puram / Basavanagudi",
+    campusNote: "JAIN College • 91/2, Dr A N Krishna Rao Road, VV Puram",
+    allowedPlaces: ["Vidyarthi Bhavan","CTR (Shri Sagar)","Brahmin's Coffee Bar","Hatti Kaapi","TEA TIME - VV Puram","VV Puram Food Street","Gandhi Bazaar","DVG Road","Sajjan Rao Circle","Brahmin's Thatte Idli","SLV Coffee Bar","Roti Ghar","Bugle Rock Park","MN Krishna Rao Park","Dodda Ganapathi Temple","Bull Temple","National College Metro","Lalbagh Botanical Garden",
+      "THE CHAI WALAH",
+      "The Coffee San",
+      "Kesarii Cafe"]
+  },
+  "JAIN College - Jayanagar": {
+    areaName: "JAIN Jayanagar 9th Block",
+    campusNote: "JAIN College • District Fund Road, Jayanagar 9th Block",
+    allowedPlaces: ["Chai Culture","Block Two Coffee","Isobel Coffee House","Parmeshwar Toys and Gift Center","Jayanagar 9th Block Market","Jayanagar 4th Block Shopping Complex","The Studio Cafe","Chai Culture","Madhavan Park","Ranadheera Park","Jayanagar Metro Station","Sgamershop","1vX Gaming | Jayanagar","Truffles (Jayanagar)","Corner House","Naturals Ice Cream","Jayanagar Shopping Complex",
+      "Nandus Jayanagar"]
+  },
+  "RV PU College - Konanakunte Area": {
+    areaName: "Konanakunte / Forum South",
+    campusNote: "Konanakunte area option • Forum South / Konanakunte Cross",
+    allowedPlaces: ["Forum South Bengaluru","Hamleys - Forum Falcon City","My Gifts - Konanakunte","Anjanapura Main Road Shops","Konanakunte Cross Metro","Yelachenahalli Metro","Konanakunte Cross Market","Kaggis Bakery","Local Food Court - Forum South","Brik Oven - Forum South","Starbucks - Forum South","Blue Tokai - Forum South","Third Wave Coffee - Forum South","Magnolia Bakery - Forum South","Theobroma - Forum South","McDonald's - Forum South","KFC - Forum South","Pizza Hut - Forum South","Taco Bell - Forum South","Subway - Forum South","PVR - Forum South","Tridom - Forum South","Miniso - Forum South","Reliance Digital - Forum South","Zara - Forum South","H&M - Forum South","Lifestyle - Forum South","Shoppers Stop - Forum South","Adidas - Forum South","Puma - Forum South","Nykaa Luxe - Forum South","Samsung - Forum South","Chai Point - Forum South","Konanakunte Cross Market","Anjanapura Main Road Tea Shops"]
   }
 };
 
@@ -4415,16 +4589,26 @@ const COLLEGE_ZONES = {
 
 const CATEGORIES = [
   { id: "breakfast", emoji: "🥞", name: "Breakfast & Tiffin", sub: "Idli, dosa & morning bites" },
-  { id: "tea", emoji: "🫖", name: "Tea & Coffee", sub: "Chai & filter coffee breaks" },
+  { id: "tea", emoji: "☕", name: "Tea & Coffee", sub: "Chai, filter coffee, espresso & cold brews" },
   { id: "cafes", emoji: "☕", name: "Cafes & Hangouts", sub: "Aesthetic gang tables" },
   { id: "burgers", emoji: "🍔", name: "Burgers & Meals", sub: "Heavy gang lunch spots" },
   { id: "icecream", emoji: "🍨", name: "Ice Cream & Dessert", sub: "Sweet post-class treats" },
   { id: "street", emoji: "🌮", name: "Street Food", sub: "Chaats, rolls & evening snacks" },
   { id: "shopping", emoji: "🛍️", name: "Shopping & Walk", sub: "Markets, bazaars & strolls" },
   { id: "parks", emoji: "🌳", name: "Parks & Chill", sub: "Greenery & peaceful benches" },
-  { id: "movies", emoji: "🎬", name: "Movies & Gaming", sub: "Screens, bowling & arcades" },
+  { id: "cinemas", emoji: "🎬", name: "PVR & Theatres", sub: "PVR, INOX, Cinepolis & local cinema halls" },
+  { id: "movies", emoji: "🕹️", name: "Arcades & Entertainment", sub: "Bowling, arcade games & indoor fun" },
   { id: "temples", emoji: "🛕", name: "Temples & Heritage", sub: "Iconic local landmarks" },
-  { id: "metro", emoji: "🚇", name: "Metro & Transit", sub: "Easy stations & main roads" }
+  { id: "metro", emoji: "🚇", name: "Metro & Transit", sub: "Easy stations & main roads" },
+  { id: "shops", emoji: "🛍️", name: "Local Shops & Markets", sub: "Shopping streets, stores & markets" },
+  { id: "viewpoints", emoji: "📍", name: "Viewpoints & Landmarks", sub: "Known local spots & city sights" },
+  { id: "gaming", emoji: "🎮", name: "Gaming & Consoles", sub: "Gaming stores and play zones" },
+  { id: "pizza", emoji: "🍕", name: "Pizza & Italian", sub: "Pizza outlets and Italian dining" },
+  { id: "toys", emoji: "🏎️", name: "Hot Wheels & Toy Shops", sub: "Die-cast, toys and collectibles" },
+  { id: "bakeries", emoji: "🥐", name: "Bakeries & Sweets", sub: "Bakeries, sweets and dessert counters" },
+  { id: "transit", emoji: "🚌", name: "BMTC Bus Stops", sub: "Nearby bus stops and transit points" },
+  { id: "pubs", emoji: "🍸", name: "Pubs & Bars (18+)", sub: "Age-restricted venue information only" },
+  { id: "stays", emoji: "🏨", name: "Hotels & OYO Stays", sub: "Accommodation listings; adult booking requirements apply" }
 ];
 
 const PLACES = [
@@ -4513,21 +4697,324 @@ const PLACES = [
 
   { name: "National College Metro", cat: "metro", area: "Basavanagudi", desc: "Main Green Line metro station serving Basavanagudi & Aps." },
   { name: "Lalbagh Metro", cat: "metro", area: "Basavanagudi", desc: "Green Line station at Lalbagh West Gate near Basavanagudi." },
-  { name: "Bull Temple Road", cat: "metro", area: "Basavanagudi", desc: "Scenic main Basavanagudi stretch connecting N.R. Colony & Gandhi Bazaar." }
+  { name: "Bull Temple Road", cat: "metro", area: "Basavanagudi", desc: "Scenic main Basavanagudi stretch connecting N.R. Colony & Gandhi Bazaar." },
+  { name: "THE CHAI WALAH", cat: "tea", area: "Basavanagudi", address: "19/E, Pattalamma Temple Road, South End Circle, Bengaluru 560004", desc: "Chai and quick-bites stop near South End Circle." },
+  { name: "TEA TIME - VV Puram", cat: "tea", area: "Basavanagudi", address: "Vishweshwarapura, Shankarapura, Bengaluru 560004", desc: "Tea house serving flavoured teas and refreshments in VV Puram." },
+  { name: "Friends Adda - Sri Manjunatha Condiments", cat: "tea", area: "Basavanagudi", address: "21/83, South End Road, Basavanagudi, Bengaluru 560004", desc: "Local tea-and-snack cafe known for bun-based snacks." },
+  { name: "The Coffee San", cat: "tea", area: "Basavanagudi", address: "54/1, Rama Iyengar Road, Vishweshwarapura, Basavanagudi, Bengaluru 560004", desc: "Specialty coffee shop in the VV Puram / Basavanagudi area." },
+
+  // Verified named locations added for campus-specific discovery
+  { name: "THE CHAI WALAH", cat: "tea", area: "Surana South End / Basavanagudi", address: "19/E, Pattalamma Temple Road, South End Circle, Bengaluru 560004", desc: "Chai and quick-bites stop near South End Circle." },
+  { name: "Friends Adda - Sri Manjunatha Condiments", cat: "tea", area: "Surana South End / Basavanagudi", address: "21/83, South End Road, Basavanagudi, Bengaluru 560004", desc: "Local tea-and-snack cafe known for bun-based snacks." },
+  { name: "The Coffee San", cat: "tea", area: "Surana South End / Basavanagudi", address: "54/1, Rama Iyengar Road, Vishweshwarapura, Basavanagudi, Bengaluru 560004", desc: "Specialty coffee shop in the VV Puram / Basavanagudi area." },
+  { name: "Kesarii Cafe", cat: "cafes", area: "Surana South End / Basavanagudi", address: "20, Food Street, next to Arya Samaj, Vishweshwarapura, Basavanagudi, Bengaluru 560004", desc: "Cafe beside VV Puram Food Street for snacks and refreshments." },
+  { name: "THE CHAI WALAH", cat: "tea", area: "JAIN VV Puram / Basavanagudi", address: "19/E, Pattalamma Temple Road, South End Circle, Bengaluru 560004", desc: "Chai and quick-bites stop near South End Circle." },
+  { name: "TEA TIME - VV Puram", cat: "tea", area: "JAIN VV Puram / Basavanagudi", address: "Vishweshwarapura, Shankarapura, Bengaluru 560004", desc: "Tea house serving flavoured teas and refreshments in VV Puram." },
+  { name: "The Coffee San", cat: "tea", area: "JAIN VV Puram / Basavanagudi", address: "54/1, Rama Iyengar Road, Vishweshwarapura, Basavanagudi, Bengaluru 560004", desc: "Specialty coffee shop in the VV Puram / Basavanagudi area." },
+  { name: "Kesarii Cafe", cat: "cafes", area: "JAIN VV Puram / Basavanagudi", address: "20, Food Street, next to Arya Samaj, Vishweshwarapura, Basavanagudi, Bengaluru 560004", desc: "Cafe next to VV Puram Food Street." },
+  { name: "Nandus Jayanagar", cat: "shops", area: "JAIN Jayanagar 9th Block", address: "5, 25th Main Road, 41st Cross, Kottapalya, Jayanagar 9th Block, Bengaluru 560041", desc: "Retail food shop near Jain College Jayanagar 9th Block." },
+  { name: "Brik Oven - Forum South", cat: "burgers", area: "Konanakunte / Forum South", address: "3F-307, 3rd Floor, Forum Falcon City, Kanakapura Main Road, Konanakunte, Bengaluru 560062", desc: "Wood-fired pizza restaurant inside Forum South." },
+  { name: "Starbucks - Forum South", cat: "tea", area: "Konanakunte / Forum South", address: "Shop 49, Ground Floor, Forum Falcon City, Kanakapura Road, Konanakunte, Bengaluru 560062", desc: "Coffee cafe inside Forum South Bengaluru." },
+  { name: "Blue Tokai - Forum South", cat: "tea", area: "Konanakunte / Forum South", address: "3rd Floor, Forum Falcon City, Kanakapura Main Road, Konanakunte, Bengaluru 560062", desc: "Specialty coffee cafe inside Forum South." },
+  { name: "Third Wave Coffee - Forum South", cat: "tea", area: "Konanakunte / Forum South", address: "Forum Falcon City, Kanakapura Road, Konanakunte, Bengaluru 560062", desc: "Coffee shop inside Forum South Bengaluru." },
+  { name: "Magnolia Bakery - Forum South", cat: "cafes", area: "Konanakunte / Forum South", address: "Ground Floor, Forum South, Konanakunte, Bengaluru 560062", desc: "Bakery and dessert counter inside the mall." },
+  { name: "Theobroma - Forum South", cat: "cafes", area: "Konanakunte / Forum South", address: "Forum South Bengaluru, Konanakunte, Bengaluru 560062", desc: "Bakery and dessert shop inside Forum South." },
+  { name: "McDonald's - Forum South", cat: "burgers", area: "Konanakunte / Forum South", address: "Forum South Bengaluru, Konanakunte, Bengaluru 560062", desc: "Quick-service restaurant inside the mall." },
+  { name: "KFC - Forum South", cat: "burgers", area: "Konanakunte / Forum South", address: "Forum South Bengaluru, Konanakunte, Bengaluru 560062", desc: "Quick-service restaurant inside the mall." },
+  { name: "Pizza Hut - Forum South", cat: "burgers", area: "Konanakunte / Forum South", address: "Forum South Bengaluru, Konanakunte, Bengaluru 560062", desc: "Pizza restaurant inside the mall." },
+  { name: "Taco Bell - Forum South", cat: "street", area: "Konanakunte / Forum South", address: "Forum South Bengaluru, Konanakunte, Bengaluru 560062", desc: "Quick-service food outlet inside the mall." },
+  { name: "Subway - Forum South", cat: "burgers", area: "Konanakunte / Forum South", address: "Forum South Bengaluru, Konanakunte, Bengaluru 560062", desc: "Sandwich outlet inside the mall." },
+  { name: "PVR - Forum South", cat: "movies", area: "Konanakunte / Forum South", address: "3rd Floor, Forum Falcon City, Konanakunte Cross, Bengaluru 560062", desc: "Multiplex cinema inside Forum South." },
+  { name: "Tridom - Forum South", cat: "movies", area: "Konanakunte / Forum South", address: "3rd Floor, Forum Falcon City, Konanakunte Cross, Bengaluru 560062", desc: "Indoor entertainment and games venue inside the mall." },
+  { name: "Miniso - Forum South", cat: "shops", area: "Konanakunte / Forum South", address: "Unit LGF-005, Lower Ground Floor, Forum Falcon City, Kanakapura Main Road, Konanakunte, Bengaluru 560062", desc: "Lifestyle, gift, stationery and toy store inside the mall." },
+  { name: "Reliance Digital - Forum South", cat: "shops", area: "Konanakunte / Forum South", address: "Forum Falcon City, Konanakunte, Bengaluru 560062", desc: "Electronics retailer inside Forum South." },
+  { name: "Zara - Forum South", cat: "shops", area: "Konanakunte / Forum South", address: "Forum Falcon City, Konanakunte, Bengaluru 560062", desc: "Fashion store inside Forum South." },
+  { name: "H&M - Forum South", cat: "shops", area: "Konanakunte / Forum South", address: "Forum Falcon City, Konanakunte, Bengaluru 560062", desc: "Fashion store inside Forum South." },
+  { name: "Lifestyle - Forum South", cat: "shops", area: "Konanakunte / Forum South", address: "Forum Falcon City, Konanakunte, Bengaluru 560062", desc: "Department store inside Forum South." },
+  { name: "Shoppers Stop - Forum South", cat: "shops", area: "Konanakunte / Forum South", address: "Forum Falcon City, Konanakunte, Bengaluru 560062", desc: "Department store inside Forum South." },
+  { name: "Adidas - Forum South", cat: "shops", area: "Konanakunte / Forum South", address: "Forum Falcon City, Konanakunte, Bengaluru 560062", desc: "Sportswear and footwear store inside Forum South." },
+  { name: "Puma - Forum South", cat: "shops", area: "Konanakunte / Forum South", address: "Forum Falcon City, Konanakunte, Bengaluru 560062", desc: "Sportswear and footwear store inside Forum South." },
+  { name: "Nykaa Luxe - Forum South", cat: "shops", area: "Konanakunte / Forum South", address: "Forum Falcon City, Konanakunte, Bengaluru 560062", desc: "Beauty retail store inside Forum South." },
+  { name: "Samsung - Forum South", cat: "shops", area: "Konanakunte / Forum South", address: "Forum Falcon City, Konanakunte, Bengaluru 560062", desc: "Electronics and mobile store inside Forum South." },
+  { name: "Chai Point - Forum South", cat: "tea", area: "Konanakunte / Forum South", address: "Kiosk-04, 1st Floor, Falcon City Mall, Kanakapura Main Road, Konanakunte, Bengaluru 560062", desc: "Tea and refreshments kiosk inside Forum South." }
 ];
+
+
+/* =========================================================
+   IN-APP LOCATION DETAILS + HOT WHEELS / PLAYSTATION HUBS
+========================================================= */
+const NEXORA_DISCOVERY = {
+  hotWheels: [
+    {name:"Playport", address:"Brigade Gardens, G-35, Shanthala Nagar, Ashok Nagar, Bengaluru 560001", desc:"Toy and collectibles shop known for die-cast model cars, including Hot Wheels. Central Bengaluru."},
+    {name:"The Super Toys", address:"18, 1st Main Road, New BEL Road, Jaladarshini Layout, Bengaluru 560094", desc:"Hobby/toy store with die-cast cars and collector models including Hot Wheels and Matchbox."},
+    {name:"Evergreen Toys", address:"1-A/07, E End Main Road, 4th T Block East, Jayanagar, Bengaluru 560041", desc:"Toy store in Jayanagar with toy cars and gifts; ask about current Hot Wheels stock."},
+    {name:"Parmeshwar Toys and Gift Center", address:"No. 37, Basement, 25th Main Road, Kottapalya, Jayanagar 9th Block, Bengaluru 560069", desc:"Toy, gift and stationery store in Jayanagar 9th Block; check for die-cast stock."},
+    {name:"Hamleys - Forum Falcon City", address:"Level 3, Forum Falcon City, Konanakunte Cross, Bengaluru 560062", desc:"Large toy store inside Forum South Bengaluru; Hot Wheels availability varies by stock."},
+    {name:"Bhavana's Gift - Exclusive Toys & Games", address:"B Center Block, Jayanagar Shopping Complex, 4th Block, Bengaluru 560011", desc:"Toy and games gift shop inside Jayanagar Shopping Complex; check current die-cast selection."},
+    {name:"Paragon Sales Agency", address:"Near Sreenivasa Hospital, Upparpete, Chickpet, Bengaluru 560053", desc:"Toy and collectibles wholesaler known for die-cast cars; central Bengaluru location."},
+    {name:"Toonz Retail India Pvt Ltd", address:"9th Main Road, Jayanagar 3rd Block, opposite Cloudnine Hospital", desc:"From your campus research: toy retailer listed for Hot Wheels, Matchbox and action figures."},
+    {name:"Mahalaxmi Toys", address:"27th Cross, Jayanagar 4th Block West, opposite Swan Hardware", desc:"From your campus research: toy shop listed for die-cast cars and track sets."},
+    {name:"Bhavana's Gifts", address:"B Centre Block, Jayanagar 4th Block Shopping Complex", desc:"From your campus research: gift and toy shop; confirm current Hot Wheels stock."},
+    {name:"Praveen Novelties", address:"Jayanagar 9th Block", desc:"From your campus research: novelty and stationery shop; confirm die-cast stock."},
+    {name:"Shree Gifts N Toys", address:"Dr DVG Road, Gandhi Bazaar, Basavanagudi", desc:"From your campus research: toy and gift shop."},
+    {name:"Hamleys – Forum South Bengaluru", address:"Forum Falcon City, Konanakunte Cross, Kanakapura Road", desc:"Toy retailer inside Forum South; availability varies by stock."},
+    {name:"FirstCry.com Store – Konanakunte", address:"Kanakapura Main Road, Konanakunte", desc:"Toy retailer listing from your research; confirm current Hot Wheels stock."}
+  ],
+  playStation: [
+    {name:"Rey Games Castle", address:"2nd Floor, No. 29A, 9th Main Road, 4th Block, Jayanagar, Bengaluru 560011", desc:"Video game and console store with PlayStation games, consoles and accessories."},
+    {name:"1vX Gaming | Jayanagar", address:"1537, 39th Cross Road, Kottapalya, Jayanagar 9th Block, Bengaluru 560041", desc:"Gaming lounge with console and PC gaming setups, including PS5 setups per listing."},
+    {name:"Sgamershop", address:"52/23, 8th E Main Road, 4th T Block East, Jayanagar, Bengaluru 560041", desc:"Video game store listing PlayStation and Xbox sales, repair and service."},
+    {name:"PlayStation Exclusive - Brigade Road", address:"No. 202, 1st Floor, Glenand Building, Brigade Road, Bengaluru 560001", desc:"PlayStation-focused game and console retailer in central Bengaluru."},
+    {name:"PlayStation Exclusive - Church Street", address:"Shop 46/1, Basement, Church Street Corner, Bengaluru 560001", desc:"Game store focused on PlayStation consoles, games and accessories."},
+    {name:"PlayStation Exclusive - Phoenix Marketcity", address:"Second Floor, Unit S-15, Phoenix Marketcity, Whitefield Main Road, Mahadevapura, Bengaluru 560048", desc:"PlayStation-focused retail store inside Phoenix Marketcity."},
+    {name:"Sony Center - Kalyan Nagar", address:"No. 25/30, Ramky House, Hennur Outer Ring Road, Kalyan Nagar, Bengaluru 560043", desc:"Sony electronics showroom listing video-game products; check PlayStation stock before visiting."},
+    {name:"The Basement Warzone", address:"Near KFC, Jayanagar 3rd/4th Block", desc:"From your campus research: gaming lounge listing with console and PC gaming."},
+    {name:"Amoeba Bowling & Arcade", address:"Cosmopolitan Club, 22nd Cross, Jayanagar 3rd Block", desc:"From your campus research: bowling and arcade entertainment; confirm public entry."},
+    {name:"Next Level – The Gaming Cafe", address:"Ashoka Pillar Road, Jayanagar", desc:"From your campus research: gaming cafe; confirm console availability."},
+    {name:"Happy Memories GameZone", address:"40th Cross Road, Kottapalya, Jayanagar 9th Block", desc:"From your campus research: private-screen and PS5 gaming listing."},
+    {name:"Echo E-Sports", address:"National High School Road, Basavanagudi", desc:"From your campus research: esports PCs and console gaming listing."},
+    {name:"Antharal Gamebridge", address:"Near National College Metro, Basavanagudi", desc:"From your campus research: PC and console gaming listing."},
+    {name:"V-Play Gaming Zone", address:"Chunchaghatta Main Road, Konanakunte", desc:"From your campus research: gaming lounge listing; confirm console availability."},
+    {name:"Fun City / Play Arena – Forum South", address:"Forum South Bengaluru, Konanakunte Cross", desc:"Arcade and family entertainment listing inside the mall."}
+  ]
+};
+
+
+/* =========================================================
+   USER-SUPPLIED SOUTH BENGALURU CAMPUS COMPENDIUM
+   Entries are grouped by the selected campus, not merged by area.
+   Addresses/descriptions are based on the user's supplied research;
+   confirm current operations before travelling.
+========================================================= */
+
+// Keep cinema halls in their own PVR & Theatres category; leave arcades separate.
+if (Array.isArray(PLACES)) {
+  for (const place of PLACES) {
+    if (place.cat === "movies" && /\b(PVR|INOX|Cinepolis|Theatre|Cinema|Urvashi|Chandrodaya|Kamakya)\b/i.test(place.name || "")) place.cat = "cinemas";
+  }
+}
+
+const CAMPUS_RESEARCH_PLACES = {"NMKRV":[["toys","Toonz Retail India Pvt Ltd","9th Main Road, Jayanagar 3rd Block, opposite Cloudnine Hospital","Toy shop listing: Hot Wheels, Matchbox, action figures and board games."],["toys","Mahalaxmi Toys","27th Cross, Jayanagar 4th Block West, opposite Swan Hardware","Toy shop listing: Mattel cartons, track sets, die-cast bikes and cars."],["toys","Bhavana's Gifts","B Centre Block, Jayanagar 4th Block Shopping Complex","Gift and toy shop listing; confirm current die-cast stock."],["toys","Bhavana Gifts","4th Cross Road, Jayanagar","Collectibles, novelties and die-cast models."],["toys","Gift Zone","Jayanagar 4th Block","Die-cast cars, novelty collectibles and desk toys."],["toys","Archies Gallery","11th Main Road, Jayanagar 4th Block","Gift boxes, miniature collectibles and cards."],["toys","Alai Gifting And Wrapping","Sri Garuda Swagath Mall, Tilak Nagar","Curated gift sets and miniature collectibles."],["toys","Khan Soap Center","Byrasandra Main Road, Jayanagar 1st Block East","Neighbourhood store listed for Mattel toys and die-cast cars."],["toys","Praveen Novelties","Jayanagar 9th Block","Stationery, novelties and Hot Wheels mainline listings."],["toys","Sapna Book House – Toy & Gift Floor","11th Main Road, Jayanagar 4th Block","Toy and gift floor listing: Hot Wheels, Lego, puzzles and manga."],["toys","Itsy Bitsy","11th Main Road, Jayanagar 4th Block","Craft supplies, diorama materials and miniatures."],["toys","Miniso – Sri Garuda Swagath Mall","Sri Garuda Swagath Mall, Tilak Nagar","Blind boxes, figures, plushies and desk collectibles."],["toys","Crossword Bookstore – Toys & Collectibles","Jayanagar 4th Block","Bookstore listing for toys, collectibles and tabletop games."],["toys","Srinivasa Fancy & Toys","Jayanagar 4th Block Shopping Complex","Budget toy cars and retro games."],["toys","Sri Balaji Gift & Toy Centre","Jayanagar 7th Block","Neighbourhood toy and gift outlet."],["toys","Reliance Smart Bazaar / Trends Kids","Jayanagar","Occasional toy and Hot Wheels restock listing; stock varies."],["gaming","The Basement Warzone","Near KFC, Jayanagar 3rd/4th Block","Gaming lounge listing: high-refresh PCs and PS5 stations; confirm current games and access."],["gaming","Amoeba Bowling & Arcade","Cosmopolitan Club, 22nd Cross, Jayanagar 3rd Block","Bowling, arcade racers, air hockey and redemption games; check public entry."],["gaming","Complex Arcade","Eastern Block, Jayanagar 3rd/4th Block","Classic arcade and console gaming listing."],["gaming","Wonder Land","10th Main, Jayanagar 4th Block","Arcade and casual gaming listing."],["gaming","Next Level – The Gaming Cafe","Ashoka Pillar Road, Jayanagar","Gaming cafe listing with console and multiplayer gaming; confirm current setup."],["gaming","ATOM Gaming","10th Main Road, Jayanagar 3rd Block East","Competitive PC and console gaming lounge listing."],["gaming","The Cue Cafe And Gaming","Swagath Road, Jayanagar","Pool tables, console gaming and snacks listing."],["gaming","Now Boarding Cafe","Jayanagar 3rd Block","Tabletop board games, card games and food listing."],["gaming","Dream Celebrations – Private Screen & PS5","Swagath Road, Jayanagar 4th T Block","Private-screen and PlayStation gaming listing."],["breakfast","Taaza Thindi","26th Main Road, Jayanagar 9th Block","Masala dosa, chow chow bath, kesari bath and filter coffee."],["breakfast","Jayanagar Tiffin Room","4th T Block East, Jayanagar 4th Block","Set dosa, podi idli and filter coffee."],["breakfast","Jayanagar SLV Tiffin Corner","Jayanagar 4th Block Shopping Complex","Masala dosa, uddina vada and tea."],["breakfast","Shiva Prasad Tiffin Centre","10th Main Road, opposite Madhavan Park, Jayanagar 3rd Block","Pocket-friendly idli, dosa and rice bath."],["breakfast","Vasudev Adiga's","11th Main Road, Jayanagar 4th Block","South Indian breakfast combos and akki roti."],["breakfast","AR Tiffin Cafe","Opposite Sri Garuda Swagath Mall, Jayanagar 4th T Block","Benne dosa and thatte idli listing."],["breakfast","Shiv Sagar","Sri Garuda Swagath Mall, Tilak Nagar","Pav bhaji, tiffins and fresh juices."],["breakfast","Upahara Darshini","Jayanagar 3rd Block","Idli-vada and pongal listing."],["breakfast","New Shanthi Sagar – Jayanagar","Jayanagar 4th Block","South and North Indian meals and tiffins."],["breakfast","Savi Sagar","Jayanagar 7th Block","Ghee roast dosa and Mangalore bajji."],["breakfast","Maiyas Beverages & Foods","Jayanagar 4th Block","Rasam vada, heritage-style dishes and filter coffee."],["breakfast","Udupi Sri Krishna Bhavan","Jayanagar 4th Block","Udupi meals and morning tiffin."],["breakfast","Sendhoor Coffee & Tiffin","Jayanagar 4th Block","Pongal, medu vada and Kumbakonam coffee."],["tea","Hatti Kaapi – 11th Main","11th Main Road, Jayanagar 4th Block","Tea and filter coffee outlet listing."],["tea","Hatti Kaapi – Jayanagar 3rd Block","Near Jayanagara Metro, Jayanagar 3rd Block","Tea and filter coffee outlet listing."],["tea","Chai Point – Jayanagar 3rd Block","Jayanagar 3rd Block","Tea outlet; exact branch to confirm."],["tea","Chai Point – Jayanagar 4th Block","Jayanagar 4th Block","Tea outlet; exact branch to confirm."],["tea","Tea Day – Jayanagar","Jayanagar 4th Block","Tea and refreshments outlet listing."],["tea","Theka Coffee – Jayanagar","Jayanagar 4th Block","Coffee and beverages outlet listing."],["tea","Boba Bhai","Jayanagar 4th Block","Bubble tea and Korean bites listing."],["tea","Chaayos – Jayanagar","Jayanagar 4th / 9th Block area","Tea cafe listing; confirm exact branch."],["tea","Kumbakonam Degree Coffee – Jayanagar","Jayanagar 4th Block","Filter coffee outlet listing."],["cafes","Bengaluru Cafe","9th Main, Jayanagar 2nd Block","Cafe and hangout listing."],["cafes","Mugshot Cafe Tea Bench","Jayanagar 4th Block","Cafe and tea hangout listing."],["cafes","Hamdeez Cafe","Jayanagar 4th Block","Cafe listing."],["cafes","Brewing Untold Stories","Jayanagar","Cafe listing; exact branch to confirm."],["cafes","Kallol By Cafe Durga","Jayanagar","Cafe listing."],["cafes","Third Wave Coffee Roasters – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse and study hangout listing."],["cafes","Blue Tokai Coffee Roasters – Jayanagar","Jayanagar 3rd/4th Block","Specialty coffee outlet listing; exact branch to confirm."],["cafes","Glen's Bakehouse","Jayanagar 4th Block","Bakery cafe listing; red velvet cupcakes and cold coffee noted in research."],["cafes","Matteo Coffea","Jayanagar 4th Block","Cafe and coffeehouse listing."],["cafes","Public Cafe","Jayanagar 1st Block / Phase","Cafe listing."],["cafes","Starbucks – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse listing."],["cafes","Truffles – Jayanagar","Jayanagar 4th / 9th Block area","Cafe and bistro listing; exact branch to confirm."],["burgers","Indiana Burgers","Jayanagar 8th Block","Burger outlet listing."],["burgers","Leon's – Burgers & Wings","Jayanagar 4th Block","Burger and wings outlet listing."],["burgers","Biggies Burger – Jayanagar","Jayanagar 4th Block","Burger outlet listing."],["burgers","Burger King – Jayanagar","Jayanagar 4th Block","Quick-service restaurant listing."],["burgers","McDonald's – Jayanagar","11th Main Road, Jayanagar 4th Block","Quick-service restaurant listing."],["burgers","KFC – Jayanagar","Jayanagar 3rd/4th Block","Quick-service restaurant listing."],["burgers","Taco Bell – Jayanagar","Jayanagar 4th Block","Quick-service restaurant listing."],["burgers","Burger It Up","JP Nagar / Jayanagar","Burger outlet listing in nearby area."],["burgers","Subway – Jayanagar","Jayanagar 4th Block","Sandwich outlet listing."],["burgers","Wendy's – Jayanagar","Jayanagar","Burger outlet listing; exact branch to confirm."],["pizza","Onesta – Jayanagar","Jayanagar 4th Block","Pizza and dessert restaurant listing."],["pizza","Brik Oven – Jayanagar","Jayanagar","Wood-fired sourdough pizza listing."],["pizza","Toscano – Jayanagar","Jayanagar","Italian dining listing."],["pizza","Via Milano – Jayanagar","Jayanagar","Italian dining listing."],["pizza","La Pino'z Pizza – Jayanagar","Jayanagar","Pizza outlet listing."],["pizza","MOJO Pizza – Jayanagar","Jayanagar","Pizza outlet listing."],["pizza","Domino's Pizza – Jayanagar","Jayanagar 3rd/4th Block and 9th Block","Pizza outlet listing; multiple branches."],["pizza","Chicago Pizza – Sri Garuda Swagath Mall","Sri Garuda Swagath Mall, Jayanagar","Pizza outlet listing."],["icecream","Corner House – Jayanagar","Jayanagar 4th Block and 9th Block","Ice cream parlour; DBC noted in research."],["icecream","Natural Ice Cream – Jayanagar","Jayanagar 7th Block / Kanakapura Road","Ice cream parlour listing."],["icecream","Milano Ice Cream","9th Main, Jayanagar 5th Block","Gelato listing."],["icecream","Ibaco Ice Cream Parlour","33rd Cross, 11th Main, Jayanagar 4th Block","Ice cream parlour listing."],["icecream","The Belgian Waffle Co. – Jayanagar","11th Main, Jayanagar 4th Block","Waffle and dessert outlet listing."],["icecream","Art of Delight","Jayanagar 5th Block","Dessert and ice cream listing."],["icecream","Stoned Monkey","Jayanagar","Dessert outlet listing; exact branch to confirm."],["icecream","The Lassi Park","Jayanagar 3rd Block","Lassi and dessert outlet listing."],["icecream","Cool Joint","11th Main Road, Jayanagar 4th Block","Cold badam milk and grilled sandwich listing."],["icecream","Baskin Robbins – Jayanagar","Jayanagar 4th Block","Ice cream outlet listing."],["street","Jayanagar 4th Block Complex Chaat Lane","Outer perimeter, Jayanagar 4th Block","Street-food and chaat stretch."],["street","A Sweet Touch","29C Cross, 11th Main Road, Jayanagar 4th Block","Sweets and snacks outlet listing."],["street","Hari Super Sandwich","Jayanagar 3rd/4th Block","Sandwich and snack outlet listing."],["bakeries","Iyengar's Bakery – Jayanagar 3rd Block","Jayanagar 3rd Block, near NMKRV","Bakery listing."],["parks","Madhavan Park","Jayanagar 3rd Block","Park beside NMKRV and RV PU Jayanagar area."],["parks","Kittur Rani Chennamma Stadium & Park","Jayanagar 3rd Block","Local park and sports ground."],["parks","Yediyur Lake","Jayanagar 6th Block","Lake and walking area."],["viewpoints","Yediyur Lake Sunset Deck & Walkway","Jayanagar 6th Block / Kanakapura Road","Lake-side sunset and walking area."],["temples","Sri Vinayaka Temple","Jayanagar 4th Block, near BDA Complex","Temple landmark."],["temples","Sri Dharma Sastha Ayyappa Temple","Jayanagar 4th T Block","Temple landmark."],["shopping","Jayanagar 4th Block Shopping Complex","Jayanagar 4th Block","Shopping complex and market."],["shopping","Sri Garuda Swagath Mall","Tilak Nagar, Jayanagar 4th Block","Shopping mall with food and retail."],["shopping","High Street Mall","11th Main Road, Jayanagar 4th T Block East","Shopping destination listing."],["shopping","11th Main & 9th Main Street Shopping","Jayanagar 3rd and 4th Block","Shopping streets and high street stretch."],["movies","INOX – Sri Garuda Swagath Mall","Jayanagar 4th Block","Cinema listing; verify current operator and showtimes."],["metro","Jayanagara Metro Station","Green Line, Jayanagar","Metro station serving Jayanagar campuses."],["transit","NMKRV College / 3rd Block Jayanagara Bus Stop","Jayanagar 3rd Block","BMTC stop listed in supplied research."],["transit","Madhavan Park Bus Stop","Jayanagar 3rd Block","BMTC stop listed in supplied research."],["transit","Jayanagara 4th Block TTMC","Jayanagar 4th Block","BMTC terminal listed in supplied research."],["transit","Jayanagara Church Bus Stop","Jayanagar","BMTC stop listed in supplied research."],["burgers","Texas Burgers","JP Nagar","Burger outlet listing."],["pizza","Friendly Neighbourhood Pizza Man","National High School Road, VV Puram","Pizza outlet listing."],["pizza","Singlepizza","72, Parvathipuram, Kavi Lakshmisha Road, VV Puram","Pizza outlet listing."],["pizza","Via Milano","Jayanagar","Italian dining listing."],["pizza","Megna's Pizza","Basavanagudi","Pizza outlet listing."],["icecream","The Soft Corner","92, National High School Road, VV Puram","Soft-serve ice cream outlet listing."],["icecream","Havmor Ice Cream","Jayanagar 4th Block / Kanakapura Road","Ice cream outlet listing."],["street","Shri Nanjundeshwara Gulkand & Fruit Center","VV Puram Food Street","Fruit and gulkand outlet listing."],["street","Shivanna Gulkand Store","VV Puram","Gulkand and fruit outlet listing."],["street","Kailash Parbat","VV Puram","Chaat and snacks listing."],["street","Asha Sweet Center","Gandhi Bazaar, Basavanagudi","Sweets and snacks listing."],["street","Subbamma Stores","Gandhi Bazaar, Basavanagudi","Kodagu snacks and nippat listing."],["viewpoints","Sankey Tank Sunset Promenade","Malleshwaram","Lake promenade and walking destination."],["viewpoints","Manchanabele Dam & Backwater Sunset Point","Off Mysore Road","Backwater and dam day-trip destination."],["temples","Sri Chandramouleshwara Temple","Jayanagar 3rd Block","Temple landmark near NMKRV area."],["temples","Sri Kote Venkataramana Swamy Temple","KR Road, Fort / Chamarajpet","Historic temple landmark."],["shopping","Dress Circle Shopping Mall","Subbarama Chetty Road, Basavanagudi","Shopping mall listing."],["shopping","Gopalan Innovation Mall","Bannerghatta Road","Shopping mall listing."],["shopping","Royal Meenakshi Mall","Bannerghatta Road, Hulimavu","Shopping mall listing."],["movies","Urvashi Theatre","Lalbagh Road","Cinema listing; verify current showtimes."],["movies","Chandrodaya Theatre","Opposite Hanumanthnagar, Basavanagudi","Cinema listing; verify current operations."],["movies","Kamakya Theatre","Outer Ring Road, Banashankari 3rd Stage","Cinema listing; verify current operations."],["movies","Cinepolis – Royal Meenakshi Mall","Royal Meenakshi Mall, Bannerghatta Road","Cinema listing; verify showtimes."],["transit","South End Circle Bus Stop","South End Circle","BMTC stop listed in supplied research."],["transit","Nettakallappa Circle Bus Stop","Basavanagudi","BMTC stop listed in supplied research."],["transit","Nagasandra Circle Bus Stop","South End / Basavanagudi area","BMTC stop listed in supplied research."],["tea","Hatti Kaapi – Jayanagar 4th Block","11th Main Road, Jayanagar 4th Block","Filter coffee outlet listing."],["tea","Hatti Kaapi – Jayanagar 3rd Block","Near Jayanagara Metro, Jayanagar 3rd Block","Filter coffee outlet listing."],["tea","Kumbakonam Degree Coffee – Jayanagar","Jayanagar 4th Block","Filter coffee outlet listing."],["tea","Third Wave Coffee Roasters – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse listing."],["tea","Blue Tokai Coffee Roasters – Jayanagar","Jayanagar 3rd/4th Block","Specialty coffee outlet listing."],["tea","Matteo Coffea","Jayanagar 4th Block","Coffeehouse listing."],["tea","Starbucks – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse listing."],["tea","Starbucks – Forum South Bengaluru","Forum South Bengaluru, Konanakunte","Coffeehouse listing."],["tea","Malgudi Filter Coffee – South End Circle","South End Circle","Filter coffee joint listed outside Surana area."],["tea","Friends Adda – Sri Manjunatha Condiments","21/83, South End Road, Basavanagudi","Tea and snack cafe listing."],["tea","THE CHAI WALAH","19/E, Pattalamma Temple Road, South End Circle","Chai and quick bites listing."],["cafes","The 11th Bean Cafe","South End / Jayanagar area","Cafe listing from supplied research; exact address to confirm."]],"RV PU College":[["toys","Toonz Retail India Pvt Ltd","9th Main Road, Jayanagar 3rd Block, opposite Cloudnine Hospital","Toy shop listing: Hot Wheels, Matchbox, action figures and board games."],["toys","Mahalaxmi Toys","27th Cross, Jayanagar 4th Block West, opposite Swan Hardware","Toy shop listing: Mattel cartons, track sets, die-cast bikes and cars."],["toys","Bhavana's Gifts","B Centre Block, Jayanagar 4th Block Shopping Complex","Gift and toy shop listing; confirm current die-cast stock."],["toys","Bhavana Gifts","4th Cross Road, Jayanagar","Collectibles, novelties and die-cast models."],["toys","Gift Zone","Jayanagar 4th Block","Die-cast cars, novelty collectibles and desk toys."],["toys","Archies Gallery","11th Main Road, Jayanagar 4th Block","Gift boxes, miniature collectibles and cards."],["toys","Alai Gifting And Wrapping","Sri Garuda Swagath Mall, Tilak Nagar","Curated gift sets and miniature collectibles."],["toys","Khan Soap Center","Byrasandra Main Road, Jayanagar 1st Block East","Neighbourhood store listed for Mattel toys and die-cast cars."],["toys","Praveen Novelties","Jayanagar 9th Block","Stationery, novelties and Hot Wheels mainline listings."],["toys","Sapna Book House – Toy & Gift Floor","11th Main Road, Jayanagar 4th Block","Toy and gift floor listing: Hot Wheels, Lego, puzzles and manga."],["toys","Itsy Bitsy","11th Main Road, Jayanagar 4th Block","Craft supplies, diorama materials and miniatures."],["toys","Miniso – Sri Garuda Swagath Mall","Sri Garuda Swagath Mall, Tilak Nagar","Blind boxes, figures, plushies and desk collectibles."],["toys","Crossword Bookstore – Toys & Collectibles","Jayanagar 4th Block","Bookstore listing for toys, collectibles and tabletop games."],["toys","Srinivasa Fancy & Toys","Jayanagar 4th Block Shopping Complex","Budget toy cars and retro games."],["toys","Sri Balaji Gift & Toy Centre","Jayanagar 7th Block","Neighbourhood toy and gift outlet."],["toys","Reliance Smart Bazaar / Trends Kids","Jayanagar","Occasional toy and Hot Wheels restock listing; stock varies."],["gaming","The Basement Warzone","Near KFC, Jayanagar 3rd/4th Block","Gaming lounge listing: high-refresh PCs and PS5 stations; confirm current games and access."],["gaming","Amoeba Bowling & Arcade","Cosmopolitan Club, 22nd Cross, Jayanagar 3rd Block","Bowling, arcade racers, air hockey and redemption games; check public entry."],["gaming","Complex Arcade","Eastern Block, Jayanagar 3rd/4th Block","Classic arcade and console gaming listing."],["gaming","Wonder Land","10th Main, Jayanagar 4th Block","Arcade and casual gaming listing."],["gaming","Next Level – The Gaming Cafe","Ashoka Pillar Road, Jayanagar","Gaming cafe listing with console and multiplayer gaming; confirm current setup."],["gaming","ATOM Gaming","10th Main Road, Jayanagar 3rd Block East","Competitive PC and console gaming lounge listing."],["gaming","The Cue Cafe And Gaming","Swagath Road, Jayanagar","Pool tables, console gaming and snacks listing."],["gaming","Now Boarding Cafe","Jayanagar 3rd Block","Tabletop board games, card games and food listing."],["gaming","Dream Celebrations – Private Screen & PS5","Swagath Road, Jayanagar 4th T Block","Private-screen and PlayStation gaming listing."],["breakfast","Taaza Thindi","26th Main Road, Jayanagar 9th Block","Masala dosa, chow chow bath, kesari bath and filter coffee."],["breakfast","Jayanagar Tiffin Room","4th T Block East, Jayanagar 4th Block","Set dosa, podi idli and filter coffee."],["breakfast","Jayanagar SLV Tiffin Corner","Jayanagar 4th Block Shopping Complex","Masala dosa, uddina vada and tea."],["breakfast","Shiva Prasad Tiffin Centre","10th Main Road, opposite Madhavan Park, Jayanagar 3rd Block","Pocket-friendly idli, dosa and rice bath."],["breakfast","Vasudev Adiga's","11th Main Road, Jayanagar 4th Block","South Indian breakfast combos and akki roti."],["breakfast","AR Tiffin Cafe","Opposite Sri Garuda Swagath Mall, Jayanagar 4th T Block","Benne dosa and thatte idli listing."],["breakfast","Shiv Sagar","Sri Garuda Swagath Mall, Tilak Nagar","Pav bhaji, tiffins and fresh juices."],["breakfast","Upahara Darshini","Jayanagar 3rd Block","Idli-vada and pongal listing."],["breakfast","New Shanthi Sagar – Jayanagar","Jayanagar 4th Block","South and North Indian meals and tiffins."],["breakfast","Savi Sagar","Jayanagar 7th Block","Ghee roast dosa and Mangalore bajji."],["breakfast","Maiyas Beverages & Foods","Jayanagar 4th Block","Rasam vada, heritage-style dishes and filter coffee."],["breakfast","Udupi Sri Krishna Bhavan","Jayanagar 4th Block","Udupi meals and morning tiffin."],["breakfast","Sendhoor Coffee & Tiffin","Jayanagar 4th Block","Pongal, medu vada and Kumbakonam coffee."],["tea","Hatti Kaapi – 11th Main","11th Main Road, Jayanagar 4th Block","Tea and filter coffee outlet listing."],["tea","Hatti Kaapi – Jayanagar 3rd Block","Near Jayanagara Metro, Jayanagar 3rd Block","Tea and filter coffee outlet listing."],["tea","Chai Point – Jayanagar 3rd Block","Jayanagar 3rd Block","Tea outlet; exact branch to confirm."],["tea","Chai Point – Jayanagar 4th Block","Jayanagar 4th Block","Tea outlet; exact branch to confirm."],["tea","Tea Day – Jayanagar","Jayanagar 4th Block","Tea and refreshments outlet listing."],["tea","Theka Coffee – Jayanagar","Jayanagar 4th Block","Coffee and beverages outlet listing."],["tea","Boba Bhai","Jayanagar 4th Block","Bubble tea and Korean bites listing."],["tea","Chaayos – Jayanagar","Jayanagar 4th / 9th Block area","Tea cafe listing; confirm exact branch."],["tea","Kumbakonam Degree Coffee – Jayanagar","Jayanagar 4th Block","Filter coffee outlet listing."],["cafes","Bengaluru Cafe","9th Main, Jayanagar 2nd Block","Cafe and hangout listing."],["cafes","Mugshot Cafe Tea Bench","Jayanagar 4th Block","Cafe and tea hangout listing."],["cafes","Hamdeez Cafe","Jayanagar 4th Block","Cafe listing."],["cafes","Brewing Untold Stories","Jayanagar","Cafe listing; exact branch to confirm."],["cafes","Kallol By Cafe Durga","Jayanagar","Cafe listing."],["cafes","Third Wave Coffee Roasters – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse and study hangout listing."],["cafes","Blue Tokai Coffee Roasters – Jayanagar","Jayanagar 3rd/4th Block","Specialty coffee outlet listing; exact branch to confirm."],["cafes","Glen's Bakehouse","Jayanagar 4th Block","Bakery cafe listing; red velvet cupcakes and cold coffee noted in research."],["cafes","Matteo Coffea","Jayanagar 4th Block","Cafe and coffeehouse listing."],["cafes","Public Cafe","Jayanagar 1st Block / Phase","Cafe listing."],["cafes","Starbucks – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse listing."],["cafes","Truffles – Jayanagar","Jayanagar 4th / 9th Block area","Cafe and bistro listing; exact branch to confirm."],["burgers","Indiana Burgers","Jayanagar 8th Block","Burger outlet listing."],["burgers","Leon's – Burgers & Wings","Jayanagar 4th Block","Burger and wings outlet listing."],["burgers","Biggies Burger – Jayanagar","Jayanagar 4th Block","Burger outlet listing."],["burgers","Burger King – Jayanagar","Jayanagar 4th Block","Quick-service restaurant listing."],["burgers","McDonald's – Jayanagar","11th Main Road, Jayanagar 4th Block","Quick-service restaurant listing."],["burgers","KFC – Jayanagar","Jayanagar 3rd/4th Block","Quick-service restaurant listing."],["burgers","Taco Bell – Jayanagar","Jayanagar 4th Block","Quick-service restaurant listing."],["burgers","Burger It Up","JP Nagar / Jayanagar","Burger outlet listing in nearby area."],["burgers","Subway – Jayanagar","Jayanagar 4th Block","Sandwich outlet listing."],["burgers","Wendy's – Jayanagar","Jayanagar","Burger outlet listing; exact branch to confirm."],["pizza","Onesta – Jayanagar","Jayanagar 4th Block","Pizza and dessert restaurant listing."],["pizza","Brik Oven – Jayanagar","Jayanagar","Wood-fired sourdough pizza listing."],["pizza","Toscano – Jayanagar","Jayanagar","Italian dining listing."],["pizza","Via Milano – Jayanagar","Jayanagar","Italian dining listing."],["pizza","La Pino'z Pizza – Jayanagar","Jayanagar","Pizza outlet listing."],["pizza","MOJO Pizza – Jayanagar","Jayanagar","Pizza outlet listing."],["pizza","Domino's Pizza – Jayanagar","Jayanagar 3rd/4th Block and 9th Block","Pizza outlet listing; multiple branches."],["pizza","Chicago Pizza – Sri Garuda Swagath Mall","Sri Garuda Swagath Mall, Jayanagar","Pizza outlet listing."],["icecream","Corner House – Jayanagar","Jayanagar 4th Block and 9th Block","Ice cream parlour; DBC noted in research."],["icecream","Natural Ice Cream – Jayanagar","Jayanagar 7th Block / Kanakapura Road","Ice cream parlour listing."],["icecream","Milano Ice Cream","9th Main, Jayanagar 5th Block","Gelato listing."],["icecream","Ibaco Ice Cream Parlour","33rd Cross, 11th Main, Jayanagar 4th Block","Ice cream parlour listing."],["icecream","The Belgian Waffle Co. – Jayanagar","11th Main, Jayanagar 4th Block","Waffle and dessert outlet listing."],["icecream","Art of Delight","Jayanagar 5th Block","Dessert and ice cream listing."],["icecream","Stoned Monkey","Jayanagar","Dessert outlet listing; exact branch to confirm."],["icecream","The Lassi Park","Jayanagar 3rd Block","Lassi and dessert outlet listing."],["icecream","Cool Joint","11th Main Road, Jayanagar 4th Block","Cold badam milk and grilled sandwich listing."],["icecream","Baskin Robbins – Jayanagar","Jayanagar 4th Block","Ice cream outlet listing."],["street","Jayanagar 4th Block Complex Chaat Lane","Outer perimeter, Jayanagar 4th Block","Street-food and chaat stretch."],["street","A Sweet Touch","29C Cross, 11th Main Road, Jayanagar 4th Block","Sweets and snacks outlet listing."],["street","Hari Super Sandwich","Jayanagar 3rd/4th Block","Sandwich and snack outlet listing."],["bakeries","Iyengar's Bakery – Jayanagar 3rd Block","Jayanagar 3rd Block, near NMKRV","Bakery listing."],["parks","Madhavan Park","Jayanagar 3rd Block","Park beside NMKRV and RV PU Jayanagar area."],["parks","Kittur Rani Chennamma Stadium & Park","Jayanagar 3rd Block","Local park and sports ground."],["parks","Yediyur Lake","Jayanagar 6th Block","Lake and walking area."],["viewpoints","Yediyur Lake Sunset Deck & Walkway","Jayanagar 6th Block / Kanakapura Road","Lake-side sunset and walking area."],["temples","Sri Vinayaka Temple","Jayanagar 4th Block, near BDA Complex","Temple landmark."],["temples","Sri Dharma Sastha Ayyappa Temple","Jayanagar 4th T Block","Temple landmark."],["shopping","Jayanagar 4th Block Shopping Complex","Jayanagar 4th Block","Shopping complex and market."],["shopping","Sri Garuda Swagath Mall","Tilak Nagar, Jayanagar 4th Block","Shopping mall with food and retail."],["shopping","High Street Mall","11th Main Road, Jayanagar 4th T Block East","Shopping destination listing."],["shopping","11th Main & 9th Main Street Shopping","Jayanagar 3rd and 4th Block","Shopping streets and high street stretch."],["movies","INOX – Sri Garuda Swagath Mall","Jayanagar 4th Block","Cinema listing; verify current operator and showtimes."],["metro","Jayanagara Metro Station","Green Line, Jayanagar","Metro station serving Jayanagar campuses."],["transit","NMKRV College / 3rd Block Jayanagara Bus Stop","Jayanagar 3rd Block","BMTC stop listed in supplied research."],["transit","Madhavan Park Bus Stop","Jayanagar 3rd Block","BMTC stop listed in supplied research."],["transit","Jayanagara 4th Block TTMC","Jayanagar 4th Block","BMTC terminal listed in supplied research."],["transit","Jayanagara Church Bus Stop","Jayanagar","BMTC stop listed in supplied research."],["burgers","Texas Burgers","JP Nagar","Burger outlet listing."],["pizza","Friendly Neighbourhood Pizza Man","National High School Road, VV Puram","Pizza outlet listing."],["pizza","Singlepizza","72, Parvathipuram, Kavi Lakshmisha Road, VV Puram","Pizza outlet listing."],["pizza","Via Milano","Jayanagar","Italian dining listing."],["pizza","Megna's Pizza","Basavanagudi","Pizza outlet listing."],["icecream","The Soft Corner","92, National High School Road, VV Puram","Soft-serve ice cream outlet listing."],["icecream","Havmor Ice Cream","Jayanagar 4th Block / Kanakapura Road","Ice cream outlet listing."],["street","Shri Nanjundeshwara Gulkand & Fruit Center","VV Puram Food Street","Fruit and gulkand outlet listing."],["street","Shivanna Gulkand Store","VV Puram","Gulkand and fruit outlet listing."],["street","Kailash Parbat","VV Puram","Chaat and snacks listing."],["street","Asha Sweet Center","Gandhi Bazaar, Basavanagudi","Sweets and snacks listing."],["street","Subbamma Stores","Gandhi Bazaar, Basavanagudi","Kodagu snacks and nippat listing."],["viewpoints","Sankey Tank Sunset Promenade","Malleshwaram","Lake promenade and walking destination."],["viewpoints","Manchanabele Dam & Backwater Sunset Point","Off Mysore Road","Backwater and dam day-trip destination."],["temples","Sri Chandramouleshwara Temple","Jayanagar 3rd Block","Temple landmark near NMKRV area."],["temples","Sri Kote Venkataramana Swamy Temple","KR Road, Fort / Chamarajpet","Historic temple landmark."],["shopping","Dress Circle Shopping Mall","Subbarama Chetty Road, Basavanagudi","Shopping mall listing."],["shopping","Gopalan Innovation Mall","Bannerghatta Road","Shopping mall listing."],["shopping","Royal Meenakshi Mall","Bannerghatta Road, Hulimavu","Shopping mall listing."],["movies","Urvashi Theatre","Lalbagh Road","Cinema listing; verify current showtimes."],["movies","Chandrodaya Theatre","Opposite Hanumanthnagar, Basavanagudi","Cinema listing; verify current operations."],["movies","Kamakya Theatre","Outer Ring Road, Banashankari 3rd Stage","Cinema listing; verify current operations."],["movies","Cinepolis – Royal Meenakshi Mall","Royal Meenakshi Mall, Bannerghatta Road","Cinema listing; verify showtimes."],["transit","South End Circle Bus Stop","South End Circle","BMTC stop listed in supplied research."],["transit","Nettakallappa Circle Bus Stop","Basavanagudi","BMTC stop listed in supplied research."],["transit","Nagasandra Circle Bus Stop","South End / Basavanagudi area","BMTC stop listed in supplied research."],["tea","Hatti Kaapi – Jayanagar 4th Block","11th Main Road, Jayanagar 4th Block","Filter coffee outlet listing."],["tea","Hatti Kaapi – Jayanagar 3rd Block","Near Jayanagara Metro, Jayanagar 3rd Block","Filter coffee outlet listing."],["tea","Kumbakonam Degree Coffee – Jayanagar","Jayanagar 4th Block","Filter coffee outlet listing."],["tea","Third Wave Coffee Roasters – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse listing."],["tea","Blue Tokai Coffee Roasters – Jayanagar","Jayanagar 3rd/4th Block","Specialty coffee outlet listing."],["tea","Matteo Coffea","Jayanagar 4th Block","Coffeehouse listing."],["tea","Starbucks – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse listing."],["tea","Starbucks – Forum South Bengaluru","Forum South Bengaluru, Konanakunte","Coffeehouse listing."],["tea","Malgudi Filter Coffee – South End Circle","South End Circle","Filter coffee joint listed outside Surana area."],["tea","Friends Adda – Sri Manjunatha Condiments","21/83, South End Road, Basavanagudi","Tea and snack cafe listing."],["tea","THE CHAI WALAH","19/E, Pattalamma Temple Road, South End Circle","Chai and quick bites listing."],["cafes","The 11th Bean Cafe","South End / Jayanagar area","Cafe listing from supplied research; exact address to confirm."]],"Surana College":[["tea","Malgudi Filter Coffee – South End Circle","South End Circle","Filter coffee joint listed outside Surana area."],["tea","Friends Adda – Sri Manjunatha Condiments","21/83, South End Road, Basavanagudi","Tea and snack cafe listing."],["tea","THE CHAI WALAH","19/E, Pattalamma Temple Road, South End Circle","Chai and quick bites listing."],["cafes","The 11th Bean Cafe","South End / Jayanagar area","Cafe listing from supplied research; exact address to confirm."],["toys","KH Associates","Near Gunasheela Nursing Home, Arumugam Circle, Basavanagudi","Toy wholesale and retail listing; Hot Wheels and collectibles noted in research."],["toys","Shree Gifts N Toys","Dr DVG Road, Gandhi Bazaar, Basavanagudi","Toy and gift shop listing."],["toys","Mahalaxmi Gift & Toys","Dr DVG Road, Basavanagudi","Mattel toys, remote cars and gifts listing."],["toys","Kids Wonderland","Basavanagudi","Toy, board game and die-cast vehicle shop listing."],["toys","Kutoohala – A Space For Curious Minds","Ratna Villas Road, Basavanagudi","STEM toys, mechanical models and puzzles listing."],["toys","Sri Venkateshwara Fancy & Toys","Gandhi Bazaar Main Road, Basavanagudi","Toy and novelty store listing."],["toys","New Star Fancy & Gifts","NR Colony Main Road, Basavanagudi","Gift, novelty and toy-car shop listing."],["toys","Archies Paper Rose","Gandhi Bazaar, Basavanagudi","Gift and collectibles shop listing."],["toys","Laxmi Novelties & Toys","Bull Temple Road, Basavanagudi","Toy, gift and stationery shop listing."],["gaming","Happy Memories GameZone – Basavanagudi","Basavanagudi","PS5 gaming and private-screen hangout listing."],["gaming","Echo E-Sports","National High School Road, Basavanagudi","Esports PCs and PlayStation stations listing."],["gaming","Antharal Gamebridge PC & Console Gaming","Near National College Metro, Basavanagudi","PC and PS5 multiplayer gaming listing."],["gaming","Arena Gaming Lounge","Bull Temple Road, Basavanagudi","Console and PC gaming listing."],["gaming","Pixel Play Console Zone","Gandhi Bazaar / NR Colony","Local PS4/PS5 hourly gaming listing."],["breakfast","Vidyarthi Bhavan","32, Gandhi Bazaar Main Road, Basavanagudi","Ghee masala dosa, khara bath and coffee."],["breakfast","Brahmins' Coffee Bar","Ranga Rao Road, Shankarapura, Basavanagudi","Idli-vada, khara bath and kesari bath."],["breakfast","MTR – Mavalli Tiffin Rooms","14, Lalbagh Road, near VV Puram","Rava idli, bisibele bath and traditional tiffins."],["breakfast","Roti Ghar","Gandhi Bazaar, Basavanagudi","Akki roti, ragi roti and jolada roti meals."],["breakfast","Kamat Bugle Rock","Bull Temple Road, Basavanagudi","North Karnataka meals and masala dosa listing."],["breakfast","Mahalakshmi Tiffin Room","DVG Road, Basavanagudi","Butter masala dosa and khara bath listing."],["breakfast","SLV Corner","Vanivilas Road, Basavanagudi","Vada, bath and masala dosa listing."],["breakfast","Upahara Bhavan","Gandhi Bazaar, Basavanagudi","Idli sambar and coffee listing."],["breakfast","Dwaraka","NR Colony, Basavanagudi","Khali dosa and chutney listing."],["breakfast","A2B – Adyar Ananda Bhavan","Basavanagudi","Mini tiffin, pongal and sweets listing."],["tea","By 2 Coffee – Basavanagudi","Bull Temple Road, Basavanagudi","Coffee and tea joint listing."],["tea","Tea Day – Gandhi Bazaar","Gandhi Bazaar, Basavanagudi","Tea outlet listing."],["tea","Chai Point – DVG Road","DVG Road, Basavanagudi","Tea outlet listing; exact branch to confirm."],["tea","Kumbakonam Degree Coffee – Basavanagudi","Basavanagudi","Filter coffee outlet listing."],["tea","Hatti Kaapi – Basavanagudi","Basavanagudi","Tea and filter coffee outlet listing."],["cafes","The Coffee San","54/1, Rama Iyengar Road, Vishweshwarapura, Basavanagudi","Specialty coffee cafe listing."],["cafes","Kesarii Cafe","20, Food Street, beside Arya Samaj, Vishweshwarapura, Basavanagudi","Cafe near VV Puram Food Street."],["cafes","The Rogue Elephant","Krishna Rao Park / Kanakapura Road, Basavanagudi","Cafe and garden dining listing."],["cafes","Marzipan Cafe & Bakery","Basavanagudi","Cafe and bakery listing."],["burgers","Burger King – Basavanagudi","Basavanagudi","Quick-service restaurant listing."],["burgers","McDonald's – Basavanagudi","Basavanagudi","Quick-service restaurant listing."],["burgers","KFC – Basavanagudi","Basavanagudi","Quick-service restaurant listing."],["burgers","Subway – Basavanagudi","Basavanagudi","Sandwich outlet listing."],["pizza","La Pino'z Pizza – Basavanagudi","Basavanagudi","Pizza outlet listing."],["pizza","MOJO Pizza – Basavanagudi","Basavanagudi","Pizza outlet listing."],["pizza","Domino's Pizza – Basavanagudi","Basavanagudi / Chamarajpet","Pizza outlet listing."],["pizza","Pizza Hut – Basavanagudi","Basavanagudi","Pizza outlet listing."],["pizza","Megna's Pizza","Basavanagudi","Pizza outlet listing; exact branch to confirm."],["icecream","Natural Ice Cream – Gandhi Bazaar","Gandhi Bazaar, Basavanagudi","Ice cream parlour listing."],["icecream","Polar Bear – Basavanagudi","Basavanagudi","Ice cream outlet listing."],["icecream","Havmor Ice Cream – Basavanagudi","Basavanagudi","Ice cream outlet listing."],["icecream","The Belgian Waffle Co. – Basavanagudi","Basavanagudi","Waffle and dessert outlet listing."],["street","Asha Sweet Center","Gandhi Bazaar, Basavanagudi","Sweets and snacks outlet."],["street","Subbamma Stores","Gandhi Bazaar, Basavanagudi","Kodagu snacks and nippat listing."],["viewpoints","Bugle Rock Sunset & City Viewpoint","Bull Temple Road, Basavanagudi","Rock formation and city-view landmark."],["viewpoints","Lalbagh Peninsular Gneiss Rock & Watchtower","Lalbagh Botanical Garden","Rock formation and historic watchtower inside the garden."],["viewpoints","Lalbagh Glasshouse & Lake Sunset Pier","Lalbagh Botanical Garden","Garden glasshouse and lake-side walk."],["parks","M N Krishna Rao Park","Dewan Madhava Rao Road, Basavanagudi","Large neighbourhood park."],["parks","Bugle Rock Park","Bull Temple Road, Basavanagudi","Park and rock formation beside Bull Temple."],["parks","NR Colony Park & Shamanna Park","NR Colony, Basavanagudi","Neighbourhood park listing."],["parks","Lalbagh Botanical Garden","Mavalli / RV Road / West Gate","Botanical garden and walking trails."],["parks","Kempambudhi Lake","Gavipuram / Basavanagudi","Lake and walking area."],["temples","Dodda Basavana Gudi – Big Bull Temple","Bull Temple Road, Basavanagudi","Historic temple landmark."],["temples","Dodda Ganapathi Temple","Bull Temple Road, Basavanagudi","Temple landmark."],["temples","Karanji Anjaneya Swamy Temple","Basavanagudi / NR Colony","Temple landmark."],["temples","Sri Ramakrishna Math","Bull Temple Road, Basavanagudi","Spiritual and heritage landmark."],["shopping","Gandhi Bazaar Main Road","Basavanagudi","Shopping street and market."],["shopping","DVG Road Shopping Stretch","Basavanagudi","Shopping and food street."],["shopping","Dress Circle Shopping Mall","Subbarama Chetty Road, Basavanagudi","Shopping mall listing."],["movies","Chandrodaya Theatre","Opposite Hanumanthnagar, Basavanagudi","Cinema listing; verify current operations and showtimes."],["metro","National College Metro Station","Green Line, Basavanagudi","Metro station serving APS and Jain VV Puram areas."],["metro","Lalbagh Metro Station","Green Line, Lalbagh Road","Metro station serving VV Puram / Lalbagh area."],["transit","NR Colony Bus Stop","Outside APS College, NR Colony","BMTC stop listed in supplied research."],["transit","Gandhi Bazaar Bus Stop","Gandhi Bazaar, Basavanagudi","BMTC stop listed in supplied research."],["transit","Ramakrishna Ashrama Bus Stop","Basavanagudi","BMTC stop listed in supplied research."],["transit","Minerva Circle Bus Stop","VV Puram / Basavanagudi","BMTC stop listed in supplied research."],["viewpoints","Lalbagh Peninsular Gneiss Rock & Kempegowda Watchtower","Lalbagh Botanical Garden","Rock formation and historic watchtower."],["movies","Urvashi Theatre","Lalbagh Road","Cinema listing; verify current showtimes."],["tea","Brahmins' Coffee Bar","Ranga Rao Road, Shankarapura, Basavanagudi","Filter coffee and traditional coffee-bar listing."],["tea","Hatti Kaapi – Jayanagar 4th Block","11th Main Road, Jayanagar 4th Block","Filter coffee outlet listing."],["tea","Hatti Kaapi – Jayanagar 3rd Block","Near Jayanagara Metro, Jayanagar 3rd Block","Filter coffee outlet listing."],["tea","By 2 Coffee – Basavanagudi","Bull Temple Road, Basavanagudi","Coffee joint listing."],["tea","Kumbakonam Degree Coffee – Jayanagar","Jayanagar 4th Block","Filter coffee outlet listing."],["tea","Malgudi Filter Coffee – South End Circle","South End Circle","Filter coffee joint listed near Surana."],["tea","Kumbakonam Degree Coffee – Basavanagudi","Basavanagudi","Filter coffee outlet listing."],["tea","The Coffee San","54/1, Rama Iyengar Road, Vishweshwarapura, Basavanagudi","Specialty coffee cafe listing."],["tea","Third Wave Coffee Roasters – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse listing."],["tea","Blue Tokai Coffee Roasters – Jayanagar","Jayanagar 3rd/4th Block","Specialty coffee outlet listing."],["tea","Matteo Coffea","Jayanagar 4th Block","Coffeehouse listing."],["tea","Starbucks – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse listing."]],"Aps":[["toys","KH Associates","Near Gunasheela Nursing Home, Arumugam Circle, Basavanagudi","Toy wholesale and retail listing; Hot Wheels and collectibles noted in research."],["toys","Shree Gifts N Toys","Dr DVG Road, Gandhi Bazaar, Basavanagudi","Toy and gift shop listing."],["toys","Mahalaxmi Gift & Toys","Dr DVG Road, Basavanagudi","Mattel toys, remote cars and gifts listing."],["toys","Kids Wonderland","Basavanagudi","Toy, board game and die-cast vehicle shop listing."],["toys","Kutoohala – A Space For Curious Minds","Ratna Villas Road, Basavanagudi","STEM toys, mechanical models and puzzles listing."],["toys","Sri Venkateshwara Fancy & Toys","Gandhi Bazaar Main Road, Basavanagudi","Toy and novelty store listing."],["toys","New Star Fancy & Gifts","NR Colony Main Road, Basavanagudi","Gift, novelty and toy-car shop listing."],["toys","Archies Paper Rose","Gandhi Bazaar, Basavanagudi","Gift and collectibles shop listing."],["toys","Laxmi Novelties & Toys","Bull Temple Road, Basavanagudi","Toy, gift and stationery shop listing."],["gaming","Happy Memories GameZone – Basavanagudi","Basavanagudi","PS5 gaming and private-screen hangout listing."],["gaming","Echo E-Sports","National High School Road, Basavanagudi","Esports PCs and PlayStation stations listing."],["gaming","Antharal Gamebridge PC & Console Gaming","Near National College Metro, Basavanagudi","PC and PS5 multiplayer gaming listing."],["gaming","Arena Gaming Lounge","Bull Temple Road, Basavanagudi","Console and PC gaming listing."],["gaming","Pixel Play Console Zone","Gandhi Bazaar / NR Colony","Local PS4/PS5 hourly gaming listing."],["breakfast","Vidyarthi Bhavan","32, Gandhi Bazaar Main Road, Basavanagudi","Ghee masala dosa, khara bath and coffee."],["breakfast","Brahmins' Coffee Bar","Ranga Rao Road, Shankarapura, Basavanagudi","Idli-vada, khara bath and kesari bath."],["breakfast","MTR – Mavalli Tiffin Rooms","14, Lalbagh Road, near VV Puram","Rava idli, bisibele bath and traditional tiffins."],["breakfast","Roti Ghar","Gandhi Bazaar, Basavanagudi","Akki roti, ragi roti and jolada roti meals."],["breakfast","Kamat Bugle Rock","Bull Temple Road, Basavanagudi","North Karnataka meals and masala dosa listing."],["breakfast","Mahalakshmi Tiffin Room","DVG Road, Basavanagudi","Butter masala dosa and khara bath listing."],["breakfast","SLV Corner","Vanivilas Road, Basavanagudi","Vada, bath and masala dosa listing."],["breakfast","Upahara Bhavan","Gandhi Bazaar, Basavanagudi","Idli sambar and coffee listing."],["breakfast","Dwaraka","NR Colony, Basavanagudi","Khali dosa and chutney listing."],["breakfast","A2B – Adyar Ananda Bhavan","Basavanagudi","Mini tiffin, pongal and sweets listing."],["tea","By 2 Coffee – Basavanagudi","Bull Temple Road, Basavanagudi","Coffee and tea joint listing."],["tea","Tea Day – Gandhi Bazaar","Gandhi Bazaar, Basavanagudi","Tea outlet listing."],["tea","Chai Point – DVG Road","DVG Road, Basavanagudi","Tea outlet listing; exact branch to confirm."],["tea","Friends Adda – Sri Manjunatha Condiments","21/83, South End Road, Basavanagudi","Tea and snack cafe listing."],["tea","Kumbakonam Degree Coffee – Basavanagudi","Basavanagudi","Filter coffee outlet listing."],["tea","Hatti Kaapi – Basavanagudi","Basavanagudi","Tea and filter coffee outlet listing."],["cafes","The Coffee San","54/1, Rama Iyengar Road, Vishweshwarapura, Basavanagudi","Specialty coffee cafe listing."],["cafes","Kesarii Cafe","20, Food Street, beside Arya Samaj, Vishweshwarapura, Basavanagudi","Cafe near VV Puram Food Street."],["cafes","The Rogue Elephant","Krishna Rao Park / Kanakapura Road, Basavanagudi","Cafe and garden dining listing."],["cafes","Marzipan Cafe & Bakery","Basavanagudi","Cafe and bakery listing."],["burgers","Burger King – Basavanagudi","Basavanagudi","Quick-service restaurant listing."],["burgers","McDonald's – Basavanagudi","Basavanagudi","Quick-service restaurant listing."],["burgers","KFC – Basavanagudi","Basavanagudi","Quick-service restaurant listing."],["burgers","Subway – Basavanagudi","Basavanagudi","Sandwich outlet listing."],["pizza","La Pino'z Pizza – Basavanagudi","Basavanagudi","Pizza outlet listing."],["pizza","MOJO Pizza – Basavanagudi","Basavanagudi","Pizza outlet listing."],["pizza","Domino's Pizza – Basavanagudi","Basavanagudi / Chamarajpet","Pizza outlet listing."],["pizza","Pizza Hut – Basavanagudi","Basavanagudi","Pizza outlet listing."],["pizza","Megna's Pizza","Basavanagudi","Pizza outlet listing; exact branch to confirm."],["icecream","Natural Ice Cream – Gandhi Bazaar","Gandhi Bazaar, Basavanagudi","Ice cream parlour listing."],["icecream","Polar Bear – Basavanagudi","Basavanagudi","Ice cream outlet listing."],["icecream","Havmor Ice Cream – Basavanagudi","Basavanagudi","Ice cream outlet listing."],["icecream","The Belgian Waffle Co. – Basavanagudi","Basavanagudi","Waffle and dessert outlet listing."],["street","Asha Sweet Center","Gandhi Bazaar, Basavanagudi","Sweets and snacks outlet."],["street","Subbamma Stores","Gandhi Bazaar, Basavanagudi","Kodagu snacks and nippat listing."],["viewpoints","Bugle Rock Sunset & City Viewpoint","Bull Temple Road, Basavanagudi","Rock formation and city-view landmark."],["viewpoints","Lalbagh Peninsular Gneiss Rock & Watchtower","Lalbagh Botanical Garden","Rock formation and historic watchtower inside the garden."],["viewpoints","Lalbagh Glasshouse & Lake Sunset Pier","Lalbagh Botanical Garden","Garden glasshouse and lake-side walk."],["parks","M N Krishna Rao Park","Dewan Madhava Rao Road, Basavanagudi","Large neighbourhood park."],["parks","Bugle Rock Park","Bull Temple Road, Basavanagudi","Park and rock formation beside Bull Temple."],["parks","NR Colony Park & Shamanna Park","NR Colony, Basavanagudi","Neighbourhood park listing."],["parks","Lalbagh Botanical Garden","Mavalli / RV Road / West Gate","Botanical garden and walking trails."],["parks","Kempambudhi Lake","Gavipuram / Basavanagudi","Lake and walking area."],["temples","Dodda Basavana Gudi – Big Bull Temple","Bull Temple Road, Basavanagudi","Historic temple landmark."],["temples","Dodda Ganapathi Temple","Bull Temple Road, Basavanagudi","Temple landmark."],["temples","Karanji Anjaneya Swamy Temple","Basavanagudi / NR Colony","Temple landmark."],["temples","Sri Ramakrishna Math","Bull Temple Road, Basavanagudi","Spiritual and heritage landmark."],["shopping","Gandhi Bazaar Main Road","Basavanagudi","Shopping street and market."],["shopping","DVG Road Shopping Stretch","Basavanagudi","Shopping and food street."],["shopping","Dress Circle Shopping Mall","Subbarama Chetty Road, Basavanagudi","Shopping mall listing."],["movies","Chandrodaya Theatre","Opposite Hanumanthnagar, Basavanagudi","Cinema listing; verify current operations and showtimes."],["metro","National College Metro Station","Green Line, Basavanagudi","Metro station serving APS and Jain VV Puram areas."],["metro","Lalbagh Metro Station","Green Line, Lalbagh Road","Metro station serving VV Puram / Lalbagh area."],["transit","NR Colony Bus Stop","Outside APS College, NR Colony","BMTC stop listed in supplied research."],["transit","Gandhi Bazaar Bus Stop","Gandhi Bazaar, Basavanagudi","BMTC stop listed in supplied research."],["transit","Ramakrishna Ashrama Bus Stop","Basavanagudi","BMTC stop listed in supplied research."],["transit","Minerva Circle Bus Stop","VV Puram / Basavanagudi","BMTC stop listed in supplied research."],["viewpoints","Lalbagh Peninsular Gneiss Rock & Kempegowda Watchtower","Lalbagh Botanical Garden","Rock formation and historic watchtower."],["movies","Urvashi Theatre","Lalbagh Road","Cinema listing; verify current showtimes."],["tea","Brahmins' Coffee Bar","Ranga Rao Road, Shankarapura, Basavanagudi","Filter coffee and traditional coffee-bar listing."],["tea","By 2 Coffee – Basavanagudi","Bull Temple Road, Basavanagudi","Coffee joint listing."],["tea","Kumbakonam Degree Coffee – Basavanagudi","Basavanagudi","Filter coffee outlet listing."],["tea","The Coffee San","54/1, Rama Iyengar Road, Vishweshwarapura, Basavanagudi","Specialty coffee cafe listing."]],"JAIN College - VV Puram":[["toys","Sajjan Rao Circle Gift & Toy Stores","VV Puram, Sajjan Rao Circle","Gift and toy shops cluster listed in supplied research."],["breakfast","MTR – Mavalli Tiffin Rooms","14, Lalbagh Road, near VV Puram","Rava idli, bisibele bath and traditional tiffins."],["breakfast","New Shanthi Sagar – VV Puram","VV Puram","South and North Indian meals and tiffins."],["breakfast","Sri Krishna Darshini","60/2, Sajjan Rao Circle, VV Puram","Morning dosa, idli-vada and coffee."],["breakfast","Durga Darshan","VV Puram","Student-budget tiffins and meals listing."],["breakfast","Alfa Family Restaurant","VV Puram","Quick breakfast and lunch plates listing."],["tea","TEA TIME – VV Puram","VV Puram","Tea outlet listing; exact branch to confirm."],["cafes","Kesarii Cafe","20, Food Street, beside Arya Samaj, Vishweshwarapura, Basavanagudi","Cafe near VV Puram Food Street."],["street","VV Puram Food Street (Thindi Beedi)","Sajjan Rao Circle, VV Puram","Food street known for dosa, chaat, pani puri and kulfi."],["street","Rasoi Desi Ghar","VV Puram Food Street","Chaat and smoke ice cream listing."],["street","Shri Nanjundeshwara Gulkand & Fruit Center","VV Puram Food Street","Fruit and gulkand outlet listing."],["street","Shivanna Gulkand Store","VV Puram","Gulkand and fruit outlet listing."],["street","Kailash Parbat","VV Puram","Chaat and North Indian snack restaurant listing."],["bakeries","VB Bakery","Sajjan Rao Circle, VV Puram","Bakery listing: honey cake, congress bun and khara biscuit."],["temples","Sri Subramanya Swamy Temple","Sajjan Rao Circle, VV Puram","Temple near Jain VV Puram area."],["shopping","DVG Road Shopping Stretch","Basavanagudi","Shopping and food street."],["metro","National College Metro Station","Green Line, Basavanagudi","Metro station serving APS and Jain VV Puram areas."],["metro","Lalbagh Metro Station","Green Line, Lalbagh Road","Metro station serving VV Puram / Lalbagh area."],["transit","Sajjan Rao Circle Bus Stop","VV Puram","BMTC stop listed in supplied research."],["transit","Minerva Circle Bus Stop","VV Puram / Basavanagudi","BMTC stop listed in supplied research."],["transit","Vani Vilas Hospital Bus Stop","VV Puram","BMTC stop listed in supplied research."],["transit","KR Market Bus Stop","KR Market","BMTC stop listed in supplied research."],["movies","Urvashi Theatre","Lalbagh Road","Cinema listing; verify current showtimes."],["toys","KH Associates","Near Gunasheela Nursing Home, Arumugam Circle, Basavanagudi","Toy wholesale and retail listing; Hot Wheels and collectibles noted in research."],["toys","Shree Gifts N Toys","Dr DVG Road, Gandhi Bazaar, Basavanagudi","Toy and gift shop listing."],["toys","Mahalaxmi Gift & Toys","Dr DVG Road, Basavanagudi","Mattel toys, remote cars and gifts listing."],["toys","Kids Wonderland","Basavanagudi","Toy, board game and die-cast vehicle shop listing."],["toys","Kutoohala – A Space For Curious Minds","Ratna Villas Road, Basavanagudi","STEM toys, mechanical models and puzzles listing."],["toys","Sri Venkateshwara Fancy & Toys","Gandhi Bazaar Main Road, Basavanagudi","Toy and novelty store listing."],["toys","New Star Fancy & Gifts","NR Colony Main Road, Basavanagudi","Gift, novelty and toy-car shop listing."],["toys","Archies Paper Rose","Gandhi Bazaar, Basavanagudi","Gift and collectibles shop listing."],["toys","Laxmi Novelties & Toys","Bull Temple Road, Basavanagudi","Toy, gift and stationery shop listing."],["gaming","Happy Memories GameZone – Basavanagudi","Basavanagudi","PS5 gaming and private-screen hangout listing."],["gaming","Echo E-Sports","National High School Road, Basavanagudi","Esports PCs and PlayStation stations listing."],["gaming","Antharal Gamebridge PC & Console Gaming","Near National College Metro, Basavanagudi","PC and PS5 multiplayer gaming listing."],["gaming","Arena Gaming Lounge","Bull Temple Road, Basavanagudi","Console and PC gaming listing."],["gaming","Pixel Play Console Zone","Gandhi Bazaar / NR Colony","Local PS4/PS5 hourly gaming listing."],["breakfast","Vidyarthi Bhavan","32, Gandhi Bazaar Main Road, Basavanagudi","Ghee masala dosa, khara bath and coffee."],["breakfast","Brahmins' Coffee Bar","Ranga Rao Road, Shankarapura, Basavanagudi","Idli-vada, khara bath and kesari bath."],["breakfast","Roti Ghar","Gandhi Bazaar, Basavanagudi","Akki roti, ragi roti and jolada roti meals."],["breakfast","Kamat Bugle Rock","Bull Temple Road, Basavanagudi","North Karnataka meals and masala dosa listing."],["breakfast","Mahalakshmi Tiffin Room","DVG Road, Basavanagudi","Butter masala dosa and khara bath listing."],["breakfast","SLV Corner","Vanivilas Road, Basavanagudi","Vada, bath and masala dosa listing."],["breakfast","Upahara Bhavan","Gandhi Bazaar, Basavanagudi","Idli sambar and coffee listing."],["breakfast","Dwaraka","NR Colony, Basavanagudi","Khali dosa and chutney listing."],["breakfast","A2B – Adyar Ananda Bhavan","Basavanagudi","Mini tiffin, pongal and sweets listing."],["tea","By 2 Coffee – Basavanagudi","Bull Temple Road, Basavanagudi","Coffee and tea joint listing."],["tea","Tea Day – Gandhi Bazaar","Gandhi Bazaar, Basavanagudi","Tea outlet listing."],["tea","Chai Point – DVG Road","DVG Road, Basavanagudi","Tea outlet listing; exact branch to confirm."],["tea","Friends Adda – Sri Manjunatha Condiments","21/83, South End Road, Basavanagudi","Tea and snack cafe listing."],["tea","Kumbakonam Degree Coffee – Basavanagudi","Basavanagudi","Filter coffee outlet listing."],["tea","Hatti Kaapi – Basavanagudi","Basavanagudi","Tea and filter coffee outlet listing."],["cafes","The Coffee San","54/1, Rama Iyengar Road, Vishweshwarapura, Basavanagudi","Specialty coffee cafe listing."],["cafes","The Rogue Elephant","Krishna Rao Park / Kanakapura Road, Basavanagudi","Cafe and garden dining listing."],["cafes","Marzipan Cafe & Bakery","Basavanagudi","Cafe and bakery listing."],["burgers","Burger King – Basavanagudi","Basavanagudi","Quick-service restaurant listing."],["burgers","McDonald's – Basavanagudi","Basavanagudi","Quick-service restaurant listing."],["burgers","KFC – Basavanagudi","Basavanagudi","Quick-service restaurant listing."],["burgers","Subway – Basavanagudi","Basavanagudi","Sandwich outlet listing."],["pizza","La Pino'z Pizza – Basavanagudi","Basavanagudi","Pizza outlet listing."],["pizza","MOJO Pizza – Basavanagudi","Basavanagudi","Pizza outlet listing."],["pizza","Domino's Pizza – Basavanagudi","Basavanagudi / Chamarajpet","Pizza outlet listing."],["pizza","Pizza Hut – Basavanagudi","Basavanagudi","Pizza outlet listing."],["pizza","Megna's Pizza","Basavanagudi","Pizza outlet listing; exact branch to confirm."],["icecream","Natural Ice Cream – Gandhi Bazaar","Gandhi Bazaar, Basavanagudi","Ice cream parlour listing."],["icecream","Polar Bear – Basavanagudi","Basavanagudi","Ice cream outlet listing."],["icecream","Havmor Ice Cream – Basavanagudi","Basavanagudi","Ice cream outlet listing."],["icecream","The Belgian Waffle Co. – Basavanagudi","Basavanagudi","Waffle and dessert outlet listing."],["street","Asha Sweet Center","Gandhi Bazaar, Basavanagudi","Sweets and snacks outlet."],["street","Subbamma Stores","Gandhi Bazaar, Basavanagudi","Kodagu snacks and nippat listing."],["viewpoints","Bugle Rock Sunset & City Viewpoint","Bull Temple Road, Basavanagudi","Rock formation and city-view landmark."],["viewpoints","Lalbagh Peninsular Gneiss Rock & Watchtower","Lalbagh Botanical Garden","Rock formation and historic watchtower inside the garden."],["viewpoints","Lalbagh Glasshouse & Lake Sunset Pier","Lalbagh Botanical Garden","Garden glasshouse and lake-side walk."],["parks","M N Krishna Rao Park","Dewan Madhava Rao Road, Basavanagudi","Large neighbourhood park."],["parks","Bugle Rock Park","Bull Temple Road, Basavanagudi","Park and rock formation beside Bull Temple."],["parks","NR Colony Park & Shamanna Park","NR Colony, Basavanagudi","Neighbourhood park listing."],["parks","Lalbagh Botanical Garden","Mavalli / RV Road / West Gate","Botanical garden and walking trails."],["parks","Kempambudhi Lake","Gavipuram / Basavanagudi","Lake and walking area."],["temples","Dodda Basavana Gudi – Big Bull Temple","Bull Temple Road, Basavanagudi","Historic temple landmark."],["temples","Dodda Ganapathi Temple","Bull Temple Road, Basavanagudi","Temple landmark."],["temples","Karanji Anjaneya Swamy Temple","Basavanagudi / NR Colony","Temple landmark."],["temples","Sri Ramakrishna Math","Bull Temple Road, Basavanagudi","Spiritual and heritage landmark."],["shopping","Gandhi Bazaar Main Road","Basavanagudi","Shopping street and market."],["shopping","Dress Circle Shopping Mall","Subbarama Chetty Road, Basavanagudi","Shopping mall listing."],["movies","Chandrodaya Theatre","Opposite Hanumanthnagar, Basavanagudi","Cinema listing; verify current operations and showtimes."],["transit","NR Colony Bus Stop","Outside APS College, NR Colony","BMTC stop listed in supplied research."],["transit","Gandhi Bazaar Bus Stop","Gandhi Bazaar, Basavanagudi","BMTC stop listed in supplied research."],["transit","Ramakrishna Ashrama Bus Stop","Basavanagudi","BMTC stop listed in supplied research."],["viewpoints","Lalbagh Peninsular Gneiss Rock & Kempegowda Watchtower","Lalbagh Botanical Garden","Rock formation and historic watchtower."],["tea","Brahmins' Coffee Bar","Ranga Rao Road, Shankarapura, Basavanagudi","Filter coffee and traditional coffee-bar listing."],["tea","By 2 Coffee – Basavanagudi","Bull Temple Road, Basavanagudi","Coffee joint listing."],["tea","Malgudi Filter Coffee – South End Circle","South End Circle","Filter coffee joint listed near Surana."],["tea","Kumbakonam Degree Coffee – Basavanagudi","Basavanagudi","Filter coffee outlet listing."],["tea","The Coffee San","54/1, Rama Iyengar Road, Vishweshwarapura, Basavanagudi","Specialty coffee cafe listing."]],"JAIN College - Jayanagar":[["toys","Toonz Retail India Pvt Ltd","9th Main Road, Jayanagar 3rd Block, opposite Cloudnine Hospital","Toy shop listing: Hot Wheels, Matchbox, action figures and board games."],["toys","Mahalaxmi Toys","27th Cross, Jayanagar 4th Block West, opposite Swan Hardware","Toy shop listing: Mattel cartons, track sets, die-cast bikes and cars."],["toys","Bhavana's Gifts","B Centre Block, Jayanagar 4th Block Shopping Complex","Gift and toy shop listing; confirm current die-cast stock."],["toys","Bhavana Gifts","4th Cross Road, Jayanagar","Collectibles, novelties and die-cast models."],["toys","Gift Zone","Jayanagar 4th Block","Die-cast cars, novelty collectibles and desk toys."],["toys","Archies Gallery","11th Main Road, Jayanagar 4th Block","Gift boxes, miniature collectibles and cards."],["toys","Alai Gifting And Wrapping","Sri Garuda Swagath Mall, Tilak Nagar","Curated gift sets and miniature collectibles."],["toys","Khan Soap Center","Byrasandra Main Road, Jayanagar 1st Block East","Neighbourhood store listed for Mattel toys and die-cast cars."],["toys","Praveen Novelties","Jayanagar 9th Block","Stationery, novelties and Hot Wheels mainline listings."],["toys","Sapna Book House – Toy & Gift Floor","11th Main Road, Jayanagar 4th Block","Toy and gift floor listing: Hot Wheels, Lego, puzzles and manga."],["toys","Itsy Bitsy","11th Main Road, Jayanagar 4th Block","Craft supplies, diorama materials and miniatures."],["toys","Miniso – Sri Garuda Swagath Mall","Sri Garuda Swagath Mall, Tilak Nagar","Blind boxes, figures, plushies and desk collectibles."],["toys","Crossword Bookstore – Toys & Collectibles","Jayanagar 4th Block","Bookstore listing for toys, collectibles and tabletop games."],["toys","Srinivasa Fancy & Toys","Jayanagar 4th Block Shopping Complex","Budget toy cars and retro games."],["toys","Sri Balaji Gift & Toy Centre","Jayanagar 7th Block","Neighbourhood toy and gift outlet."],["toys","Reliance Smart Bazaar / Trends Kids","Jayanagar","Occasional toy and Hot Wheels restock listing; stock varies."],["gaming","The Basement Warzone","Near KFC, Jayanagar 3rd/4th Block","Gaming lounge listing: high-refresh PCs and PS5 stations; confirm current games and access."],["gaming","Amoeba Bowling & Arcade","Cosmopolitan Club, 22nd Cross, Jayanagar 3rd Block","Bowling, arcade racers, air hockey and redemption games; check public entry."],["gaming","Complex Arcade","Eastern Block, Jayanagar 3rd/4th Block","Classic arcade and console gaming listing."],["gaming","Wonder Land","10th Main, Jayanagar 4th Block","Arcade and casual gaming listing."],["gaming","Next Level – The Gaming Cafe","Ashoka Pillar Road, Jayanagar","Gaming cafe listing with console and multiplayer gaming; confirm current setup."],["gaming","ATOM Gaming","10th Main Road, Jayanagar 3rd Block East","Competitive PC and console gaming lounge listing."],["gaming","The Cue Cafe And Gaming","Swagath Road, Jayanagar","Pool tables, console gaming and snacks listing."],["gaming","Now Boarding Cafe","Jayanagar 3rd Block","Tabletop board games, card games and food listing."],["gaming","Dream Celebrations – Private Screen & PS5","Swagath Road, Jayanagar 4th T Block","Private-screen and PlayStation gaming listing."],["breakfast","Taaza Thindi","26th Main Road, Jayanagar 9th Block","Masala dosa, chow chow bath, kesari bath and filter coffee."],["breakfast","Jayanagar Tiffin Room","4th T Block East, Jayanagar 4th Block","Set dosa, podi idli and filter coffee."],["breakfast","Jayanagar SLV Tiffin Corner","Jayanagar 4th Block Shopping Complex","Masala dosa, uddina vada and tea."],["breakfast","Shiva Prasad Tiffin Centre","10th Main Road, opposite Madhavan Park, Jayanagar 3rd Block","Pocket-friendly idli, dosa and rice bath."],["breakfast","Vasudev Adiga's","11th Main Road, Jayanagar 4th Block","South Indian breakfast combos and akki roti."],["breakfast","AR Tiffin Cafe","Opposite Sri Garuda Swagath Mall, Jayanagar 4th T Block","Benne dosa and thatte idli listing."],["breakfast","Shiv Sagar","Sri Garuda Swagath Mall, Tilak Nagar","Pav bhaji, tiffins and fresh juices."],["breakfast","Upahara Darshini","Jayanagar 3rd Block","Idli-vada and pongal listing."],["breakfast","New Shanthi Sagar – Jayanagar","Jayanagar 4th Block","South and North Indian meals and tiffins."],["breakfast","Savi Sagar","Jayanagar 7th Block","Ghee roast dosa and Mangalore bajji."],["breakfast","Maiyas Beverages & Foods","Jayanagar 4th Block","Rasam vada, heritage-style dishes and filter coffee."],["breakfast","Udupi Sri Krishna Bhavan","Jayanagar 4th Block","Udupi meals and morning tiffin."],["breakfast","Sendhoor Coffee & Tiffin","Jayanagar 4th Block","Pongal, medu vada and Kumbakonam coffee."],["tea","Hatti Kaapi – 11th Main","11th Main Road, Jayanagar 4th Block","Tea and filter coffee outlet listing."],["tea","Hatti Kaapi – Jayanagar 3rd Block","Near Jayanagara Metro, Jayanagar 3rd Block","Tea and filter coffee outlet listing."],["tea","Chai Point – Jayanagar 3rd Block","Jayanagar 3rd Block","Tea outlet; exact branch to confirm."],["tea","Chai Point – Jayanagar 4th Block","Jayanagar 4th Block","Tea outlet; exact branch to confirm."],["tea","Tea Day – Jayanagar","Jayanagar 4th Block","Tea and refreshments outlet listing."],["tea","Theka Coffee – Jayanagar","Jayanagar 4th Block","Coffee and beverages outlet listing."],["tea","Boba Bhai","Jayanagar 4th Block","Bubble tea and Korean bites listing."],["tea","Chaayos – Jayanagar","Jayanagar 4th / 9th Block area","Tea cafe listing; confirm exact branch."],["tea","Kumbakonam Degree Coffee – Jayanagar","Jayanagar 4th Block","Filter coffee outlet listing."],["cafes","Bengaluru Cafe","9th Main, Jayanagar 2nd Block","Cafe and hangout listing."],["cafes","Mugshot Cafe Tea Bench","Jayanagar 4th Block","Cafe and tea hangout listing."],["cafes","Hamdeez Cafe","Jayanagar 4th Block","Cafe listing."],["cafes","Brewing Untold Stories","Jayanagar","Cafe listing; exact branch to confirm."],["cafes","Kallol By Cafe Durga","Jayanagar","Cafe listing."],["cafes","Third Wave Coffee Roasters – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse and study hangout listing."],["cafes","Blue Tokai Coffee Roasters – Jayanagar","Jayanagar 3rd/4th Block","Specialty coffee outlet listing; exact branch to confirm."],["cafes","Glen's Bakehouse","Jayanagar 4th Block","Bakery cafe listing; red velvet cupcakes and cold coffee noted in research."],["cafes","Matteo Coffea","Jayanagar 4th Block","Cafe and coffeehouse listing."],["cafes","Public Cafe","Jayanagar 1st Block / Phase","Cafe listing."],["cafes","Starbucks – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse listing."],["cafes","Truffles – Jayanagar","Jayanagar 4th / 9th Block area","Cafe and bistro listing; exact branch to confirm."],["burgers","Indiana Burgers","Jayanagar 8th Block","Burger outlet listing."],["burgers","Leon's – Burgers & Wings","Jayanagar 4th Block","Burger and wings outlet listing."],["burgers","Biggies Burger – Jayanagar","Jayanagar 4th Block","Burger outlet listing."],["burgers","Burger King – Jayanagar","Jayanagar 4th Block","Quick-service restaurant listing."],["burgers","McDonald's – Jayanagar","11th Main Road, Jayanagar 4th Block","Quick-service restaurant listing."],["burgers","KFC – Jayanagar","Jayanagar 3rd/4th Block","Quick-service restaurant listing."],["burgers","Taco Bell – Jayanagar","Jayanagar 4th Block","Quick-service restaurant listing."],["burgers","Burger It Up","JP Nagar / Jayanagar","Burger outlet listing in nearby area."],["burgers","Subway – Jayanagar","Jayanagar 4th Block","Sandwich outlet listing."],["burgers","Wendy's – Jayanagar","Jayanagar","Burger outlet listing; exact branch to confirm."],["pizza","Onesta – Jayanagar","Jayanagar 4th Block","Pizza and dessert restaurant listing."],["pizza","Brik Oven – Jayanagar","Jayanagar","Wood-fired sourdough pizza listing."],["pizza","Toscano – Jayanagar","Jayanagar","Italian dining listing."],["pizza","Via Milano – Jayanagar","Jayanagar","Italian dining listing."],["pizza","La Pino'z Pizza – Jayanagar","Jayanagar","Pizza outlet listing."],["pizza","MOJO Pizza – Jayanagar","Jayanagar","Pizza outlet listing."],["pizza","Domino's Pizza – Jayanagar","Jayanagar 3rd/4th Block and 9th Block","Pizza outlet listing; multiple branches."],["pizza","Chicago Pizza – Sri Garuda Swagath Mall","Sri Garuda Swagath Mall, Jayanagar","Pizza outlet listing."],["icecream","Corner House – Jayanagar","Jayanagar 4th Block and 9th Block","Ice cream parlour; DBC noted in research."],["icecream","Natural Ice Cream – Jayanagar","Jayanagar 7th Block / Kanakapura Road","Ice cream parlour listing."],["icecream","Milano Ice Cream","9th Main, Jayanagar 5th Block","Gelato listing."],["icecream","Ibaco Ice Cream Parlour","33rd Cross, 11th Main, Jayanagar 4th Block","Ice cream parlour listing."],["icecream","The Belgian Waffle Co. – Jayanagar","11th Main, Jayanagar 4th Block","Waffle and dessert outlet listing."],["icecream","Art of Delight","Jayanagar 5th Block","Dessert and ice cream listing."],["icecream","Stoned Monkey","Jayanagar","Dessert outlet listing; exact branch to confirm."],["icecream","The Lassi Park","Jayanagar 3rd Block","Lassi and dessert outlet listing."],["icecream","Cool Joint","11th Main Road, Jayanagar 4th Block","Cold badam milk and grilled sandwich listing."],["icecream","Baskin Robbins – Jayanagar","Jayanagar 4th Block","Ice cream outlet listing."],["street","Jayanagar 4th Block Complex Chaat Lane","Outer perimeter, Jayanagar 4th Block","Street-food and chaat stretch."],["street","A Sweet Touch","29C Cross, 11th Main Road, Jayanagar 4th Block","Sweets and snacks outlet listing."],["street","Hari Super Sandwich","Jayanagar 3rd/4th Block","Sandwich and snack outlet listing."],["bakeries","Iyengar's Bakery – Jayanagar 3rd Block","Jayanagar 3rd Block, near NMKRV","Bakery listing."],["parks","Madhavan Park","Jayanagar 3rd Block","Park beside NMKRV and RV PU Jayanagar area."],["parks","Kittur Rani Chennamma Stadium & Park","Jayanagar 3rd Block","Local park and sports ground."],["parks","Yediyur Lake","Jayanagar 6th Block","Lake and walking area."],["viewpoints","Yediyur Lake Sunset Deck & Walkway","Jayanagar 6th Block / Kanakapura Road","Lake-side sunset and walking area."],["temples","Sri Vinayaka Temple","Jayanagar 4th Block, near BDA Complex","Temple landmark."],["temples","Sri Dharma Sastha Ayyappa Temple","Jayanagar 4th T Block","Temple landmark."],["shopping","Jayanagar 4th Block Shopping Complex","Jayanagar 4th Block","Shopping complex and market."],["shopping","Sri Garuda Swagath Mall","Tilak Nagar, Jayanagar 4th Block","Shopping mall with food and retail."],["shopping","High Street Mall","11th Main Road, Jayanagar 4th T Block East","Shopping destination listing."],["shopping","11th Main & 9th Main Street Shopping","Jayanagar 3rd and 4th Block","Shopping streets and high street stretch."],["movies","INOX – Sri Garuda Swagath Mall","Jayanagar 4th Block","Cinema listing; verify current operator and showtimes."],["metro","Jayanagara Metro Station","Green Line, Jayanagar","Metro station serving Jayanagar campuses."],["transit","NMKRV College / 3rd Block Jayanagara Bus Stop","Jayanagar 3rd Block","BMTC stop listed in supplied research."],["transit","Madhavan Park Bus Stop","Jayanagar 3rd Block","BMTC stop listed in supplied research."],["transit","Jayanagara 4th Block TTMC","Jayanagar 4th Block","BMTC terminal listed in supplied research."],["transit","Jayanagara Church Bus Stop","Jayanagar","BMTC stop listed in supplied research."],["burgers","Texas Burgers","JP Nagar","Burger outlet listing."],["pizza","Friendly Neighbourhood Pizza Man","National High School Road, VV Puram","Pizza outlet listing."],["pizza","Singlepizza","72, Parvathipuram, Kavi Lakshmisha Road, VV Puram","Pizza outlet listing."],["pizza","Via Milano","Jayanagar","Italian dining listing."],["pizza","Megna's Pizza","Basavanagudi","Pizza outlet listing."],["icecream","The Soft Corner","92, National High School Road, VV Puram","Soft-serve ice cream outlet listing."],["icecream","Havmor Ice Cream","Jayanagar 4th Block / Kanakapura Road","Ice cream outlet listing."],["street","Shri Nanjundeshwara Gulkand & Fruit Center","VV Puram Food Street","Fruit and gulkand outlet listing."],["street","Shivanna Gulkand Store","VV Puram","Gulkand and fruit outlet listing."],["street","Kailash Parbat","VV Puram","Chaat and snacks listing."],["street","Asha Sweet Center","Gandhi Bazaar, Basavanagudi","Sweets and snacks listing."],["street","Subbamma Stores","Gandhi Bazaar, Basavanagudi","Kodagu snacks and nippat listing."],["viewpoints","Sankey Tank Sunset Promenade","Malleshwaram","Lake promenade and walking destination."],["viewpoints","Manchanabele Dam & Backwater Sunset Point","Off Mysore Road","Backwater and dam day-trip destination."],["temples","Sri Chandramouleshwara Temple","Jayanagar 3rd Block","Temple landmark near NMKRV area."],["temples","Sri Kote Venkataramana Swamy Temple","KR Road, Fort / Chamarajpet","Historic temple landmark."],["shopping","Dress Circle Shopping Mall","Subbarama Chetty Road, Basavanagudi","Shopping mall listing."],["shopping","Gopalan Innovation Mall","Bannerghatta Road","Shopping mall listing."],["shopping","Royal Meenakshi Mall","Bannerghatta Road, Hulimavu","Shopping mall listing."],["movies","Urvashi Theatre","Lalbagh Road","Cinema listing; verify current showtimes."],["movies","Chandrodaya Theatre","Opposite Hanumanthnagar, Basavanagudi","Cinema listing; verify current operations."],["movies","Kamakya Theatre","Outer Ring Road, Banashankari 3rd Stage","Cinema listing; verify current operations."],["movies","Cinepolis – Royal Meenakshi Mall","Royal Meenakshi Mall, Bannerghatta Road","Cinema listing; verify showtimes."],["transit","South End Circle Bus Stop","South End Circle","BMTC stop listed in supplied research."],["transit","Nettakallappa Circle Bus Stop","Basavanagudi","BMTC stop listed in supplied research."],["transit","Nagasandra Circle Bus Stop","South End / Basavanagudi area","BMTC stop listed in supplied research."],["tea","Hatti Kaapi – Jayanagar 4th Block","11th Main Road, Jayanagar 4th Block","Filter coffee outlet listing."],["tea","Hatti Kaapi – Jayanagar 3rd Block","Near Jayanagara Metro, Jayanagar 3rd Block","Filter coffee outlet listing."],["tea","Kumbakonam Degree Coffee – Jayanagar","Jayanagar 4th Block","Filter coffee outlet listing."],["tea","Third Wave Coffee Roasters – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse listing."],["tea","Blue Tokai Coffee Roasters – Jayanagar","Jayanagar 3rd/4th Block","Specialty coffee outlet listing."],["tea","Matteo Coffea","Jayanagar 4th Block","Coffeehouse listing."],["tea","Starbucks – Jayanagar","11th Main Road, Jayanagar 4th Block","Coffeehouse listing."],["tea","Starbucks – Forum South Bengaluru","Forum South Bengaluru, Konanakunte","Coffeehouse listing."],["toys","Parmeshwar Toys and Gift Center","37, Basement, 25th Main Road, Kottapalya, Jayanagar 9th Block","Toy, gift and stationery shop listing."],["toys","Hamleys – Nexus Vega City Mall","Nexus Vega City Mall, Bannerghatta Road","Toy and collectible store listing."],["toys","Starmark / Crossword – Nexus Vega City Mall","Nexus Vega City Mall, Bannerghatta Road","Collectibles, manga and board games listing."],["gaming","Happy Memories GameZone – Jayanagar 9th Block","2nd Floor, 40th Cross Road, Kottapalya, Jayanagar 9th Block","Private-screen and PS5 gaming listing."],["gaming","Timezone – Nexus Vega City Mall","Nexus Vega City Mall, Bannerghatta Road","Arcade, VR rides and bowling listing."],["tea","Chaayos – Jayanagar 9th Block","Jayanagar 9th Block area","Tea cafe listing; exact branch to confirm."],["cafes","Truffles – Jayanagar 9th Block","Jayanagar 9th Block","Cafe and bistro listing; exact branch to confirm."],["burgers","Leon's – JP Nagar","JP Nagar","Burger and wings outlet listing."],["burgers","Biggies Burger – JP Nagar","JP Nagar","Burger outlet listing."],["pizza","Onesta – JP Nagar","JP Nagar","Pizza and dessert restaurant listing."],["pizza","Brik Oven – JP Nagar","JP Nagar","Wood-fired sourdough pizza listing."],["pizza","Domino's Pizza – Jayanagar 9th Block","Jayanagar 9th Block","Pizza outlet listing."],["icecream","Corner House – Jayanagar 9th Block","26th Main, Jayanagar 9th Block","Ice cream parlour listing."],["icecream","Polar Bear – Jayanagar","Jayanagar","Ice cream outlet listing."],["viewpoints","Madiwala Lake Sunset Watchtower & Boardwalk","BTM 2nd Stage","Lake-side boardwalk and viewing area."],["temples","Sri Ragigudda Anjaneya Swamy Temple","Jayanagar 9th Block","Hilltop temple landmark."],["parks","JP Park / Mini Forest","JP Nagar 3rd Phase","Park and walking area."],["parks","Puttenahalli Lake Bird Reserve","JP Nagar 7th Phase","Lake and bird habitat."],["parks","Sarakki Lake","JP Nagar 6th Phase","Lake-side walking area."],["shopping","Nexus Vega City Mall","Bannerghatta Road, JP Nagar 3rd Phase","Shopping mall with food and entertainment."],["movies","PVR – Nexus Vega City Mall","Nexus Vega City Mall, Bannerghatta Road","Cinema listing; verify formats and showtimes."],["metro","Ragigudda Metro Station","Yellow Line, Jayanagar 9th Block","Metro station serving the Jayanagar 9th Block area."],["transit","Ragigudda Temple Bus Stop","Jayanagar 9th Block","BMTC stop listed in supplied research."],["transit","Jayanagar 9th Block Bus Stop","Jayanagar 9th Block","BMTC stop listed in supplied research."],["transit","East End Circle Bus Stop","Jayanagar","BMTC stop listed in supplied research."]],"RV PU College - Konanakunte Area":[["toys","Hamleys – Forum South Bengaluru","Level 3, Forum Falcon City, Konanakunte Cross","Toy store listing: Hot Wheels, Monster Trucks and track sets; stock varies."],["toys","Hamleys – RV Road, JP Nagar 2nd Phase","RV Road, JP Nagar 2nd Phase","Toy store listing for Hot Wheels and Lego; confirm branch and stock."],["toys","FirstCry.com Store – Konanakunte","Kanakapura Main Road, Konanakunte","Mattel toys and Hot Wheels singles listing."],["toys","FirstCry.com Store – JP Nagar","24th Main Road, JP Nagar 2nd Phase","Toy and die-cast pack listing."],["toys","Miniso – Forum South Bengaluru","Forum South Bengaluru, Konanakunte Cross","Collectibles, blind boxes and lifestyle products."],["toys","Evergreen Toys","East End Road, Kumaraswamy Layout","Toy and die-cast car shop listing."],["toys","E Chariot Retail LLP","Opposite Kamakya Theatre, Banashankari 3rd Stage","Toy and collectible retail listing."],["toys","Ganesh Toys & Games","JP Nagar","Board games and toy vehicles listing."],["toys","Aatike","Banashankari 2nd Stage","Handcrafted and wooden collectibles listing."],["toys","Toy It Yourself","Banashankari 2nd Stage","DIY model kits and toys listing."],["gaming","V-Play Gaming Zone","Chunchaghatta Main Road, Konanakunte","PS5 lounge and multiplayer gaming listing."],["gaming","Skylime – Happy Minds","1st Floor, Manjushree 1310, 9th Cross Road, ITI Layout, JP Nagar 1st Phase","Console gaming and private-screen chill zone listing."],["gaming","Elysium X – PS5 & Ryzen Esports Arena","Outer Ring Road, Banashankari 3rd Stage","Esports PCs and PS5 booths listing."],["gaming","Helios Play Hub","M K Puttalingaiah Road, Padmanabhanagar","PS5 and multiplayer console arena listing."],["gaming","Play Paradox","Chikkalasandra, Ramanjaneya Nagar","Console gaming lounge listing."],["gaming","Fun City / Play Arena – Forum South","Forum South Bengaluru, Konanakunte Cross","Arcade machines, simulators and VR listing."],["gaming","CeX (WeBuy) – Nexus Vega City Mall","Nexus Vega City Mall, Bannerghatta Road","Buy/sell/exchange listing for games, discs and console accessories."],["breakfast","154 Breakfast Club","JP Nagar","Breakfast, pancakes, waffles and eggs listing."],["breakfast","Udupi Kitchen","JP Nagar","South Indian tiffin restaurant listing."],["breakfast","Paakashala","Kanakapura Main Road, JP Nagar / Konanakunte","South Indian breakfast and meals listing."],["breakfast","Sree Sagar","Konanakunte Cross, Kanakapura Road","Quick tiffin and breakfast listing."],["breakfast","Udupi Upahar","Banashankari 2nd Stage","Darshini-style breakfast listing."],["tea","By 2 Coffee – JP Nagar","JP Nagar","Tea and coffee joint listing."],["tea","Malgudi Kaapi Katte","JP Nagar 2nd Phase","Filter coffee joint listing."],["tea","Brahmins Coffee Katte","RK Colony / JP Nagar","Coffee joint listing."],["tea","Vinaya Coffee Moments","21st Main Road, JP Nagar","Coffee joint listing."],["tea","Mumbai Chai Cafe","JP Nagar Phase 2","Tea cafe listing."],["tea","Chai Point – Forum South","Forum South Bengaluru, Konanakunte Cross","Tea outlet listing."],["tea","Chai Days – Konanakunte Cross","Konanakunte Cross","Tea outlet listing."],["tea","Theka Coffee – JP Nagar","JP Nagar","Coffee outlet listing."],["tea","Kumbakonam Degree Coffee – JP Nagar","JP Nagar","Filter coffee outlet listing."],["cafes","Third Wave Coffee Roasters – JP Nagar","JP Nagar 5th Phase","Coffeehouse and study hangout listing."],["cafes","Blue Tokai Coffee Roasters – JP Nagar","JP Nagar","Specialty coffee outlet listing."],["cafes","Minus 3 Degree Cafe","24th Main, 7th Cross, JP Nagar 2nd Phase","Cafe listing."],["cafes","Cafe Catwalk","Marenahalli Lane, JP Nagar 2nd Phase","Cafe listing."],["cafes","Anju's Cafe","8th Cross, JP Nagar 2nd Phase","Cafe listing."],["cafes","The Blip Cafe","Vasanthapura Main Road, Subramanyapura","Cafe near Konanakunte listing."],["cafes","Starbucks – Forum South Bengaluru","Forum South Bengaluru, Konanakunte","Coffeehouse listing."],["cafes","Third Wave Coffee – Forum South","Forum South Bengaluru, Konanakunte","Coffeehouse listing."],["cafes","Blue Tokai – Forum South","Forum South Bengaluru, Konanakunte","Specialty coffee outlet listing."],["cafes","Magnolia Bakery – Forum South","Forum South Bengaluru, Konanakunte","Bakery cafe listing."],["cafes","Theobroma – Forum South","Forum South Bengaluru, Konanakunte","Bakery and dessert cafe listing."],["burgers","Leon's – JP Nagar","JP Nagar","Burger and wings outlet listing."],["burgers","Biggies Burger – JP Nagar","JP Nagar","Burger outlet listing."],["burgers","Burger King – Forum South","Forum South Bengaluru, Konanakunte","Quick-service restaurant listing."],["burgers","McDonald's – Forum South","Forum South Bengaluru, Konanakunte","Quick-service restaurant listing."],["burgers","KFC – Forum South","Forum South Bengaluru, Konanakunte","Quick-service restaurant listing."],["burgers","Taco Bell – Forum South","Forum South Bengaluru, Konanakunte","Quick-service restaurant listing."],["burgers","Texas Burgers","JP Nagar","Burger outlet listing."],["pizza","GoPizza – Forum South","Forum South Bengaluru, Konanakunte Cross","Pizza outlet listing."],["pizza","Pizza Hut – Forum South","Forum South Bengaluru, Konanakunte","Pizza restaurant listing."],["pizza","Domino's Pizza – Konanakunte","Konanakunte / Kanakapura Road","Pizza outlet listing."],["pizza","Onesta – JP Nagar","JP Nagar","Pizza and dessert restaurant listing."],["pizza","Brik Oven – JP Nagar","JP Nagar","Wood-fired sourdough pizza listing."],["icecream","Baskin Robbins – Forum South","Forum South Bengaluru, Konanakunte","Ice cream outlet listing."],["icecream","The Belgian Waffle Co. – Forum South","Forum South Bengaluru, Konanakunte","Waffle and dessert outlet listing."],["icecream","Polar Bear – Banashankari","Banashankari Stage 2","Ice cream outlet listing."],["icecream","Natural Ice Cream – Kanakapura Road","Kanakapura Main Road","Ice cream parlour listing."],["icecream","Havmor Ice Cream – Kanakapura Road","Kanakapura Road","Ice cream outlet listing."],["street","Forum South Food Court","Forum South Bengaluru, Konanakunte Cross","Food court with multiple quick-bite counters."],["viewpoints","Turahalli Forest Hilltop & Boulder Viewpoint","Off Kanakapura Road","Forest and rocky hilltop viewpoint; use public trails in daylight."],["viewpoints","Chunchi Falls & Rocky Gorge Viewpoint","Kanakapura Road corridor","Waterfall and gorge day-trip destination; check access and conditions."],["viewpoints","Mekedatu Gorge & Sangama Confluence","Kanakapura Road corridor","River confluence day-trip destination."],["viewpoints","Manchanabele Dam & Backwater Viewpoint","Off Mysore Road","Reservoir and backwater day-trip destination."],["viewpoints","Thottikallu Falls (TK Falls)","Off Kanakapura Road","Seasonal waterfall destination; check access and conditions."],["parks","Chunchaghatta Lake","Konanakunte / JP Nagar 7th Phase","Lake-side open space."],["parks","Vasanthapura Lake","Near Konanakunte Cross","Local lake and walking area."],["parks","Dorekere Lake","Uttarahalli / Subramanyapura","Lake and nature area."],["parks","Sarakki Lake","JP Nagar 6th Phase","Lake-side walking area."],["parks","Puttenahalli Lake Bird Reserve","JP Nagar 7th Phase","Lake and bird habitat."],["temples","Banashankari Amma Temple","Kanakapura Road, Banashankari","Temple landmark."],["temples","ISKCON Vaikuntha Hill Temple","Vasanthapura, Kanakapura Road","Temple landmark."],["temples","Sri Vasantha Vallabharaya Swamy Temple","Vasanthapura, near Konanakunte","Temple landmark."],["shopping","Forum South Bengaluru (Forum Falcon City)","Konanakunte Cross, Kanakapura Road","Shopping mall with food, cinema and entertainment."],["shopping","Nexus Vega City Mall","Bannerghatta Road, JP Nagar 3rd Phase","Shopping mall with food and entertainment."],["shopping","Gopalan Innovation Mall","Bannerghatta Road","Shopping mall listing."],["shopping","Royal Meenakshi Mall","Bannerghatta Road, Hulimavu","Shopping mall listing."],["movies","PVR Superplex – Forum South","Forum South Bengaluru, Konanakunte Cross","Cinema listing; verify showtimes."],["movies","PVR – Nexus Vega City Mall","Nexus Vega City Mall, Bannerghatta Road","Cinema listing; verify formats and showtimes."],["movies","Cinepolis – Royal Meenakshi Mall","Royal Meenakshi Mall, Bannerghatta Road","Cinema listing; verify showtimes."],["metro","Konanakunte Cross Metro Station","Green Line, adjacent to Forum South","Metro station serving Konanakunte Cross."],["metro","Yelachenahalli Metro Station","Green Line, Kanakapura Road","Nearby metro station."],["metro","Doddakallasandra Metro Station","Green Line, Kanakapura Road","Nearby metro station."],["transit","Konanakunte Cross Bus Stop","Konanakunte Cross","BMTC stop listed in supplied research."],["transit","Forum South Bengaluru Bus Stop","Konanakunte Cross","BMTC stop listed in supplied research."],["transit","Doddakallasandra Bus Stop","Kanakapura Road","BMTC stop listed in supplied research."],["viewpoints","Mekedatu Gorge & Sangama Confluence Viewpoint","Kanakapura Road corridor","River confluence day-trip destination."],["parks","Madiwala Lake","BTM 2nd Stage","Lake and walking area."],["tea","By 2 Coffee – JP Nagar","JP Nagar","Coffee joint listing."],["tea","Malgudi Kaapi Katte","JP Nagar 2nd Phase","Filter coffee joint listing."],["tea","Brahmins Coffee Katte","RK Colony / JP Nagar","Coffee joint listing."],["tea","Vinaya Coffee Moments","21st Main Road, JP Nagar","Coffee joint listing."],["tea","Third Wave Coffee Roasters – JP Nagar","JP Nagar 5th Phase","Coffeehouse listing."],["tea","Blue Tokai Coffee Roasters – JP Nagar","JP Nagar","Specialty coffee outlet listing."],["tea","Starbucks – Forum South Bengaluru","Forum South Bengaluru, Konanakunte","Coffeehouse listing."],["tea","Third Wave Coffee – Forum South","Forum South Bengaluru, Konanakunte","Coffeehouse listing."],["tea","Blue Tokai – Forum South","Forum South Bengaluru, Konanakunte","Specialty coffee outlet listing."]]};
+
+/* =========================================================
+   CAMPUS-SPECIFIC CINEMA DIRECTORY + TEA/COFFEE MERGE
+   Each college gets its own cinema rows, while the two Jayanagar
+   campuses continue sharing the same research array.
+========================================================= */
+function prepareCampusCinemaAndBeverageRows() {
+  const cinemaPattern = /\b(PVR|INOX|Cinepolis|Cinepolis|Urvashi Theatre|Chandrodaya Theatre|Kamakya Theatre|theatre|cinema)\b/i;
+  const sharedPvr = ["cinemas", "PVR – Nexus Vega City Mall", "Nexus Vega City Mall, Bannerghatta Road, Bengaluru 560076", "PVR multiplex listed in the supplied South Bengaluru campus research. Check current showtimes and operating status before visiting."];
+  for (const rows of Object.values(CAMPUS_RESEARCH_PLACES)) {
+    for (const row of rows) {
+      if (row[0] === "coffee") row[0] = "tea";
+      if (row[0] === "movies" && cinemaPattern.test(row[1])) row[0] = "cinemas";
+    }
+    if (!rows.some(row => row[0] === "cinemas" && /PVR/i.test(row[1]))) {
+      rows.push([...sharedPvr]);
+    }
+  }
+  // Keep NMKRV PU and RV PU Jayanagar as one shared campus list.
+  if (CAMPUS_RESEARCH_PLACES["NMKRV"]) CAMPUS_RESEARCH_PLACES["RV PU College"] = CAMPUS_RESEARCH_PLACES["NMKRV"];
+}
+prepareCampusCinemaAndBeverageRows();
+
+
+/* =========================================================
+   AGE-RESTRICTED VENUES & ACCOMMODATION FROM USER RESEARCH
+   Pub/bar cards are informational only (18+/21+ as applicable).
+   Accommodation listings are not booking links; minors need a parent/guardian.
+========================================================= */
+const NEXORA_PUBS = [
+ ["Plan B","Jayanagar","Jayanagar"],["Soho Pub & Grill – Jayanagar","Jayanagar","Jayanagar"],["Soho Pub & Grill – Basavanagudi","Basavanagudi","Basavanagudi"],["Salut Gastro Pub","Jayanagar","Jayanagar"],["The English Channel","Jayanagar","Jayanagar"],["Brew Meister Craft Beer and Kitchen","Jayanagar","Jayanagar"],["Once Upon A Rooftop Restobar","Jayanagar","Jayanagar"],["LIT Gastropub","Jayanagar","Jayanagar"],["Bierre Republic","Jayanagar","Jayanagar"],
+ ["Brahma Brews","JP Nagar 5th Phase","JP Nagar"],["The Pump House","JP Nagar","JP Nagar"],["URU Brewpark","JP Nagar","JP Nagar"],["1522 – The Pub","JP Nagar","JP Nagar"],["Tipsy Bull – The Bar Exchange","JP Nagar 5th Phase","JP Nagar"],["Indian Biere House","JP Nagar 5th Phase","JP Nagar"],["Terrace By House Of Commons","JP Nagar","JP Nagar"],["Levels Pub & Kitchen","JP Nagar 5th Phase","JP Nagar"],["The Scene – Craft Kitchen & Bar","JP Nagar 5th Phase","JP Nagar"],["Watson's","JP Nagar","JP Nagar"],["Jollygunj","JP Nagar","JP Nagar"],["Casa Piccosa","JP Nagar","JP Nagar"],["The Clink","JP Nagar","JP Nagar"],["Fat Owl","JP Nagar","JP Nagar"],["Timbar","JP Nagar","JP Nagar"],["Millennials","JP Nagar","JP Nagar"],["Mockaholic Restro Beer Cafe","JP Nagar","JP Nagar"],
+ ["Gilly's Restobar","Konanakunte Cross","Konanakunte"],["Public The Rooftop Bar Kitchen","Konanakunte Cross","Konanakunte"],["3B's Buddies Bar And Barbecues","Konanakunte Cross","Konanakunte"]
+];
+const NEXORA_STAYS = [
+ ["OYO Basavanagudi Near Lalbagh Botanical Garden","4, Tata Silk Farms, KR Road, Basavanagudi","Basavanagudi"],
+ ["Super Hotel O Archana Inn","Near Lalbagh Main Gate, Mavalli","Mavalli / VV Puram"],
+ ["Hotel O Shree AMM Residency","Mavalli, near Lalbagh / VV Puram","Mavalli / VV Puram"],
+ ["OYO 9151 Hotel Sri Sai Comforts","Jayanagar 7th Block","Jayanagar"],
+ ["Hotel O White Fort Near Lalbagh Botanical Garden","Dispensary Road, Lalbagh side","Mavalli / VV Puram"],
+ ["Hotel O Townhall","JC Road","Central Bengaluru"],
+ ["Hotel O ABHIMAANI COMFORTS","Kanakapura Main Road, Metro Pillar 45","Banashankari / JP Nagar"],
+ ["Hotel O Varcity Emerald","Near Ragigudda Temple / BTM 1st Stage","Jayanagar 9th Block / BTM"],
+ ["Hotel O Blue Inn","Near Jayadeva Hospital, Gurappanpalya","BTM / JP Nagar"],
+ ["Super Hotel O Konanakunte Cross / Kanakapura Road","Near Forum South Bengaluru and Konanakunte Cross","Konanakunte"]
+];
+function addCampusAgeRestrictedListings() {
+ const campusAreas = {
+  "NMKRV": ["Jayanagar","JP Nagar"], "RV PU College": ["Jayanagar","JP Nagar"],
+  "Surana College": ["Jayanagar","Basavanagudi","JP Nagar"], "Aps": ["Basavanagudi","Jayanagar"],
+  "JAIN College - VV Puram": ["Basavanagudi","Mavalli / VV Puram","Central Bengaluru"],
+  "JAIN College - Jayanagar": ["Jayanagar","JP Nagar","BTM / JP Nagar"],
+  "RV PU College - Konanakunte Area": ["Konanakunte","JP Nagar","Banashankari / JP Nagar"]
+ };
+ for (const [campus, areas] of Object.entries(campusAreas)) {
+  const rows = CAMPUS_RESEARCH_PLACES[campus]; if (!rows) continue;
+  for (const [name, area, cluster] of NEXORA_PUBS) if (areas.includes(cluster)) rows.push(["pubs", name, area, "Age-restricted venue from supplied research. Entry is subject to Karnataka law and venue policy; 18+/21+ as applicable. Informational listing only."]);
+  for (const [name, address, cluster] of NEXORA_STAYS) if (areas.includes(cluster) || (cluster === "Jayanagar" && areas.includes("Jayanagar"))) rows.push(["stays", name, address, "Accommodation listing from supplied research. Not a booking link; age and ID requirements apply. Minors should arrange travel and stays with a parent or legal guardian."]);
+ }
+ // Keep the two nearby Jayanagar colleges as one shared campus cluster.
+ CAMPUS_RESEARCH_PLACES["RV PU College"] = CAMPUS_RESEARCH_PLACES["NMKRV"];
+}
+addCampusAgeRestrictedListings();
+
+
+function campusResearchAsPlaces(college) {
+  const key = college || "NMKRV";
+  const rows = CAMPUS_RESEARCH_PLACES[key] || CAMPUS_RESEARCH_PLACES["NMKRV"] || [];
+  return rows.map(([cat,name,address,desc]) => ({
+    name, cat, area: getZone().areaName, address, desc, campusResearch: true, campusGroup:
+      (key === "NMKRV" || key === "RV PU College") ? "NMKRV + RV PU Jayanagar cluster" : key
+  }));
+}
+
+function findAnyPlace(name) {
+  return PLACES.find(p => p.name === name) ||
+    Object.values(CAMPUS_RESEARCH_PLACES).flat().map(([cat,n,address,desc]) => ({name:n,cat,address,desc})).find(p => p.name === name) ||
+    Object.values(NEXORA_DISCOVERY).flat().find(p => p.name === name) || null;
+}
+function showLocationDetails(name) {
+  const item = findAnyPlace(name);
+  if (!item) { showToast("Location details are not available yet."); return; }
+  let overlay = document.getElementById("locationDetailModal");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.id = "locationDetailModal";
+    overlay.className = "locationDetailOverlay";
+    overlay.onclick = e => { if (e.target === overlay) closeLocationDetails(); };
+    document.body.appendChild(overlay);
+  }
+  overlay.innerHTML = `<div class="locationDetailBox"><button class="locationDetailClose" onclick="closeLocationDetails()">✕</button><span class="locationDetailTag">NEXORA LOCATION CARD</span><h2>${esc(item.name)}</h2><p style="color:#c6c3d6;font-size:13px;line-height:1.55;">${esc(item.desc || "Local place")}</p><div class="locationDetailAddress"><b>📍 Address / Area</b><br>${esc(item.address || item.area || "Area listing — exact shop address not independently confirmed")}</div><p style="font-size:11px;color:#9692aa;line-height:1.5;">Listings can change. Check the shop's current hours and stock before travelling. This card stays inside NEXORA.</p><button class="mapBtn" style="width:100%;margin-top:8px;" onclick="closeLocationDetails()">Done</button></div>`;
+  overlay.style.display = "flex";
+}
+function closeLocationDetails() { const el=document.getElementById("locationDetailModal"); if(el) el.style.display="none"; }
+function openHotWheelsPage() { state.page="hotWheels"; state.search=""; render(); renderPollDock(); window.scrollTo(0,0); }
+function openPlayStationPage() { state.page="playStation"; state.search=""; render(); renderPollDock(); window.scrollTo(0,0); }
+function renderDiscoveryPage(kind) {
+  const isHot = kind === "hotWheels";
+  const title = isHot ? "🏎️ HOT WHEELS NEAR ME" : "🎮 PLAYSTATION NEAR ME";
+  const subtitle = isHot ? "Die-cast shops, toy stores and collector stops around Bengaluru." : "PlayStation stores, console shops and gaming lounges around Bengaluru.";
+  const baseList = NEXORA_DISCOVERY[kind] || [];
+  const targetCat = isHot ? "toys" : "gaming";
+  const researched = Object.values(CAMPUS_RESEARCH_PLACES).flat()
+    .filter(([cat]) => cat === targetCat)
+    .map(([cat,name,address,desc]) => ({name,address,desc,cat}));
+  const seenNames = new Set();
+  const list = [...baseList, ...researched].filter(x => {
+    const key = x.name.toLowerCase();
+    if (seenNames.has(key)) return false;
+    seenNames.add(key); return true;
+  });
+  const q = (state.search || "").toLowerCase();
+  const filtered = list.filter(x => (x.name+" "+x.address+" "+x.desc).toLowerCase().includes(q));
+  return `<div class="page"><div class="sectionTop"><button class="backBtn" onclick="goHome()">← Home</button><span class="locationPill">📍 Bengaluru</span></div><h1 class="pageTitle">${title}</h1><p class="pageSub">${subtitle}</p><input class="search" value="${esc(state.search)}" placeholder="Search locations..." oninput="state.search=this.value;render();"><div class="discoveryGrid">${filtered.map((x,i)=>`<div class="discoveryCard" style="animation-delay:${i*.03}s"><span class="locationDetailTag">${isHot?"TOY / DIE-CAST STORE":"GAMING / CONSOLE"}</span><h3>${esc(x.name)}</h3><small>📍 ${esc(x.address)}</small><p>${esc(x.desc)}</p><button class="mapBtn" data-name="${esc(x.name)}" onclick="showLocationDetails(this.dataset.name)">View Location Details</button></div>`).join("") || `<div class="empty">No matching locations. Try another search.</div>`}</div><p class="pageSub" style="margin-top:16px;font-size:11px;">Location cards open inside NEXORA. No automatic Google Maps redirect. Store stock, console availability and opening status can change; confirm before visiting.</p></div>`;
+}
 
 /* =========================================================
    BEAUTY MODE COMPLIMENTS
 ========================================================= */
 
 const BEAUTY_LINES = [
-  { icon: "✨", text: "You don't just enter a room, you upgrade the entire atmosphere." },
-  { icon: "💫", text: "Your smile has more main-character energy than an entire movie." },
-  { icon: "🌷", text: "Effortlessly unforgettable, genuinely rare, and impossible to ignore." },
-  { icon: "🔥", text: "Confidence looks ridiculously good on you." },
-  { icon: "👑", text: "Some people follow trends. You ARE the standard." },
-  { icon: "💖", text: "Your vibe makes ordinary moments feel like core memories." },
-  { icon: "🌟", text: "10/10 energy, 10/10 presence, 0% competition." }
+  { icon: '😉', text: 'You walked in like the plot twist everyone secretly wanted.' },
+  { icon: '😏', text: 'That confidence? Very distracting. Please continue responsibly.' },
+  { icon: '✨', text: 'You have the kind of charm that makes small talk suddenly interesting.' },
+  { icon: '💫', text: 'Main-character energy detected. The soundtrack agrees.' },
+  { icon: '🦋', text: "Your smile just upgraded the entire room's atmosphere." },
+  { icon: '😌', text: 'You make being effortlessly cool look suspiciously easy.' },
+  { icon: '🌷', text: 'A little mischief, a lot of sparkle. Dangerous combination.' },
+  { icon: '😉', text: "If charm were a subject, you'd be setting the question paper." },
+  { icon: '💖', text: 'You have a talent for making ordinary moments feel special.' },
+  { icon: '🎀', text: 'That vibe deserves its own fan club. Applications are probably open.' },
+  { icon: '🌟', text: 'You are proof that good energy can be louder than words.' },
+  { icon: '💌', text: 'Official notice: your presence is seriously hard to ignore.' },
+  { icon: '😎', text: 'Cool called. It wants to know how you keep stealing its look.' },
+  { icon: '🔥', text: 'That confidence is doing a lot of heavy lifting—in the best way.' },
+  { icon: '😉', text: 'Are you always this effortlessly interesting, or is today a special event?' },
+  { icon: '✨', text: 'You bring the sparkle. The rest of us are just trying to keep up.' },
+  { icon: '😏', text: 'That grin looks like it knows three secrets and all the best cafes.' },
+  { icon: '🌙', text: 'You have the sort of presence that makes a dull day sit up straight.' },
+  { icon: '💫', text: 'Your energy deserves a little spotlight. Actually, make that a whole stage.' },
+  { icon: '🧁', text: 'Sweet vibe, sharp wit. Quite the excellent combo.' },
+  { icon: '😌', text: "You make 'just being yourself' look like a premium feature." },
+  { icon: '💎', text: 'Rare energy. No need for a filter, no need for an introduction.' },
+  { icon: '😉', text: 'If confidence had a notification sound, yours would be impossible to miss.' },
+  { icon: '🌈', text: 'You add colour to the room without even trying.' },
+  { icon: '😏', text: 'That little bit of sass is doing your reputation wonders.' },
+  { icon: '✨', text: 'You seem like the reason someone would happily take the longer route.' },
+  { icon: '💖', text: 'Your laugh probably has better timing than most comedians.' },
+  { icon: '🎧', text: "You give off 'great playlist and even better conversation' energy." },
+  { icon: '🌹', text: 'Classy, clever, and just mischievous enough to keep things interesting.' },
+  { icon: '😎', text: "You don't chase the spotlight. It keeps finding you anyway." },
+  { icon: '😉', text: 'Some people make an entrance. You make an impression.' },
+  { icon: '💫', text: 'You have the kind of vibe that makes people forget what they were saying.' },
+  { icon: '🪄', text: "If charm were magic, you'd be asked to explain the trick every day." },
+  { icon: '🌻', text: 'You make sunshine look like it has competition.' },
+  { icon: '😏', text: 'That confidence is almost unfair. Almost.' },
+  { icon: '✨', text: 'Your personality has excellent design. Whoever made it understood the assignment.' },
+  { icon: '💬', text: 'Talking to you probably turns a five-minute chat into a whole episode.' },
+  { icon: '🦋', text: 'You have a quietly unforgettable kind of sparkle.' },
+  { icon: '😉', text: 'Careful with that smile. It has excellent persuasive skills.' },
+  { icon: '🔥', text: 'You bring the plot, the personality, and apparently the whole season.' },
+  { icon: '🌙', text: 'You make late-night conversations sound like a very good idea—keep them friendly, though.' },
+  { icon: '😌', text: "You have a calm confidence that doesn't need to announce itself." },
+  { icon: '🎀', text: 'Your vibe is equal parts polished and playful. Nicely done.' },
+  { icon: '💎', text: 'Not everyone can be memorable without being loud. You can.' },
+  { icon: '😏', text: 'You look like you have a comeback ready before the question finishes.' },
+  { icon: '🌟', text: 'The room got more interesting. Coincidence? Highly unlikely.' },
+  { icon: '😉', text: 'You have the rare talent of making a simple hello feel like a scene.' },
+  { icon: '💖', text: 'Your kindness is a very underrated kind of charm.' },
+  { icon: '✨', text: "You are giving 'best part of the group chat' energy." },
+  { icon: '😎', text: 'A little mystery, a little humour, and a suspicious amount of charisma.' },
+  { icon: '🌷', text: "You make confidence look comfortable. That's a skill." },
+  { icon: '😏', text: 'That playful attitude? 10/10. No further questions.' },
+  { icon: '💫', text: 'You could make a waiting room feel like an event.' },
+  { icon: '😉', text: 'Your sense of humour deserves its own highlight reel.' },
+  { icon: '🧋', text: 'You are the human equivalent of finding your favourite drink on sale.' },
+  { icon: '✨', text: "You have a way of making people feel noticed. That's powerful." },
+  { icon: '🔥', text: 'That glow is not a phone brightness setting.' },
+  { icon: '😌', text: 'You make being genuine look effortlessly cool.' },
+  { icon: '💌', text: 'A tiny reminder: your presence is appreciated more than you think.' },
+  { icon: '😏', text: 'You seem like trouble—but the kind that returns library books on time.' },
+  { icon: '🌈', text: 'Your energy is a very good reason to say yes to the plan.' },
+  { icon: '😉', text: 'You have the confidence of someone who knows the camera is ready.' },
+  { icon: '💎', text: 'A rare mix of brains, humour, and excellent timing.' },
+  { icon: '🎧', text: 'Your vibe has a soundtrack. It is definitely on repeat.' },
+  { icon: '🌟', text: "You make 'nothing special' look like a memorable occasion." },
+  { icon: '😎', text: 'The effortless style is noted. The confidence is louder.' },
+  { icon: '✨', text: "You have the kind of charm that doesn't need a grand entrance." },
+  { icon: '😉', text: "One compliment is not enough, but let's not make this a whole ceremony." },
+  { icon: '🌻', text: 'You make good moods contagious. Keep that superpower.' },
+  { icon: '😏', text: 'That wit should come with a warning: may cause spontaneous grinning.' },
+  { icon: '💫', text: 'You have a habit of making ordinary plans sound exciting.' },
+  { icon: '💖', text: 'Your thoughtful side is probably your most impressive flex.' },
+  { icon: '🎀', text: 'You are giving premium personality with absolutely no subscription fee.' },
+  { icon: '🔥', text: "You don't need to be the loudest person to own the moment." },
+  { icon: '😉', text: 'If being interesting were accidental, you are doing a brilliant job.' },
+  { icon: '🌙', text: 'You have a calm kind of charm that stays with people.' },
+  { icon: '✨', text: "You make the word 'vibe' feel like a proper description." },
+  { icon: '😏', text: 'A little cheek, a little class. Nicely balanced.' },
+  { icon: '💎', text: 'Your best feature might just be the way you make others feel welcome.' },
+  { icon: '😎', text: 'You have the confidence of someone who already knows the answer is yes to dessert.' },
+  { icon: '🌷', text: 'You are a walking reminder that kindness never goes out of style.' },
+  { icon: '😉', text: 'That smile is doing excellent public relations for you.' },
+  { icon: '💫', text: "You bring a little extra to every conversation. It's noticed." },
+  { icon: '✨', text: "You are not everyone's cup of tea—and that's fine. You're the whole cafe." },
+  { icon: '😏', text: 'Your comebacks are quick, your vibe is quicker.' },
+  { icon: '🌟', text: 'Some people brighten a room. You make it feel more welcoming.' },
+  { icon: '💖', text: 'You deserve compliments that are specific, sincere, and frequent.' },
+  { icon: '😌', text: 'You have a quietly confident way of making things better.' },
+  { icon: '😉', text: "You make 'one more minute' turn into the best part of the day." },
+  { icon: '🔥', text: 'That personality has range. Comedy, charm, and a little chaos.' },
+  { icon: '🎀', text: 'You are the plot twist that makes the group story better.' },
+  { icon: '💫', text: "Your energy says 'good things are happening' and honestly, fair." },
+  { icon: '😏', text: 'That much charm in one person? Someone should check the settings.' },
+  { icon: '🌈', text: "You make people feel like there's room for them. That's lovely." },
+  { icon: '✨', text: 'You have a signature vibe. No copycats allowed.' },
+  { icon: '😉', text: 'You are dangerously good at making a first impression—strictly in the nicest way.' },
+  { icon: '💎', text: 'A good heart and a quick mind: excellent combination.' },
+  { icon: '😎', text: "You don't need a spotlight. Your confidence brought its own." },
+  { icon: '🌻', text: "Keep being the reason someone's day gets a little better." }
 ];
 
 /* =========================================================
@@ -4593,8 +5080,14 @@ function getZonePlaces() {
   const basePlaces = PLACES.filter(
     p => p.area === zone.areaName && zone.allowedPlaces.includes(p.name)
   );
+  const researchPlaces = campusResearchAsPlaces(state.college);
   const custom = getCustomPlaces().filter(p => p.area === zone.areaName);
-  return [...basePlaces, ...custom];
+  const seen = new Set();
+  return [...researchPlaces, ...basePlaces, ...custom].filter(p => {
+    const key = `${p.cat}|${p.name.toLowerCase()}`;
+    if (seen.has(key)) return false;
+    seen.add(key); return true;
+  });
 }
 
 function getCategoryPlaces(catId) {
@@ -4602,8 +5095,8 @@ function getCategoryPlaces(catId) {
 }
 
 function mapLink(place) {
-  const zone = getZone();
-  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(place.name + " " + zone.areaName + " Bangalore");
+  // Kept only for compatibility with older render fragments. NEXORA no longer redirects to Maps.
+  return "#location-" + encodeURIComponent(place && place.name ? place.name : "spot");
 }
 
 function getTimeOfDayVibe() {
@@ -4764,7 +5257,7 @@ function renderPollDock() {
 
 function shareSingleSpot(name) {
   const zone = getZone();
-  const msg = `🔥 Gang plan!\nSpot: ${name}\nArea: ${zone.areaName} (${state.college})\nMap: https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name + " " + zone.areaName + " Bangalore")}`;
+  const msg = `🔥 Gang plan!\nSpot: ${name}\nArea: ${zone.areaName} (${state.college})\nFind the location card in NEXORA for its saved address.`;
   window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
 }
 
@@ -5807,6 +6300,7 @@ function shareSplitWhatsApp() {
 ========================================================= */
 
 function goHome() {
+  if (state.page === "funZone") { closeFunZone(); return; }
   state.page = "home";
   render();
   renderPollDock();
@@ -6220,7 +6714,7 @@ function renderStudentIdPage() {
   return `
     <div class="page">
       <div class="sectionTop">
-        <button class="backBtn" onclick="openSocialHub()">← Social Hub</button>
+        <button class="backBtn" onclick="openSocialHub()">← NEXORA VAULT</button>
         <button class="changeBtn" onclick="openCollegeChanger()">New Account</button>
       </div>
 
@@ -6434,7 +6928,7 @@ function renderMessagesPage() {
   return `
     <div class="page">
       <div class="sectionTop">
-        <button class="backBtn" onclick="openSocialHub()">← Social Hub</button>
+        <button class="backBtn" onclick="openSocialHub()">← NEXORA VAULT</button>
         <button class="changeBtn" onclick="openStudentIdPage()">My ID 🪪</button>
       </div>
 
@@ -6626,7 +7120,7 @@ function renderVotingPage() {
   return `
     <div class="page">
       <div class="sectionTop">
-        <button class="backBtn" onclick="openSocialHub()">← Social Hub</button>
+        <button class="backBtn" onclick="openSocialHub()">← NEXORA VAULT</button>
         <button class="changeBtn" onclick="openCreatePollModal()">+ Create Poll</button>
       </div>
 
@@ -6941,7 +7435,7 @@ function renderMemoriesPage() {
   return `
     <div class="page">
       <div class="sectionTop">
-        <button class="backBtn" onclick="openSocialHub()">← Social Hub</button>
+        <button class="backBtn" onclick="openSocialHub()">← NEXORA VAULT</button>
         <button class="changeBtn" onclick="openPostMemoryModal()">+ Post Memory</button>
       </div>
 
@@ -7225,7 +7719,7 @@ function renderFrameStudioPage() {
     <div class="page">
       <div class="sectionTop">
         <button class="backBtn" onclick="openMemoriesPage()">← Memories Vault</button>
-        <button class="changeBtn" onclick="openSocialHub()">Social Hub 🌐</button>
+        <button class="changeBtn" onclick="openSocialHub()">NEXORA VAULT 🌐</button>
       </div>
 
       <h1 class="pageTitle">Frame &amp; Receipt Studio</h1>
@@ -7399,7 +7893,7 @@ function renderLeaderboardPage() {
   return `
     <div class="page">
       <div class="sectionTop">
-        <button class="backBtn" onclick="openSocialHub()">← Social Hub</button>
+        <button class="backBtn" onclick="openSocialHub()">← NEXORA VAULT</button>
         <button class="changeBtn" onclick="openStudentIdPage()">My ID 🪪</button>
       </div>
 
@@ -7453,12 +7947,108 @@ function renderLeaderboardPage() {
 }
 
 /* =========================================================
-   NEXORA SOCIAL HUB PAGE
+   NEXORA VAULT PAGE
 ========================================================= */
+
+function getPrivateNotes() {
+  const me = getActiveAccount();
+  if (!me) return [];
+  try {
+    return JSON.parse(localStorage.getItem(`nexora_private_notes_${me.id}`) || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function savePrivateNotes(notes) {
+  const me = getActiveAccount();
+  if (!me) return;
+  localStorage.setItem(`nexora_private_notes_${me.id}`, JSON.stringify(notes));
+}
+
+function openPrivateNotesPage() {
+  if (!state.college || !getActiveAccount()) {
+    handleJoinTheGangClick();
+    return;
+  }
+  state.activePrivateNoteId = "";
+  state.page = "privateNotes";
+  render();
+  renderPollDock();
+  window.scrollTo(0, 0);
+}
+
+function openPrivateNote(id) {
+  state.activePrivateNoteId = id;
+  render();
+}
+
+function savePrivateNote() {
+  const titleEl = document.getElementById("privateNoteTitle");
+  const bodyEl = document.getElementById("privateNoteBody");
+  const title = (titleEl ? titleEl.value : "").trim();
+  const body = (bodyEl ? bodyEl.value : "").trim();
+  if (!body) {
+    showToast("Write something before saving your note.");
+    return;
+  }
+  const notes = getPrivateNotes();
+  const id = state.activePrivateNoteId || `note_${Date.now()}`;
+  const existing = notes.findIndex(n => n.id === id);
+  const note = { id, title: title || "Untitled note", body, updatedAt: new Date().toISOString() };
+  if (existing >= 0) notes[existing] = note;
+  else notes.unshift(note);
+  savePrivateNotes(notes);
+  state.activePrivateNoteId = id;
+  render();
+  showToast("Private note saved on this device.");
+}
+
+function deletePrivateNote(id) {
+  const notes = getPrivateNotes().filter(n => n.id !== id);
+  savePrivateNotes(notes);
+  if (state.activePrivateNoteId === id) state.activePrivateNoteId = "";
+  render();
+  showToast("Note deleted.");
+}
+
+function renderPrivateNotesPage() {
+  const notes = getPrivateNotes();
+  const active = notes.find(n => n.id === state.activePrivateNoteId) || null;
+  return `
+    <div class="page">
+      <div class="sectionTop">
+        <button class="backBtn" onclick="openSocialHub()">← NEXORA VAULT</button>
+        <button class="changeBtn" onclick="openStudentIdPage()">My ID 🪪</button>
+      </div>
+      <h1 class="pageTitle">📝 Private Notes</h1>
+      <p class="pageSub">Your notes are saved in this browser on this device, separately for each NEXORA account. They do not sync to other devices.</p>
+      <div class="specialCard" style="margin-top:0;">
+        <input id="privateNoteTitle" class="input" maxlength="80" placeholder="Note title (optional)" value="${active ? esc(active.title) : ""}">
+        <textarea id="privateNoteBody" class="input" rows="7" maxlength="12000" style="margin-top:10px;resize:vertical;min-height:150px;" placeholder="Write your note here...">${active ? esc(active.body) : ""}</textarea>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
+          <button class="primary" onclick="savePrivateNote()">💾 Save Note</button>
+          <button class="secondary" onclick="state.activePrivateNoteId='';render();">＋ New Note</button>
+        </div>
+      </div>
+      <h2 style="margin:20px 0 10px;">Saved Notes (${notes.length})</h2>
+      ${notes.length ? `<div class="cards">${notes.map(n => `
+        <div class="placeCard">
+          <div class="placeHead"><div class="placeName">${esc(n.title || "Untitled note")}</div><span class="placeType">PRIVATE</span></div>
+          <div class="placeDesc">${esc(n.body).slice(0,260)}${n.body.length > 260 ? "…" : ""}</div>
+          <small style="color:#8fe8ff;">Updated ${esc(new Date(n.updatedAt).toLocaleString())}</small>
+          <div class="placeBtns">
+            <button class="mapBtn" onclick="openPrivateNote('${esc(n.id)}')">Open / Edit</button>
+            <button class="secondary" onclick="deletePrivateNote('${esc(n.id)}')">Delete</button>
+          </div>
+        </div>`).join("")}</div>` : `<div class="empty">No notes yet. Write your first note above.</div>`}
+      <div class="footer">NEXORA VAULT • PRIVATE NOTES</div>
+    </div>
+  `;
+}
 
 function renderSocialHubPage() {
   const acc = getActiveAccount();
-  const unreadCount = getIncomingDmCount();
   const pollsCount = getSquadPolls().length;
   const memCount = getSquadMemories().length;
 
@@ -7469,7 +8059,7 @@ function renderSocialHubPage() {
         <button class="changeBtn" onclick="openCollegeChanger()">New Account</button>
       </div>
 
-      <h1 class="pageTitle">NEXORA Social Hub</h1>
+      <h1 class="pageTitle">NEXORA VAULT</h1>
       <p class="pageSub">
         Logged in as <b>${esc(acc ? acc.name : state.userName)}</b> (<span style="font-family:'Courier New',monospace;color:#8fe8ff;">${esc(acc ? acc.studentId : "NEX-STUDENT")}</span>)
       </p>
@@ -7496,11 +8086,11 @@ function renderSocialHubPage() {
           <small>Create custom photo frames &amp; story receipts.</small>
         </button>
 
-        <button class="socialHubCard" onclick="openMessagesPage()">
-          ${unreadCount > 0 ? `<span class="notifPill">${unreadCount} NEW</span>` : ""}
-          <span class="sIcon">💬</span>
-          <b>Student DMs</b>
-          <small>Search students by name or ID &amp; send direct messages.</small>
+        <button class="socialHubCard" onclick="openPrivateNotesPage()">
+          <span class="notifPill">SAVED ON THIS DEVICE</span>
+          <span class="sIcon">📝</span>
+          <b>Private Notes</b>
+          <small>Write personal notes and save them privately in this browser on this device.</small>
         </button>
 
         <button class="socialHubCard" onclick="openVotingPage()">
@@ -7518,7 +8108,7 @@ function renderSocialHubPage() {
         </button>
       </div>
 
-      <div class="footer">NEXORA SOCIAL NETWORK • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
+      <div class="footer">NEXORA VAULT • <span class="kushGlow" onclick="openMgmtModal()">MADE BY KUSH KUMAR</span></div>
     </div>
   `;
 }
@@ -7845,7 +8435,7 @@ function renderDecisionMasterPage() {
               </div>
               <div class="placeDesc" style="margin-bottom:8px;">${esc(place.desc)}</div>
               <div class="placeBtns">
-                <a class="mapBtn" href="${mapLink(place)}" target="_blank" rel="noopener noreferrer">Open Map 📍</a>
+                <button class="mapBtn" data-name="${esc(place.name)}" onclick="showLocationDetails(this.dataset.name)">View Location Details 📍</button>
                 <button class="actionChip ${state.pollList.includes(place.name) ? "activePoll" : ""}" onclick="togglePollSpot('${esc(place.name)}')">
                   ${state.pollList.includes(place.name) ? "✓ In Poll" : "+ Poll"}
                 </button>
@@ -8021,7 +8611,7 @@ function renderVibeSwipePage() {
           <h2 style="font-size:30px;margin:10px 0 6px;">${esc(state.swipeWinner.name)}</h2>
           <p style="color:#dfd9f2;margin-bottom:16px;">${esc(state.swipeWinner.desc)}</p>
           <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-            <a class="mapBtn" href="${mapLink(state.swipeWinner)}" target="_blank" rel="noopener noreferrer">Open Map 📍</a>
+            <button class="mapBtn" data-name="${esc(state.swipeWinner.name)}" onclick="showLocationDetails(this.dataset.name)">View Location Details 📍</button>
             <button class="tag" onclick="shareSingleSpot('${esc(state.swipeWinner.name)}')">Share Winner 💬</button>
             <button class="tag" onclick="resetSwipeDeck(true)">Play Again ↻</button>
           </div>
@@ -8183,7 +8773,7 @@ function renderThemesPage() {
     <div class="page">
       <div class="sectionTop">
         <button class="backBtn" onclick="goHome()">← Home</button>
-        <button class="changeBtn" onclick="openSocialHub()">Social Hub 🌐</button>
+        <button class="changeBtn" onclick="openSocialHub()">NEXORA VAULT 🌐</button>
       </div>
 
       <h1 class="pageTitle">Themes Studio</h1>
@@ -8213,6 +8803,7 @@ function openNexora() {
     handleJoinTheGangClick();
     return;
   }
+  loadNexoraMemory();
   state.page = "nexora";
   render();
   renderPollDock();
@@ -8227,6 +8818,7 @@ function setAiPersona(personaKey) {
     role: "ai",
     html: AI_PERSONALITIES[personaKey].intro
   });
+  saveNexoraMemory();
   render();
   setTimeout(scrollNexoraToBottom, 40);
 }
@@ -8238,17 +8830,83 @@ function scrollNexoraToBottom() {
   }
 }
 
+function nexoraMemoryKey() {
+  const who = (state.userName || "guest").toLowerCase().replace(/[^a-z0-9_-]/g, "_");
+  return "nexora_chat_memory_v1_" + who;
+}
+
+function loadNexoraMemory() {
+  if (state.nexoraMemoryLoaded) return;
+  try {
+    const saved = JSON.parse(localStorage.getItem(nexoraMemoryKey()) || "[]");
+    if (Array.isArray(saved) && saved.length) state.chatHistory = saved.slice(-36);
+  } catch (e) {}
+  state.nexoraMemoryLoaded = true;
+}
+
+function saveNexoraMemory() {
+  try { localStorage.setItem(nexoraMemoryKey(), JSON.stringify(state.chatHistory.slice(-36))); } catch (e) {}
+}
+
+function startNexoraListening() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const status = document.getElementById("nexoraLiveStatus");
+  if (!SpeechRecognition) {
+    if (status) status.textContent = "Voice input isn't supported in this browser. Try Chrome.";
+    showToast("Voice input isn't supported here. Try Chrome.");
+    return;
+  }
+  const recognition = new SpeechRecognition();
+  recognition.lang = "en-IN";
+  recognition.interimResults = true;
+  recognition.continuous = false;
+  let finalText = "";
+  if (status) status.textContent = "Listening… speak naturally";
+  const mic = document.getElementById("nexoraMicBtn");
+  if (mic) mic.classList.add("listening");
+  recognition.onresult = (event) => {
+    let interim = "";
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const spoken = event.results[i][0].transcript;
+      if (event.results[i].isFinal) finalText += spoken;
+      else interim += spoken;
+    }
+    const input = document.getElementById("nexoraInput");
+    if (input) input.value = (finalText + " " + interim).trim();
+  };
+  recognition.onerror = () => { if (status) status.textContent = "Mic paused — tap to try again"; };
+  recognition.onend = () => {
+    if (mic) mic.classList.remove("listening");
+    if (status) status.textContent = "Online • Ready when you are";
+    if (finalText.trim()) askNexora(finalText.trim());
+  };
+  try { recognition.start(); } catch (e) {
+    if (mic) mic.classList.remove("listening");
+    if (status) status.textContent = "Mic unavailable — tap again";
+  }
+}
+
 function askNexora(presetText = "") {
   const input = document.getElementById("nexoraInput");
   const query = (presetText || (input ? input.value : "")).trim();
-  if (!query) return;
-
+  if (!query || state.isAiTyping) return;
   if (input) input.value = "";
+  loadNexoraMemory();
   state.chatHistory.push({ role: "user", text: query });
-  state.chatHistory.push({ role: "ai", html: buildNexoraReply(query) });
-
+  state.chatHistory.push({ role: "ai", html: '<div class="nexoraTyping"><i></i><i></i><i></i> NEXORA is thinking…</div>', typing: true });
+  state.isAiTyping = true;
+  saveNexoraMemory();
   render();
-  setTimeout(scrollNexoraToBottom, 40);
+  setTimeout(() => {
+    const typingIndex = state.chatHistory.findIndex(m => m.typing);
+    const reply = buildNexoraReply(query);
+    if (typingIndex >= 0) state.chatHistory[typingIndex] = { role: "ai", html: reply };
+    else state.chatHistory.push({ role: "ai", html: reply });
+    state.isAiTyping = false;
+    saveNexoraMemory();
+    render();
+    setTimeout(scrollNexoraToBottom, 40);
+  }, 420 + Math.min(query.length * 7, 700));
 }
 
 function shareNexoraPlan(planText) {
@@ -8273,10 +8931,37 @@ function buildNexoraReply(query) {
   let picked = [];
   let headline = "";
 
+  // Conversational layer: react to what the person actually says before recommending places.
+  if (/^(hi|hey|hello|yo|hii|heyy|what's up|sup)[!. ]*$/.test(q)) {
+    return `Hey ${esc(name)}! ✨ I'm here. Tell me what's happening—need a plan, want to vent, have a question, or just feel like chatting?<br><small style="color:#aaa4bd">I keep this chat on this device so I can follow the thread.</small>`;
+  }
+  if (/(how are you|how r u|you there|are you there)/.test(q)) {
+    return `I'm online and ready, ${esc(name)} ⚡ My circuits are calm, my recommendations are loaded, and I'm listening. What's on your mind?`;
+  }
+  if (/(thank you|thanks|thx|tysm)/.test(q)) {
+    return `Anytime, ${esc(name)} ✨ That's what I'm here for. Want me to build on that or are we all sorted?`;
+  }
+  if (/(i feel|i am sad|i'm sad|feeling low|bad day|stressed|upset|angry|lonely|tired)/.test(q)) {
+    return `I hear you, ${esc(name)}. That sounds like a lot to carry. You don't have to turn it into a plan right away. Want to tell me what happened, or would a small distraction help?`;
+  }
+  if (/(remember|i like|i love|my favourite|my favorite|i prefer|i hate)/.test(q)) {
+    try {
+      const notes = JSON.parse(localStorage.getItem("nexora_user_notes_" + (state.userName || "guest")) || "[]");
+      notes.push({ text: query, at: Date.now() });
+      localStorage.setItem("nexora_user_notes_" + (state.userName || "guest"), JSON.stringify(notes.slice(-30)));
+    } catch(e) {}
+    return `Got it, ${esc(name)}. I'll keep that in mind in this browser for our next chats. If you want, tell me a little more so I don't get the wrong idea. 💜`;
+  }
+  if (/(what did i say|what do you remember|what have i told you)/.test(q)) {
+    let notes = [];
+    try { notes = JSON.parse(localStorage.getItem("nexora_user_notes_" + (state.userName || "guest")) || "[]"); } catch(e) {}
+    return notes.length ? `Here's what you've asked me to remember:<br>${notes.slice(-8).map(n => `• ${esc(n.text)}`).join("<br>")}<br><small>You can clear this browser's NEXORA chat data any time.</small>` : `I don't have any saved personal notes from you yet. Tell me something you want me to remember.`;
+  }
+
   if (q.includes("budget") || q.includes("cheap") || q.includes("broke") || q.includes("100") || q.includes("200")) {
     headline = `💸 Best pocket-friendly spots in <b>${esc(zone.areaName)}</b> right now:`;
     picked = zonePlaces.filter(p => ["breakfast", "tea", "street"].includes(p.cat)).slice(0, 4);
-  } else if (q.includes("cafe") || q.includes("coffee") || q.includes("aesthetic") || q.includes("talk") || q.includes("study")) {
+  } else if (q.includes("cafe") || q.includes("coffee") || q.includes("tea") || q.includes("aesthetic") || q.includes("talk") || q.includes("study")) {
     headline = `☕ Top aesthetic cafes & chill hangout tables in <b>${esc(zone.areaName)}</b>:`;
     picked = zonePlaces.filter(p => ["cafes", "tea"].includes(p.cat)).slice(0, 4);
   } else if (q.includes("dessert") || q.includes("ice cream") || q.includes("sweet")) {
@@ -8299,7 +8984,7 @@ function buildNexoraReply(query) {
         <b>${idx + 1}. ${esc(p.name)}</b><br>
         <small style="color:#a9a4bd;">${esc(p.desc)}</small>
       </div>
-      <a class="mapBtn" href="${mapLink(p)}" target="_blank" rel="noopener noreferrer">Map 📍</a>
+      <button class="mapBtn" data-name="${esc(p.name)}" onclick="showLocationDetails(this.dataset.name)">Details 📍</button>
     </div>`
   ).join("");
 
@@ -8333,46 +9018,266 @@ function pickRandom() {
 }
 
 function openBeauty() {
-  state.beautyIndex = 0;
   state.page = "beauty";
+  if (!Array.isArray(state.beautyBag)) state.beautyBag = [];
+  state.beautyIndex = -1;
+  nextBeauty();
   render();
   renderPollDock();
   window.scrollTo(0, 0);
 }
 
+const BEAUTY_GENERATORS = {
+  open: ["Okay, be honest:","Tiny observation:","Respectfully:","Not to overstate it, but:","Quick vibe check:","The official report says:","One thing about you:","A little appreciation break:","Plot twist:","Just saying:","Can we acknowledge:","Breaking news:"],
+  middle: ["your confidence has excellent timing","your sense of humour deserves its own show","you make ordinary plans sound exciting","your energy could rescue a boring Monday","your smile has serious star quality","your personality is a top-tier combination","you make being genuine look effortlessly cool","your comebacks are faster than campus Wi-Fi","you bring the sparkle without trying too hard","your kindness is a very underrated flex","your vibe has its own soundtrack","you make a simple hello memorable"],
+  end: ["and yes, people notice.","that's a rare skill.","please use this power wisely.","the room is better for it.","no further evidence is required.","even the group chat agrees.","that's a proper main-character moment.","keep that energy coming.","it's honestly impressive.","consider this your official compliment.","you understood the assignment.","the applause is well deserved."]
+};
+
+function getBeautyLine(index) {
+  if (index < BEAUTY_LINES.length) return BEAUTY_LINES[index];
+  const combo = index - BEAUTY_LINES.length;
+  const endCount = BEAUTY_GENERATORS.end.length;
+  const middleCount = BEAUTY_GENERATORS.middle.length;
+  const openIndex = Math.floor(combo / (middleCount * endCount));
+  const middleIndex = Math.floor(combo / endCount) % middleCount;
+  const endIndex = combo % endCount;
+  return {
+    icon: ["😉","✨","😏","💫","🌟","😎"][Math.floor(Math.random() * 6)],
+    text: `${BEAUTY_GENERATORS.open[openIndex]} ${BEAUTY_GENERATORS.middle[middleIndex]}, ${BEAUTY_GENERATORS.end[endIndex]}`
+  };
+}
+
 function nextBeauty() {
-  state.beautyIndex = (state.beautyIndex + 1) % BEAUTY_LINES.length;
-  const line = BEAUTY_LINES[state.beautyIndex];
+  // Pick by combination number. No large compliment array is rebuilt on every visit.
+  const total = BEAUTY_LINES.length + BEAUTY_GENERATORS.open.length * BEAUTY_GENERATORS.middle.length * BEAUTY_GENERATORS.end.length;
+  if (!Array.isArray(state.beautyBag) || !state.beautyBag.length) {
+    state.beautyBag = Array.from({ length: total }, (_, i) => i);
+    for (let i = state.beautyBag.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [state.beautyBag[i], state.beautyBag[j]] = [state.beautyBag[j], state.beautyBag[i]];
+    }
+  }
+  state.beautyIndex = state.beautyBag.pop();
+  const line = getBeautyLine(state.beautyIndex);
   const iconEl = document.getElementById("beautyIcon");
   const textEl = document.getElementById("beautyText");
-
   if (iconEl) iconEl.textContent = line.icon;
   if (textEl) textEl.textContent = line.text;
 }
 
 function moveBeautyBtn() {
   const btn = document.getElementById("beautyMoveBtn");
-  if (!btn) return;
+  const area = document.getElementById("beautyPlayArea");
+  if (!btn || !area) return;
 
-  const btnWidth = btn.offsetWidth || 160;
-  const btnHeight = btn.offsetHeight || 52;
-  const margin = 22;
+  // The button hops around ONLY in its own area beneath the compliment.
+  const padX = Math.ceil(btn.offsetWidth / 2) + 8;
+  const padY = Math.ceil(btn.offsetHeight / 2) + 8;
+  const minX = padX;
+  const maxX = Math.max(minX, area.clientWidth - padX);
+  const minY = padY;
+  const maxY = Math.max(minY, area.clientHeight - padY);
+  const x = minX + Math.random() * (maxX - minX);
+  const y = minY + Math.random() * (maxY - minY);
 
-  const maxLeft = Math.max(margin, window.innerWidth - btnWidth - margin);
-  const minBottom = 74;
-  const maxBottom = Math.max(minBottom + 20, window.innerHeight - btnHeight - 130);
-
-  const randomLeft = Math.floor(margin + Math.random() * (maxLeft - margin));
-  const randomBottom = Math.floor(minBottom + Math.random() * (maxBottom - minBottom));
-
-  btn.style.transform = "none";
-  btn.style.left = randomLeft + "px";
-  btn.style.bottom = randomBottom + "px";
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+  btn.style.transform = "translate(-50%,-50%) rotate(" + (Math.random() * 8 - 4) + "deg) scale(1.03)";
 }
 
 function handleBeautyClick() {
   nextBeauty();
   moveBeautyBtn();
+}
+
+/* =========================================================
+   NEXORA FUN ZONE — WOULD YOU RATHER + ROAST ME
+========================================================= */
+const FUN_WYR_QUESTIONS = [
+  {a:"Have a rewind button for awkward moments",b:"Have a mute button for annoying moments"},
+  {a:"Only communicate using memes",b:"Only communicate using dramatic movie dialogues"},
+  {a:"Get free food for a year",b:"Get free movie tickets for a year"},
+  {a:"Have a personal theme song everywhere",b:"Get a dramatic entrance everywhere"},
+  {a:"Always know when someone is lying",b:"Always know what song is stuck in someone's head"},
+  {a:"Fight one giant pigeon",b:"Face fifty tiny but angry ducks"},
+  {a:"Live in your favourite game",b:"Live in your favourite movie"},
+  {a:"Never charge your phone again",b:"Never wait for slow internet again"},
+  {a:"Have unlimited snacks",b:"Have unlimited weekend plans"},
+  {a:"Be famous for something silly",b:"Be secretly brilliant at everything"},
+  {a:"Teleport anywhere, but arrive 10 minutes late",b:"Fly anywhere, but only at walking speed"},
+  {a:"Have a pet dragon the size of a cat",b:"Have a cat that acts like your manager"},
+  {a:"Know every language",b:"Understand what animals are saying"},
+  {a:"Get a surprise holiday every month",b:"Get a surprise gift every week"},
+  {a:"Have perfect luck in games",b:"Have perfect timing in real life"},
+  {a:"Eat only your favourite meal for a week",b:"Try a new random meal every day"},
+  {a:"Be able to pause time for naps",b:"Be able to skip boring queues"},
+  {a:"Have a laugh that makes everyone laugh",b:"Have a poker face nobody can beat"},
+  {a:"Always find the best seat",b:"Always find the best parking spot"},
+  {a:"Get one spoiler-free hint about your future",b:"Get one answer from your future self"}
+];
+const FUN_ROASTS = {
+  gentle:[
+    "Your brain has 37 tabs open and somehow music is playing from none of them.",
+    "You bring main-character energy to a side quest. Respect.",
+    "Your planning skills are impressive. The actual plan is still loading.",
+    "You are not late. You are just operating in a different time zone.",
+    "Your phone battery has more commitment than your sleep schedule.",
+    "You say ‘one last video’ like it is a legally binding promise.",
+    "Your confidence arrived early. Your common sense is on the way.",
+    "You could turn choosing a snack into a three-part documentary.",
+    "Your talent for doing everything except the task is genuinely elite.",
+    "You have the energy of a software update at 2% battery."
+  ],
+  savage:[
+    "You have the decision-making speed of a loading screen on airport Wi-Fi.",
+    "If procrastination were an Olympic sport, you'd miss the event because you forgot the date.",
+    "Your attention span just left this roast halfway through.",
+    "You bring a whole new meaning to ‘terms and conditions apply’ — nobody knows what you're doing.",
+    "Your to-do list has become a historical document.",
+    "Even your autocorrect has stopped trying to understand you.",
+    "You are proof that chaos can have a username.",
+    "Your brain said ‘I'll think about it’ and never returned.",
+    "You don't need a plot twist. Your daily decisions are enough.",
+    "Your alarm clock is basically a daily suggestion box."
+  ],
+  extra:[
+    "You are the human version of clicking ‘remind me tomorrow’ for six consecutive months.",
+    "Your life has more unfinished side quests than an open-world game.",
+    "If focus were a Wi-Fi signal, yours would be one bar behind a mountain.",
+    "You could lose a staring contest with a loading spinner.",
+    "Your brain runs on 2% battery and pure confidence.",
+    "You make ‘I'll be ready in five minutes’ sound like a fictional universe.",
+    "Your search history probably needs its own season finale.",
+    "Even your future self has started leaving you on read.",
+    "You are not a mess. You're a limited-edition collection of plot holes.",
+    "Your productivity called. It said it has never met you."
+  ]
+};
+let funWyrIndex = -1;
+let funWyrLast = -1;
+let funRoastMode = "gentle";
+let funRoastLast = -1;
+
+function openFunZone(){
+  state.page = "funZone";
+  render();
+  renderPollDock();
+  window.scrollTo(0,0);
+  nextWouldYouRather();
+  nextFunRoast();
+  fgNextEmoji();
+  fgNextTruth();
+}
+function renderFunZone(){
+  return `
+    <div class="page funZoneWrap">
+      <button class="backBtn funZoneBack" onclick="closeFunZone()">← Home</button>
+      <div class="funZoneHero"><span class="funZoneEmoji">🎉</span><h1>NEXORA FUN ZONE</h1><p>Zero seriousness. Maximum nonsense.</p></div>
+      <div class="funZoneCards">
+        <section class="funZoneCard">
+          <h2>🤔 Would You Rather?</h2>
+          <div class="funZoneSub">Pick your side. No overthinking allowed.</div>
+          <div id="funWyrQuestion" class="funZoneResult" style="text-align:center;font-weight:750;min-height:48px">Loading a difficult decision...</div>
+          <div class="funZoneChoices">
+            <button class="funZoneChoice" id="funWyrA" onclick="chooseWouldYouRather('a')">Option A</button>
+            <button class="funZoneChoice" id="funWyrB" onclick="chooseWouldYouRather('b')">Option B</button>
+          </div>
+          <div id="funWyrResult" class="funZoneResult" aria-live="polite">Choose one. Defend your choice if challenged 😂</div>
+          <button class="funZonePrimary" style="margin-top:12px" onclick="nextWouldYouRather()">Next dilemma ➜</button>
+        </section>
+        <section class="funZoneCard">
+          <h2>🔥 Roast Me</h2>
+          <div class="funZoneSub">A friendly roast. You asked for it.</div>
+          <div class="funZoneModes">
+            <button class="funZoneMode active" data-roast="gentle" onclick="setFunRoastMode('gentle')">Chill 😌</button>
+            <button class="funZoneMode" data-roast="savage" onclick="setFunRoastMode('savage')">Savage 💀</button>
+            <button class="funZoneMode" data-roast="extra" onclick="setFunRoastMode('extra')">Extra 🌶️</button>
+          </div>
+          <div id="funRoastText" class="funZoneResult funZoneRoast" aria-live="polite">Ready for your roast?</div>
+          <button class="funZonePrimary" onclick="nextFunRoast()">Roast me again 🔥</button>
+        </section>
+      </div>
+      <div class="funMiniGrid">
+        <section class="funZoneCard"><h2>🧩 Guess the Emoji</h2><div class="funZoneSub">Decode the emoji combo.</div><div id="fgEmojiQ" class="funZoneResult funDrop">🍕 + 🌙</div><div class="funMiniChoices"><button onclick="fgEmojiAnswer(0)">Midnight snack</button><button onclick="fgEmojiAnswer(1)">Pizza party</button><button onclick="fgEmojiAnswer(2)">Moon pizza</button><button onclick="fgEmojiAnswer(3)">Space food</button></div><div id="fgEmojiR" class="funZoneResult">What's your guess?</div><button class="funZonePrimary" onclick="fgNextEmoji()">Next puzzle</button></section>
+        <section class="funZoneCard"><h2>🕵️ Two Truths &amp; a Lie</h2><div class="funZoneSub">Spot the fake statement.</div><div id="fgTruthQ" class="funZoneResult funDrop">Loading...</div><div class="funMiniChoices"><button onclick="fgTruthAnswer(0)">1</button><button onclick="fgTruthAnswer(1)">2</button><button onclick="fgTruthAnswer(2)">3</button></div><div id="fgTruthR" class="funZoneResult">Tap the lie.</div><button class="funZonePrimary" onclick="fgNextTruth()">New round</button></section>
+        <section class="funZoneCard"><h2>✊ Rock Paper Scissors</h2><div class="funZoneSub">Challenge NEXORA.</div><div id="fgRpsQ" class="funZoneResult funDrop">Choose your move!</div><div class="funMiniChoices"><button onclick="fgRps('rock')">✊ Rock</button><button onclick="fgRps('paper')">✋ Paper</button><button onclick="fgRps('scissors')">✌️ Scissors</button></div><div id="fgRpsR" class="funZoneResult">Ready?</div></section>
+        <section class="funZoneCard"><h2>🔮 What Type Are You?</h2><div class="funZoneSub">A tiny personality test.</div><div id="fgTypeQ" class="funZoneResult funDrop">Your group says “let's go out”. You...</div><div class="funMiniChoices"><button onclick="fgType(0)">Plan everything 📋</button><button onclick="fgType(1)">Just show up 😎</button><button onclick="fgType(2)">Ask what's for food 🍟</button><button onclick="fgType(3)">Stay mysterious 🥷</button></div><div id="fgTypeR" class="funZoneResult">Pick your vibe.</div></section>
+        <section class="funZoneCard"><h2>⚡ Reflex Test</h2><div class="funZoneSub">Wait for green, then tap as fast as you can.</div><button id="fgReflexBtn" class="funZonePrimary" onclick="fgReflexStart()">Start test</button><div id="fgReflexR" class="funZoneResult">Don't tap too early 👀</div></section>
+        <section class="funZoneCard"><h2>🎲 Random Name Generator</h2><div class="funZoneSub">Your totally official squad nickname.</div><div id="fgNameR" class="funZoneResult funDrop">Tap to reveal your name.</div><button class="funZonePrimary" onclick="fgName()">Generate name ✨</button></section>
+      </div>
+      <div class="funZoneFoot">NEXORA FUN ZONE • TAKE THE JOKES, LEAVE THE DRAMA ✨</div>
+    </div>
+    <div id="funBejarPopup" class="funPopup" role="dialog" aria-modal="true" aria-labelledby="funBejarTitle"><div class="funPopupBox"><div class="funPopupMark">✦</div><div class="funPopupKicker">NEXORA • FUN ZONE</div><h2 id="funBejarTitle">Bejar aita?</h2><p class="funPopupHint">Be honest. How was the chaos? 😏</p><div class="funPopupBtns"><button onclick="fgBejar(true)">YES ✨</button><button onclick="fgBejar(false)">NO 😭</button></div><div id="fgBejarAnswer" class="funZoneResult" style="display:none"></div></div></div>
+    </div>`;
+}
+function nextWouldYouRather(){
+  if(state.page !== "funZone") return;
+  let idx=Math.floor(Math.random()*FUN_WYR_QUESTIONS.length);
+  if(FUN_WYR_QUESTIONS.length>1 && idx===funWyrLast) idx=(idx+1)%FUN_WYR_QUESTIONS.length;
+  funWyrLast=idx; funWyrIndex=idx;
+  const q=FUN_WYR_QUESTIONS[idx];
+  const qEl=document.getElementById("funWyrQuestion"),a=document.getElementById("funWyrA"),b=document.getElementById("funWyrB"),r=document.getElementById("funWyrResult");
+  if(!qEl||!a||!b) return;
+  qEl.textContent="Would you rather…"; a.textContent=q.a; b.textContent=q.b;
+  a.classList.remove("selected"); b.classList.remove("selected"); a.disabled=false; b.disabled=false;
+  if(r) r.textContent="Choose one. Defend your choice if challenged 😂";
+}
+function chooseWouldYouRather(choice){
+  if(funWyrIndex<0) return;
+  const a=document.getElementById("funWyrA"),b=document.getElementById("funWyrB"),r=document.getElementById("funWyrResult");
+  if(!a||!b||!r) return;
+  a.classList.toggle("selected",choice==="a"); b.classList.toggle("selected",choice==="b");
+  a.disabled=true; b.disabled=true;
+  const reactions=["Bold choice. The committee is confused but supportive. 😂","Interesting. Your priorities have been noted. 👀","You chose chaos. NEXORA respects that.","No wrong answers… but we're definitely judging a little. 😭","That choice says a lot. We don't know what, but a lot."];
+  r.textContent=reactions[Math.floor(Math.random()*reactions.length)];
+  fgAnimate(r,'funDrop');
+}
+function setFunRoastMode(mode){
+  if(!FUN_ROASTS[mode]) return;
+  funRoastMode=mode;
+  document.querySelectorAll(".funZoneMode").forEach(btn=>btn.classList.toggle("active",btn.dataset.roast===mode));
+  funRoastLast=-1; nextFunRoast();
+}
+function nextFunRoast(){
+  const el=document.getElementById("funRoastText"); if(!el) return;
+  const lines=FUN_ROASTS[funRoastMode]||FUN_ROASTS.gentle;
+  let idx=Math.floor(Math.random()*lines.length);
+  if(lines.length>1 && idx===funRoastLast) idx=(idx+1)%lines.length;
+  funRoastLast=idx; el.textContent=lines[idx];
+  fgAnimate(el,'roast');
+}
+
+/* NEXORA FUN ZONE — SIX EXTRA MINI GAMES + COMPLETION POPUP */
+const fgDone=new Set(); let fgEmojiIdx=0,fgTruthIdx=0,fgReflexTimer=null,fgReflexReady=false,fgReflexStartAt=0;
+const fgEmoji=[{q:'🍕 + 🌙',a:['Midnight snack','Pizza party','Moon pizza','Space food'],c:0,why:'Midnight snack. The most important meal.'},{q:'🐝 + 🍯',a:['Honey bee','Sweet bee','Bee movie','Buzzing chef'],c:1,why:'Sweet bee! Cute and accurate.'},{q:'📚 + 😴',a:['Sleepy student','Bookworm','Library ghost','Nap time'],c:0,why:'Sleepy student. Extremely relatable.'},{q:'🌧️ + ☕',a:['Rainy day coffee','Wet cup','Storm soup','Cloud cafe'],c:0,why:'Rainy day coffee. Perfect combo.'}];
+const fgTruth=[{s:['Octopuses have three hearts','Bananas are berries','Goldfish have a three-second memory'],lie:2,why:'Goldfish can remember things much longer than three seconds.'},{s:['A day on Venus is longer than its year','Sharks are older than trees','Humans have five lungs'],lie:2,why:'Humans have two lungs.'},{s:['Honey can last a very long time','Wombat poop is cube-shaped','Penguins can fly like eagles'],lie:2,why:'Penguins cannot fly.'}];
+function fgAnimate(el,type='funDrop'){if(!el)return;el.classList.remove('funDrop','roastDrop','sadDrop');void el.offsetWidth;el.classList.add(type==='roast'?'roastDrop':type==='sad'?'sadDrop':'funDrop');}
+function fgMark(id){fgDone.add(id);}
+function closeFunZone(){const pop=document.getElementById('funBejarPopup');if(pop){const answer=document.getElementById('fgBejarAnswer');if(answer){answer.style.display='none';answer.textContent='';}const exit=pop.querySelector('.funPopupExit');if(exit)exit.remove();pop.style.display='flex';}}
+function fgNextEmoji(){fgEmojiIdx=(fgEmojiIdx+1)%fgEmoji.length;const x=fgEmoji[fgEmojiIdx],q=document.getElementById('fgEmojiQ'),r=document.getElementById('fgEmojiR');q.textContent=x.q;r.textContent="What's your guess?";fgAnimate(q);}
+function fgEmojiAnswer(i){const x=fgEmoji[fgEmojiIdx],r=document.getElementById('fgEmojiR');r.textContent=i===x.c?'Correct! 😂 '+x.why:'Nope 😂 '+x.why;fgAnimate(r,i===x.c?'funDrop':'roast');fgMark('emoji');}
+function fgNextTruth(){fgTruthIdx=(fgTruthIdx+1)%fgTruth.length;const x=fgTruth[fgTruthIdx],q=document.getElementById('fgTruthQ'),r=document.getElementById('fgTruthR');q.textContent=x.s.map((v,i)=>(i+1)+'. '+v).join('  •  ');r.textContent='Tap the lie.';fgAnimate(q);}
+function fgTruthAnswer(i){const x=fgTruth[fgTruthIdx],r=document.getElementById('fgTruthR');r.textContent=i===x.lie?'You caught it! 🕵️ '+x.why:'Busted 😂 '+x.why;fgAnimate(r,i===x.lie?'funDrop':'roast');fgMark('truth');}
+function fgRps(m){const opts=['rock','paper','scissors'],n=opts[Math.floor(Math.random()*3)],win=m===n?'tie':((m==='rock'&&n==='scissors')||(m==='paper'&&n==='rock')||(m==='scissors'&&n==='paper'))?'win':'lose';const icons={rock:'✊',paper:'✋',scissors:'✌️'},q=document.getElementById('fgRpsQ'),r=document.getElementById('fgRpsR');q.textContent='You: '+icons[m]+'  NEXORA: '+icons[n];r.textContent=win==='tie'?'Draw! Great minds 😂':win==='win'?'YOU WIN! NEXORA needs a rematch 😭':'NEXORA wins. Skill issue? 😭';fgAnimate(q,win==='lose'?'roast':'funDrop');fgMark('rps');}
+function fgType(i){const names=['The Master Planner 📋','The Chaos Captain 😎','The Snack Strategist 🍟','The Mysterious Legend 🥷'];const r=document.getElementById('fgTypeR');r.textContent='You are '+names[i]+'!';fgAnimate(r,i===2?'funDrop':'roast');fgMark('type');}
+function fgReflexStart(){const b=document.getElementById('fgReflexBtn'),r=document.getElementById('fgReflexR');if(fgReflexReady){const ms=Math.round(performance.now()-fgReflexStartAt);fgReflexReady=false;b.textContent='Start again';b.style.background='';r.textContent='⚡ '+ms+' ms — '+(ms<250?'Lightning fast!':ms<400?'Nice reflexes!':'The brain is buffering 😂');fgAnimate(r,ms<250?'funDrop':'roast');fgMark('reflex');return;}clearTimeout(fgReflexTimer);fgReflexReady=false;b.textContent='WAIT FOR GREEN...';b.style.background='#a33b56';r.textContent='Not yet!';fgReflexTimer=setTimeout(()=>{fgReflexReady=true;fgReflexStartAt=performance.now();b.textContent='TAP NOW!';b.style.background='#1caa72';r.textContent='GO GO GO!';},1200+Math.random()*2600);b.onclick=()=>{if(!fgReflexReady){clearTimeout(fgReflexTimer);b.textContent='Too early! Try again';b.style.background='';r.textContent='False start 😂';fgAnimate(r,'roast');return;}fgReflexStart();};}
+function fgName(){const a=['Turbo','Sleepy','Cosmic','Legendary','Drama','Pixel','Ninja','Waffle'],b=['Potato','Panda','Penguin','Wizard','Noodle','Raccoon','Mango','Goblin'];const r=document.getElementById('fgNameR');r.textContent=a[Math.floor(Math.random()*a.length)]+' '+b[Math.floor(Math.random()*b.length)];fgAnimate(r);fgMark('name');}
+function fgBejar(yes){
+  const r=document.getElementById('fgBejarAnswer');
+  if(!r)return;
+  r.style.display='block';
+  r.textContent=yes?'Bejar agbek anta taane maadiddu 😂':'Bejar madko 😭';
+  fgAnimate(r,yes?'roast':'sad');
+  const box=r.parentElement;
+  let exit=box.querySelector('.funPopupExit');
+  if(!exit){
+    exit=document.createElement('button');
+    exit.className='funPopupExit';
+    exit.style.marginTop='14px';
+    exit.textContent='Close Fun Zone';
+    exit.onclick=()=>{state.page='home';render();renderPollDock();window.scrollTo(0,0);};
+    box.appendChild(exit);
+  }
 }
 
 /* =========================================================
@@ -8443,7 +9348,7 @@ function renderHome() {
         </button>
 
         <button class="mainBtn socialCyberBtn" style="animation-delay:.08s" onclick="openSocialHub()">
-          NEXORA Social Hub (ID, Vault &amp; DMs) 🌐 ${unreadDm > 0 ? `• ${unreadDm} NEW` : ""}
+          NEXORA VAULT (ID, Memories &amp; Notes) 🌐 ${unreadDm > 0 ? `• ${unreadDm} NEW` : ""}
         </button>
 
         <button class="mainBtn nexoraBtn" style="animation-delay:.12s" onclick="openBunkReceiptPage()">
@@ -8458,12 +9363,24 @@ function renderHome() {
           3-Stop Auto-Combo &amp; Who Pays Wheel 🎡 ${wheelCount > 0 ? `(${wheelCount})` : ""}
         </button>
 
+        <button class="mainBtn" style="animation-delay:.22s" onclick="openHotWheelsPage()">
+          🏎️ HOT WHEELS NEAR ME
+        </button>
+
+        <button class="mainBtn" style="animation-delay:.23s" onclick="openPlayStationPage()">
+          🎮 PLAYSTATION NEAR ME
+        </button>
+
         <button class="mainBtn" style="animation-delay:.24s" onclick="openVibeSwipe()">
           Vibe Swipe Decider 💘
         </button>
 
         <button class="mainBtn" style="animation-delay:.28s" onclick="openTruthDare()">
           Truth, Dare or Chicken Out 🐔
+        </button>
+
+        <button class="mainBtn" style="animation-delay:.30s" onclick="openFunZone()">
+          NEXORA FUN ZONE 🎉
         </button>
 
         <button class="mainBtn" style="animation-delay:.32s" onclick="openThemesPage()">
@@ -8579,16 +9496,12 @@ function renderPlaceCard(place, index = 0) {
       </div>
 
       <div class="placeDesc">${esc(place.desc)}</div>
+      ${place.address ? `<div style="font-size:11px;color:#8fe8ff;margin:7px 0;">📍 ${esc(place.address)}</div>` : ""}
 
       <div class="placeBtns">
-        <a
-          class="mapBtn"
-          href="${mapLink(place)}"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Open Map 📍
-        </a>
+        <button class="mapBtn" data-name="${esc(place.name)}" onclick="showLocationDetails(this.dataset.name)">
+          View Location Details 📍
+        </button>
         <button
           class="actionChip ${inPoll ? "activePoll" : ""}"
           onclick="togglePollSpot('${esc(place.name)}')"
@@ -8644,8 +9557,10 @@ function renderPlaces() {
         ${category ? `${category.emoji} ${esc(category.name)}` : "Places"}
       </h1>
       <p class="pageSub">
-        Verified ${esc(zone.areaName)} spots for ${esc(state.college)} students.
+        Listed ${esc(zone.areaName)} places for ${esc(state.college)}.
       </p>
+      ${state.category === "pubs" ? `<p class="pageSub" style="color:#ffbd72;font-size:12px;">18+/21+ only as applicable under venue policy and Karnataka law. Informational listings only; no access or alcohol-use guidance.</p>` : ""}
+      ${state.category === "stays" ? `<p class="pageSub" style="color:#ffbd72;font-size:12px;">Accommodation information only. Minors should arrange any stay with a parent or legal guardian; age and ID rules apply.</p>` : ""}
 
       <input
         class="search"
@@ -8678,7 +9593,10 @@ function renderNexora() {
 
         <div class="nexoraTitlePill">
           <div class="nexoraMiniOrb"></div>
-          <strong style="font-size:13px;letter-spacing:.3px;">NEXORA AI</strong>
+          <div style="display:flex;flex-direction:column;gap:1px;">
+            <strong style="font-size:13px;letter-spacing:.3px;">NEXORA AI</strong>
+            <small id="nexoraLiveStatus" style="font-size:9px;color:#70f2c4;letter-spacing:.5px;">● ONLINE • READY TO LISTEN</small>
+          </div>
         </div>
 
         <button class="changeBtn" onclick="openDecisionMaster()">Combo 🚀</button>
@@ -8719,7 +9637,8 @@ function renderNexora() {
             placeholder="Ask NEXORA in ${esc(zone.areaName)}..."
             onkeydown="if(event.key==='Enter') askNexora()"
           >
-          <button class="nexoraSendBtn" onclick="askNexora()">Ask</button>
+          <button id="nexoraMicBtn" class="nexoraMicBtn" onclick="startNexoraListening()" title="Speak to NEXORA" aria-label="Speak to NEXORA">🎙️</button>
+          <button class="nexoraSendBtn" onclick="askNexora()">Send</button>
         </div>
       </div>
 
@@ -8748,14 +9667,9 @@ function renderRandom() {
         <p style="max-width:460px;margin:0 auto 20px;">${esc(place.desc)}</p>
 
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-          <a
-            class="mapBtn"
-            href="${mapLink(place)}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open in Google Maps 📍
-          </a>
+          <button class="mapBtn" data-name="${esc(place.name)}" onclick="showLocationDetails(this.dataset.name)">
+            View Location Details 📍
+          </button>
           <button class="tag" onclick="shareSingleSpot('${esc(place.name)}')">Share Spot 💬</button>
           <button class="tag" onclick="pickRandom()">Try Another</button>
         </div>
@@ -8769,7 +9683,7 @@ function renderRandom() {
 }
 
 function renderBeauty() {
-  const line = BEAUTY_LINES[state.beautyIndex];
+  const line = getBeautyLine(state.beautyIndex);
   const zone = state.college ? getZone() : null;
 
   return `
@@ -8796,13 +9710,15 @@ function renderBeauty() {
       <div id="beautyIcon" class="beautyIcon">${line.icon}</div>
       <div id="beautyText" class="beautyText">${esc(line.text)}</div>
 
-      <button
-        id="beautyMoveBtn"
-        class="beautyBtn"
-        onclick="handleBeautyClick()"
-      >
-        Another ✨
-      </button>
+      <div id="beautyPlayArea" class="beautyPlayArea">
+        <button
+          id="beautyMoveBtn"
+          class="beautyBtn"
+          onclick="handleBeautyClick()"
+        >
+          Another ✨
+        </button>
+      </div>
     </div>
   `;
 }
@@ -8909,12 +9825,18 @@ function render() {
     app.innerHTML = renderCategories();
   } else if (state.page === "places") {
     app.innerHTML = renderPlaces();
+  } else if (state.page === "hotWheels" || state.page === "playStation") {
+    app.innerHTML = renderDiscoveryPage(state.page);
+  } else if (state.page === "privateNotes") {
+    app.innerHTML = renderPrivateNotesPage();
   } else if (state.page === "nexora") {
     app.innerHTML = renderNexora();
   } else if (state.page === "random") {
     app.innerHTML = renderRandom();
   } else if (state.page === "beauty") {
     app.innerHTML = renderBeauty();
+  } else if (state.page === "funZone") {
+    app.innerHTML = renderFunZone();
   } else if (state.page === "management") {
     app.innerHTML = renderManagement();
   } else if (state.page === "decisionMaster") {
