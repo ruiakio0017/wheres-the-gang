@@ -4110,7 +4110,7 @@ let state = {
   swipeDeck: [],
   swipeKept: [],
   swipeWinner: null,
-  truthDeckType: "truth",
+  truthDeckType: "mixed",
   currentPromptCard: null,
   activeGamePlayer: localStorage.getItem("gang_user_name") || "",
   beautyIndex: 0,
@@ -5746,8 +5746,16 @@ function generateBunkHangoutReceipt() {
   const dateStr = now.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
   const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   const receiptNo = "BNK-" + String(now.getTime()).slice(-6);
+  const bunkStamps = [
+    "📚 Attendance? Never heard of her. 😭",
+    "🕵️ Mission: Campus Escape — SUCCESS-ish 😂",
+    "🎒 Bags packed, excuses unpacked 🤡",
+    "🏃‍♂️ Present in the group chat, absent in class 💀",
+    "🍟 Educational field trip to the snack department 😎"
+  ];
 
   d.generatedReceipt = {
+    funnyStamp: bunkStamps[Math.floor(Math.random() * bunkStamps.length)],
     receiptNo,
     title: d.title.trim() || "OFFICIAL BUNK & HANGOUT PASS",
     college: d.collegeLabel.trim() || state.college || "CAMPUS SQUAD",
@@ -5796,6 +5804,10 @@ function downloadBunkHangoutReceiptPng() {
 
   y += 26;
   ctx.fillText(`${r.dateStr} • ${r.timeStr}`, 340, y);
+  y += 25;
+  ctx.fillStyle = "#a21caf";
+  ctx.font = "bold 15px Courier New";
+  ctx.fillText(r.funnyStamp || "🎒 SQUAD MODE: ON 😂", 340, y);
 
   y += 28;
   ctx.strokeStyle = "#888";
@@ -6028,6 +6040,7 @@ function renderBunkReceiptPage() {
               <div style="font-weight:1000;font-size:15px;letter-spacing:.8px;">${esc(r.title)}</div>
               <div style="font-size:10.5px;color:#555;margin-top:3px;">RECEIPT #${r.receiptNo} • ${esc(r.college)} (${esc(r.area)})</div>
               <div style="font-size:10px;color:#444;margin-top:2px;">${esc(r.dateStr)} • ${esc(r.timeStr)}</div>
+              <div style="font-size:11px;font-weight:900;color:#a21caf;margin-top:7px;">${esc(r.funnyStamp || "🎒 Squad mode: ON 😂")}</div>
             </div>
 
             <div style="margin-bottom:10px;">
@@ -6457,7 +6470,7 @@ function openTruthDare() {
   }
   state.page = "truthDare";
   if (!state.currentPromptCard) {
-    drawPromptCard(state.truthDeckType, false);
+    drawPromptCard("mixed", false);
   }
   render();
   renderPollDock();
@@ -8289,6 +8302,10 @@ function downloadWheelWinnerReceiptPng() {
   const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   const receiptNo = "PAY-" + String(now.getTime()).slice(-6);
   const zone = getZone();
+  const payerRoasts = w.source === "chicken"
+    ? ["🐔 Cluck cluck… the bill found its victim 😂", "🏃 The dare was dodged, the bill was not 💀", "🤡 Chicken mode activated. Wallet mode too."]
+    : ["👑 Wallet has entered the chat 😂", "💸 Congratulations, you are today's ATM 🤣", "🫡 The squad salutes your bank balance."];
+  const payerRoast = payerRoasts[Math.floor(Math.random() * payerRoasts.length)];
 
   const canvas = document.createElement("canvas");
   canvas.width = 660;
@@ -8331,33 +8348,37 @@ function downloadWheelWinnerReceiptPng() {
   ctx.font = "bold 38px Courier New";
   ctx.fillText(w.name.toUpperCase().slice(0, 20), 330, 345);
 
+  ctx.fillStyle = "#a21caf";
+  ctx.font = "bold 16px Courier New";
+  ctx.fillText(payerRoast, 330, 370);
+
   ctx.fillStyle = w.source === "chicken" ? "#d97706" : "#0a7d52";
   ctx.font = "bold 17px Courier New";
   ctx.fillText(
     w.source === "chicken" ? "[REASON: CHICKENED OUT OF DARE]" : "[REASON: SQUAD WHEEL SPIN]",
     330,
-    385
+    405
   );
 
   ctx.beginPath();
-  ctx.moveTo(95, 420);
-  ctx.lineTo(565, 420);
+  ctx.moveTo(95, 435);
+  ctx.lineTo(565, 435);
   ctx.stroke();
 
   ctx.textAlign = "left";
   ctx.fillStyle = "#111019";
   ctx.font = "bold 20px Courier New";
-  ctx.fillText("WHERE THEY ARE PAYING:", 95, 470);
+  ctx.fillText("📍 WHERE THEY ARE PAYING:", 95, 485);
   ctx.fillStyle = "#c2255c";
   ctx.font = "bold 22px Courier New";
-  ctx.fillText((spotVal || `${zone.areaName} Hangout`).slice(0, 28), 95, 505);
+  ctx.fillText((spotVal || `${zone.areaName} Hangout`).slice(0, 28), 95, 520);
 
   ctx.fillStyle = "#111019";
   ctx.font = "bold 20px Courier New";
-  ctx.fillText("TOTAL AMOUNT PAYING:", 95, 560);
+  ctx.fillText("💸 TOTAL AMOUNT PAYING:", 95, 575);
   ctx.fillStyle = "#0a7d52";
   ctx.font = "bold 28px Courier New";
-  ctx.fillText(amountVal ? `₹${amountVal}` : "FULL SQUAD BILL", 95, 598);
+  ctx.fillText(amountVal ? `₹${amountVal}` : "FULL SQUAD BILL", 95, 613);
 
   ctx.beginPath();
   ctx.moveTo(95, 635);
@@ -8638,10 +8659,34 @@ function renderVibeSwipePage() {
    TRUTH, DARE & CHICKEN OUT DECK (EVERY PRESS ADDS TO WHEEL)
 ========================================================= */
 
-function drawPromptCard(type, shouldRender = true) {
-  state.truthDeckType = type;
-  const source = type === "dare" ? DARE_CARDS : type === "never" ? NEVER_CARDS : TRUTH_CARDS;
-  state.currentPromptCard = source[Math.floor(Math.random() * source.length)];
+// One combined deck: Truth, Dare and Never Have I Ever are mixed together.
+// Every prompt appears once per shuffled cycle before the full deck reshuffles.
+const mixedPromptCards = [
+  ...TRUTH_CARDS.map(text => ({ type: "TRUTH", text })),
+  ...DARE_CARDS.map(text => ({ type: "DARE", text })),
+  ...NEVER_CARDS.map(text => ({ type: "NEVER HAVE I EVER", text }))
+];
+let mixedPromptBag = [];
+let lastMixedPrompt = null;
+
+function drawPromptCard(type = "mixed", shouldRender = true) {
+  if (!mixedPromptBag.length) {
+    mixedPromptBag = [...mixedPromptCards];
+    for (let i = mixedPromptBag.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [mixedPromptBag[i], mixedPromptBag[j]] = [mixedPromptBag[j], mixedPromptBag[i]];
+    }
+    // Avoid the previous cycle's final prompt appearing first again.
+    if (mixedPromptBag.length > 1 && mixedPromptBag[mixedPromptBag.length - 1].text === lastMixedPrompt) {
+      [mixedPromptBag[0], mixedPromptBag[mixedPromptBag.length - 1]] =
+        [mixedPromptBag[mixedPromptBag.length - 1], mixedPromptBag[0]];
+    }
+  }
+
+  const card = mixedPromptBag.pop();
+  state.truthDeckType = card.type;
+  state.currentPromptCard = card.text;
+  lastMixedPrompt = card.text;
   if (shouldRender) render();
 }
 
@@ -8682,9 +8727,10 @@ function renderTruthDarePage() {
         <button class="changeBtn" onclick="openDecisionMaster()">Bill Wheel 🎡 (${entries.length})</button>
       </div>
 
-      <h1 class="pageTitle">Truth, Dare or Chicken Out</h1>
+      <h1 class="pageTitle">Random Truth • Dare • Never Have I Ever</h1>
       <p class="pageSub">
-        Enter who's playing right now. Complete your prompt—or press <b>Chicken Out 🐔</b> to get added straight onto the Squad Bill-Paying Wheel every single time!
+        One mixed deck, total surprise! Every tap randomly deals a Truth, Dare, or Never Have I Ever. No choosing categories—just chaos 😂
+        Enter who's playing, and press <b>Chicken Out 🐔</b> to join the Squad Bill-Paying Wheel.
       </p>
 
       <div class="specialCard" style="margin-top:0;margin-bottom:14px;">
@@ -8702,20 +8748,20 @@ function renderTruthDarePage() {
         >
       </div>
 
-      <div style="display:flex;gap:8px;margin-bottom:14px;">
-        <button class="personaChip ${state.truthDeckType === "truth" ? "active" : ""}" style="flex:1;padding:11px;" onclick="drawPromptCard('truth',true)">🤫 Truth</button>
-        <button class="personaChip ${state.truthDeckType === "dare" ? "active" : ""}" style="flex:1;padding:11px;" onclick="drawPromptCard('dare',true)">🔥 Dare</button>
-        <button class="personaChip ${state.truthDeckType === "never" ? "active" : ""}" style="flex:1;padding:11px;" onclick="drawPromptCard('never',true)">🙈 Never Have I Ever</button>
+      <div class="specialCard" style="margin-bottom:14px;text-align:center;">
+        <div style="font-size:12px;font-weight:900;letter-spacing:1.2px;color:var(--muted);">🎲 ONE SHUFFLED DECK</div>
+        <div style="font-size:17px;font-weight:900;margin-top:5px;">🤫 Truth + 🔥 Dare + 🙈 Never Have I Ever</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">You never know what's coming next 😂</div>
       </div>
 
       <div class="swipeDeckCard">
-        <span class="swipeStamp">${state.truthDeckType.toUpperCase()} CARD</span>
+        <span class="swipeStamp">${state.truthDeckType || "MIXED DECK"} CARD</span>
         <h2 style="font-size:23px;line-height:1.4;margin:10px 0 20px;">
-          "${esc(state.currentPromptCard || TRUTH_CARDS[0])}"
+          "${esc(state.currentPromptCard || "Tap below and let the chaos decide 😂")}"
         </h2>
         <div style="display:grid;gap:10px;">
-          <button class="specialBtn" onclick="drawPromptCard('${state.truthDeckType}',true)">
-            Completed! Next Card 🃏
+          <button class="specialBtn" onclick="drawPromptCard('mixed',true)">
+            Random Next Card 🎲
           </button>
           <button class="chickenOutBtn" onclick="triggerChickenOutPenalty()">
             Chicken Out 🐔 → Add Me To Bill-Paying Wheel
